@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+<!-- 
+	USER_NO, USER_ID, USER_PWD, USER_RNO,
+	USER_NAME, USER_EMAIL, USER_PHONE,
+	USER_BRANCH, USER_OPENDATE, USER_ATT_NO
+-->
+<!-- 
+	ATT_NO, ATT_NAME
+-->
+
+
+</mapper>

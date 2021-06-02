@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.sinarycious.emart24.event.model.vo.Event" alias="Event" />
+		<typeAlias type="com.sinarycious.emart24.event.model.vo.Attachment" alias="Attachment" />
+		<typeAlias type="com.sinarycious.emart24.inv.model.vo.Inv" alias="Inv" />
+		<typeAlias type="com.sinarycious.emart24.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.sinarycious.emart24.OE.model.vo.OE" alias="OE" />
+		<typeAlias type="com.sinarycious.emart24.product.model.vo.Product" alias="Product" />
+		<typeAlias type="com.sinarycious.emart24.sale.model.vo.Sale" alias="Sale" />
+	</typeAliases>
+
+	
+</configuration>
