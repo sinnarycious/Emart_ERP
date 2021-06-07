@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: "Noto Sans KR";
+	src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+
+}
+
+h4, .category, .pdtNo, .search, .btn .click {
+    display: inline;
+}
+
+.search_text {
+	width: 500px;
+}
+

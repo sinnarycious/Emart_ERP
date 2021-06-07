@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>이마트24</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/login.css">
@@ -15,7 +16,7 @@
 <body>
 
 <section class="loginPage">
-        <div class="login_logo">
+        <div class="losgin_logo">
             <img src="/emart24/resources/images/emart24_login.png">
             <h2 class="login_title">새로운 라이프 스타일 편의점</h2>
         </div>
