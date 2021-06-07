@@ -19,14 +19,15 @@
             float:left;
             border: 2px solid var(--gray);
             width: 1100px;
-            height: 500px;
+            height: 460px;
             margin-left: 75px;
+            margin-top: 10px;
         }
         .doughnut {
             float: right;
             border: 2px solid var(--gray);
             width: 400px;
-            height: 500px;
+            height: 470px;
             margin-right: 75px;
         }
         .profit {
@@ -34,9 +35,9 @@
             top: 0px;
             height: 70px;
             margin-top: 10px;
-            margin-bottom: 50px;
+            margin-bottom: 10px;
             display: inline-block;
-            line-height: 30px;
+            line-height: 35px;
         }
         .day {
             width: 150px;
@@ -94,15 +95,40 @@
             text-align: left;
             margin-top: 10px;
             position: relative;
+            left : 30px;
         }
-        #during {
+        #duringLine {
             text-align: right;
             margin-top: 10px;
             position: relative;
-            right: 0;
+            right: 30px;
+            float: right;
         }
-
-
+        .profitTitle {
+            text-align: left;
+            margin-left: 80px;
+        }
+        .ration {
+            display: inline-block;
+            text-align: left;
+            margin-top: 20px;
+            position: relative;
+            float: left;
+            left : 20px;
+        }
+        #duringDoughnut {
+            text-align: right;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            position: relative;
+            right: 15px;
+            float: right;
+        }
+        .doughnutAnno{
+            width: 396px;
+            height: 20px;
+            border-top: 2px solid var(--gray);
+        }
     </style>
 </head>
 <body>
@@ -176,18 +202,19 @@
         </footer>
     </section>
     <section class="wrap">
-        <div class="area line graphArea">
+        <div><h2 class="profitTitle">수익</h2></div>
+        <div class="area line">
             <div class="graphLine">
-                <h3 class="graphTop5">판매량 TOP 5</h3>
+                <h3 class="graphTop5">수익 그래프</h3>
                 <span>
-                    <select name="during" id="during">
+                    <select name="during" id="duringLine">
                         <option value="week">주간</option>
                         <option value="month">월간</option>
                         <option value="year">연간</option>
                     </select>
                 </span>
             </div>
-            <canvas id="myChartLine" width="1000px" height="450px"></canvas>
+            <canvas id="myChartLine" width="1000px" height="380px"></canvas>
         </div>
         <div class="area doughnut graphArea">
             <div class="day profit">
@@ -199,6 +226,14 @@
                 <h4>이번 달 매출</h4>
             </div>
             <div>
+                <div class="doughnutAnno">
+                    <h3 class="ration">판매량 비율</h3>
+                    <select name="during" id="duringDoughnut">
+                        <option value="week">주간</option>
+                        <option value="month">월간</option>
+                        <option value="year">연간</option>
+                    </select>
+                </div>
                 <canvas id="myChartDoughnut"></canvas>
             </div>
         </div>
