@@ -1,0 +1,263 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap');
+
+/* emart24 ERP 전용 초기화 css */
+*{
+    margin : 0 auto;
+    padding : 0;
+    box-sizing : border-box;
+    font-family : 'NotoSansKR', sans-serif;
+    font-size : 14px;
+    font-weight : 300;
+    text-align : center;
+    color : var(--gray);
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, hr, input, button {
+	border: 0 none;
+    font-family: 'NotoSansKR', sans-serif;
+	vertical-align: middle;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+a{
+    text-decoration : none;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* emart24 ERP 전용 색상 */
+:root{
+    --gray :  #777777; /* 기본 텍스트 색상 및 기본 회색 */
+    --yellow : #fdb718; /* emart24 노란색 */
+    --light-gray : #f1f1f2; /* 밝은 회색 */
+    --white : #fff; /* 흰색 */
+    --orange : #fd6318; /* 원 그래프 - 주황색 */
+    --light-blue : #4bb4f7;   /* 원 그래프 - 하늘색 */
+    --light-green : #85cc6e;    /* 원 그래프 - 연두색 */
+}
+
+/* emart24 영역 공통 css */
+header{
+    position : fixed;
+    top : 0;
+    left : 250px;
+    z-index : 50000;
+    height : 12.5%;
+    width : 92.2%;
+    min-width : 1670px;
+    min-height : 86px;
+    max-height : 86px;
+    background : var(--white);
+}
+.wrap{
+    position : absolute;
+    top : 86px;
+    left : 250px;
+    width : 85%;
+    min-width : 1670px;
+    height : 100%-86px;
+    background : var(--white);
+}
+.area{
+    padding-top : 42px;
+    width : 1450px;
+}
+
+/* emart24 ERP 전용 폰트 크기 */
+h2{
+    font-size : 28px;
+    font-weight : 300;
+}
+h3{
+    font-size : 20px;
+    font-weight : 700;
+}
+h4{
+    font-size : 16px;
+    font-weight : 700;
+}
+h5{
+    font-size : 14px;
+}
+h6{
+    font-size : 13px;
+}
+p{
+    font-size : 14px;
+}
+
+/* 숫자 전용 폰트 */
+.num{
+    font-family : 'Verdana';
+}
+.bold{
+    font-weight : 700;
+}
+
+/* 버튼 공통 css */
+.btn{
+    display : inline-block;
+    width : 95px;
+    height : 32px;
+    border-radius : 5px;
+    color : white;
+    background-color : var(--gray);
+    cursor : pointer;
+}
+.btn:hover{
+    background-color : var(--yellow);
+}
+.btn.click{
+    width : 80px;
+    height : 37px;
+}
+.btn.search{
+    width : 97px;
+    height : 37px;
+}
+.btn.submit{
+    width : 125px;
+    height : 45px;
+    font-size : 20px;
+    font-weight : 500;
+}
+
+/* 태그 (버튼 아님) */
+.tag{
+    display : inline-block;
+    width : 95px;
+    height : 32px;
+    border-radius : 5px;
+    color : white;
+    background-color : var(--yellow);
+}
+.tag.off{
+    background-color : var(--gray);
+}
+
+/* 숨김용 */
+.hide{
+    display : none;
+}
+
+/* input, select 태그 공용 css */
+input{
+    text-align : left;
+    padding-left : 5px;
+    height : 37px;
+    border : 1px solid var(--gray);
+}
+input:focus{
+    outline : none;
+}
+
+select{
+    width : 110px;
+    height : 37px;
+    padding-left : 5px;
+    border : 1px solid var(--gray);
+    background:url('arrow.png') no-repeat 100% 50%/37px auto;
+    -webkit-appearance:none; /* for chrome */
+    -moz-appearance:none; /*for firefox*/ 
+    appearance:none;
+}
+select::-ms-expand{
+    display:none;/*for IE10,11*/
+ }
+select:focus{
+    outline : none;
+}
+select, option{
+    font-size : 14px;
+}
+
+/* table 공용 css */
+table{
+    width : 1385px;
+}
+th, td{
+    padding : 22px 0;
+}
+td{
+    font-size : 14px;
+}
+tr:first-child{
+    border-top : var(--yellow) 2px solid;
+    border-bottom : var(--yellow) 2px solid;
+}
+tr:nth-child(n+2){
+    border-bottom : var(--light-gray) 1px solid;
+}
+tr:last-child{
+    border-bottom : var(--yellow) 2px solid;
+}
+
+/* 페이지 넘버링 공용 css */
+.pageNo li{
+    display : inline-block;
+    padding : 5px 0;
+    width : 26px;
+    border-radius : 5px;
+    position : relative;
+    vertical-align : middle;
+    cursor : pointer;
+}
+.pageNo li:nth-child(n+2):nth-child(-n+11):hover{
+    color : white;
+    background-color : var(--yellow);
+}
+.arrLeft::after {
+    content: '';
+    width: 17px; /* 사이즈 */
+    height: 17px; /* 사이즈 */
+    border-top: 3px solid var(--yellow); /* 선 두께 */
+    border-right: 3px solid var(--yellow); /* 선 두께 */
+    position: absolute;
+    top: 0px; /* 기본 0px 값으로 해주세요 */
+    left: 0px; /* 기본 0px 값으로 해주세요 */
+    transform: rotate(225deg); /* 각도 */
+    vertical-align : middle;
+}
+.arrRight::after {
+    content: '';
+    width: 17px; /* 사이즈 */
+    height: 17px; /* 사이즈 */
+    border-top: 3px solid var(--yellow); /* 선 두께 */
+    border-right: 3px solid var(--yellow); /* 선 두께 */
+    position: absolute;
+    top: 0px; /* 기본 0px 값으로 해주세요 */
+    left: 0px; /* 기본 0px 값으로 해주세요 */
+    transform: rotate(45deg); /* 각도 */
+    vertical-align : middle;
+}

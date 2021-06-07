@@ -1,0 +1,86 @@
+@charset "utf-8";
+        .myPageArea1 {
+            width: 1450px;
+            height: 871px;
+            text-align: left;
+        }
+        
+        .myPageArea1 h2 {
+            text-align: left;
+            padding-bottom: 20px;
+        }
+
+        .profile_Img {
+            width: 200px;
+            height: 250px;
+        }
+
+        .update_pw {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            display: inline;
+            padding-left: 50px;
+        }
+
+        .td1 {
+            padding-right: 30px;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .update_pw th, td {
+            padding: 10px 0;
+            text-align: left;
+        }
+
+        .pwInput {
+            width: 250px;
+        }
+
+        .update_profile {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            display: inline;
+            padding-left: 100px;
+        }
+
+        .email_first {
+            width: 97px;
+        }
+
+        .phone {
+            width: 50px;
+        }
+        
+        .btn.submit {
+            width: 110px;
+            height: 40px;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .myPage_updateBtn {
+            vertical-align: bottom;
+            width: 100px;
+            height: 45px;
+        }
+
+        .emart24_storeImg {
+            width: 640px;
+            height: 450px;
+            padding-top: 20px;
+        }
+
+        tr:first-child{
+            border: 0;
+        }
+
+        tr:nth-child(n+2){
+            border: 0;
+        }
+
+        tr:last-child{
+            border: 0;
+        }

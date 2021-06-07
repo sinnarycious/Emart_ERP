@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* nav 공용 css */
+.navArea {
+    position : fixed;
+    top : 0;
+    left : 0;
+    z-index : 100000;
+    width : 7.8%;
+    min-width : 250px;
+    max-width : 250px;
+    height : 100%;
+    background : var(--white);
+    box-shadow: 5px 0px 10px var(--gray);
+}
+nav {
+    width: 250px;
+    height: 900px;
+}
+.logo {
+    width: 180px;
+    height: 50px;
+    margin-top: 30px;
+    padding: 0 auto;;
+}
+nav ul li {
+    left:0;
+    width: 250px;
+    text-align: left;
+    padding: 15px 60px;
+}
+nav ul li:first-child{
+    margin-top : 35px;
+}
+nav ul li a h5.OEsub {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: none;
+}
+nav ul li a h5.OEsub:last-child{
+    padding-bottom: 0px;
+}
+nav li:hover{
+    background: var(--light-gray);
+    border-left: 3px solid var(--yellow);
+    
+}
+nav li:hover h5.OEsub{
+    display:block;
+}
+footer {
+    border-top: 1px solid var(--light-gray);
+    background-color: white;
+    bottom: 200px;
+    position:fixed;
+    padding: 0 60px;
+    width: 250px;
+    height: 50px;
+}
+footer * {
+    text-align: left;
+}
+.comInfo {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height : 1.5;
+}
+footer hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    max-width: 100%
+}
