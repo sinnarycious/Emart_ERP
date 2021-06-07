@@ -23,7 +23,7 @@
                      <span class="title bold">발주 / 입고</span>
                  </a>
                  <a href="#"><h5 class="OEsub">- 발주 신청</h5></a>
-                 <a href="/emart24/views/oe.jsp"><h5 class="OEsub">- 입고 관리</h5></a>
+                 <a href="/emart24/WEB-INF/views/oe.jsp"><h5 class="OEsub">- 입고 관리</h5></a>
              </li>
              <li>
                  <a href="#">
