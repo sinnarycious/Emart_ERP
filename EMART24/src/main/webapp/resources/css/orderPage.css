@@ -11,6 +11,61 @@ h4, .category, .pdtNo, .search, .btn .click {
 }
 
 .search_text {
-	width: 500px;
+	width: 740px;
 }
 
+.searchList_box {
+	border: 1px solid var(--yellow);
+}
+
+.searchList tr:first-child{
+    border-top : var(--yellow) 2px solid;
+    border-bottom : 0;
+	border-left : var(--yellow) 2px solid;
+	border-right : var(--yellow) 2px solid;
+}
+tr:nth-child(n+2){
+    border-bottom : 0;
+	border-left : var(--yellow) 2px solid;
+	border-right : var(--yellow) 2px solid;
+}
+tr:last-child{
+    border-bottom : var(--yellow) 2px solid;
+}
+
+.td1 {
+	font-weight: 800;
+	
+}
+
+td {
+	padding-left: 54px;
+}
+
+.orderPage h2{
+
+	padding-bottom: 57px;
+	text-align: left;
+}
+
+.orderPage h3 {
+	text-align: left;
+	padding-bottom: 50px;
+	padding-left: 33px;
+}
+
+.searchBar {
+	float: left;
+	padding-left: 33px;
+	padding-bottom: 25px;
+}
+
+.category, .pdtNo, .search {
+	padding-right: 25px;
+}
+
+#pdtNo_num {
+	width: 100px;
+}
+
+.searchList{ border : 2px solid var(--yellow);}
