@@ -13,9 +13,9 @@
 </head>
 <body>
 
-<c:import url="views/common/nav.jsp" />
+<c:import url="common/nav.jsp" />
 		
-	<c:import url="views/common/header.jsp" />
+	<c:import url="common/header.jsp" />
 	
     <section class="wrap">
     	<div class="area">
