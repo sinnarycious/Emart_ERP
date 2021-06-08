@@ -13,9 +13,9 @@
 </head>
 <body>
 
-	<c:import url="views/common/nav.jsp" />
+	<c:import url="common/nav.jsp" />
 		
-	<c:import url="views/common/header.jsp" />
+	<c:import url="common/header.jsp" />
 	
 	
     <section class="wrap">
@@ -26,12 +26,12 @@
             <h3>발주 조회 / 입고 등록</h3>
 
             <div class="searchBar">
-                <form action="post" id="searchFrm">
+                <form action="${pageContext.request.contextPath}/OE/search.do" method="post" id="searchFrm">
                     <h4>기준 일자</h4> <input type="date"   name="orderDate1" /> ~ <input type="date"    name="orderDate2" />
                     <h4>발주 번호</h4> <input type="number" name="oeNo"     style="width:100px;" />
                     <h4>상품명</h4> <input type="text" name="oeName"    style="width:515px;" placeholder="상품명을 검색하세요. " />
 
-                    <button type="submit" class="btn search">조회</button>
+                    <button type="submit" class="btn search" onclick="search()">조회</button>
                 </form>
             </div>
 
@@ -63,14 +63,14 @@
                 </th>
             </tr>
             <tr>
-                <td><span class="num">50</span></td>
-                <td><span class="num">17</span></td>
-                <td>초코송이</td>
-                <td><span class="num">20</span></td>
+                <td><span class="num">${oe.oeNo}</span></td>
+                <td><span class="num">${oe.oeInvNo}</span></td>
+                <td>${oe.oeName}</td>
+                <td><span class="num">${oe.oeCount}</span></td>
                 <td><span class="num">28,400</span></td>
-                <td>5월 29일</td>
+                <td>${oe.orderDate}</td>
                 <td><button class="tag">결제 완료</button></td>
-                <td><button class="btn tag" type="submit">등록하기</button></td>
+                <td><button class="btn tag" type="submit" onclick="enroll()">${oe.oeStatus=="M"?"등록하기":"등록 완료"}</button></td>
             </tr>
             <tr>
                 <td><span class="num">50</span></td>
@@ -104,6 +104,20 @@
         </div>
 
     </section>
+    
+    <script>
+    
+    <!-- 조회 버튼 -->
+    function search(){
+    	
+    }
+    
+    <!-- 입고 등록 버튼 -->
+    function enroll(){
+    	
+    }
+    
+    </script>
 
 </body>
 </html>

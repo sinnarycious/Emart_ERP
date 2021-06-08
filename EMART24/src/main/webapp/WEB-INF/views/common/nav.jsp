@@ -6,45 +6,43 @@
  <section class="navArea">
      <nav>
          <div class="logo">
-             <a href="#">
+             <a href="${pageContext.request.contextPath}/main/main.do">
                  <img src="/emart24/resources/images/emart24.png">
              </a>
          </div>
          <ul>
              <li>
-                 <a href="/emart24/views/mypage.jsp">
+                 <a href="${pageContext.request.contextPath}/common/mypage.do">
                      <span class="icon"><img src="/emart24/resources/images/myPage.png"></span>
                      <span class="title bold">마이페이지</span>
                  </a>
              </li>
              <li>
-                 <a href="#">
                      <span class="icon"><img src="/emart24/resources/images/order.png"></span>
                      <span class="title bold">발주 / 입고</span>
-                 </a>
-                 <a href="#"><h5 class="OEsub">- 발주 신청</h5></a>
-                 <a href="/emart24/WEB-INF/views/oe.jsp"><h5 class="OEsub">- 입고 관리</h5></a>
+                 <a href="${pageContext.request.contextPath}/common/orderPage.do"><h5 class="OEsub">- 발주 신청</h5></a>
+                 <a href="${pageContext.request.contextPath}/common/oe.do"><h5 class="OEsub">- 입고 관리</h5></a>
              </li>
              <li>
-                 <a href="#">
+                 <a href="${pageContext.request.contextPath}/common/">
                      <span class="icon"><img src="/emart24/resources/images/enter.png"></span>
                      <span class="title bold">재고 관리</span>
                  </a>
              </li>
              <li>
-                 <a href="#">
+                 <a href="${pageContext.request.contextPath}/common/sellPage.do">
                      <span class="icon"><img src="/emart24/resources/images/sale.png"></span>
                      <span class="title bold">판매 관리</span>
                  </a>
              </li>
              <li>
-                 <a href="#">
+                 <a href="${pageContext.request.contextPath}/common/profit.do">
                      <span class="icon"><img src="/emart24/resources/images/profit.png"></span>
                      <span class="title bold">수익</span>
                  </a>
              </li>
              <li>
-                 <a href="#">
+                 <a href="${pageContext.request.contextPath}/common/eventPage.do">
                      <span class="icon"><img src="/emart24/resources/images/event.png"></span>
                      <span class="title bold">행사 공지</span>
                  </a>

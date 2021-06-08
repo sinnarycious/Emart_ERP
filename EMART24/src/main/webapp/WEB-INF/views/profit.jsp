@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>수익</title>
-    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
     <style>
         .area {
             padding-top: 0px;
@@ -106,75 +106,11 @@
     </style>
 </head>
 <body>
-    <header>
 
-    </header>
-    <section class="navArea">
-        <nav>
-            <div class="logo">
-                <a href="#">
-                    <img src="images/emart24.png">
-                </a>
-            </div>
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="icon"><img src="images/myPage.png"></span>
-                        <span class="title bold">마이페이지</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><img src="images/order.png"></span>
-                        <span class="title bold">발주 / 입고</span>
-                    </a>
-                    <a href="#"><h5 class="OEsub">- 발주 신청</h5></a>
-                    <a href="#"><h5 class="OEsub">- 입고 관리</h5></a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><img src="images/enter.png"></span>
-                        <span class="title bold">재고 관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><img src="images/sale.png"></span>
-                        <span class="title bold">판매 관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><img src="images/profit.png"></span>
-                        <span class="title bold">수익</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><img src="images/event.png"></span>
-                        <span class="title bold">행사 공지</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <footer>
-            <div class="footerIn">
-                <h4 class="bold" style="margin-top:20px;">프로젝트 참여원</h4>
-                <div class="comInfo">
-                    <h6>(주) 이마트24</h6>
-                    <h6>대표이사: 김창욱</h6>
-                    <h6>사업자등록번호:</h6>
-                    <h6>105-86-92454</h6>
-                    <h6>서울특별시 성동구 성수동 2가 281-4 푸조비즈타워</h6>
-                </div>
-                <div class="Copyright">
-                    <h6>Copyright &copy; 2021</h6>
-                    <h6>Sinnarycious All right</h6>
-                    <h6>Reserved</h6>
-                </div>
-            </div>
-        </footer>
-    </section>
+	<c:import url="common/nav.jsp" />
+		
+	<c:import url="common/header.jsp" />
+	
     <section class="wrap">
         <div class="area line graphArea">
             <div class="graphLine">

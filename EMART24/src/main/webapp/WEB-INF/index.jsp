@@ -32,7 +32,7 @@
                 <label for="login_chk">아이디 저장</label>
                 <a href="#">아이디 찾기 / 비밀번호 찾기</a>
             </div>
-            <button class="btn loginBtn"><h3>로그인</h3></button>
+            <button class="btn loginBtn" type="submit"><a href="${pageContext.request.contextPath}/main/main.do"><h3>로그인</h3></a></button>
         </fieldset>
     </section>
     <div class="copyrightText">
