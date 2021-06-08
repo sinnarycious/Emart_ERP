@@ -1,0 +1,38 @@
+@charset "utf-8";
+.eventPage h2{
+    padding-bottom: 57px;
+    text-align: left;
+}
+
+.eventPage h2, .eventPage h3 {
+    text-align: left;
+}
+
+.searchBar{
+    padding-top : 37px;
+    padding-bottom: 52px;
+}
+
+.searchBar h4{
+    display : inline-block;
+    text-align : left;
+}
+.searchBar h4{
+    margin-right : 10px;
+}
+.searchBar h4:nth-child(n+2){
+    margin-left : 35px;
+}
+.searchBar input[type="date"]{
+    width : 150px;
+}
+.searchBar input[name="sellName"]{
+    width : 515px;
+}
+.searchBar button[type="submit"]{
+    margin-left : 15px;
+}
+
+.pageNo{
+    padding-top : 35px;
+}
