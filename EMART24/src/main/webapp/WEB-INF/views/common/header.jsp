@@ -6,7 +6,6 @@
 	
 	<!-- header Start -->
 	<!-- 로그인 시  -->
-
 	<header>
       <div>
           <ul class="gnb">
@@ -30,7 +29,6 @@
           
       </div>
     </header>
-
     <!-- header End -->
 	
 	<!-- onclick시 이동하는 스크립트 -->
