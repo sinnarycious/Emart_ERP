@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>수익</title>
-    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common/reset.css">
+    <link rel="stylesheet" href="css/common/nav.css">
+    <link rel="stylesheet" href="css/common/header.css" />
+    <script src="js/jquery-3.6.0.min.js"></script>
     <style>
         .area {
             padding-top: 0px;
@@ -132,9 +136,59 @@
     </style>
 </head>
 <body>
-    <header>
-
+	<!-- header Start -->
+	<header>
+      <div>
+          <ul class="gnb">
+              <li><a href="#" onclick="goEmail()"><img src="images/email.png"></a></li>
+              <li><a href="#" onclick="goAlarm()"><img src="images/alram.png"></a></li>
+              <li><a href="#">${member.userBranch}점&nbsp;</a></li>
+              <li class="headerBorder">&nbsp;</li>
+              <li><a href="#">${member.userName} 님</a></li>
+              <div class="action">
+                  <div class="profile" onclick="menuToggle();">
+                      <img src="images/email.png" alt="">
+                  </div>
+                  <div class="menu">
+                      <ul>
+                         <li><a href="#" onclick="goMyprofile()">마이페이지</a></li>
+                          <li><a href="#" onclick="goLogout()">로그아웃</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </ul>
+          
+      </div>
     </header>
+
+    <!-- header End -->
+	
+	<!-- onclick시 이동하는 스크립트 -->
+	<script type="text/javascript">
+		
+		function goLogin() {
+			location.href="";
+		}
+	
+		function goEmail() {
+			location.href="";
+		}	
+		
+		function goAlarm() {
+			location.href="";
+		}
+		
+		function goMyprofile() {
+			location.href="";
+		}
+		
+		function goLogout() {
+			location.href="";
+		}
+		
+	</script>
+	<!-- Script End -->
+
     <section class="navArea">
         <nav>
             <div class="logo">
@@ -207,10 +261,9 @@
             <div class="graphLine">
                 <h3 class="graphTop5">수익 그래프</h3>
                 <span>
-                    <select name="during" id="duringLine">
+                    <select name="during" id="duringLine" onchagne="line()">
                         <option value="week">주간</option>
                         <option value="month">월간</option>
-                        <option value="year">연간</option>
                     </select>
                 </span>
             </div>
@@ -231,7 +284,6 @@
                     <select name="during" id="duringDoughnut">
                         <option value="week">주간</option>
                         <option value="month">월간</option>
-                        <option value="year">연간</option>
                     </select>
                 </div>
                 <canvas id="myChartDoughnut"></canvas>
@@ -311,70 +363,199 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // lineGraph start
-        var daysLabels = [
-          '월',
-          '화',
-          '수',
-          '목',
-          '금',
-          '토',
-          '일'
-        ];
-        var thisWeekData = {
-          labels: daysLabels,
-          datasets: [{
-            label: '일별 매출액(만)',
-            backgroundColor: '#fdb718',
-            borderColor: '#fdb718',
-            data:
-                [22,
-                 50,
-                 10,
-                 8,
-                 30,
-                 30,
-                 45],
-          }]
-        };
-        var line1 = {
-          type: 'line',
-          data: thisWeekData
-        };
+        
+        function line() {
+            var duringArea = document.getElementById('duringLine');
+            console.log(duringArea);
+            var during = duringArea.options[duringArea.selectedIndex].value;
+            console.log(during);
+        }
 
-        /*
-        var lastWeekData = {
-          labels: daysLabels,
-          datasets: [{
-            label: '일별 매출액(만)',
-            backgroundColor: '#777777',
-            borderColor: '#777777',
-            data:
-                [10,
-                 50,
-                 22,
-                 50,
-                 60,
-                 80,
-                 100],
-          }]
-        };
-        var line2 = {
-          type: 'line',
-          data: lastWeekData
-        };
-        */
-          // === include 'setup' then 'config' above ===
 
-        var thisWeekLine = new Chart(
-          document.getElementById('myChartLine'),
-          line1
-        );
-        /*
-        var lastWeekData = new Chart(
-          document.getElementById('myChartLine'),
-          line2
-        );
-        */
+        // 주간 그래프 시작
+        function week() {
+                var weekLabels = [
+                  '월',
+                  '화',
+                  '수',
+                  '목',
+                  '금',
+                  '토',
+                  '일'
+                ];
+                var weekData = {
+                  labels: weekLabels,
+                  datasets: [{
+                    label: '이번 주',
+                    backgroundColor: '#fdb718',
+                    borderColor: '#fdb718',
+                    data:
+                        [22,
+                         50,
+                         10,
+                         8,
+                         30,
+                         30,
+                         45],
+                        },{
+                    label: '지난 주',
+                    backgroundColor: '#777777',
+                    borderColor: '#777777',
+                    data:
+                        [10,
+                         50,
+                         22,
+                         50,
+                         60,
+                         80,
+                         100],
+                        }]
+                };
+            
+                var line = {
+                  type: 'line',
+                  data: weekData
+                };
+            
+                  // === include 'setup' then 'config' above ===
+            
+                var weekLine = new Chart(
+                  document.getElementById('myChartLine'),
+                  line
+                );
+        }
+        // 주간 그래프 끝
+
+        // 월간 그래프 시작
+
+        function week() {
+                var monthLabels = [
+                  '1',
+                  '2',
+                  '3',
+                  '4',
+                  '5',
+                  '6',
+                  '7',
+                  '8',
+                  '9',
+                  '10',
+                  '11',
+                  '12',
+                  '13',
+                  '14',
+                  '15',
+                  '16',
+                  '17',
+                  '18',
+                  '19',
+                  '20',
+                  '21',
+                  '22',
+                  '23',
+                  '24',
+                  '25',
+                  '26',
+                  '27',
+                  '28',
+                  '29',
+                  '30',
+                  '31'
+                ];
+                var monthData = {
+                  labels: monthLabels,
+                  datasets: [{
+                    label: '이번 달',
+                    backgroundColor: '#fdb718',
+                    borderColor: '#fdb718',
+                    data:
+                        [22,
+                         50,
+                         10,
+                         8,
+                         30,
+                         30,
+                         45,
+                         22,
+                         50,
+                         10,
+                         8,
+                         30,
+                         30,
+                         45,
+                         22,
+                         50,
+                         10,
+                         8,
+                         30,
+                         30,
+                         45,
+                         22,
+                         50,
+                         10,
+                         8,
+                         30,
+                         30,
+                         45,
+                         55,
+                         100,
+                         5
+                        ],
+                        },{
+                    label: '지난 달',
+                    backgroundColor: '#777777',
+                    borderColor: '#777777',
+                    data:
+                        [10,
+                         50,
+                         22,
+                         50,
+                         60,
+                         80,
+                         100,
+                         10,
+                         50,
+                         22,
+                         50,
+                         60,
+                         80,
+                         100,
+                         10,
+                         50,
+                         22,
+                         50,
+                         60,
+                         80,
+                         100,
+                         10,
+                         50,
+                         22,
+                         50,
+                         60,
+                         80,
+                         100,
+                         150,
+                         15,
+                         10
+                        ],
+                        }]
+                };
+            
+                var line = {
+                  type: 'line',
+                  data: monthData
+                };
+            
+                  // === include 'setup' then 'config' above ===
+            
+                var monthLine = new Chart(
+                  document.getElementById('myChartLine'),
+                  line
+                );
+        }
+
+        // 월간 그래프 끝
+
         // lineGraph end
     </script>
     <script>
