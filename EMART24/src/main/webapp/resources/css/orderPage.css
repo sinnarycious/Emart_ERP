@@ -10,7 +10,101 @@ h4, .category, .pdtNo, .search, .btn .click {
     display: inline;
 }
 
-.search_text {
-	width: 500px;
+.order_h3 {
+    margin-left: 9px;
 }
 
+form {
+    width: 1434px;
+    margin-right: 0;
+}
+
+.search_text {
+	width: 720px;
+}
+
+.searchList_box {
+	border: 1px solid var(--yellow);
+}
+.searchList th, .searchList td{
+    padding : 10px;
+}
+.searchList tr:first-child{
+    border-top : var(--yellow) 2px solid;
+    border-bottom : 0;
+	border-left : var(--yellow) 2px solid;
+	border-right : var(--yellow) 2px solid;
+}
+tr:nth-child(n+2){
+    border-bottom : 0;
+	border-left : var(--yellow) 2px solid;
+	border-right : var(--yellow) 2px solid;
+}
+tr:last-child{
+    border-bottom : var(--yellow) 2px solid;
+}
+
+.td1 {
+	padding: 10px 10px;
+}
+
+.td2 {
+	font-weight: 800;
+	padding: 10px 10px;
+    width: 180px;
+}
+
+.order_Product {
+    width: 700px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+tr {
+    height: 10px ; 
+}
+td {
+	padding-left: 10px;
+}
+
+#Pdt {
+    margin-left: 20px;
+}
+.orderPage h2{
+
+	padding-bottom: 57px;
+	text-align: left;
+}
+
+.orderPage h3 {
+	text-align: left;
+	padding-bottom: 50px;
+	padding-left: 33px;
+}
+
+.searchBar {
+	float: left;
+	padding-left: 33px;
+	padding-bottom: 25px;
+}
+
+.category, .pdtNo, .search {
+	padding-right: 25px;
+}
+
+#pdtNo_num {
+	width: 100px;
+}
+
+#Pdt_Count {
+    margin-left: 19px;
+    width: 110px;
+}
+
+.searchList{ border : 2px solid var(--yellow);}
+
+.order_btn {
+    float: right;
+    padding-top: 15px;
+    padding-right: 24px;
+}
