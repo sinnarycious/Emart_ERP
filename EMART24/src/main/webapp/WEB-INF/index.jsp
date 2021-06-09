@@ -7,14 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-<title>이마트24</title>
+<link rel="shortcut icon" type="image/x-icon" href="/emart24/resources/images/emart.ico">
+<title>Emart24_ERP</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/login.css">
-
 </head>
-<body>
 
+<body>
 <section class="loginPage">
         <div class="losgin_logo">
             <img src="/emart24/resources/images/emart24_login.png">

@@ -35,7 +35,25 @@
         }
 
         .pwInput {
-            width: 250px;
+            width: 150px;
+        }
+        
+        .name {
+        	width : 130px;
+        }
+        	
+        .rno {
+        	width : 210px;
+        }
+        
+        .email {
+        	padding-right: 30px;
+        	 width: 200px;
+        }
+        
+        .phone {
+        	padding-right: 30px;
+        	width: 200px;
         }
 
         .update_profile {
@@ -46,14 +64,6 @@
             padding-left: 100px;
         }
 
-        .email_first {
-            width: 97px;
-        }
-
-        .phone {
-            width: 50px;
-        }
-        
         .btn.submit {
             width: 110px;
             height: 40px;
