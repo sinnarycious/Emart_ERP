@@ -21,7 +21,7 @@
                   </div>
                   <div class="menu">
                       <ul>
-                         <li><a href="#" onclick="goMyprofile()">마이페이지</a></li>
+                         <li><a href="/emart24/views/mypage.jsp" onclick="goMyprofile()">마이페이지</a></li>
                           <li><a href="#" onclick="goLogout()">로그아웃</a></li>
                       </ul>
                   </div>

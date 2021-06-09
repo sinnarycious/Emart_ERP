@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
+
+	<select id="selectOne" parameterType="string" resultMap="resultMember">
+		SELECT * FROM MEMBER
+		WHERE USER_ID = #{ userId }
+	</select>
+	
+
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER SET USER_PWD = #{ userPwd },
+						  USER_EMAIL= #{ userEmail }, 
+		                  USER_PHONE = #{ userPhone },
+		WHERE USERID = #{ userId } 
+	</update>
 <!-- 
 	USER_NO, USER_ID, USER_PWD, USER_RNO,
 	USER_NAME, USER_EMAIL, USER_PHONE,

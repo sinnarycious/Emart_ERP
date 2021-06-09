@@ -7,38 +7,86 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-<title>이마트24</title>
+<title>마이페이지</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
-<link rel="stylesheet" href="/emart24/resources/css/common/login.css">
-
+<link rel="stylesheet" href="/emart24/resources/css/mparea.css">
 </head>
 <body>
 
-<section class="loginPage">
-        <div class="losgin_logo">
-            <img src="/emart24/resources/images/emart24_login.png">
-            <h2 class="login_title">새로운 라이프 스타일 편의점</h2>
-        </div>
-        <fieldset class="login_form">
-            <div class="id_area">
-                <input type="text" placeholder="아이디를 입력해주세요.">
+<c:import url="views/common/nav.jsp" />
+		
+	<c:import url="views/common/header.jsp" />
+	
+    <section class="wrap">
+    	<div class="area">
+    	<form name="memberUpdate" action="${pageContext.request.contextPath}/member/memberUpdate.do" method="post">
+		<div class="myPageArea1">
+                <h2>마이페이지</h2>
+                <img src="/emart24/resources/images/yoona.png" class="profile_Img">
+                <table class="update_pw">
+                   <tr>
+						<td class="td1">아이디</td>
+						<td><input type="text" class="pwInput" value="${member.userId}" readonly required ></td>					
+                    </tr>
+                    <tr>
+                        <td class="td1">비밀번호</td>
+                        <td><input type="text" class="pwInput" value="${member.userPwd}" required></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">비밀번호 확인</td>
+                        <td><input type="text" class="pwInput" value="${member.userPwd}" required></td>
+                    </tr>
+                </table>
+                <table class="update_profile">
+                    <tr>
+                        <td class="td1">이름</td>
+                        <td><input type="text" class="name" value= "${member.userName}" readonly required></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">주민번호</td>
+                        <td><input type="text" class="rno" value= "${member.userRno}" readonly required></td>
+                    </tr>
+                    <tr>
+                        <td class="td1">이메일</td>
+                        <td><input type="text" class="email" value="${member.userEmail}" required> </td>
+                    </tr>
+                    <tr>
+                        <td class="td1">전화번호</td>
+                        <td><input type="text" class="phone" value="${member.userPhone}" required> </td>
+                    </tr>
+                </table>
+                <button class="btn submit myPage_updateBtn">수정하기</button>
+                <img src="/emart24/resources/images/emart24store.png" class="emart24_storeImg">
+                <table class="update_profile">
+                    <tr>
+                        <td class="td1">지점명</td>
+                        <td>${member.userBranch}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">주소</td>
+                        <td>서울특별시 강남구 언주로 103길 10</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">영업시간</td>
+                        <td>07:00 ~ 23:00</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">무인 영업시간</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">점포 전화번호</td>
+                        <td>02-408-7906</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">점포 개업일</td>
+                        <td>${member.userOpenDate}</td>
+                    </tr>
+                </table>
             </div>
-            <div class="pw_area">
-                <input type="text" placeholder="비밀번호를 입력해주세요.">
-            </div>
-            <div class="idSave_checkbox">
-                <input type="checkbox">
-                <label for="login_chk">아이디 저장</label>
-                <a href="#">아이디 찾기 / 비밀번호 찾기</a>
-            </div>
-            <button class="btn loginBtn"><h3>로그인</h3></button>
-        </fieldset>
+		</form>
+		</div>
     </section>
-    <div class="copyrightText">
-        <hr>
-        <h5>프로젝트 참여원</h5><p style="text-align: center;">copyright © 2021 Sinnarycious All Rights Reserved</p>
-    </div>
 
 </body>
 </html>
