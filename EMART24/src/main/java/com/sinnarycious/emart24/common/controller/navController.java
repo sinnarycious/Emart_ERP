@@ -28,7 +28,11 @@ public class navController {
 	}
 	
 	/* 재고 관리 이동 */
-	
+	@RequestMapping("/common/inv.do")
+	public String inv() {
+		System.out.println("/common/inv.do가 호출되었습니다.");
+		return "inv";
+	}
 	
 	
 	/* 판매 관리 이동 */

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-	<link rel="stylesheet" href="/emart24/resources/css/common/nav.css" />
+<link rel="stylesheet" href="/emart24/resources/css/common/nav.css" />
 	
  <section class="navArea">
      <nav>
@@ -24,7 +24,7 @@
                  <a href="${pageContext.request.contextPath}/common/oe.do"><h5 class="OEsub">- 입고 관리</h5></a>
              </li>
              <li>
-                 <a href="${pageContext.request.contextPath}/common/">
+                 <a href="${pageContext.request.contextPath}/common/inv.do">
                      <span class="icon"><img src="/emart24/resources/images/enter.png"></span>
                      <span class="title bold">재고 관리</span>
                  </a>

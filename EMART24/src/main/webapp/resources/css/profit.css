@@ -1,0 +1,123 @@
+@charset "utf-8";
+.area {
+	padding-top: 0px;
+}
+.line {
+    float:left;
+    width: 1100px;
+    height: 460px;
+    margin-left: 75px;
+    margin-top: 10px;
+    border : 1px solid var(--light-gray);
+}
+.doughnut {
+    float: right;
+    width: 400px;
+    height: 470px;
+    margin-right: 75px;
+}
+.profit {
+    top: 0px;
+    height: 70px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    line-height: 35px;
+}
+.profit * {
+    color : white;
+    font-weight: 700;
+}
+.day {
+    width: 150px;
+    margin-right: 5px;
+}
+.month {
+    width: 200px;
+    margin-left: 5px;
+}
+.categoriArea {
+    width: 1520px;
+    height: 330px;
+    top: 520px;
+    left: 75px;
+    position: absolute;
+    border : 1px solid var(--light-gray);
+}
+.categoriArea h3{
+    text-align: left;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.categoriArea>div {
+    width : 200px;
+    height : 250px;
+    border: 2px solid var(--yellow);
+    display: inline-block;
+    margin-top: 25px;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+.categoriArea>div>div {
+    width:180px;
+    height:220px;
+    margin-top: 12px;
+}
+.categoriArea>div>div>div {
+    width:150px;
+    height:180px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.categoriArea h4 {
+    text-align: left;
+}
+.categoriArea h6 {
+    text-align: left;
+    line-height: 20px;
+}
+.graphLine {
+    width: 1096px;
+    text-align: justify;
+}
+.graphTop5 {
+    display: inline-block;
+    text-align: left;
+    margin-top: 10px;
+    position: relative;
+    left : 30px;
+}
+#duringLine {
+    text-align: right;
+    margin-top: 10px;
+    position: relative;
+    right: 30px;
+    float: right;
+}
+.profitTitle {
+    text-align: left;
+    margin-left: 80px;
+}
+.ration {
+    display: inline-block;
+    text-align: left;
+    margin-top: 20px;
+    position: relative;
+    float: left;
+    left : 20px;
+}
+#ration {
+    height: 380px;
+}
+#duringDoughnut {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    right: 15px;
+    float: right;
+}
+.doughnutAnno{
+    width: 396px;
+    height: 20px;
+}
