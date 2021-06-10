@@ -22,3 +22,5 @@ public class Member implements Serializable{
 	private Date userOpenDate;
 	private String userAttNO;
 }
+
+

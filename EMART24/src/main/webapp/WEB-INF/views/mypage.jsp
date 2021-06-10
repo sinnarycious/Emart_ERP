@@ -13,9 +13,9 @@
 </head>
 <body>
 
-	<c:import url="views/common/nav.jsp" />
+	<c:import url="common/nav.jsp" />
 
-	<c:import url="views/common/header.jsp" />
+	<c:import url="common/header.jsp" />
 
 	<section class="wrap">
 		<div class="area">
@@ -28,7 +28,7 @@
 					<table class="update_pw">
 						<tr>
 							<td class="td1">아이디</td>
-							<td><input type="text" class="pwInput"
+							<td><input type="text" class="idInput"
 								value="${member.userId}" readonly required></td>
 						</tr>
 						<tr>
@@ -50,7 +50,7 @@
 						</tr>
 						<tr>
 							<td class="td1">주민번호</td>
-							<td><input type="text" class="rno" value="${member.userRno}"
+							<td><input type="text" class="rno" value="${member.userRNo}"
 								readonly required></td>
 						</tr>
 						<tr>

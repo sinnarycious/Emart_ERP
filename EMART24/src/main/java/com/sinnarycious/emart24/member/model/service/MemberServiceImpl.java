@@ -11,12 +11,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberDAO memberDAO;
-	
-	@Override
-	public Member selectOneMember(String userId) {
-		
-		return memberDAO.selectOneMember(userId);
-	}
 
 	@Override
 	public int updateMember(Member member) {
