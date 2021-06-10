@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
+<link rel="stylesheet" href="/emart24/resources/css/common/header.css" />
+<link rel="stylesheet" href="/eamrt24/resources/css/common/nav.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,7 +22,7 @@
         <h3 class="order_h3">발주 신청</h3>
 
         <!-- 검색창 -->
-        <form action="" method="post" class="searchBar">
+        <form action="search.do" method="post" class="searchBar">
             <!-- 상품카테고리 -->
             <h4>상품 카테고리 &nbsp;</h4> 
             <div class="category">
@@ -38,14 +40,14 @@
             <!-- 상품 번호 -->
             <h4>상품 번호 &nbsp;</h4>
             <div class="pdtNo">
-                <input type="number" id="pdtNo_num">
+                <input type="number" id="pdtNo_num" name = "proNo">
             </div>
             <!-- 상품 번호끝 -->
 
             <!-- 상품명 검색 -->
             <h4>상품명 &nbsp;</h4>
             <div class="search">
-                <input type="text" class="search_text">
+                <input type="text" name="proName" class="search_text">
             </div>
             <!-- 상품명 검색 끝-->
 
@@ -56,7 +58,7 @@
         <!-- 검색창 끝-->
 
         <!-- 검색 리스트 -->
-        <form action="">
+        <form action="searchList.do" method="post">
             <table class="searchList">
                 <tr>
                     <td class="td1" style="width:120px;"><h4>상품명</h4></td>
@@ -70,16 +72,16 @@
                 
                 <tr>
                     <td class="td1" style="width:120px;"><h4>상품명</h4></td>
-                    <td class="order_Product">${product.proName}</td>
+                    <td class="order_Product" name="proName">${product.proName}</td>
                     <td class="td1" style="width:70px;"><h4>금액</h4></td>
-                    <td style="width:80px;">${product.proPriceE}</td>
+                    <td style="width:80px;" name="proPirceE">${product.proPriceE}</td>
                     <td class="td1" style="width:180px;"><h4>수량</h4><input type="number" id="Pdt_Count">
                     </td>
                     <td style="width:110px;padding-right:30px;"><button class="btn click">추가</button></td>
                 </tr>
                 
             </table>
-        </form> n
+        </form> 
         <!-- 검색 리스트 끝-->
 
         <!-- 발주 리스트 -->
@@ -118,7 +120,7 @@
                         <td style="width:60px;">5</td>
                         <td style="width:90px;padding-left:10px">5000</td>
                         <td style="padding-left:37px;">6월 6일</td>
-                        <td><button class="btn click" onclick="">삭제</button></td>
+                        <td><button class="btn click" onclick="goOrderDel">삭제</button></td>
                     </tr>
                 </tbody>
                 <tfoot class="tfoot">
@@ -138,8 +140,8 @@
         
         <!-- 발주 버튼 시작 -->
         <div class="order_btn">
-	        <button class="btn submit">다시 작성</button>
-	        <button class="btn submit">발주하기</button>
+	        <button class="btn submit" type="reset">다시 작성</button>
+	        <button class="btn submit" type="submit">발주하기</button>
         </div>
         <!--  발주 버튼 끝 -->
     </div>
@@ -148,32 +150,44 @@
     <!-- script 시작 -->
     <script>
     	
-    	
-    	$(function) {
-    		// 버튼 클릭 시 검색 결과
-    		$('#search_btn').on('click', function(){
-    			document.
-    		});
-    		
-    		
-    		// 버튼 클릭 시 검색 리스트로 전달 (아직 아님)
-    		$('.btn click').on('click', function(){
-    			document.searchBar.submit();
-    		})
-    		
-    		// 검색 
-    		$('.search_text').keyup(function(){
-    			
-    			
-    		})
+    	const Searching = Search.prototype;
+    
+    	function Search() {
+    		this.engine = document.querySelector('input[name="Pdt"]')			// 상품명 카테고리
+    		this.keyword = document.querySelector('input[name="proNo"]')		// 상품명 번호
+    		this.keyword = document.querySelector('input[name="proName"]')		// 상품명 
+    		this.button = document.querySelector('#search_btn')					// 검색 버튼
+    		this.form = document.querySelector('.searchBar')					// 검색창 form		
     	}
+    	
+    	new Search();
+    	
+    	// 검색 결과 주소로 이동하는 함수
+    	Searching.Engine = function() {
+    		this.form.addEventListener('submit', e => {
+    			
+    			e.preventDefault();
+    			
+    			let engine = this.engine.value;
+    			let keyword = this.keyword.value;
+    			
+    			if (engine === '')
+    			
+    		});
+    	}
+    	
+    	$(function(){
+    		$('#search_btn').click(function(){
+    			self.location = "li"
+    		});
+    	});
     
-    
-    
-    
-    
-    
-    
+    	
+    	// 검색 리스트
+		$.ajax({
+			url : "${pageContext.request.contextPath}/oe/"
+			data : {}
+		});
     
     </script>
     <!-- script 끝 -->

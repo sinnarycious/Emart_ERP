@@ -15,7 +15,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public Member selectOneMember(String userId) {
 		
-		return sqlSession.selectOne("member-mapper.selectOne", userId);
+		return sqlSession.selectOne("member-mapper.selectOneMember", userId);
 	}
 	
 	@Override
