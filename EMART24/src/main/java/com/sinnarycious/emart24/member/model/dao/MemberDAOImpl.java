@@ -17,9 +17,13 @@ public class MemberDAOImpl implements MemberDAO {
 <<<<<<< HEAD
 	public Member selectOneMember(Member m) {
 		
+<<<<<<< HEAD
 		System.out.println(m);
 		
 		return sqlSession.selectOne("member.selectOneMember", m);
+=======
+		return sqlSession.selectOne("member-mapper.selectOneMember", userId);
+>>>>>>> refs/remotes/origin/gayul
 	}
 	
 	@Override

@@ -4,6 +4,7 @@
 <mapper namespace="member">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <resultMap type="Member" id="resultMember"> </resultMap>
     
     <select id="selectOneMember" parameterType="Member" resultMap="resultMember">
@@ -14,9 +15,16 @@
 <resultMap type="Member" id="resultMember"> </resultMap>   
 
 	<select id="selectOne" parameterType="Member" resultMap="resultMember">
+=======
+	<select id="selectOneMember" parameterType="string" resultMap="resultMember">
+>>>>>>> refs/remotes/origin/gayul
 		SELECT * FROM MEMBER
+<<<<<<< HEAD
 		WHERE USER_ID = #{ userId }
 			AND USER_PWD = #{ userPwd }
+=======
+		WHERE USER_ID = #{ userId } AND USER_PWD = #{userPwd}
+>>>>>>> refs/remotes/origin/gayul
 	</select>
 	
 >>>>>>> refs/remotes/origin/kjw1302
