@@ -14,6 +14,7 @@ public class MemberDAOImpl implements MemberDAO {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
+<<<<<<< HEAD
 	public Member selectOneMember(Member m) {
 		
 		System.out.println(m);
@@ -22,6 +23,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
+=======
+>>>>>>> refs/remotes/origin/kjw1302
 	public int updateMember(Member member) {
 		
 		return sqlSession.update("member.updateMember", member);

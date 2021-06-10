@@ -16,11 +16,11 @@
         }
 
         .update_pw {
-            width: 200px;
+            width: 250px;
             height: 200px;
             position: relative;
             display: inline;
-            padding-left: 50px;
+            padding-left: 60px;
         }
 
         .td1 {
@@ -33,9 +33,14 @@
             padding: 10px 0;
             text-align: left;
         }
+        
+        .idInput {
+        	width: 240px;
+        }
+        
 
         .pwInput {
-            width: 150px;
+            width: 240px;
         }
         
         .name {
@@ -47,12 +52,12 @@
         }
         
         .email {
-        	padding-right: 30px;
+        	padding-right: 50px;
         	 width: 200px;
         }
         
         .phone {
-        	padding-right: 30px;
+        	padding-right: 50px;
         	width: 200px;
         }
 

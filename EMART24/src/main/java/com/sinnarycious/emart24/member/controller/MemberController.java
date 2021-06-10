@@ -1,7 +1,6 @@
 package com.sinnarycious.emart24.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +17,7 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
+<<<<<<< HEAD
 	@RequestMapping("/member/memberLogin.do")
 	public String memberLogin(
 			@RequestParam String userId,
@@ -71,6 +71,8 @@ public class MemberController {
 	}
 		
 
+=======
+>>>>>>> refs/remotes/origin/kjw1302
 	
 	@RequestMapping("/member/memberUpdate.do")
 	public String memberUpdate(Member member, Model model) {
@@ -81,10 +83,10 @@ public class MemberController {
 		String msg = "";
 		
 		if( result > 0 ) {
-			msg = "마이페이지 수정 완료!";
+			msg = "마이페이지 수정 완료ㅎㅎ";
 			model.addAttribute("member", member);
 		} else {
-			msg = "마이페이지 수정 실패";
+			msg = "마이페이지 수정 실패ㅠㅠ";
 		}
 		
 		model.addAttribute("loc", loc);
@@ -95,3 +97,4 @@ public class MemberController {
 	}
 	*/
 }
+
