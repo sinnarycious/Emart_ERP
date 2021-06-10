@@ -2,20 +2,23 @@ package com.sinnarycious.emart24.member.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
-import com.sinnarycious.emart24.member.model.vo.Member;
 import com.sinnarycious.emart24.member.model.dao.MemberDAO;
+import com.sinnarycious.emart24.member.model.vo.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberDAO memberDAO;
-	
+
 	@Override
-	public Member selectOneMember(String userId) {
+	public Member selectOneMember(Member m ) {
 		
-		return memberDAO.selectOneMember(userId);
+		System.out.println(m);
+		
+		return memberDAO.selectOneMember(m);
 	}
 
 	@Override
