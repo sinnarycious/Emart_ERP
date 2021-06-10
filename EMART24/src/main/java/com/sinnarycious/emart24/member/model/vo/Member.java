@@ -21,4 +21,9 @@ public class Member implements Serializable{
 	private String userBranch;
 	private Date userOpenDate;
 	private String userAttNO;
+	
+	public Member(String userId, String userPwd) {
+		this.userId = userId;
+		this.userPwd = userPwd;
+	}
 }

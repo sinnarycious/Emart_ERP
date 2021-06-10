@@ -3,11 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-	<select id="selectOne" parameterType="string" resultMap="resultMember">
-		SELECT * FROM MEMBER
-		WHERE USER_ID = #{ userId }
-	</select>
-	
+    <resultMap type="Member" id="resultMember"> </resultMap>
+    
+    <select id="selectOneMember" parameterType="Member" resultMap="resultMember">
+    	SELECT * FROM MEMBER
+    	WHERE USER_ID =#{ userId } AND USER_PWD = #{ userPwd }
+    </select>
 
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER SET USER_PWD = #{ userPwd },
