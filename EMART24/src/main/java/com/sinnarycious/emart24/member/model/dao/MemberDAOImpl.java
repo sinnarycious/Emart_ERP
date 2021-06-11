@@ -14,25 +14,21 @@ public class MemberDAOImpl implements MemberDAO {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-<<<<<<< HEAD
 	public Member selectOneMember(Member m) {
 		
-<<<<<<< HEAD
 		System.out.println(m);
 		
 		return sqlSession.selectOne("member.selectOneMember", m);
-=======
-		return sqlSession.selectOne("member-mapper.selectOneMember", userId);
->>>>>>> refs/remotes/origin/gayul
 	}
 	
 	@Override
-=======
->>>>>>> refs/remotes/origin/kjw1302
 	public int updateMember(Member member) {
+		
+		System.out.println(member);
 		
 		return sqlSession.update("member.updateMember", member);
 	}
 
 	
 }
+
