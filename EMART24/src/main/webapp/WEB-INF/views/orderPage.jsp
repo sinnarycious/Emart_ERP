@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>이마트24</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
-<link rel="stylesheet" href="/emart24/resources/css/common/header.css" />
-<link rel="stylesheet" href="/eamrt24/resources/css/common/nav.css" />
-<title>Insert title here</title>
+<link rel="stylesheet" href="/emart24/resources/css/common/nav.css">
+<link rel="stylesheet" href="/emart24/resources/css/orderPage.css">
 </head>
 <body>
 	
-	<c:import url="views/common/nav.jsp" />
+	<c:import url="common/nav.jsp" />
 		
-	<c:import url="views/common/header.jsp" />
+	<c:import url="common/header.jsp" />
+	
 	
     <div class="area orderPage">
         <h2>발주 관리</h2>
@@ -22,7 +23,7 @@
         <h3 class="order_h3">발주 신청</h3>
 
         <!-- 검색창 -->
-        <form action="search.do" method="post" class="searchBar">
+        <form action="searchBar.do" method="post" class="searchBar">
             <!-- 상품카테고리 -->
             <h4>상품 카테고리 &nbsp;</h4> 
             <div class="category">
@@ -53,7 +54,6 @@
 
             <!-- 버튼 -->
             <button class="btn click" id="search_btn">검색</button>
-
         </form>
         <!-- 검색창 끝-->
 
@@ -150,44 +150,6 @@
     <!-- script 시작 -->
     <script>
     	
-    	const Searching = Search.prototype;
-    
-    	function Search() {
-    		this.engine = document.querySelector('input[name="Pdt"]')			// 상품명 카테고리
-    		this.keyword = document.querySelector('input[name="proNo"]')		// 상품명 번호
-    		this.keyword = document.querySelector('input[name="proName"]')		// 상품명 
-    		this.button = document.querySelector('#search_btn')					// 검색 버튼
-    		this.form = document.querySelector('.searchBar')					// 검색창 form		
-    	}
-    	
-    	new Search();
-    	
-    	// 검색 결과 주소로 이동하는 함수
-    	Searching.Engine = function() {
-    		this.form.addEventListener('submit', e => {
-    			
-    			e.preventDefault();
-    			
-    			let engine = this.engine.value;
-    			let keyword = this.keyword.value;
-    			
-    			if (engine === '')
-    			
-    		});
-    	}
-    	
-    	$(function(){
-    		$('#search_btn').click(function(){
-    			self.location = "li"
-    		});
-    	});
-    
-    	
-    	// 검색 리스트
-		$.ajax({
-			url : "${pageContext.request.contextPath}/oe/"
-			data : {}
-		});
     
     </script>
     <!-- script 끝 -->

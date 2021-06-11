@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sinnarycious.emart24.OE.model.service.OEService;
+import com.sinnarycious.emart24.OE.model.vo.OE;
 
 @Controller
 public class OEController {
@@ -16,6 +17,16 @@ public class OEController {
 	@Autowired
 	OEService OEService;
 	
+
+	
+	// 검색 리스트
+	@RequestMapping("/OE/searchList.do")
+	public String searchList() {
+		
+		
+		
+		return "";
+	}
 
 	
 	

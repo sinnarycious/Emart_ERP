@@ -12,7 +12,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberDAO memberDAO;
-<<<<<<< HEAD
 
 	@Override
 	public Member selectOneMember(Member m ) {
@@ -21,12 +20,11 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.selectOneMember(m);
 	}
-=======
->>>>>>> refs/remotes/origin/kjw1302
 
 	@Override
 	public int updateMember(Member member) {
 		
 		return memberDAO.updateMember(member);
 	}
+	
 }
