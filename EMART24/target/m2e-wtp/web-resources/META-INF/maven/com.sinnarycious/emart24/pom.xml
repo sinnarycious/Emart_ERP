@@ -188,6 +188,7 @@
 		    <scope>provided</scope>
 		</dependency>
 
+
 		<!-- spring security modules -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 		<dependency>

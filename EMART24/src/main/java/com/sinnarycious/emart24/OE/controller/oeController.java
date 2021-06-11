@@ -1,6 +1,7 @@
 package com.sinnarycious.emart24.OE.controller;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,14 +9,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sinnarycious.emart24.OE.model.service.OEService;
+import com.sinnarycious.emart24.OE.model.service.oeService;
+import com.sinnarycious.emart24.OE.model.vo.oe;
 
 @Controller
-public class OEController {
+public class oeController {
 
 	@Autowired
-	OEService OEService;
+	oeService oeService;
 	
+	/* 입고 관리 이동 */
+	@RequestMapping("/OE/oe.do")
+	public String oe(Model model) {
+		System.out.println("/common/oe.do가 호출되었습니다.");
+		
+		List<oe> list = oeService.selectOEList();
+		
+		System.out.println("selectOE [list] : " + list);
+		
+		model.addAttribute("list", list);
+		
+		return "oe";
+	}
+
 
 	
 	
@@ -25,8 +41,7 @@ public class OEController {
 			@RequestParam Date orderDate1,
 			@RequestParam Date orderDate2,
 			@RequestParam int oeNo,
-			@RequestParam String oeName,
-			Model model
+			@RequestParam String oeName
 			) {
 		
 		
@@ -34,4 +49,7 @@ public class OEController {
 		return null;
 		
 	}
+	
+
+
 }

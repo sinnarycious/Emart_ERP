@@ -10,9 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OE implements Serializable{
+public class oe implements Serializable{
+	private static final long serialVersionUID = 1009L;
+	
 	private int oeNo;
 	private int oeCount;
+	private int oePrice;
 	private Date orderDate;
 	private Date enterDate;
 	private String oeStatus;

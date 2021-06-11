@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oe">
+
+	<resultMap type="oe" id="oeMap">
+		<result column="OE_NO" property="oeNo" />
+		<result column="OE_COUNT" property="oeCount" />
+		<result column="OE_PRICE_E" property="oePrice" />
+		<result column="ORDER_DATE" property="orderDate" />
+		<result column="ENTER_DATE" property="enterDate" />
+		<result column="OE_STATUS" property="oeStatus" />
+		<result column="OE_INV_NO" property="oeInvNo" />
+		<result column="OE_NAME" property="oeName" />
+		<result column="OE_CAT_NO" property="oeCatNo" />
+	</resultMap>
+	
+	<select id="selectOEList" resultMap="oeMap">
+		SELECT * FROM ORDER_ENTER
+		ORDER BY OE_NO DESC
+	</select>
+
+
+
+
+
+</mapper>

@@ -3,38 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     <resultMap type="Member" id="resultMember"> </resultMap>
     
     <select id="selectOneMember" parameterType="Member" resultMap="resultMember">
     	SELECT * FROM MEMBER
     	WHERE USER_ID =#{ userId } AND USER_PWD = #{ userPwd }
     </select>
-=======
-<resultMap type="Member" id="resultMember"> </resultMap>   
-
-	<select id="selectOne" parameterType="Member" resultMap="resultMember">
-=======
-	<select id="selectOneMember" parameterType="string" resultMap="resultMember">
->>>>>>> refs/remotes/origin/gayul
-		SELECT * FROM MEMBER
-<<<<<<< HEAD
-		WHERE USER_ID = #{ userId }
-			AND USER_PWD = #{ userPwd }
-=======
-		WHERE USER_ID = #{ userId } AND USER_PWD = #{userPwd}
->>>>>>> refs/remotes/origin/gayul
-	</select>
-	
->>>>>>> refs/remotes/origin/kjw1302
 
 	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER SET 
-		USER_PWD = #{ userPwd },
-		USER_EMAIL= #{ userEmail }, 
-		USER_PHONE = #{ userPhone }
-		WHERE USER_ID = #{ userId } 
+		UPDATE MEMBER SET USER_PWD = #{ userPwd },
+						  USER_EMAIL= #{ userEmail }, 
+		                  USER_PHONE = #{ userPhone },
+		WHERE USERID = #{ userId } 
 	</update>
 <!-- 
 	USER_NO, USER_ID, USER_PWD, USER_RNO,
