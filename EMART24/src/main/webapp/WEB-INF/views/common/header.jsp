@@ -33,12 +33,8 @@
 	<!-- onclick시 이동하는 스크립트 -->
 	<script type="text/javascript">
 		
-		function goLogin() {
-			location.href="";
-		}
-	
 		function goEmail() {
-			location.href="";
+			location.href="mailto:${member.userEmail}";
 		}	
 		
 		function goAlarm() {
@@ -50,7 +46,12 @@
 		}
 		
 		function goLogout() {
-			location.href="";
+			location.href="/memeber/logout.do";
+		}
+		
+		function menuToggle() {
+			const toggleMenu = document.querySelector('.menu');
+            toggleMenu.classList.toggle('active')
 		}
 		
 	</script>

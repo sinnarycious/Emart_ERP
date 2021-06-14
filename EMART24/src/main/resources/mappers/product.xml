@@ -7,4 +7,22 @@
 	PRO_PRICE_S, PRO_PRICE_E, PRO_CAT_NO
 -->
 
+	<select id="searchBar" parameterType="product" resultType="product">
+		
+		<where>
+			<if test="keyword != null and keyword !=''">
+				<if test="search == ''">
+					proName like '%' || %{keyword} || '%' or
+					pdtNo_num like '$'|| ${keyword} || '%'
+				 
+				</if>
+				<if test="search">
+				
+				</if>
+			</if>
+		
+		</where>
+		
+	</select>
+
 </mapper>

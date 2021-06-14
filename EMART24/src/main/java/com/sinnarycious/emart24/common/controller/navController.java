@@ -17,7 +17,7 @@ public class navController {
 	@RequestMapping("/common/orderPage.do")
 	public String orderPage() {
 		System.out.println("/common/orderPage.do가 호출되었습니다.");
-		return "orderPage/orderPage";
+		return "orderPage";
 	}
 	
 	/* 입고 관리 이동 */

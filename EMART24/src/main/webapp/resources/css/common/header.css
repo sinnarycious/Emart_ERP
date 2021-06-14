@@ -53,7 +53,7 @@ header .gnb li:nth-child(n+2) {
     top: 120px;
     right: -10px;
     padding: 10px 20px;
-    background: var(--white);
+    background: var(--yellow);
     width: 200px;
     box-sizing: 0 5px 25px rgba(0,0,0,0.1);
     border-radius: 20px;
@@ -64,6 +64,7 @@ header .gnb li:nth-child(n+2) {
 
 .action .menu.active {
     top: 80px;
+    right: 110px;
     visibility: visible;
     opacity: 1;
 }
@@ -75,7 +76,7 @@ header .gnb li:nth-child(n+2) {
     right: 8px;
     width: 50px;
     height: 30px;
-    background: var(--white);
+    background: var(--yellow);
     transform: rotate(45deg);
 }
 
