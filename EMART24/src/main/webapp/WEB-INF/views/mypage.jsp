@@ -3,11 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
+<script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/mparea.css">
 </head>
@@ -20,7 +23,7 @@
 	<section class="wrap">
 		<div class="area">
 			<form name="memberUpdate"
-				action="${pageContext.request.contextPath}/member/memberUpdate.do"
+				action="${pageContext.request.contextPath}/member/memberUpdate.do" id="update"
 				method="post">
 				<div class="myPageArea1">
 					<h2>마이페이지</h2>
@@ -28,43 +31,47 @@
 					<table class="update_pw">
 						<tr>
 							<td class="td1">아이디</td>
-							<td><input type="text" class="idInput"
+							<td><input type="text" class="idInput" name ="userId"
 								value="${member.userId}" readonly required></td>
 						</tr>
 						<tr>
 							<td class="td1">비밀번호</td>
-							<td><input type="text" class="pwInput"
-								value="${member.userPwd}" required></td>
+							<td><input type="password" class="pwInput" name ="userPwd" id = "userPwd" placeholder="새 비밀번호를 입력하세요"
+								></td>
 						</tr>
 						<tr>
 							<td class="td1">비밀번호 확인</td>
-							<td><input type="text" class="pwInput"
-								value="${member.userPwd}" required></td>
+							<td><input type="password" class="pwInput" name ="userPwd2" id = "userPwd2" placeholder="새 비밀번호 확인입니다"
+								></td>
 						</tr>
+						
+
 					</table>
 					<table class="update_profile">
 						<tr>
 							<td class="td1">이름</td>
-							<td><input type="text" class="name"
+							<td><input type="text" class="name" name ="userName"
 								value="${member.userName}" readonly required></td>
 						</tr>
 						<tr>
 							<td class="td1">주민번호</td>
-							<td><input type="text" class="rno" value="${member.userRNo}"
+							<td><input type="text" class="rno" value="${member.userRNo}" name= "userRNo"
 								readonly required></td>
 						</tr>
 						<tr>
 							<td class="td1">이메일</td>
-							<td><input type="text" class="email"
-								value="${member.userEmail}" required></td>
+							<td><input type="text" class="email" name = "userEmail"
+								placeholder="새 이메일을 입력하세요"></td>
 						</tr>
 						<tr>
 							<td class="td1">전화번호</td>
-							<td><input type="text" class="phone"
-								value="${member.userPhone}" required></td>
+							<td><input type="text" class="phone" name = "userPhone"
+								placeholder="새 전화번호를 입력하세요"></td>
 						</tr>
 					</table>
-					<button class="btn submit myPage_updateBtn">수정하기</button>
+	
+				    <button class="btn submit myPage_updateBtn">수정하기</button> 
+					<!-- <input type="submit" class="btn submit myPage_updateBtn" value="수정하기" /> -->
 					<img src="/emart24/resources/images/emart24store.png"
 						class="emart24_storeImg">
 					<table class="update_profile">
@@ -94,8 +101,21 @@
 						</tr>
 					</table>
 				</div>
+	
 			</form>
+<script>
+		function updateMember() {
+			$("#update").submit();
+		}
+		
+		$("#update").submit(function(event){
+			if($('#userPwd').val() != $('#userPwd2').val()) alert("비밀번호 확인 값과 다릅니다.");
+			else return;
+			event.preventDefault();
+		});
+</script>
 		</div>
+
 	</section>
 </body>
 </html>

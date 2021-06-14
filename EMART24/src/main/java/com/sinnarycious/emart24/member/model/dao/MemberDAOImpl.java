@@ -24,8 +24,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int updateMember(Member member) {
 		
+		System.out.println(member);
+		
 		return sqlSession.update("member.updateMember", member);
 	}
 
 	
 }
+

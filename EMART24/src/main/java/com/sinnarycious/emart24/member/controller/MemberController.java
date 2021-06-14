@@ -63,6 +63,7 @@ public class MemberController {
 		
 	}
 	
+
 	@RequestMapping("/member/memberLogout.do")
 		public String memberLogout(HttpSession session) {
 			session.setAttribute("memberLogin", null);
@@ -90,6 +91,9 @@ public class MemberController {
 		
 
 	
+=======
+
+>>>>>>> refs/remotes/origin/kjw1302
 	@RequestMapping("/member/memberUpdate.do")
 	public String memberUpdate(Member member, Model model) {
 		
@@ -98,7 +102,12 @@ public class MemberController {
 		String loc= "/";
 		String msg = "";
 		
+<<<<<<< HEAD
 		if( result > 0 ) {
+=======
+		if( result > 0) {
+			loc = "/main/main.do";
+>>>>>>> refs/remotes/origin/kjw1302
 			msg = "마이페이지 수정 완료!";
 			model.addAttribute("member", member);
 		} else {
