@@ -9,21 +9,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sinnarycious.emart24.OE.model.service.oeService;
-import com.sinnarycious.emart24.OE.model.vo.oe;
+import com.sinnarycious.emart24.OE.model.service.OEService;
+import com.sinnarycious.emart24.OE.model.vo.OE;
+
 
 @Controller
-public class oeController {
+public class OEController {
 
 	@Autowired
-	oeService oeService;
+	OEService oeService;
 	
 	/* 입고 관리 이동 */
 	@RequestMapping("/OE/oe.do")
 	public String oe(Model model) {
 		System.out.println("/common/oe.do가 호출되었습니다.");
 		
-		List<oe> list = oeService.selectOEList();
+		List<OE> list = oeService.selectOEList();
 		
 		System.out.println("selectOE [list] : " + list);
 		

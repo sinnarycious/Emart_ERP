@@ -12,7 +12,7 @@
 		<typeAlias type="com.sinnarycious.emart24.event.model.vo.Attachment" alias="Attachment" />
 		<typeAlias type="com.sinnarycious.emart24.inv.model.vo.Inv" alias="Inv" />
 		<typeAlias type="com.sinnarycious.emart24.member.model.vo.Member" alias="Member" />
-		<typeAlias type="com.sinnarycious.emart24.OE.model.vo.oe" alias="oe" />
+		<typeAlias type="com.sinnarycious.emart24.OE.model.vo.OE" alias="OE" />
 		<typeAlias type="com.sinnarycious.emart24.product.model.vo.Product" alias="Product" />
 		<typeAlias type="com.sinnarycious.emart24.sale.model.vo.Sale" alias="Sale" />
 	</typeAliases>
