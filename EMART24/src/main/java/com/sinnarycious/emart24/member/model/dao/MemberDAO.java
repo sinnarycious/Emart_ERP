@@ -9,3 +9,5 @@ public interface MemberDAO {
 	Member selectOneMember(Member m);
 	
 	int updateMember(Member member);
+
+}

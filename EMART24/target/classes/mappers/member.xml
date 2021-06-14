@@ -12,19 +12,10 @@
 
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER SET USER_PWD = #{ userPwd },
-						  USER_EMAIL= #{ userEmail }, 
-<<<<<<< HEAD
-<<<<<<< HEAD
+						  USER_EMAIL= #{ userEmail },  
 		                  USER_PHONE = #{ userPhone }
 		WHERE USER_ID = #{ userId } 
-=======
-		                  USER_PHONE = #{ userPhone },
-		WHERE USERID = #{ userId } 
->>>>>>> refs/remotes/origin/sehong_dev
-=======
-		                  USER_PHONE = #{ userPhone },
-		WHERE USERID = #{ userId } 
->>>>>>> refs/remotes/origin/subin
+
 	</update>
 <!-- 
 	USER_NO, USER_ID, USER_PWD, USER_RNO,

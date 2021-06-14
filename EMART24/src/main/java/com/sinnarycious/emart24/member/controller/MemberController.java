@@ -1,8 +1,5 @@
 package com.sinnarycious.emart24.member.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.sinnarycious.emart24.member.model.service.MemberService;
 import com.sinnarycious.emart24.member.model.vo.Member;
+import com.sinnarycious.emart24.member.model.service.MemberService;
 
 @SessionAttributes({"member"}) 
 @Controller
@@ -59,37 +56,9 @@ public class MemberController {
 		
 		return "common/msg";
 
-
-
 		
 	}
 	
-
-	@RequestMapping("/member/memberLogout.do")
-		public String memberLogout(HttpSession session) {
-			session.setAttribute("memberLogin", null);
-			
-			if(session != null) {
-				session.invalidate();
-			}
-			return "redirect:login";
-		}
-
-	
-/*
-	@RequestMapping("/member/memberView.do")
-	public String memberView(@RequestParam String userId, Model model) {
-		
-		Member result = memberService.selectOneMember(userId);
-		
-		model.addAttribute("member", result);
-		
-		return "member/memberView";
-	}
-		
-
-	
-=======
 
 	@RequestMapping("/member/memberUpdate.do")
 	public String memberUpdate(Member member, Model model) {
@@ -98,12 +67,9 @@ public class MemberController {
 		
 		String loc= "/";
 		String msg = "";
-
-		if( result > 0 ) {
-
+		
 		if( result > 0) {
 			loc = "/main/main.do";
-
 			msg = "마이페이지 수정 완료!";
 			model.addAttribute("member", member);
 		} else {
@@ -116,5 +82,5 @@ public class MemberController {
 		return "common/msg";
 		
 	}
-	*/
 }
+

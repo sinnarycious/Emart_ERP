@@ -26,6 +26,4 @@ public class Member implements Serializable{
 		this.userId = userId;
 		this.userPwd = userPwd;
 	}
-
 }
-
