@@ -20,12 +20,13 @@ public class navController {
 		return "orderPage";
 	}
 	
-	/* 입고 관리 이동 */
+	/* 입고 관리 이동 
 	@RequestMapping("/common/oe.do")
 	public String oe() {
 		System.out.println("/common/oe.do가 호출되었습니다.");
 		return "oe";
 	}
+	*/
 	
 	/* 재고 관리 이동 */
 	@RequestMapping("/common/inv.do")

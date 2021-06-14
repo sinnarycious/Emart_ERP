@@ -11,8 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OE implements Serializable{
+	private static final long serialVersionUID = 1119L;
+	
 	private int oeNo;
 	private int oeCount;
+	private int oePrice;
 	private Date orderDate;
 	private Date enterDate;
 	private String oeStatus;

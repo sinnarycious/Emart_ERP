@@ -36,53 +36,45 @@
             </div>
 
             <table class="oeDBTable">
-            <tr>
-                <th>
-                    <h4>발주 번호</h4>
-                </th>
-                <th>
-                    <h4>상품 번호</h4>
-                </th>
-                <th>
-                    <h4>상품명</h4>
-                </th>
-                <th>
-                    <h4>수량</h4>
-                </th>
-                <th>
-                    <h4>금액</h4>
-                </th>
-                <th>
-                    <h4>발주 날짜</h4>
-                </th>
-                <th>
-                    <h4>발주 현황</h4>
-                </th>
-                <th>
-                    <h4>입고 등록</h4>
-                </th>
-            </tr>
-            <tr>
-                <td><span class="num">${oe.oeNo}</span></td>
-                <td><span class="num">${oe.oeInvNo}</span></td>
-                <td>${oe.oeName}</td>
-                <td><span class="num">${oe.oeCount}</span></td>
-                <td><span class="num">28,400</span></td>
-                <td>${oe.orderDate}</td>
-                <td><button class="tag">결제 완료</button></td>
-                <td><button class="btn tag" type="submit" onclick="enroll()">${oe.oeStatus=="M"?"등록하기":"등록 완료"}</button></td>
-            </tr>
-            <tr>
-                <td><span class="num">50</span></td>
-                <td><span class="num">09</span></td>
-                <td>미트리 스팀 슬라이스 닭가슴살 오리지널</td>
-                <td><span class="num">40</span></td>
-                <td><span class="num">60,800</span></td>
-                <td>5월 29일</td>
-                <td><button class="tag off">입고 완료</button></td>
-                <td><button class="tag off">등록 완료</button></td>
-            </tr>
-
+	            <tr>
+	                <th>
+	                    <h4>발주 번호</h4>
+	                </th>
+	                <th>
+	                    <h4>상품 번호</h4>
+	                </th>
+	                <th>
+	                    <h4>상품명</h4>
+	                </th>
+	                <th>
+	                    <h4>수량</h4>
+	                </th>
+	                <th>
+	                    <h4>금액</h4>
+	                </th>
+	                <th>
+	                    <h4>발주 날짜</h4>
+	                </th>
+	                <th>
+	                    <h4>발주 현황</h4>
+	                </th>
+	                <th>
+	                    <h4>입고 등록</h4>
+	                </th>
+	            </tr>
+	            
+	            <c:forEach items="${list}" var="oe">
+		            <tr>
+		                <td><span class="num">${oe.oeNo}</span></td>
+		                <td><span class="num">${oe.oeInvNo}</span></td>
+		                <td>${oe.oeName}</td>
+		                <td><span class="num">${oe.oeCount}</span></td>
+		                <td><span class="num">${oe.oePrice}</span></td>
+		                <td>${oe.orderDate}</td>
+		                <td><button class="tag">결제 완료</button></td>
+		                <td><button class="btn tag" type="submit" onclick="enroll()">${oe.oeStatus=="M"?"등록하기":"등록 완료"}</button></td>
+		            </tr>
+	            </c:forEach>
             </table>
 
             <div class="pageNo">

@@ -21,7 +21,7 @@
                      <span class="icon"><img src="/emart24/resources/images/order.png"></span>
                      <span class="title bold">발주 / 입고</span>
                  <a href="${pageContext.request.contextPath}/common/orderPage.do"><h5 class="OEsub">- 발주 신청</h5></a>
-                 <a href="${pageContext.request.contextPath}/common/oe.do"><h5 class="OEsub">- 입고 관리</h5></a>
+                 <a href="${pageContext.request.contextPath}/OE/oe.do"><h5 class="OEsub">- 입고 관리</h5></a>
              </li>
              <li>
                  <a href="${pageContext.request.contextPath}/common/inv.do">

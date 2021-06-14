@@ -74,7 +74,7 @@ public class MemberController {
 			return "redirect:login";
 		}
 
-		
+
 		
 	
 	
@@ -104,10 +104,13 @@ public class MemberController {
 		
 <<<<<<< HEAD
 		if( result > 0 ) {
+<<<<<<< HEAD
 =======
 		if( result > 0) {
 			loc = "/main/main.do";
 >>>>>>> refs/remotes/origin/kjw1302
+=======
+>>>>>>> refs/remotes/origin/sehong_dev
 			msg = "마이페이지 수정 완료!";
 			model.addAttribute("member", member);
 		} else {
