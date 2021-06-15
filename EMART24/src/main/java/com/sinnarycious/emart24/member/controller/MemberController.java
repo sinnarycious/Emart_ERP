@@ -1,15 +1,15 @@
 package com.sinnarycious.emart24.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
-import com.sinnarycious.emart24.member.model.vo.Member;
 import com.sinnarycious.emart24.member.model.service.MemberService;
+import com.sinnarycious.emart24.member.model.vo.Member;
 
 @SessionAttributes({"member"}) 
 @Controller
@@ -18,6 +18,7 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
+	// 로그인 기능
 	@RequestMapping("/member/memberLogin.do")
 	public String memberLogin(
 			@RequestParam String userId,
@@ -59,6 +60,18 @@ public class MemberController {
 		
 	}
 	
+	// 로그아웃 기능
+	@RequestMapping("/member/memberLogout.do")
+	public String memberLogout(SessionStatus status) {
+		System.out.println("로그아웃기능 호출");
+		// HttpSession --> session.invalidate() (세션 무효화)
+		// SessionStatus --> status.setComplete() (세션 만료)
+		if( ! status.isComplete() ) {
+			status.setComplete();
+		}
+		
+		return "redirect:/";
+	}
 
 	@RequestMapping("/member/memberUpdate.do")
 	public String memberUpdate(Member member, Model model) {

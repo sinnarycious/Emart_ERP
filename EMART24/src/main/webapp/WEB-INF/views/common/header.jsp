@@ -20,7 +20,7 @@
                   <div class="menu">
                       <ul>
                          <li><a href="/emart24/views/mypage.jsp" onclick="goMyprofile()">마이페이지</a></li>
-                          <li><a href="#" onclick="goLogout()">로그아웃</a></li>
+                         <li><a href="#" onclick="goLogout()">로그아웃</a></li>
                       </ul>
                   </div>
               </div>
@@ -46,7 +46,7 @@
 		}
 		
 		function goLogout() {
-			location.href="/memeber/logout.do";
+			location.href="${pageContext.request.contextPath}/member/memberLogout.do";
 		}
 		
 		function menuToggle() {
