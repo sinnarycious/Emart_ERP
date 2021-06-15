@@ -8,4 +8,6 @@ public interface OEDAO {
 
 	List<OE> selectOEList();
 
+	int resetList();
+
 }

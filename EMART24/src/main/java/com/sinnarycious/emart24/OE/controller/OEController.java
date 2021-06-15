@@ -3,6 +3,8 @@ package com.sinnarycious.emart24.OE.controller;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,6 @@ public class OEController {
 		return "oe";
 	}
 
-
 	
 	// 검색 리스트
 	@RequestMapping("/OE/searchList.do")
@@ -40,9 +41,29 @@ public class OEController {
 		
 		
 		
+		
 		return "";
 	}
-
+	
+	
+	// 발주 다시 작성
+	@RequestMapping("/OE/resetList.do")
+	public String resetList(@RequestParam int oeNo,
+							HttpServletRequest req, Model model) {
+		
+		int result = oeService.resetList(oeNo);
+		
+		String loc = "";
+		String msg = "";
+		
+		if (result > 0) {
+			
+		}
+		
+		
+		
+		return "common/msg";
+	}
 	
 	
 	/* 조회 기능 */

@@ -23,7 +23,7 @@
         <h3 class="order_h3">발주 신청</h3>
 
         <!-- 검색창 -->
-        <form action="searchBar.do" method="post" class="searchBar">
+        <form action="searchBar.do" method="get" class="searchBar" onsubmit="searchList(); return false;">
             <!-- 상품카테고리 -->
             <h4>상품 카테고리 &nbsp;</h4> 
             <div class="category">
@@ -108,19 +108,19 @@
                             <h4>발주 날짜</h4>
                         </th>
                         <th>
-                            <h4>삭제</h4>
+                            <h4>삭제</h4>				
                         </th>
                     </tr>
                 </thead>
-                <tbody class="tbody">
+                <tbody class="tbody" id="listTable">
                     <tr>
-                        <td style="width:115px;padding-left:45px;">51</td>
-                        <td style="width:110px;padding-left:8px;">13</td>
-                        <td style="width:676px;">젤리</td>
-                        <td style="width:60px;">5</td>
+                        <td style="width:115px;padding-left:45px;">${oe.oeNo}</td>
+                        <td style="width:110px;padding-left:8px;">${product.proNo}</td>
+                        <td style="width:676px;">${product.proName}</td>
+                        <td style="width:60px;">${oe.count}</td>
                         <td style="width:90px;padding-left:10px">5000</td>
-                        <td style="padding-left:37px;">6월 6일</td>
-                        <td><button class="btn click" onclick="goOrderDel">삭제</button></td>
+                        <td style="padding-left:37px;">${oe.orderDate}</td>
+                        <td><button class="btn click" onclick="goOrderDel(this)">삭제</button></td>
                     </tr>
                 </tbody>
                 <tfoot class="tfoot">
@@ -140,7 +140,7 @@
         
         <!-- 발주 버튼 시작 -->
         <div class="order_btn">
-	        <button class="btn submit" type="reset">다시 작성</button>
+	        <button class="btn submit" type="reset" id="btn_delete">다시 작성</button>
 	        <button class="btn submit" type="submit">발주하기</button>
         </div>
         <!--  발주 버튼 끝 -->
@@ -150,7 +150,37 @@
     <!-- script 시작 -->
     <script>
     	
-    
+    	// '검색'버튼 클릭 시 검색 리스트에서 추가 
+    	
+    	searchList();
+    	
+    	$(document).ready(functionm(){
+    		$('#search_btn').click(function(){
+    			$.ajax({
+    				url: "searchList.do"			// 데이터를 넘겨줄 링크설정
+    				type: "GET"						// GET으로 보내도될듯..
+    				data : ""						// 넘겨줄 데이터
+    				
+    			});
+    		});
+    	});
+    	
+    	
+    	// 발주리스트에서 행 삭제
+    	function goOrderDel() {
+    		var ths = $(ths);
+    		
+    		ths.parents("tr").remove();
+    	}
+    	
+    	// 다시 쓰기
+    	$(function(){
+    		$('#btn_delete').click(function(){
+    			$("#listTable").delete();
+    		});
+    	});
+    	
+    	
     </script>
     <!-- script 끝 -->
     

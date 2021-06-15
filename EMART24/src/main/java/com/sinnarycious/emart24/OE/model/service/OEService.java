@@ -8,4 +8,6 @@ public interface OEService {
 
 	List<OE> selectOEList();
 
+	int resetList(int oeNo);
+
 }

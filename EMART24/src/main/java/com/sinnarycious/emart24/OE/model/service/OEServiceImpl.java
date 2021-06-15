@@ -20,4 +20,10 @@ public class OEServiceImpl implements OEService {
 		return oeDAO.selectOEList();
 	}
 
+	@Override
+	public int resetList(int oeNo) {
+		
+		return oeDAO.resetList();
+	}
+
 }

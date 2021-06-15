@@ -20,4 +20,12 @@ public class OEDAOImpl implements OEDAO {
 		return sqlSession.selectList("oe.selectOEList");
 	}
 	
+	
+	// 다시 쓰기 
+	@Override
+	public int resetList() {
+		
+		return sqlSession.delete("oe.resetList");
+	}
+	
 }

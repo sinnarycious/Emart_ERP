@@ -20,7 +20,10 @@
 		ORDER BY OE_NO DESC
 	</select>
 
-
+	<delete id="resetList" parameterType="string">
+		DELETE FROM OE WEHRE 
+		WEHRE 
+	</delete>
 
 
 
