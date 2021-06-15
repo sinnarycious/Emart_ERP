@@ -24,6 +24,7 @@
 		SELECT COUNT(*) FROM ORDER_ENTER
 	</select>
 
+
 	<select id="searchInfo" resultMap="oeMap">
 		SELECT * FROM ORDER_ENTER
 		WHERE ORDER_DATE = #{ orderDate }
@@ -36,6 +37,13 @@
 		SET OE_STATUS = 'Y'
 		WHERE OE_NO = #{ oeNo } AND OE_NAME = #{ oeName }
 	</update>
+
+	<delete id="resetList" parameterType="string">
+		DELETE FROM OE WEHRE 
+		WEHRE 
+	</delete>
+
+
 
 
 </mapper>

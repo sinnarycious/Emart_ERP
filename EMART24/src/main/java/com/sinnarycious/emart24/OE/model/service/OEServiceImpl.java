@@ -46,4 +46,10 @@ public class OEServiceImpl implements OEService {
 
 
 
+	@Override
+	public int resetList(int oeNo) {
+		
+		return oeDAO.resetList();
+	}
+
 }

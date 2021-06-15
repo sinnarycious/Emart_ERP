@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +45,7 @@ public class OEController {
 		
 		return "oe";
 	}
+
 	
 	/* 조회 기능 */
 	@RequestMapping("/OE/searchList.do")
@@ -60,12 +63,45 @@ public class OEController {
 		
 		model.addAttribute("list", list);
 		
+		
 		return "";
 	}
 
+
 	/* 입고 등록하기 */
 	@RequestMapping("OE/updateStatus.do")
-	public String updateStatus(
+	public String updateStatus() {
+		
+		return "";
+	}
+
+	
+	
+	// 발주 다시 작성
+	@RequestMapping("/OE/resetList.do")
+	public String resetList(@RequestParam int oeNo,
+							HttpServletRequest req, Model model) {
+		
+		int result = oeService.resetList(oeNo);
+		
+		String loc = "";
+		String msg = "";
+		
+		if (result > 0) {
+			
+		}
+		
+		
+		
+		return "common/msg";
+	}
+	
+	
+	/* 조회 기능 */
+	@RequestMapping("/OE/search.do")
+	public String search(
+			@RequestParam Date orderDate1,
+			@RequestParam Date orderDate2,
 			@RequestParam int oeNo,
 			@RequestParam String oeName
 			) {

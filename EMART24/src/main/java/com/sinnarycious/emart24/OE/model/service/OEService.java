@@ -15,4 +15,6 @@ public interface OEService {
 
 	int selectOETotalContents();
 
+	int resetList(int oeNo);
+
 }

@@ -47,4 +47,12 @@ public class OEDAOImpl implements OEDAO {
 
 
 	
+	
+	// 다시 쓰기 
+	@Override
+	public int resetList() {
+		
+		return sqlSession.delete("oe.resetList");
+	}
+	
 }
