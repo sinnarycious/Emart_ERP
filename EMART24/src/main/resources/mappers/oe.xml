@@ -19,9 +19,23 @@
 		SELECT * FROM ORDER_ENTER
 		ORDER BY OE_NO DESC
 	</select>
+	
+	<select id="selectOETotalContents" resultType="_int">
+		SELECT COUNT(*) FROM ORDER_ENTER
+	</select>
 
+	<select id="searchInfo" resultMap="oeMap">
+		SELECT * FROM ORDER_ENTER
+		WHERE ORDER_DATE = #{ orderDate }
+			  AND OE_NO = #{ oeNo }
+			  AND OE_NAME = #{ oeName }
+	</select>
 
-
+	<update id="updateStatus" parameterType="oe">
+		UPDATE ORDER_ENTER
+		SET OE_STATUS = 'Y'
+		WHERE OE_NO = #{ oeNo } AND OE_NAME = #{ oeName }
+	</update>
 
 
 </mapper>
