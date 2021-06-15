@@ -22,12 +22,12 @@ public class Utils {
 		pageBar += "<div class='pageNo'> <ul>";
 		//[이전]section
 		if(pageNo == 1 ){
-			pageBar += "<li class='page-item disabled'>";
+			pageBar += "<li>";
 			pageBar += "<a class='arrLeft' href='#' tabindex='-1'></a>";
 			pageBar += "</li>";
 		}
 		else {
-			pageBar += "<li class='page-item'>";
+			pageBar += "<li>";
 			pageBar += "<a class='arrLeft' href='javascript:fn_paging("+(pageNo-1)+")'></a>";
 			pageBar += "</li>";
 		}
@@ -35,13 +35,13 @@ public class Utils {
 		// pageNo section
 		while(!(pageNo>pageEnd || pageNo > totalPage)){
 			if(cPage == pageNo ){
-				pageBar += "<li class='page-item active'>";
-				pageBar += "<a class='page-link'>"+pageNo+"</a>";
+				pageBar += "<li class='hover'>";
+				pageBar += "<a>"+pageNo+"</a>";
 				pageBar += "</li>";
 			} 
 			else {
-				pageBar += "<li class='page-item'>";
-				pageBar += "<a class='page-link' href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
+				pageBar += "<li class='hover'>";
+				pageBar += "<a href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
 				pageBar += "</li>";
 			}
 			pageNo++;
@@ -49,12 +49,12 @@ public class Utils {
 		
 		//[다음] section
 		if(pageNo > totalPage){
-			pageBar += "<li class='page-item disabled'>";
+			pageBar += "<li>";
 			pageBar += "<a class='arrRight' href='#'></a>";
 			pageBar += "</li>";
 			
 		} else {
-			pageBar += "<li class='page-item'>";
+			pageBar += "<li>";
 			pageBar += "<a class='arrRight' href='javascript:fn_paging("+pageNo+")'></a> ";
 			pageBar += "</li>";
 		}
