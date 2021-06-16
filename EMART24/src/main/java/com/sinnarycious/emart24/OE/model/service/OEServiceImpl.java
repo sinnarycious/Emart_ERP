@@ -37,9 +37,9 @@ public class OEServiceImpl implements OEService {
 	*/
 
 	@Override
-	public List<OE> selectSearchList() {
+	public List<OE> searchInfo(String oeName) {
 
-		return oeDAO.selectSearchList();
+		return oeDAO.searchInfo(oeName);
 	}
 
 

@@ -24,12 +24,19 @@
 		SELECT COUNT(*) FROM ORDER_ENTER
 	</select>
 
-
+	<!-- 검색 기능 -->
 	<select id="searchInfo" resultMap="oeMap">
 		SELECT * FROM ORDER_ENTER
-		WHERE ORDER_DATE = #{ orderDate }
-			  AND OE_NO = #{ oeNo }
-			  AND OE_NAME = #{ oeName }
+		<if test="oeName !=null">
+			WHERE OE_NAME = #{ oeName }
+		</if>
+		<if test="oeNo != null">
+			WHERE OE_NO = #{ oeNo }
+		</if>
+		<if test="oeName !=null and oeNo != null">
+			WHERE OE_NAME = #{ oeName }
+			AND OE_NO = #{ oeNo }
+		</if>
 	</select>
 
 	<update id="updateStatus" parameterType="oe">

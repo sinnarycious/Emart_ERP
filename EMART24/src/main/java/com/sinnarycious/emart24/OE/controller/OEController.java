@@ -1,9 +1,12 @@
 package com.sinnarycious.emart24.OE.controller;
 
+import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sinnarycious.emart24.OE.model.service.OEService;
 import com.sinnarycious.emart24.OE.model.vo.OE;
@@ -48,24 +52,42 @@ public class OEController {
 
 	
 	/* 조회 기능 */
-	@RequestMapping("/OE/searchList.do")
-	public String searchList(
-			@RequestParam Date orderDate1,
-			@RequestParam Date orderDate2,
-			@RequestParam int oeNo,
-			@RequestParam String oeName,
-			Model model
-			) {
+	@RequestMapping("/OE/searchInfo.do")
+	@ResponseBody
+	public Map<String, Object> searchInfo(
+			@RequestParam String oeName
+			){
 		
-		List<OE> list = oeService.selectSearchList();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println("search : " + list);
+		List<OE> searchList = oeService.searchInfo(oeName);
 		
-		model.addAttribute("list", list);
+		map.put("search", searchList);
 		
-		
-		return "";
+		return map;
 	}
+	
+	/*
+	 * @RequestMapping("/member/checkIdDuplicate.do")
+	@ResponseBody
+	public Map<String, Object> checkIdDuplicate(@RequestParam String userId) {
+		// @ResponseBody Map 같은 객체를 viewResolver 에 강제로 맞추는 Annotation
+		// => Spring 에선 String 반환값으로 화면 이동을 하는데 객체를 이용할 때 사용
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int check = memberService.checkIdDuplicate(userId);
+		
+		boolean data = (check == 0 ? true : false);
+		
+		map.put("data", data);
+		
+		return map;
+		// Parsing 처리 없이 화면으로 보내도 GSON을 사용한 것처럼 JSON으로 바뀐다.
+		// => @ResponseBody 덕분이다.
+	}
+
+	 */
 
 
 	/* 입고 등록하기 */

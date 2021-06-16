@@ -12,7 +12,7 @@ public interface OEDAO {
 	
 	int selectOETotalContents();
 
-	List<OE> selectSearchList();
+	List<OE> searchInfo(String oeName);
 
 
 

@@ -38,9 +38,9 @@ public class OEDAOImpl implements OEDAO {
 	*/
 
 	@Override
-	public List<OE> selectSearchList() {
+	public List<OE> searchInfo(String oeName) {
 
-		return sqlSession.selectList("oe.searchInfo");
+		return sqlSession.selectList("oe.searchInfo", oeName);
 	}
 
 

@@ -11,7 +11,7 @@ public interface OEService {
 	
 	//List<OE> selectOEList();
 
-	List<OE> selectSearchList();
+	List<OE> searchInfo(String oeName);
 
 	int selectOETotalContents();
 
