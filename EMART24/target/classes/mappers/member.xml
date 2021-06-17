@@ -25,6 +25,7 @@
 		WHERE USER_ID =#{ userId } AND USER_NAME =#{ userName } AND USER_PHONE =#{ userPhone }
 	</select>
 	<!-- 비밀번호 찾기 끝 -->
+	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER SET USER_PWD = #{ userPwd },
 						  USER_EMAIL= #{ userEmail },  
