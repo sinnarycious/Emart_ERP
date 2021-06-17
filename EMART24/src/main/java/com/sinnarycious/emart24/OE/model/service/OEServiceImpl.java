@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sinnarycious.emart24.OE.model.dao.OEDAO;
 import com.sinnarycious.emart24.OE.model.vo.OE;
+import com.sinnarycious.emart24.product.model.vo.Product;
 
 @Service
 public class OEServiceImpl implements OEService {
@@ -44,13 +45,17 @@ public class OEServiceImpl implements OEService {
 	}
 
 
-
-
-
 	@Override
 	public int resetList(int oeNo) {
 		
 		return oeDAO.resetList();
+	}
+	
+	// 발주리스트 결과
+	@Override
+	public List<OE> orderInsertList(OE oe) {
+		
+		return oeDAO.orderInsertList(oe);
 	}
 
 }

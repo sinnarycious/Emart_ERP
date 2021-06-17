@@ -23,13 +23,13 @@ form {
 	width: 720px;
 }
 
-.searchList_box {
+.resultList_box {
 	border: 1px solid var(--yellow);
 }
-.searchList th, .searchList td{
+.resultList th, .resultList td{
     padding : 10px;
 }
-.searchList tr:first-child{
+.resultList tr:first-child{
     border-top : var(--yellow) 2px solid;
     border-bottom : 0;
 	border-left : var(--yellow) 2px solid;
@@ -101,7 +101,7 @@ td {
     width: 110px;
 }
 
-.searchList{ border : 2px solid var(--yellow);}
+.resultList{ border : 2px solid var(--yellow);}
 
 .order_btn {
     float: right;

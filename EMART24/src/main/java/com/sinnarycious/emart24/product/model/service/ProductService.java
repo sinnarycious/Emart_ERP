@@ -6,6 +6,8 @@ import com.sinnarycious.emart24.product.model.vo.Product;
 
 public interface ProductService {
 
-	List<Product> selectPdList(String keyword);
+	List<Product> selectPdList(Product product);
+
+	List<Product> selectResultList();
 
 }
