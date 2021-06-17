@@ -42,7 +42,7 @@
                  </a>
              </li>
              <li>
-                 <a href="${pageContext.request.contextPath}/common/eventPage.do">
+                 <a href="${pageContext.request.contextPath}/event/eventPage.do">
                      <span class="icon"><img src="/emart24/resources/images/event.png"></span>
                      <span class="title bold">행사 공지</span>
                  </a>

@@ -2,6 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="event">
+
+<resultMap type="event" id="eventMap">
+		<result column="EVNT_NO" property="evntNo" />
+		<result column="EVNT_TITLE" property="evntTitle" />
+		<result column="EVNT_CONTENT" property="evntContent" />
+		<result column="EVNT_DATE_S" property="evntDateS" />
+		<result column="EVNT_DATE_E" property="evntDateE" />
+		<result column="EVNT_ATT_NO" property="evntAttNo" />
+	</resultMap>
+	
+	<select id="selectEventList" resultMap="eventMap">
+		SELECT * FROM EVENT
+		ORDER BY EVNT_NO DESC
+	</select>
+	
+	<select id="selectEventTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM EVENT
+	</select>
+
+
+	
+		<!-- 검색 기능 -->
+	<!--<select id="searchInfo" parameterType="event" resultMap="eventMap">
+		SELECT * FROM EVENT
+		<where>
+			<if test="evntTitle !=null">
+				AND EVNT_TITLE = #{ evntTitle }
+			</if>
+			  <if test="evntDateS !=null and evntDateE =null">
+				AND EVNT_DATE_S = #{ evntDateS }
+			</if>
+			<if test="evntDateS !=null and evntDateE !=null">
+				AND EVNT_DATE_S BETWEEN ${ evntDateS } AND ${ evntDateE }
+			</if> 
+		</where>
+	</select> -->
 <!-- 
 	EVNT_NO, EVNT_TITLE, EVNT_CONTENT
 	EVNT_DATE_S, EVNT_DATE_E, EVNT_ATT_NO
