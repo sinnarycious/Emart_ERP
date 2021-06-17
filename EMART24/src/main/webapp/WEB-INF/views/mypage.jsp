@@ -44,8 +44,10 @@
 							<td><input type="password" class="pwInput" name ="userPwd2" id = "userPwd2" placeholder="새 비밀번호 확인입니다"
 								></td>
 						</tr>
-						
-
+						<tr>
+						<td id="alert-success" style="display: none; color: #0000ff; font-weight: bold;">똑같지롱~~</td>
+   						<td id="alert-fail" style="display: none; color: #ff0000; font-weight: bold;">다르지롱~~</td>						
+						</tr>
 					</table>
 					<table class="update_profile">
 						<tr>
@@ -113,6 +115,24 @@
 			else return;
 			event.preventDefault();
 		});
+		
+		 $('.pwInput').focusout(function () {
+		        var pwd1 = $("#userPwd").val();
+		        var pwd2 = $("#userPwd2").val();
+		  
+		        if ( pwd1 != '' && pwd2 == '' ) {
+		            null;
+		        } else if (pwd1 != "" || pwd2 != "") {
+		            if (pwd1 == pwd2) {
+		                $("#alert-success").css('display', 'inline-block');
+		                $("#alert-fail").css('display', 'none');
+		            } else {
+		                $("#alert-success").css('display', 'none');
+		                $("#alert-fail").css('display', 'inline-block');
+		            }
+		        }
+		    
+		    });
 </script>
 		</div>
 

@@ -1,5 +1,19 @@
 package com.sinnarycious.emart24.event.model.dao;
 
-public interface EventDAO {
+import java.sql.Date;
+import java.util.List;
+import java.util.Map;
 
+import com.sinnarycious.emart24.event.model.vo.Attachment;
+import com.sinnarycious.emart24.event.model.vo.Event;
+
+public interface EventDAO {
+    
+	List<Map<String, String>> selectEventList(int pageNo, int numPerPage);
+
+	int selectEventTotalContents();
+	
+	
+	
 }
+
