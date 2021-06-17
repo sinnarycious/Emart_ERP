@@ -1,5 +1,6 @@
 package com.sinnarycious.emart24.OE.model.dao;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ public interface OEDAO {
 	
 	int selectOETotalContents();
 
-	List<OE> searchInfo(String oeName);
+	List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo);
 
 
 

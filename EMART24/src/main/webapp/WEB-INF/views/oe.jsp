@@ -35,74 +35,69 @@
 				<button id="searchBtn" class="btn search">조회</button>
 			</div>
 			
-			<!-- 검색 -->
-			<!-- 
-            <script>                 
-            	
-				$('#searchBtn').on('click', function(){
-					$.ajax({							
-						url : "/OE/searchInfo.do",
-						type : "get",
-						data : {
-							//orderDate1 : $('#orderDate1').val(),
-							//orderDate2 : $('#orderDate2').val(),
-							//oeNo : $('#oeNo').val(),
-							oeName : $('#oeName').val()
-						},
-						success : function( data ){
-							
-							console.log(data);
-							
-							/*
-							var oeNo = data.oeNo;
-							var oeInvNo = data.oeInvNo;
-							var oeName = data.oeName;
-							var oeCount = data.oeCount;
-							var oePrice = data.oePrice;
-							var orderDate = data.orderDate;
-							var oeStatus = data.oeStatus;
-							*/
-							
-							/*
-							$('#oeNo').text(oeNo);
-							$('#oeInvNo').text(oeInvNo);
-							$('#oeName').text(oeName);
-							$('#oeCount').text(oeCount);
-							$('#oePrice').text(oePrice);
-							$('#orderDate').date(orderDate);
-							*/
-							
-							// console.log(oeNo + ", " + oeInvNo + ", " + oeName + ", " + oeCount + ", " + oePrice + ", " + orderDate + ", " + oeStatus);
-							
-						},
-						error : function( error ){
-							console.log("에러입니다!");
-						}
-					});
-				});	
-            </script>
- 			-->
- 			
+			<!-- 검색 ajax -->
  			<script>
  			$('#searchBtn').on('click', function(){
- 				$.ajax({ // jQuery 전용 함수
- 					url : "/OE/searchInfo.do",
- 					type : "get",
- 					data : { 
- 						oeName : $('#oeName').val()
-
- 					}, success : function( data ) {
- 						alert("전송 성공!");
- 					}, error : function( error ) {
- 						alert("전송 실패!");
- 					}
- 				});
+ 				
+ 				var orderDate1 = $('#orderDate1').val();
+ 				var orderDate2 = $('#orderDate2').val();
+ 				var oeName = $('#oeName').val();
+ 				var oeNo = $('#oeNo').val();
+ 				
+ 				if(oeName != null){
+	 				$.ajax({ // jQuery 전용 함수
+	 					url : "${pageContext.request.contextPath}/OE/searchInfo.do",
+	 					type : "get",
+	 					data : {
+	 						orderDate1 : orderDate1,
+	 						orderDate2 : orderDate2,
+	 						oeName : oeName,
+	 						oeNo : oeNo
+	 					}, 
+	 					dataType : 'json',
+	 					success : function( data ) {
+	 						alert("전송 성공!");
+	 						
+	 						$('tbody').empty();	// ORDER_ENTER 테이블 전체 데이터 값을 <tbody>에서 지움
+	 						var $tr = $('<tr>');
+	 						
+	 						
+	 						var search = data.search;
+	 						
+	 						for(var i in search){
+	 							
+	 							var $oeNo = $('<td><span class="num" id="oeNo">' + search[i].oeNo +'</span></td>');
+								var $oeInvNo = $('<td><span class="num" id="oeInvNo">' + search[i].oeInvNo + '</span></td>');
+	 							var $oeName = $('<td id="oeName">' + search[i].oeName + '</td>');
+								var $oeCount = $('<td><span class="num" id="oeCount">'+ search[i].oeCount +'</span></td>');
+								var $oePrice = $('<td><span class="num" id="oePrice">'+ search[i].oePrice +'</span></td>');
+								var $orderDate = $('<td id="orderDate">' + search[i].orderDate + '</td>');
+								var $oeStatus = $('<td>' + search[i].oeStatus + '</td></tr>');
+								 							
+	 							$tr.append($oeNo);
+	 							$tr.append($oeInvNo);
+	 							$tr.append($oeName);
+	 							$tr.append($oeCount);
+	 							$tr.append($oePrice);
+	 							$tr.append($orderDate);
+	 							$tr.append($oeStatus);
+	 							
+	 							$('tbody').append($tr);
+	 						}
+	 						
+	 					}, error : function( error ) {
+	 						alert("전송 실패!");
+	 					}
+	 				});
+ 				}
  			});
 
  			
  			</script>
 
+
             <table class="oeDBTable">
+            <thead>
 	            <tr>
 	                <th>
 	                    <h4>발주 번호</h4>
@@ -129,7 +124,8 @@
 	                    <h4>입고 등록</h4>
 	                </th>
 	            </tr>
-	            
+	            </thead>
+	            <tbody>
 	            <c:forEach items="${list}" var="oe">
 		            <tr>
 		                <td><span class="num" id="oeNo">${oe.oeNo}</span></td>
@@ -150,6 +146,7 @@
 						</td>
 		            </tr>
 	            </c:forEach>
+	            </tbody>
             </table>
             <!-- 
             <script>

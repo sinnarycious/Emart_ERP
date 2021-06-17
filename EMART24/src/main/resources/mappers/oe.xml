@@ -25,18 +25,22 @@
 	</select>
 
 	<!-- 검색 기능 -->
-	<select id="searchInfo" resultMap="oeMap">
+	<select id="searchInfo" parameterType="oe" resultMap="oeMap">
 		SELECT * FROM ORDER_ENTER
-		<if test="oeName !=null">
-			WHERE OE_NAME = #{ oeName }
-		</if>
-		<if test="oeNo != null">
-			WHERE OE_NO = #{ oeNo }
-		</if>
-		<if test="oeName !=null and oeNo != null">
-			WHERE OE_NAME = #{ oeName }
-			AND OE_NO = #{ oeNo }
-		</if>
+		<where>
+			<if test="oeName !=null">
+				AND OE_NAME = #{ oeName }
+			</if>
+			<if test="oeNo != 0">
+				AND OE_NO = #{ oeNo }
+			</if>
+			<if test="orderDate1 !=null and orderDate2 =null">
+				AND ORDER_DATE = ${ orderDate1 }
+			</if>
+			<if test="orderDate1 !=null and orderDate2 !=null">
+				AND ORDER_DATE BETWEEN ${ orderDate1 } AND ${ orderDate2 }
+			</if>
+		</where>
 	</select>
 
 	<update id="updateStatus" parameterType="oe">

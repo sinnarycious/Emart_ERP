@@ -1,17 +1,20 @@
 package com.sinnarycious.emart24.OE.controller;
 
-import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,39 +58,39 @@ public class OEController {
 	@RequestMapping("/OE/searchInfo.do")
 	@ResponseBody
 	public Map<String, Object> searchInfo(
-			@RequestParam String oeName
+			@RequestParam (required=false)Date orderDate1,
+			@RequestParam (required=false)Date orderDate2,
+			@RequestParam String oeName,
+			@RequestParam (required=false, defaultValue="0") int oeNo 
 			){
+		System.out.println(orderDate1);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<OE> searchList = oeService.searchInfo(oeName);
+		List<OE> searchList = oeService.searchInfo(orderDate1, orderDate2, oeName, oeNo);
+
+		System.out.println("search : " + searchList);
 		
 		map.put("search", searchList);
 		
 		return map;
 	}
 	
-	/*
-	 * @RequestMapping("/member/checkIdDuplicate.do")
-	@ResponseBody
-	public Map<String, Object> checkIdDuplicate(@RequestParam String userId) {
-		// @ResponseBody Map 같은 객체를 viewResolver 에 강제로 맞추는 Annotation
-		// => Spring 에선 String 반환값으로 화면 이동을 하는데 객체를 이용할 때 사용
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		int check = memberService.checkIdDuplicate(userId);
-		
-		boolean data = (check == 0 ? true : false);
-		
-		map.put("data", data);
-		
-		return map;
-		// Parsing 처리 없이 화면으로 보내도 GSON을 사용한 것처럼 JSON으로 바뀐다.
-		// => @ResponseBody 덕분이다.
+	@InitBinder
+	public void initBinder(WebDataBinder binder) throws Exception {
+	    final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    final CustomDateEditor dateEditor = new CustomDateEditor(df, true) {
+	        @Override
+	        public void setAsText(String text) throws IllegalArgumentException {
+	            if ("today".equals(text)) {
+	                setValue(new java.util.Date());
+	            } else {
+	                super.setAsText(text);
+	            }
+	        }
+	    };
+	    binder.registerCustomEditor(Date.class, dateEditor);
 	}
-
-	 */
 
 
 	/* 입고 등록하기 */

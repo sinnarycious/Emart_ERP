@@ -1,5 +1,6 @@
 package com.sinnarycious.emart24.OE.model.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public interface OEService {
 	
 	//List<OE> selectOEList();
 
-	List<OE> searchInfo(String oeName);
+	List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo);
 
 	int selectOETotalContents();
 

@@ -22,4 +22,16 @@ public class OE implements Serializable{
 	private int oeInvNo;
 	private String oeName;
 	private int oeCatNo;
+	
+	private Date orderDate1;
+	private Date orderDate2;
+
+	public OE(Date orderDate1, Date orderDate2, String oeName, int oeNo) {
+		this.orderDate1 = orderDate1;
+		this.orderDate2 = orderDate2;
+		this.oeName = oeName;
+		this.oeNo = oeNo;
+	}
 }
+
+

@@ -212,14 +212,14 @@ th, td{
 td{
     font-size : 14px;
 }
-tr:first-child{
+thead tr{
     border-top : var(--yellow) 2px solid;
     border-bottom : var(--yellow) 2px solid;
 }
-tr:nth-child(n+2){
+tbody tr{
     border-bottom : var(--light-gray) 1px solid;
 }
-tr:last-child{
+tbody tr:last-child{
     border-bottom : var(--yellow) 2px solid;
 }
 
