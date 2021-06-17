@@ -1,8 +1,10 @@
 package com.sinnarycious.emart24.sale.model.service;
 
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -50,5 +52,18 @@ public class SaleServiceImpl implements SaleService {
 		dataMap.put("thisMonthList", thisMonthList);
 
 		return dataMap;
+	}
+	
+	@Override
+	public List<Map<String, String>> selectSaleList(int pageNo, int numberPage) {
+
+		return saleDAO.selectSaleList(pageNo, numberPage);
+	}
+	
+	@Override
+	public int selectSaleTotalContents() {
+
+		return saleDAO.selectSaleTotalContents();
+
 	}
 }

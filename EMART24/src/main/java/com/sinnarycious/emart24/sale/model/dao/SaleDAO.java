@@ -1,9 +1,13 @@
 package com.sinnarycious.emart24.sale.model.dao;
 
+
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 
 public interface SaleDAO {
@@ -18,6 +22,10 @@ public interface SaleDAO {
 
 	Map<String, Integer> selectThisMonthProfit();
 
+
+	List<Map<String, String>> selectSaleList(int pageNo, int numberPage);
+
+	int selectSaleTotalContents();
 
 
 

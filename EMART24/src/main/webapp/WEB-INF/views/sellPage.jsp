@@ -28,16 +28,19 @@
             <h3>판매 조회</h3>
 
             <div class="searchBar">
-                <form action="post" id="searchFrm">
+               
                     <h4>판매 날짜</h4><input type="date" name="sellDate1" /> ~ <input type="date" name="sellDate2" />
                     <h4>상품번호</h4><input type="number" name="sellNo" style="width: 100px;" min="0"  />
                     <h4>상품명</h4><input type="text" name="sellName" style="width: 515px;" placeholder="상품명을 검색하세요."/>
 
                     <button class="btn search">조회</button>
-                </form>
+             
             </div>
+            
+        
+          
 
-            <table class="oeDBTable">
+            <table class="saleDBTable">
                 <tr>
                     <th>
                         <h4>판매 번호</h4>
@@ -61,114 +64,36 @@
                         <h4>판매날짜</h4>
                     </th>
                 </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-                <tr>
-                    <td>내용1</td>
-                    <td>내용2</td>
-                    <td>내용3</td>
-                    <td>내용4</td>
-                    <td>내용5</td>
-                    <td>내용6</td>
-                    <td>내용7</td>
-                </tr>
-            </table>
-
-            <div class="pageNo">
+                 <c:forEach items="${list}" var="sale">
+		            <tr>
+		                <td><span class="num">${sale.saleNo}</span></td>
+		                <td><span class="num">${sale.saleCount}</span></td>
+		                <td>${sale.saleCatNo}</td>
+		                <td><span class="num">${sale.saleName}</span></td>
+		                <td><span class="num">${sale.saleCount}</span></td>
+		                <td>${sale.salePrice}</td>
+		                <td>${sale.saleDate}</td>
+		            </tr>
+	            </c:forEach>
+	            </table>
+	            
+	             <div class="pageNo">
                 <ul>
-                        <li><span class="arrLeft"></span></li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li>7</li>
-                        <li>8</li>
-                        <li>9</li>
-                        <li>10</li>
-                        <li><span class="arrRight"></span></li>
-                 </ul>
+                    <li><span class="arrLeft"></span></li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li><span class="arrRight"></span></li>
+                </ul>
             </div>
+
          </div> 
     </section>
 
