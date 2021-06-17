@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sinnarycious.emart24.OE.model.service.OEService;
 import com.sinnarycious.emart24.OE.model.vo.OE;
+import com.sinnarycious.emart24.common.SearchUtils;
 import com.sinnarycious.emart24.common.Utils;
 
 @Controller
@@ -60,18 +61,21 @@ public class OEController {
 	public Map<String, Object> searchInfo(
 			@RequestParam (required=false)Date orderDate1,
 			@RequestParam (required=false)Date orderDate2,
-			@RequestParam String oeName,
+			@RequestParam (required=false) String oeName,
 			@RequestParam (required=false, defaultValue="0") int oeNo 
 			){
 		System.out.println(orderDate1);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		oeName.replace('_', ' ');
 		
 		List<OE> searchList = oeService.searchInfo(orderDate1, orderDate2, oeName, oeNo);
-
+		String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "oe.do", oeName);
+		
 		System.out.println("search : " + searchList);
 		
 		map.put("search", searchList);
+		map.put("paging", pageBar);
 		
 		return map;
 	}

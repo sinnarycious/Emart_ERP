@@ -29,16 +29,16 @@
 		SELECT * FROM ORDER_ENTER
 		<where>
 			<if test="oeName !=null">
-				AND OE_NAME = #{ oeName }
+				AND OE_NAME LIKE '%' || #{ oeName } || '%'
 			</if>
 			<if test="oeNo != 0">
 				AND OE_NO = #{ oeNo }
 			</if>
 			<if test="orderDate1 !=null and orderDate2 =null">
-				AND ORDER_DATE = ${ orderDate1 }
+				AND ORDER_DATE = #{ orderDate1 }
 			</if>
 			<if test="orderDate1 !=null and orderDate2 !=null">
-				AND ORDER_DATE BETWEEN ${ orderDate1 } AND ${ orderDate2 }
+				AND ORDER_DATE BETWEEN #{ orderDate1 } AND #{ orderDate2 }
 			</if>
 		</where>
 	</select>

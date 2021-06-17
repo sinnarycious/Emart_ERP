@@ -37,6 +37,11 @@
 			
 			<!-- 검색 ajax -->
  			<script>
+ 			$('#oeName').on('keyup', function(event){
+ 				if( event.keyCode == 13) {
+ 					$('#searchBtn').click();
+ 				}
+ 			});
  			$('#searchBtn').on('click', function(){
  				
  				var orderDate1 = $('#orderDate1').val();
@@ -56,16 +61,16 @@
 	 					}, 
 	 					dataType : 'json',
 	 					success : function( data ) {
-	 						alert("전송 성공!");
-	 						
+
 	 						$('tbody').empty();	// ORDER_ENTER 테이블 전체 데이터 값을 <tbody>에서 지움
-	 						var $tr = $('<tr>');
 	 						
+	 						console.log(data);
 	 						
 	 						var search = data.search;
 	 						
 	 						for(var i in search){
-	 							
+		 						var $tr = $('<tr>');
+
 	 							var $oeNo = $('<td><span class="num" id="oeNo">' + search[i].oeNo +'</span></td>');
 								var $oeInvNo = $('<td><span class="num" id="oeInvNo">' + search[i].oeInvNo + '</span></td>');
 	 							var $oeName = $('<td id="oeName">' + search[i].oeName + '</td>');
@@ -83,7 +88,13 @@
 	 							$tr.append($oeStatus);
 	 							
 	 							$('tbody').append($tr);
+	 							
+	 							
 	 						}
+ 							
+	 						$('#paging_area').empty();
+	 						
+	 						$('#paging_area').append(data.paging);
 	 						
 	 					}, error : function( error ) {
 	 						alert("전송 실패!");
@@ -118,9 +129,6 @@
 	                    <h4>발주 날짜</h4>
 	                </th>
 	                <th>
-	                    <h4>발주 현황</h4>
-	                </th>
-	                <th>
 	                    <h4>입고 등록</h4>
 	                </th>
 	            </tr>
@@ -134,7 +142,7 @@
 		                <td><span class="num" id="oeCount">${oe.oeCount}</span></td>
 		                <td><span class="num" id="oePrice">${oe.oePrice}</span></td>
 		                <td id="orderDate">${oe.orderDate}</td>
-		                <td><button class="tag">결제 완료</button></td>
+		                
 		                <td>
 							<c:if test="${oe.oeStatus == 'N' }">
 								<button class="btn tag" type="submit" id="enrollBtn">등록하기</button>
@@ -163,9 +171,9 @@
             
             </script>
              -->
-            
-            <c:out value="${ pageBar }" escapeXml="false"/>
-
+            <div id="paging_area">
+            	<c:out value="${ pageBar }" escapeXml="false"/>
+			</div>
         </div>
 
     </section>
