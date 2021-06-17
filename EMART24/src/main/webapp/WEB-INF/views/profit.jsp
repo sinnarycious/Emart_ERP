@@ -10,129 +10,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>수익</title>
-    <link rel="stylesheet" href="resources/css/common/reset.css">
-    <link rel="stylesheet" href="resources/css/common/nav.css">
-    <link rel="stylesheet" href="resources/css/common/header.css">
-    <link rel="stylesheet" href="resources/css/profit.css">
-    <script src="resources/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/nav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profit.css">
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<header>
-        <div>
-            <ul class="gnb">
-                <li><a href="#" onclick="goEmail()"><img src="/emart24/resources/images/email.png"></a></li>
-                <li><a href="#" onclick="goAlarm()"><img src="/emart24/resources/images/alram.png"></a></li>
-                <li><a href="#">${member.userBranch}점&nbsp;</a></li>
-                <li class="headerBorder">&nbsp;</li>
-                <li><a href="#">${member.userName} 님</a></li>
-                <div class="action">
-                    <div class="profile" onclick="menuToggle();">
-                        <img src="/emart24/resources/images/email.png" alt="">
-                    </div>
-                    <div class="menu">
-                        <ul>
-                           <li><a href="/emart24/views/mypage.jsp" onclick="goMyprofile()">마이페이지</a></li>
-                            <li><a href="#" onclick="goLogout()">로그아웃</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </ul>
-            
-        </div>
-    </header>
-    <!-- header End -->
-    
-    <!-- onclick시 이동하는 스크립트 -->
-    <script type="text/javascript">
-        
-        function goLogin() {
-            location.href="";
-        }
-    
-        function goEmail() {
-            location.href="";
-        }	
-        
-        function goAlarm() {
-            location.href="";
-        }
-        
-        function goMyprofile() {
-            location.href="";
-        }
-        
-        function goLogout() {
-            location.href="";
-        }
-        
-    </script>
-    <!-- Script End -->
-    <section class="navArea">
-        <nav>
-            <div class="logo">
-                <a href="${pageContext.request.contextPath}/main/main.do">
-                    <img src="/emart24/resources/images/emart24.png">
-                </a>
-            </div>
-            <ul>
-                <li>
-                    <a href="${pageContext.request.contextPath}/common/mypage.do">
-                        <span class="icon"><img src="/emart24/resources/images/myPage.png"></span>
-                        <span class="title bold">마이페이지</span>
-                    </a>
-                </li>
-                <li>
-                        <span class="icon"><img src="/emart24/resources/images/order.png"></span>
-                        <span class="title bold">발주 / 입고</span>
-                    <a href="${pageContext.request.contextPath}/common/orderPage.do"><h5 class="OEsub">- 발주 신청</h5></a>
-                    <a href="${pageContext.request.contextPath}/common/oe.do"><h5 class="OEsub">- 입고 관리</h5></a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/common/inv.do">
-                        <span class="icon"><img src="/emart24/resources/images/enter.png"></span>
-                        <span class="title bold">재고 관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/common/sellPage.do">
-                        <span class="icon"><img src="/emart24/resources/images/sale.png"></span>
-                        <span class="title bold">판매 관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/common/profit.do">
-                        <span class="icon"><img src="/emart24/resources/images/profit.png"></span>
-                        <span class="title bold">수익</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/common/eventPage.do">
-                        <span class="icon"><img src="/emart24/resources/images/event.png"></span>
-                        <span class="title bold">행사 공지</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <footer>
-            <div class="footerIn">
-                <h4 class="bold" style="margin-top:20px;">프로젝트 참여원</h4>
-                <div class="comInfo">
-                    <h6>(주) 이마트24</h6>
-                    <h6>대표이사: 김창욱</h6>
-                    <h6>사업자등록번호:</h6>
-                    <h6>105-86-92454</h6>
-                    <h6>서울특별시 성동구 성수동 2가 281-4 푸조비즈타워</h6>
-                </div>
-                <div class="Copyright">
-                    <h6>Copyright &copy; 2021</h6>
-                    <h6>Sinnarycious All right</h6>
-                    <h6>Reserved</h6>
-                </div>
-            </div>
-        </footer>
-   
-        
-    </section>
+
+	<c:import url="common/nav.jsp" />
+      
+   	<c:import url="common/header.jsp" />
+
     <section class="wrap">
         <div>
             <h2 class="profitTitle">수익</h2></div>
@@ -234,7 +123,250 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <script>
+	    var lineArea = document.getElementById('myChartLine').getContext('2d');
+		var date = new Date();
+		var line;  // undefined
+		var wLine;
+		var mLine;
+	
+		console.log(date.getTime());
+		
+		
+			$.ajax({ 
+			url : "/emart24/sale/line.do",
+			type : "get",
+			data : {
+				date : date.getTime()
+					//key : value
+				}, success : function( data ) {
+					// console.log("data : " + data);
+					// console.log("data(weekList) : " + data.weekList);
+					// console.log("data(lastMonthList) : " + data.lastMonthList.getKey);
+					// console.log("data(thisMonthList) : " + data.thisMonthList);
+					
+					// 주간 데이터 처리
+					var weekList = data.weekList
+					var weekData = [];
+		
+		
+					for (var i in weekList) {
+						// console.log(weekList[i]);
+						weekData.push(weekList[i]);
+					}
+		
+					
+					// 월간 데이터 처리
+					
+					var lastMonthList;
+					var lastMonthData = [];
+					var thisMonthList;
+					var thisMonthData = [];
+					
+					// 지난 달 데이터 처리
+					$.each(data.lastMonthList,function(key, value){
+		
+							// console.log(key);
+		
+							// console.log(data.lastMonthList[key]);
+							
+							lastMonthData.push(data.lastMonthList[key]);
+							
+							// console.log("lastData 입력 확인 : " + lastData[key]);
+		
+					});
+					
+					// console.log("lastData 순서 확인 : " + lastMonthData);
+					
+					for (var i in lastMonthData) {
+						console.log("lastData 입력 확인 : " + lastMonthData[i]);
+					}
+					
+					// 이번 달 데이터 처리
+					$.each(data.thisMonthList,function(key, value){
+		
+							thisMonthData.push(data.thisMonthList[key]);
+		
+					});
+					
+					console.log("thisMonthData 순서 확인 : " + thisMonthData);
+					
+					for (var i in lastMonthData) {
+						console.log("thisMonthData 입력 확인 : " + thisMonthData[i]);
+					}
+					
+			        // lineGraph start
+		
+			        // 주간 그래프 시작
+		
+			        var weekLabels = [
+			          '월',
+			          '화',
+			          '수',
+			          '목',
+			          '금',
+			          '토',
+			          '일'
+			        ];
+			        var weekLineData = {
+			          labels: weekLabels,
+			          datasets: [{
+			            label: '이번 주',
+			            backgroundColor: '#fdb718',
+			            borderColor: '#fdb718',
+			            data:
+			                [],
+			                },{
+			            label: '지난 주',
+			            backgroundColor: '#777777',
+			            borderColor: '#777777',
+			            data:
+			                [],
+			                }]
+			        };
+			    
+			        wLine = {
+			          type: 'line',
+			          data: weekLineData
+			        };
+			    
+			        // === include 'setup' then 'config' above ===
+			        
+			        var weekDataset = weekLineData.datasets;	
+			        
+			        // console.log("dataset 길이 : " + dataset.length);
+			        // console.log("weekData 확인 : " + weekData);
+			        // console.log(dataset);
+					
+					for(var i = weekDataset.length -1; i >= 0; i--){
+						
+						if (i == 1) {
+							for(var j = 0; j < 7; j++) {
+								// console.log("첫 if 문 출력확인 : " + weekData[j]);
+								console.log(weekDataset[i]);
+								weekDataset[i].data.push(weekData[j]);
+							}
+						} else if (i == 0) {
+							for(var j = 7; j < 13; j++) {
+								weekDataset[i].data.push(weekData[j]);
+							}
+						}
+						console.log(weekDataset[i].data);
+					}
+					
+					// 주간 그래프 끝
+				
+					// 월간 그래프 시작
+		
+			        var monthLabels = [
+			          '1',
+			          '2',
+			          '3',
+			          '4',
+			          '5',
+			          '6',
+			          '7',
+			          '8',
+			          '9',
+			          '10',
+			          '11',
+			          '12',
+			          '13',
+			          '14',
+			          '15',
+			          '16',
+			          '17',
+			          '18',
+			          '19',
+			          '20',
+			          '21',
+			          '22',
+			          '23',
+			          '24',
+			          '25',
+			          '26',
+			          '27',
+			          '28',
+			          '29',
+			          '30',
+			          '31'
+			        ];
+			        var monthLineData = {
+			            labels: monthLabels,
+			            datasets: [{
+			            label: '이번 달',
+			            backgroundColor: '#fdb718',
+			            borderColor: '#fdb718',
+			            data:
+			                []
+			            },
+			                {
+			            label: '지난 달',
+			            backgroundColor: '#777777',
+			            borderColor: '#777777',
+			            data:
+			                [],
+			                }]
+			        };
+			            
+			        mLine = {
+			            type: 'line',
+			            data: monthLineData
+			        };
+			        
+			        var monthDataset = monthLineData.datasets;
+			        
+					for(var i = monthDataset.length -1; i >= 0; i--){
+						
+						if (i == 1) {
+							for(var j = 0; j < lastMonthData.length; j++) {
+								// console.log("첫 if 문 출력확인 : " + weekData[j]);
+								monthDataset[i].data.push(lastMonthData[j]);
+								console.log("lastMonthDataset : " + monthDataset[i].data[j]);
+							}
+						} else if (i == 0) {
+							for(var j = 0; j < thisMonthData.length; j++) {
+								monthDataset[i].data.push(thisMonthData[j]);
+								console.log("thisMonthDataset : " + monthDataset[i].data[j]);
+							}
+						}
+						// console.log(monthDataset[i].data);
+					}
+			        
+			        // === include 'setup' then 'config' above ===
+			        
+					alert("전송 성공!");
+				}, error : function( error ) { // 200 번을 제외한 3,4,5xx
+					alert("전송 실패!");
+				}
+			});
+		
+		
+	    function duringLine() {
+	    	var val = document.getElementById('duringLine').value;
+	        console.log(val);
+	
+	        if(line != undefined){ // undefined = null;
+	            line.destroy();
+	        }
+	       
+	        if (val == 'week') {
+	            line = new Chart(lineArea, wLine);
+	        } else if (val == 'month'){
+	            line = new Chart(lineArea, mLine);
+	        }
+	    }
+		/*
+	    window.onload = function() {
+	    	line = new Chart(lineArea, wLine);
+	    }
+		*/
+	    // lineGraph end
+	</script>
+    <script>
+    
+    /*
         // lineGraph start
         var lineArea = document.getElementById('myChartLine').getContext('2d');
         var line;  // undefined
@@ -429,6 +561,7 @@
 
 
         // lineGraph end
+    */
     </script>
     <script>
         // doughnutGraph start

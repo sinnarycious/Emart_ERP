@@ -7,4 +7,9 @@
 	SALE_DATE, SALE_CAT_NO, SALE_NAME
 -->
 
+	<select id="findMonday" parameterType="string" resultType="hashmap" >
+		SELECT NEXT_DAY(TO_DATE(#{sqlDate})-14, '월') "LAST_WEEK"
+		FROM DUAL;
+	</select>
+
 </mapper>
