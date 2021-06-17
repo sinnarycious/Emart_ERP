@@ -2,9 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sale">
-<!-- 
-	SALE_NO, SALE_COUNT, SALE_PRICE,
-	SALE_DATE, SALE_CAT_NO, SALE_NAME
--->
 
+<resultMap type="sale" id="saleMap">
+		<result column="SALE_NO" property="saleNo" />
+		<result column="SALE_COUNT" property="saleCount" />
+		<result column="SALE_PRICE" property="salePrice" />
+		<result column="SALE_DATE" property="saleDate" />
+		<result column="SALE_CAT_NO" property="saleCatNo" />
+		<result column="SALE_NAME" property="saleName" />
+		<result column="USER_NO" property="userNo" />
+	</resultMap>
+	
+	<select id="selectSaleList" resultMap="saleMap">
+		SELECT * FROM SALE
+		ORDER BY SALE_NO DESC
+	</select>
+	
+	<select id="selectSaleTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM SALE
+	</select>
+	
 </mapper>

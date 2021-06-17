@@ -36,12 +36,13 @@ public class navController {
 	}
 	
 	
-	/* 판매 관리 이동 */
+	/* 판매 관리 이동 
 	@RequestMapping("/common/sellPage.do")
 	public String sellPage() {
 		System.out.println("/common/sellPage.do가 호출되었습니다.");
 		return "sellPage";
 	}	
+	*/
 	
 	
 	/* 수익 페이지 이동 */

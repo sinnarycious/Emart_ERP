@@ -17,4 +17,5 @@ public class Sale implements Serializable{
 	private Date saleDate;
 	private int saleCatNo;
 	private String saleName;
+	private int userNo;
 }
