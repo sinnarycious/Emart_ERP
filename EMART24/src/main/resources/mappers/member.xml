@@ -5,11 +5,26 @@
 
     <resultMap type="Member" id="resultMember"> </resultMap>
     
+    <!-- 로그인시 아이디와 비밀번호 확인 -->
     <select id="selectOneMember" parameterType="Member" resultMap="resultMember">
     	SELECT * FROM MEMBER
     	WHERE USER_ID =#{ userId } AND USER_PWD = #{ userPwd }
     </select>
+	<!-- 로그인 끝 -->
 
+	<!-- 아이디 찾기시 이름과 전화번호 확인 -->
+	<select id="findId" resultMap="resultMember">
+		SELECT * FROM MEMBER
+		WHERE USER_NAME =#{ userName } AND USER_PHONE =#{ userPhone }
+	</select>
+	<!-- 아이디 찾기 끝 -->
+
+	<!-- 비밀번호 찾기시 아이디, 이름, 전화번호 확인 -->
+	<select id="findPassword" resultMap="resultMember">
+		SELECT * FROM MEMBER
+		WHERE USER_ID =#{ userId } AND USER_NAME =#{ userName } AND USER_PHONE =#{ userPhone }
+	</select>
+	<!-- 비밀번호 찾기 끝 -->
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER SET USER_PWD = #{ userPwd },
 						  USER_EMAIL= #{ userEmail },  
