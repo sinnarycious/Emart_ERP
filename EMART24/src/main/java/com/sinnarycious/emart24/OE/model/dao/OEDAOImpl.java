@@ -43,16 +43,18 @@ public class OEDAOImpl implements OEDAO {
 		return sqlSession.selectList("oe.searchInfo");
 	}
 
-
-
-
-	
-	
-	// 다시 쓰기 
+	// 다시 쓰기 - 가율
 	@Override
 	public int resetList() {
 		
 		return sqlSession.delete("oe.resetList");
+	}
+
+	// 발주결과 리스트 - 가율
+	@Override
+	public List<OE> orderInsertList(OE oe) {
+		
+		return sqlSession.selectList("oe.orderInsertList", oe);
 	}
 	
 }

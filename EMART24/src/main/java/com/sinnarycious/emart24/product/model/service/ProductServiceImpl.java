@@ -13,10 +13,18 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductDAO productDAO;
-
+	
+	// 검색
 	@Override
-	public List<Product> selectPdList(String keyword) {
+	public List<Product> selectPdList(Product product) {
 		
-		return productDAO.selectPdList(keyword);
+		return productDAO.selectPdList(product);
+	}
+
+	// 검색 리스트
+	@Override
+	public List<Product> selectResultList() {
+		
+		return productDAO.selectResultList();
 	}
 }

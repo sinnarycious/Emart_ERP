@@ -42,7 +42,12 @@
 		DELETE FROM OE WEHRE 
 		WEHRE 
 	</delete>
-
+	
+	<select id="orderInsertList" resultMap="oeMap">
+		SELECT OE_INV_NO, OE_NAME, OE_PRICE_E, ORDER_DATE
+		FROM ORDER_ENTER
+		WHERE OE_INV_NO = #{oeInvNo}
+	</select>
 
 
 

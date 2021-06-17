@@ -15,8 +15,18 @@ public class ProductDAOImpl implements ProductDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Product> selectPdList(String keyword) {
+	public List<Product> selectPdList(Product product) {
 		
-		return sqlSession.selectList("product.selectPdList");
+		System.out.println(sqlSession.selectList("product.selectPdList", product));
+		
+		System.out.println(product.getProName());
+		
+		return sqlSession.selectList("product.selectPdList", product);
+	}
+	
+	@Override
+	public List<Product> selectResultList() {
+		
+		return sqlSession.selectList("product.selectResultList");
 	}
 }

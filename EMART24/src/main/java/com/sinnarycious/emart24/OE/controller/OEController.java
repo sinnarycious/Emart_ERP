@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sinnarycious.emart24.OE.model.service.OEService;
 import com.sinnarycious.emart24.OE.model.vo.OE;
 import com.sinnarycious.emart24.common.Utils;
+import com.sinnarycious.emart24.product.model.vo.Product;
 
 @Controller
 public class OEController {
@@ -76,8 +77,7 @@ public class OEController {
 	}
 
 	
-	
-	// 발주 다시 작성
+	// 발주 다시 작성 : 가율
 	@RequestMapping("/OE/resetList.do")
 	public String resetList(@RequestParam int oeNo,
 							HttpServletRequest req, Model model) {
@@ -96,21 +96,27 @@ public class OEController {
 		return "common/msg";
 	}
 	
-	
-	/* 조회 기능 */
-	@RequestMapping("/OE/search.do")
-	public String search(
-			@RequestParam Date orderDate1,
-			@RequestParam Date orderDate2,
-			@RequestParam int oeNo,
-			@RequestParam String oeName
-			) {
+	// 발주 리스트 : 가율
+	@RequestMapping("/product/orderInsertList.do")
+	public String orderInsertList(
+						 	@RequestParam int oeInvNo,
+							 @RequestParam String oeName,
+							 @RequestParam int oePrice,
+							 @RequestParam Date orderDate,
+							 @RequestParam int oeCatNo,
+							 Model model) {
+							// user_no 나중에 추가
 		
+		OE oe = new OE(oeInvNo, oeName, orderDate, oePrice, oeCatNo);
 		
+		List<OE> list = oeService.orderInsertList(oe);
 		
-		return "";
+		System.out.println("리스트" + list);
+		
+		model.addAttribute("list", list);
+		
+		return "orderPage";
 	}
 	
-
 
 }
