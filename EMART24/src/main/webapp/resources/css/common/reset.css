@@ -187,7 +187,7 @@ select{
     height : 37px;
     padding-left : 5px;
     border : 1px solid var(--gray);
-    background:url('../../images/arrow.png') no-repeat 100% 50%/37px auto;
+    background:url('/emart24/resources/images/arrow.png') no-repeat 100% 50%/37px auto;
     -webkit-appearance:none; /* for chrome */
     -moz-appearance:none; /*for firefox*/ 
     appearance:none;
@@ -212,14 +212,14 @@ th, td{
 td{
     font-size : 14px;
 }
-tr:first-child{
+thead tr{
     border-top : var(--yellow) 2px solid;
     border-bottom : var(--yellow) 2px solid;
 }
-tr:nth-child(n+2){
+tbody tr{
     border-bottom : var(--light-gray) 1px solid;
 }
-tr:last-child{
+tbody tr:last-child{
     border-bottom : var(--yellow) 2px solid;
 }
 
@@ -236,12 +236,11 @@ tr:last-child{
     vertical-align : middle;
     cursor : pointer;
 }
-.pageNo li:first-child:hover, .pageNo li:last-child:hover{
-	background-color : transparent;
-}
-.pageNo li:nth-child(n+2):nth-child(-n+11):hover{
-    color : white;
+.pageNo .hover:hover{
     background-color : var(--yellow);
+}
+.pageNo .hover:hover a{
+	color : white;		
 }
 .arrLeft::after {
     content: '';
@@ -250,7 +249,7 @@ tr:last-child{
     border-top: 3px solid var(--yellow); /* 선 두께 */
     border-right: 3px solid var(--yellow); /* 선 두께 */
     position: absolute;
-    top: 0px; /* 기본 0px 값으로 해주세요 */
+    top: -4.5px; /* 기본 0px 값으로 해주세요 */
     left: 0px; /* 기본 0px 값으로 해주세요 */
     transform: rotate(225deg); /* 각도 */
     vertical-align : middle;
@@ -262,7 +261,7 @@ tr:last-child{
     border-top: 3px solid var(--yellow); /* 선 두께 */
     border-right: 3px solid var(--yellow); /* 선 두께 */
     position: absolute;
-    top: 0px; /* 기본 0px 값으로 해주세요 */
+    top: -4.5px; /* 기본 0px 값으로 해주세요 */
     left: 0px; /* 기본 0px 값으로 해주세요 */
     transform: rotate(45deg); /* 각도 */
     vertical-align : middle;

@@ -10,6 +10,7 @@
 	<title>이마트24</title>
 	<link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 	<link rel="stylesheet" href="/emart24/resources/css/oe.css">
+	<script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -26,51 +27,88 @@
             <h3>발주 조회 / 입고 등록</h3>
 
             <div class="searchBar">
-                <form action="${pageContext.request.contextPath}/OE/search.do" method="post" id="searchFrm">
-                    <h4>기준 일자</h4> <input type="date"   name="orderDate1" id="orderDate1"/> ~ <input type="date" name="orderDate2" id="orderDate2" />
-                    <h4>발주 번호</h4> <input type="number" name="oeNo" id="oeNo" style="width:100px;" />
-                    <h4>상품명</h4> <input type="text" name="oeName" id="oeName" style="width:515px;" placeholder="상품명을 검색하세요. " />
+               
+				<h4>기준 일자</h4> <input type="date"   name="orderDate1" id="orderDate1"/> ~ <input type="date" name="orderDate2" id="orderDate2" />
+				<h4>발주 번호</h4> <input type="number" name="oeNo" id="oeNo" style="width:100px;" />
+				<h4>상품명</h4> <input type="text" name="oeName" id="oeName" style="width:515px;" placeholder="상품명을 검색하세요. " />
+				
+				<button id="searchBtn" class="btn search">조회</button>
+			</div>
+			
+			<!-- 검색 ajax -->
+ 			<script>
+ 			$('#oeName').on('keyup', function(event){
+ 				if( event.keyCode == 13) {
+ 					$('#searchBtn').click();
+ 				}
+ 			});
+ 			$('#searchBtn').on('click', function(){
+ 				
+ 				var orderDate1 = $('#orderDate1').val();
+ 				var orderDate2 = $('#orderDate2').val();
+ 				var oeName = $('#oeName').val();
+ 				var oeNo = $('#oeNo').val();
+ 				
+ 				if(oeName != null){
+	 				$.ajax({ // jQuery 전용 함수
+	 					url : "${pageContext.request.contextPath}/OE/searchInfo.do",
+	 					type : "get",
+	 					data : {
+	 						orderDate1 : orderDate1,
+	 						orderDate2 : orderDate2,
+	 						oeName : oeName,
+	 						oeNo : oeNo
+	 					}, 
+	 					dataType : 'json',
+	 					success : function( data ) {
 
-                    <button type="submit" id="searchBtn" class="btn search">조회</button>
-                </form>
-            </div>
-            
-            <script>
-			
-				$('#searchBtn').on('click', function(){
-					/*
-						jQuery( == $).get() / .post() ;
-							get("요청URL", "전달할 값", 콜백함수);
-						$.ajax({
-							url : "요청 주소",
-							type : "get/post",
-							data : "전달할 값"
-							     / { name : "홍길동", age : 20 },
-							async : true / false, (비동기 / 동기 사용 여부)  
-							dataType : "text/html", // 서버에서 응답하는 데이터의 유형
-							success : function(data) { . . . },
-							error : function(error, code, msg) { . . . },
-							complete : function() { . . . } // 무조건 실행하는 함수
-						});
-					*/
-					$.ajax({
-						url : "/OE/searchList.do",
-						type : "post",
-						data : { 
-							date1 : $('#orderDate1').val(),
-							date2 : ${'#orderDate2'}.val(),
-							ProductNo : ${'#oeNo'}.val(),
-							ProductName : ${'#oeName'}.val()
-							
-							},
-						success : function( data ){ console.log(data) },
-						error : function(){ console.log('수신 실패!')	}
-					});
-				});
-			
-			</script>
+	 						$('tbody').empty();	// ORDER_ENTER 테이블 전체 데이터 값을 <tbody>에서 지움
+	 						
+	 						console.log(data);
+	 						
+	 						var search = data.search;
+	 						
+	 						for(var i in search){
+		 						var $tr = $('<tr>');
+
+	 							var $oeNo = $('<td><span class="num" id="oeNo">' + search[i].oeNo +'</span></td>');
+								var $oeInvNo = $('<td><span class="num" id="oeInvNo">' + search[i].oeInvNo + '</span></td>');
+	 							var $oeName = $('<td id="oeName">' + search[i].oeName + '</td>');
+								var $oeCount = $('<td><span class="num" id="oeCount">'+ search[i].oeCount +'</span></td>');
+								var $oePrice = $('<td><span class="num" id="oePrice">'+ search[i].oePrice +'</span></td>');
+								var $orderDate = $('<td id="orderDate">' + search[i].orderDate + '</td>');
+								var $oeStatus = $('<td>' + search[i].oeStatus + '</td></tr>');
+								 							
+	 							$tr.append($oeNo);
+	 							$tr.append($oeInvNo);
+	 							$tr.append($oeName);
+	 							$tr.append($oeCount);
+	 							$tr.append($oePrice);
+	 							$tr.append($orderDate);
+	 							$tr.append($oeStatus);
+	 							
+	 							$('tbody').append($tr);
+	 							
+	 							
+	 						}
+ 							
+	 						$('#paging_area').empty();
+	 						
+	 						$('#paging_area').append(data.paging);
+	 						
+	 					}, error : function( error ) {
+	 						alert("전송 실패!");
+	 					}
+	 				});
+ 				}
+ 			});
+
+ 			
+ 			</script>
+
 
             <table class="oeDBTable">
+            <thead>
 	            <tr>
 	                <th>
 	                    <h4>발주 번호</h4>
@@ -91,22 +129,20 @@
 	                    <h4>발주 날짜</h4>
 	                </th>
 	                <th>
-	                    <h4>발주 현황</h4>
-	                </th>
-	                <th>
 	                    <h4>입고 등록</h4>
 	                </th>
 	            </tr>
-	            
+	            </thead>
+	            <tbody>
 	            <c:forEach items="${list}" var="oe">
 		            <tr>
-		                <td><span class="num">${oe.oeNo}</span></td>
-		                <td><span class="num">${oe.oeInvNo}</span></td>
-		                <td>${oe.oeName}</td>
-		                <td><span class="num">${oe.oeCount}</span></td>
-		                <td><span class="num">${oe.oePrice}</span></td>
-		                <td>${oe.orderDate}</td>
-		                <td><button class="tag">결제 완료</button></td>
+		                <td><span class="num" id="oeNo">${oe.oeNo}</span></td>
+		                <td><span class="num" id="oeInvNo">${oe.oeInvNo}</span></td>
+		                <td id="oeName">${oe.oeName}</td>
+		                <td><span class="num" id="oeCount">${oe.oeCount}</span></td>
+		                <td><span class="num" id="oePrice">${oe.oePrice}</span></td>
+		                <td id="orderDate">${oe.orderDate}</td>
+		                
 		                <td>
 							<c:if test="${oe.oeStatus == 'N' }">
 								<button class="btn tag" type="submit" id="enrollBtn">등록하기</button>
@@ -118,8 +154,9 @@
 						</td>
 		            </tr>
 	            </c:forEach>
+	            </tbody>
             </table>
-            
+            <!-- 
             <script>
             	$('#enrollBtn').on('click', function(){
             		$.ajax({
@@ -133,42 +170,14 @@
             		
             
             </script>
-            
-            <c:out value="${ pageBar }" escapeXml="false"/>
-
-            <div class="pageNo">
-                <ul>
-                    <li><span class="arrLeft"></span></li>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>6</li>
-                    <li>7</li>
-                    <li>8</li>
-                    <li>9</li>
-                    <li>10</li>
-                    <li><span class="arrRight"></span></li>
-                </ul>
-            </div>
+             -->
+            <div id="paging_area">
+            	<c:out value="${ pageBar }" escapeXml="false"/>
+			</div>
         </div>
 
     </section>
-    
-    <script>
-    
-    <!-- 조회 버튼 -->
-    function search(){
-    	
-    }
-    
-    <!-- 입고 등록 버튼 -->
-    function enroll(){
-    	
-    }
-    
-    </script>
+
 
 </body>
 </html>

@@ -1,19 +1,27 @@
 package com.sinnarycious.emart24.OE.controller;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sinnarycious.emart24.OE.model.service.OEService;
 import com.sinnarycious.emart24.OE.model.vo.OE;
+import com.sinnarycious.emart24.common.SearchUtils;
 import com.sinnarycious.emart24.common.Utils;
 
 @Controller
@@ -48,23 +56,44 @@ public class OEController {
 
 	
 	/* 조회 기능 */
-	@RequestMapping("/OE/searchList.do")
-	public String searchList(
-			@RequestParam Date orderDate1,
-			@RequestParam Date orderDate2,
-			@RequestParam int oeNo,
-			@RequestParam String oeName,
-			Model model
-			) {
+	@RequestMapping("/OE/searchInfo.do")
+	@ResponseBody
+	public Map<String, Object> searchInfo(
+			@RequestParam (required=false)Date orderDate1,
+			@RequestParam (required=false)Date orderDate2,
+			@RequestParam (required=false) String oeName,
+			@RequestParam (required=false, defaultValue="0") int oeNo 
+			){
+		System.out.println(orderDate1);
 		
-		List<OE> list = oeService.selectSearchList();
+		Map<String, Object> map = new HashMap<String, Object>();
+		oeName.replace('_', ' ');
 		
-		System.out.println("search : " + list);
+		List<OE> searchList = oeService.searchInfo(orderDate1, orderDate2, oeName, oeNo);
+		String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "oe.do", oeName);
 		
-		model.addAttribute("list", list);
+		System.out.println("search : " + searchList);
 		
+		map.put("search", searchList);
+		map.put("paging", pageBar);
 		
-		return "";
+		return map;
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) throws Exception {
+	    final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    final CustomDateEditor dateEditor = new CustomDateEditor(df, true) {
+	        @Override
+	        public void setAsText(String text) throws IllegalArgumentException {
+	            if ("today".equals(text)) {
+	                setValue(new java.util.Date());
+	            } else {
+	                super.setAsText(text);
+	            }
+	        }
+	    };
+	    binder.registerCustomEditor(Date.class, dateEditor);
 	}
 
 

@@ -1,9 +1,9 @@
 package com.sinnarycious.emart24.common;
 
-public class Utils {
+public class SearchUtils {
 	// 페이지 계산 처리 및 HTML 생성용 클래스
 
-	public static String getPageBar(int totalContents, int cPage, int numPerPage, String url ){
+	public static String getPageBar(int totalContents, int cPage, int numPerPage, String url, String keyword ){
 		String pageBar = "";
 		int pageBarSize = 10;
 		cPage = cPage==0?1:cPage;
@@ -28,7 +28,7 @@ public class Utils {
 		}
 		else {
 			pageBar += "<li>";
-			pageBar += "<a class='arrLeft' href='javascript:fn_paging("+(pageNo-1)+")'></a>";
+			pageBar += "<a class='arrLeft' href='javascript:fn_paging("+(pageNo-1)+", \"" + keyword + "\")'></a>";
 			pageBar += "</li>";
 		}
 		
@@ -41,7 +41,7 @@ public class Utils {
 			} 
 			else {
 				pageBar += "<li class='hover'>";
-				pageBar += "<a href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
+				pageBar += "<a href='javascript:fn_paging("+pageNo+", \"" + keyword + "\")'>"+pageNo+"</a>";
 				pageBar += "</li>";
 			}
 			pageNo++;
@@ -55,7 +55,7 @@ public class Utils {
 			
 		} else {
 			pageBar += "<li>";
-			pageBar += "<a class='arrRight' href='javascript:fn_paging("+pageNo+")'></a> ";
+			pageBar += "<a class='arrRight' href='javascript:fn_paging("+pageNo+", \"" + keyword + "\")'></a> ";
 			pageBar += "</li>";
 		}
 		
@@ -64,8 +64,8 @@ public class Utils {
 		//2.스크립트 태그 작성
 		//fn_paging함수
 		pageBar += "<script>";
-		pageBar += "function fn_paging(cPage,numPerPage){";
-		pageBar += "location.href='"+url+"?cPage='+cPage;";
+		pageBar += "function fn_paging(cPage, keyword ,numPerPage){";
+		pageBar += "location.href='"+url+"?cPage='+cPage +'&keyword=' + keyword;";
 		pageBar += "}";
 		pageBar += "</script>";
 		
