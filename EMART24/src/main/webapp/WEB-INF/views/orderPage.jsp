@@ -68,7 +68,7 @@
 		                    <td class="td1" style="width:120px;"><h4>상품명</h4></td>
 		                    <td class="order_Product" name="proName" id="proName">${product.proName}</td>
 		                    <td class="td1" style="width:70px;"><h4>금액</h4></td>
-		                    <td style="width:80px;" name="proPirceE" id="proPirceE">${product.proPriceE}</td>
+		                    <td style="width:80px;" name="proPriceE" id="proPriceE">${product.proPriceE}</td>
 		                    <td class="td1" id="updown" style="width:180px;"><h4>수량</h4><input type="number" id="Pdt_Count" value="0">
 		                    </td>
 		                    <td style="width:110px;padding-right:30px;"><button class="btn click" id="addProduct">추가</button></td>
@@ -165,8 +165,19 @@
     					$('tbody').empty();		// 한번 비우고 시작해야함;
     					var $tr = $('<tr>');
     					
+    					var search = data.search;
     					
-    				
+    					// 
+    					for(var i in search) {
+    						
+    						var $h4 = $('<td class="td1" style="width:120px;"><h4>상품명</h4></td>')
+    						var $proName = $('<td class="order_Product" name="proName" id="proName"> + search[i].proName + </td>')
+    						var $price = $('<td class="td1" style="width:70px;"><h4>금액</h4></td>')
+    						var $proPriceE = $('<td sytle="width:80px;" name="proPriceE" id="proPriceE" + search[i].proPriceE + </td>')
+    						var $td1 = $('<td class="td1" id="updown" style="width:180px;"><h4>수량</h4><input type="number" id="Pdt_Count" value="0"</td>')
+    						var btn = $('<td style="width:110px; pdding-right:30px;"<button class="btn click" id="addProduct">추가</button></td>')
+    					}
+    					
     					console.log(searchList);
     				}, error : function(error) {
     					alert("전송 실패");
