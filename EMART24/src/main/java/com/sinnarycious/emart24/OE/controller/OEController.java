@@ -69,7 +69,7 @@ public class OEController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		oeName.replace('_', ' ');
-		
+
 		List<OE> searchList = oeService.searchInfo(orderDate1, orderDate2, oeName, oeNo);
 		String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "oe.do", oeName);
 		
@@ -99,10 +99,14 @@ public class OEController {
 
 
 	/* 입고 등록하기 */
-	@RequestMapping("OE/updateStatus.do")
-	public String updateStatus() {
+	@RequestMapping("/OE/updateStatus.do")
+	@ResponseBody
+	public int updateStatus(
+			@RequestParam int oeNo,
+			@RequestParam String oeName) {
 		
-		return "";
+		int result = oeService.updateStastus(oeNo, oeName);
+		return result;
 	}
 
 	
