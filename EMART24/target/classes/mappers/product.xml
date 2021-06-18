@@ -34,8 +34,9 @@ WHERE PRO_NO LIKE ${proNo};
 					AND PRO_NO = #{proNo}
 				</if>
 				<if test="proName != null">
-					AND PRO_NAME = #{proName}
-				</if>	
+					AND PRO_NAME LIKE '%' || #{proName} || '%'
+				</if>
+				
 			</where>
 	</select>
 	
