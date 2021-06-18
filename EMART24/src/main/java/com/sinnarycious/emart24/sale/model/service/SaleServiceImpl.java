@@ -21,7 +21,7 @@ public class SaleServiceImpl implements SaleService {
 	SaleDAO saleDAO;
 
 	@Override
-	public Map<String, Object> selectWeekProfit(Date javaDate) {
+	public Map<String, Object> selectLineProfit(Date javaDate) {
 		
 		System.out.println("javaDate : " + javaDate);
 		String sqlDate = new SimpleDateFormat("yy/MM/dd").format(javaDate);
@@ -34,11 +34,11 @@ public class SaleServiceImpl implements SaleService {
 		
 		System.out.println("sqlMonthDate : " + sqlMonthDate);
 		
-		List<Sale> weekList = saleDAO.selectWeekProfit(sqlWeek);
+		List<Sale> weekList = saleDAO.selectLineWeekProfit(sqlWeek);
 		
-		List<Sale> lastMonthList = saleDAO.selectLastMonthProfit(sqlMonthDate);
+		List<Sale> lastMonthList = saleDAO.selectLineLastMonthProfit(sqlMonthDate);
 		
-		List<Sale> thisMonthList = saleDAO.selectThisMonthProfit();
+		List<Sale> thisMonthList = saleDAO.selectLineThisMonthProfit();
 		
 		System.out.println("weekList : " + weekList);
 
@@ -48,9 +48,9 @@ public class SaleServiceImpl implements SaleService {
 		
 		Map<String, Object> dataMap = new HashMap<>();
 		
-		dataMap.put("weekList", weekList);
-		dataMap.put("lastMonthList", lastMonthList);
-		dataMap.put("thisMonthList", thisMonthList);
+		dataMap.put("weekLineList", weekList);
+		dataMap.put("lastLineMonthList", lastMonthList);
+		dataMap.put("thisLineMonthList", thisMonthList);
 
 		return dataMap;
 	}
@@ -66,5 +66,39 @@ public class SaleServiceImpl implements SaleService {
 
 		return saleDAO.selectSaleTotalContents();
 
+	}
+
+	@Override
+	public Map<String, Object> selectDoughnutProfit(Date javaDate) {
+		System.out.println("javaDate : " + javaDate);
+		String sqlDate = new SimpleDateFormat("yy/MM/dd").format(javaDate);
+		
+		String sqlWeek = saleDAO.FindMonday(sqlDate);
+		
+		System.out.println("sqlWeekDate : " + sqlWeek);
+		
+		String sqlMonthDate = saleDAO.FindMonth(sqlDate);
+		
+		System.out.println("sqlMonthDate : " + sqlMonthDate);
+		
+		List<Sale> weekList = saleDAO.selectDoughnutWeekProfit(sqlWeek);
+		
+		List<Sale> lastMonthList = saleDAO.selectDoughnutLastMonthProfit(sqlMonthDate);
+		
+		List<Sale> thisMonthList = saleDAO.selectDoughnutThisMonthProfit();
+		
+		System.out.println("weekDoughnutList : " + weekList);
+
+		System.out.println("lastDoughnutMonthList : " + lastMonthList);
+		
+		System.out.println("thisDoughnutMonthList : " + thisMonthList);
+		
+		Map<String, Object> dataMap = new HashMap<>();
+		
+		dataMap.put("weekDoughnutList", weekList);
+		dataMap.put("lastDoughnutMonthList", lastMonthList);
+		dataMap.put("thisDoughnutMonthList", thisMonthList);
+
+		return dataMap;
 	}
 }

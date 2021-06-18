@@ -131,15 +131,13 @@
 		var wLine;
 		var mLine;
 	
-		console.log(date.getTime());
-		
 		
 			$.ajax({ 
 			url : "/emart24/sale/line.do",
 			type : "get",
+			async : true,
 			data : {
 				date : date.getTime()
-					//key : value
 				}, success : function( data ) {
 					//console.log("data : " + data);
 					//console.log("data(weekList) : " + data.weekList);
@@ -147,7 +145,7 @@
 					//console.log("data(thisMonthList) : " + data.thisMonthList);
 					
 					// 주간 데이터 처리
-					var weekList = data.weekList
+					var weekList = data.weekLineList
 					var weekData = [];
 		
 		
@@ -159,9 +157,9 @@
 					
 					// 월간 데이터 처리
 					
-					var lastMonthList = data.lastMonthList;
+					var lastMonthList = data.lastLineMonthList;
 					var lastMonthData = [];
-					var thisMonthList = data.thisMonthList;
+					var thisMonthList = data.thisLineMonthList;
 					var thisMonthData = [];
 					
 					// 지난 달 데이터 처리
@@ -345,7 +343,7 @@
 			        // === include 'setup' then 'config' above ===
 			        
 					alert("전송 성공!");
-				}, error : function( error ) { // 200 번을 제외한 3,4,5xx
+				}, error : function( error ) {
 					alert("전송 실패!");
 				}
 			});
@@ -572,6 +570,26 @@
     */
     </script>
     <script>
+    var doughnutArea = document.getElementById('myChartDoughnut').getContext('2d');
+    var doughnut;
+	    $.ajax({ 
+			url : "/emart24/sale/doughnut.do",
+			type : "get",
+			async : true,
+			data : {
+				date : date.getTime()
+				}, success : function( data ) {
+					
+					
+					alert("전송 성공!");
+				}, error : function( error ) { 
+					
+					
+					alert("전송 실패!");
+				}
+			});
+    
+    /*
         // doughnutGraph start
         var doughnutArea = document.getElementById('myChartDoughnut').getContext('2d');
         var doughnut;
@@ -651,8 +669,8 @@
             }
         }
         
-
-        // doughnutGraph start
+	*/
+        // doughnutGraph end
         
         // 시작 시 그래프 그리기
         $(function(){

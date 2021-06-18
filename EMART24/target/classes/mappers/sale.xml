@@ -12,12 +12,12 @@
 		SELECT TO_CHAR(TRUNC(ADD_MONTHS(#{sqlDate},-1), 'MM')) "LAST_MONTH" FROM DUAL
 	</select>
 
-	<resultMap type="sale" id="profitMap">
+	<resultMap type="sale" id="lineProfitMap">
 		<result column="SALE_DATE" property="saleDate" />
 		<result column="SALE_SUM" property="saleSum" />
 	</resultMap>
 
-	<select id="selectWeekProfit" parameterType="string" resultMap="profitMap">
+	<select id="selectLineWeekProfit" parameterType="string" resultMap="lineProfitMap">
 		SELECT SALE_DATE, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
 		WHERE SALE_DATE BETWEEN TO_DATE(#{sqlWeekDate})
   		  AND SYSDATE
@@ -25,7 +25,7 @@
         ORDER BY SALE_DATE
 	</select>
 	
-	<select id="selectLastMonthProfit" parameterType="string" resultMap="profitMap">
+	<select id="selectLineLastMonthProfit" parameterType="string" resultMap="lineProfitMap">
 		SELECT SALE_DATE, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
 		WHERE SALE_DATE BETWEEN TO_DATE(#{sqlMonthDate})
 	  	  AND LAST_DAY(TO_DATE(#{sqlMonthDate}))
@@ -33,7 +33,7 @@
 		ORDER BY SALE_DATE
 	</select>
 	
-	<select id="selectThisMonthProfit" resultMap="profitMap">
+	<select id="selectLineThisMonthProfit" resultMap="lineProfitMap">
 		SELECT SALE_DATE, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
 		WHERE SALE_DATE BETWEEN (SELECT TRUNC(SYSDATE, 'MM') "LAST_MONTH" FROM DUAL)
   		  AND SYSDATE
@@ -62,5 +62,7 @@
 		SELECT COUNT(*) FROM SALE
 	</select>
 	
+	<select id="selectLineWeekProfit" parameterType="string" resultMap="doughnutProfitMap">
+	</select>
 
 </mapper>

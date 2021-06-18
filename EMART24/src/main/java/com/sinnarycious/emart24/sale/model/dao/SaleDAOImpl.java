@@ -65,21 +65,21 @@ public class SaleDAOImpl implements SaleDAO {
 	}
 	
 	@Override
-	public List<Sale> selectWeekProfit(String sqlWeekDate) {
+	public List<Sale> selectLineWeekProfit(String sqlWeekDate) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("sale.selectWeekProfit", sqlWeekDate);
+		return sqlSession.selectList("sale.selectLineWeekProfit", sqlWeekDate);
 	}
 	
 	@Override
-	public List<Sale> selectLastMonthProfit(String sqlMonthDate) {
+	public List<Sale> selectLineLastMonthProfit(String sqlMonthDate) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("sale.selectLastMonthProfit", sqlMonthDate);
+		return sqlSession.selectList("sale.selectLineLastMonthProfit", sqlMonthDate);
 	}
 	
 	@Override
-	public List<Sale> selectThisMonthProfit() {
+	public List<Sale> selectLineThisMonthProfit() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("sale.selectThisMonthProfit");
+		return sqlSession.selectList("sale.selectLineThisMonthProfit");
 	}
 	
 	@Override
@@ -94,6 +94,24 @@ public class SaleDAOImpl implements SaleDAO {
 	public int selectSaleTotalContents() {
 		
 		return sqlSession.selectOne("sale.selectSaleTotalContents");
+	}
+
+	@Override
+	public List<Sale> selectDoughnutWeekProfit(String sqlWeek) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sale> selectDoughnutLastMonthProfit(String sqlMonthDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sale> selectDoughnutThisMonthProfit() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

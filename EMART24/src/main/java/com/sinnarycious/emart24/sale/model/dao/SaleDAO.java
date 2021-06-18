@@ -16,16 +16,22 @@ public interface SaleDAO {
 
 	String FindMonth(String sqlDate);
 
-	List<Sale> selectWeekProfit(String sqlWeekDate);
+	List<Sale> selectLineWeekProfit(String sqlWeekDate);
 
-	List<Sale> selectLastMonthProfit(String sqlMonthDate);
+	List<Sale> selectLineLastMonthProfit(String sqlMonthDate);
 
-	List<Sale> selectThisMonthProfit();
+	List<Sale> selectLineThisMonthProfit();
 
 
 	List<Map<String, String>> selectSaleList(int pageNo, int numberPage);
 
 	int selectSaleTotalContents();
+
+	List<Sale> selectDoughnutWeekProfit(String sqlWeek);
+
+	List<Sale> selectDoughnutLastMonthProfit(String sqlMonthDate);
+
+	List<Sale> selectDoughnutThisMonthProfit();
 
 
 
