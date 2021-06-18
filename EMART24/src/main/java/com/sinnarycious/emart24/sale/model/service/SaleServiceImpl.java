@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sinnarycious.emart24.sale.model.dao.SaleDAO;
+import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 @Service
 public class SaleServiceImpl implements SaleService {
@@ -25,19 +26,19 @@ public class SaleServiceImpl implements SaleService {
 		System.out.println("javaDate : " + javaDate);
 		String sqlDate = new SimpleDateFormat("yy/MM/dd").format(javaDate);
 		
-		HashMap<String, Date> sqlWeekDateMap = saleDAO.FindMonday(sqlDate);
+		String sqlWeek = saleDAO.FindMonday(sqlDate);
 		
-		System.out.println("sqlWeekDate : " + sqlWeekDateMap.get("LAST_WEEK"));
+		System.out.println("sqlWeekDate : " + sqlWeek);
 		
-		Date sqlMonthDate = saleDAO.FindMonth(sqlDate);
+		String sqlMonthDate = saleDAO.FindMonth(sqlDate);
 		
 		System.out.println("sqlMonthDate : " + sqlMonthDate);
 		
-		List<Integer> weekList = saleDAO.selectWeekProfit(javaDate);
+		List<Sale> weekList = saleDAO.selectWeekProfit(sqlWeek);
 		
-		Map<String, Integer> lastMonthList = saleDAO.selectLastMonthProfit(sqlMonthDate);
+		List<Sale> lastMonthList = saleDAO.selectLastMonthProfit(sqlMonthDate);
 		
-		Map<String, Integer> thisMonthList = saleDAO.selectThisMonthProfit();
+		List<Sale> thisMonthList = saleDAO.selectThisMonthProfit();
 		
 		System.out.println("weekList : " + weekList);
 

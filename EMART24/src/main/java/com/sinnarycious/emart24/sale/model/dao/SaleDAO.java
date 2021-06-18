@@ -12,20 +12,21 @@ import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 public interface SaleDAO {
 
-	HashMap<String, Date> FindMonday(String sqlDate);
+	String FindMonday(String sqlDate);
 
-	Date FindMonth(String sqlDate);
+	String FindMonth(String sqlDate);
 
-	List<Integer> selectWeekProfit(Date sqlWeekDate);
+	List<Sale> selectWeekProfit(String sqlWeekDate);
 
-	Map<String, Integer> selectLastMonthProfit(Date sqlMonthDate);
+	List<Sale> selectLastMonthProfit(String sqlMonthDate);
 
-	Map<String, Integer> selectThisMonthProfit();
+	List<Sale> selectThisMonthProfit();
 
 
 	List<Map<String, String>> selectSaleList(int pageNo, int numberPage);
 
 	int selectSaleTotalContents();
+
 
 
 

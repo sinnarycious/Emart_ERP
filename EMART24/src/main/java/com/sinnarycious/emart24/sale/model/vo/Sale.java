@@ -18,4 +18,5 @@ public class Sale implements Serializable{
 	private int saleCatNo;
 	private String saleName;
 	private int userNo;
+	private int saleSum;
 }

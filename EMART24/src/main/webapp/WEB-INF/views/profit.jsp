@@ -141,10 +141,10 @@
 				date : date.getTime()
 					//key : value
 				}, success : function( data ) {
-					// console.log("data : " + data);
-					// console.log("data(weekList) : " + data.weekList);
-					// console.log("data(lastMonthList) : " + data.lastMonthList.getKey);
-					// console.log("data(thisMonthList) : " + data.thisMonthList);
+					//console.log("data : " + data);
+					//console.log("data(weekList) : " + data.weekList);
+					//console.log("data(lastMonthList) : " + data.lastMonthList);
+					//console.log("data(thisMonthList) : " + data.thisMonthList);
 					
 					// 주간 데이터 처리
 					var weekList = data.weekList
@@ -159,12 +159,13 @@
 					
 					// 월간 데이터 처리
 					
-					var lastMonthList;
+					var lastMonthList = data.lastMonthList;
 					var lastMonthData = [];
-					var thisMonthList;
+					var thisMonthList = data.thisMonthList;
 					var thisMonthData = [];
 					
 					// 지난 달 데이터 처리
+					/*
 					$.each(data.lastMonthList,function(key, value){
 		
 							// console.log(key);
@@ -176,26 +177,33 @@
 							// console.log("lastData 입력 확인 : " + lastData[key]);
 		
 					});
+					*/
 					
 					// console.log("lastData 순서 확인 : " + lastMonthData);
 					
-					for (var i in lastMonthData) {
-						console.log("lastData 입력 확인 : " + lastMonthData[i]);
+					for (var i in lastMonthList) {
+						// console.log("lastMonthList.saleDate 입력 확인 : " + dateChange(lastMonthList[i].saleDate));
+						// console.log("lastMonthList.saleSum 입력 확인 : " + lastMonthList[i].saleSum);
+						lastMonthData.push(lastMonthList[i]);
+						// console.log("lastMonthData[i].salenum : " + lastMonthData[i].saleSum);
 					}
 					
 					// 이번 달 데이터 처리
+					/*
 					$.each(data.thisMonthList,function(key, value){
 		
-							thisMonthData.push(data.thisMonthList[key]);
+							thisMonthData.push(data.thisMonthList[]);
 		
 					});
+					*/
 					
-					console.log("thisMonthData 순서 확인 : " + thisMonthData);
-					
-					for (var i in lastMonthData) {
-						console.log("thisMonthData 입력 확인 : " + thisMonthData[i]);
+					for (var i in thisMonthList) {
+						// console.log("thisMonthList.saleDate 입력 확인 : " + dateChange(thisMonthList[i].saleDate));
+						// console.log("thisMonthList.saleSum 입력 확인 : " + thisMonthList[i].saleSum);
+						thisMonthData.push(thisMonthList[i]);
 					}
-					
+
+
 			        // lineGraph start
 		
 			        // 주간 그래프 시작
@@ -244,15 +252,15 @@
 						if (i == 1) {
 							for(var j = 0; j < 7; j++) {
 								// console.log("첫 if 문 출력확인 : " + weekData[j]);
-								console.log(weekDataset[i]);
-								weekDataset[i].data.push(weekData[j]);
+								// console.log(weekDataset[i]);
+								weekDataset[i].data.push(weekData[j].saleSum);
 							}
 						} else if (i == 0) {
-							for(var j = 7; j < 13; j++) {
-								weekDataset[i].data.push(weekData[j]);
+							for(var j = 7; j < 14; j++) {
+								weekDataset[i].data.push(weekData[j].saleSum);
 							}
 						}
-						console.log(weekDataset[i].data);
+						//console.log(weekDataset[i].data);
 					}
 					
 					// 주간 그래프 끝
@@ -322,12 +330,12 @@
 						if (i == 1) {
 							for(var j = 0; j < lastMonthData.length; j++) {
 								// console.log("첫 if 문 출력확인 : " + weekData[j]);
-								monthDataset[i].data.push(lastMonthData[j]);
+								monthDataset[i].data.push(lastMonthData[j].saleSum);
 								console.log("lastMonthDataset : " + monthDataset[i].data[j]);
 							}
 						} else if (i == 0) {
 							for(var j = 0; j < thisMonthData.length; j++) {
-								monthDataset[i].data.push(thisMonthData[j]);
+								monthDataset[i].data.push(thisMonthData[j].saleSum);
 								console.log("thisMonthDataset : " + monthDataset[i].data[j]);
 							}
 						}
@@ -651,6 +659,12 @@
             duringLine();
             duringDoughnut();
         })
+        
+        // 밀리초를 yyyy-mm-dd로 변환
+        function dateChange( time ) {
+           var myDate = new Date(time);
+           return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + myDate.getDate()).slice(-2); 
+        }
 
     </script>
 </body>
