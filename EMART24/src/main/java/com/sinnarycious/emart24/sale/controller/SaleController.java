@@ -42,7 +42,7 @@ public class SaleController {
 
 	@RequestMapping("/sale/line.do")
 	@ResponseBody
-	public Map<String, Object> linegraph(@RequestParam long date) {
+	public Map<String, Object> lineGraph(@RequestParam long date) {
 		
 		System.out.println(date);
 
@@ -53,12 +53,28 @@ public class SaleController {
 		System.out.println(sqlDate);
 
 		
-		Map<String, Object> map = saleService.selectWeekProfit(javaDate);
+		Map<String, Object> map = saleService.selectLineProfit(javaDate);
 				
 		return map;
 	}
 	
-	
+	@RequestMapping("/sale/doughnut.do")
+	@ResponseBody
+	public Map<String, Object> doughnutGraph(@RequestParam long date) {
+		
+		System.out.println(date);
+
+		
+		Date javaDate = new Date(new java.util.Date(date).getTime());
+		System.out.println(javaDate);
+		String sqlDate = new SimpleDateFormat("yy/MM/dd").format(javaDate);
+		System.out.println(sqlDate);
+
+		
+		Map<String, Object> map = saleService.selectDoughnutProfit(javaDate);
+				
+		return map;
+	}
 
 	@RequestMapping("/sale/sale.do")
 	public String selectSaleList(

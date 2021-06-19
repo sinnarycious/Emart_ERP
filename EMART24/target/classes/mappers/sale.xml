@@ -3,13 +3,76 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sale">
 
-	<select id="findMonday" parameterType="string" resultType="hashmap" >
-		SELECT NEXT_DAY(TO_DATE(#{sqlDate})-14, '월') "LAST_WEEK"
-		FROM DUAL;
+	<select id="findLastMonday" parameterType="string" resultType="string" >
+		SELECT TO_CHAR(NEXT_DAY(TO_DATE(#{sqlDate})-14, '월'), 'YYYY-MM-DD') LAST_WEEK
+		FROM DUAL
+	</select>
+
+	<select id="findLastMonth" parameterType="string" resultType="string" >
+		SELECT TO_CHAR(TRUNC(ADD_MONTHS(TO_DATE(#{sqlDate}),-1), 'MM')) "LAST_MONTH" FROM DUAL
+	</select>
+	
+	<select id="findMonday" parameterType="string" resultType="string" >
+		SELECT TO_CHAR(NEXT_DAY(TO_DATE(#{sqlDate})-7, '월'), 'YYYY-MM-DD') LAST_WEEK
+		FROM DUAL
+	</select>
+	
+	<select id="findMonth" parameterType="string" resultType="string" >
+		SELECT TO_CHAR(TRUNC(TO_DATE(#{sqlDate}), 'MM')) "LAST_MONTH" FROM DUAL
+	</select>
+
+	<resultMap type="Sale" id="lineProfitMap">
+		<result column="SALE_DATE" property="saleDate" />
+		<result column="SALE_SUM" property="saleSum" />
+	</resultMap>
+	
+	<resultMap type="Sale" id="doughnutProfitMap">
+		<result column="SALE_DATE" property="saleDate" />
+		<result column="SALE_SUM" property="saleSum" />
+		<result column="SALE_CAT_NO" property="saleCatNo" />
+	</resultMap>
+		
+	<select id="selectDoughnutWeekProfit" parameterType="Sale" resultMap="doughnutProfitMap">
+		SELECT SUM(SALE_PRICE) "WEEK_PROFIT" FROM SALE
+		WHERE SALE_DATE BETWEEN TO_DATE(#{sqlDate})
+	  	  AND SYSDATE
+	      AND SALE_CAT_NO = #{saleCatNo}
+	</select>
+	
+	<select id="selectDoughnutMonthProfit" parameterType="Sale" resultMap="doughnutProfitMap">
+		SELECT SUM(SALE_PRICE) "THIS_MONTH_PROFIT" FROM SALE
+		WHERE SALE_DATE BETWEEN (SELECT TRUNC(SYSDATE, 'MM') "LAST_MONTH" FROM DUAL)
+		  AND SYSDATE
+		  AND SALE_CAT_NO = #{saleCatNo}
+		ORDER BY SALE_DATE
+	</select>
+
+	<select id="selectLineWeekProfit" parameterType="string" resultMap="lineProfitMap">
+		SELECT SALE_DATE, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
+		WHERE SALE_DATE BETWEEN TO_DATE(#{sqlWeekDate})
+  		  AND SYSDATE
+		GROUP BY SALE_DATE
+        ORDER BY SALE_DATE
+	</select>
+	
+	<select id="selectLineLastMonthProfit" parameterType="string" resultMap="lineProfitMap">
+		SELECT SALE_DATE, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
+		WHERE SALE_DATE BETWEEN TO_DATE(#{sqlMonthDate})
+	  	  AND LAST_DAY(TO_DATE(#{sqlMonthDate}))
+		GROUP BY SALE_DATE
+		ORDER BY SALE_DATE
+	</select>
+	
+	<select id="selectLineThisMonthProfit" resultMap="lineProfitMap">
+		SELECT SALE_DATE, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
+		WHERE SALE_DATE BETWEEN (SELECT TRUNC(SYSDATE, 'MM') "LAST_MONTH" FROM DUAL)
+  		  AND SYSDATE
+		GROUP BY SALE_DATE
+		ORDER BY SALE_DATE
 	</select>
 
 
-<resultMap type="sale" id="saleMap">
+	<resultMap type="Sale" id="saleMap">
 		<result column="SALE_NO" property="saleNo" />
 		<result column="SALE_COUNT" property="saleCount" />
 		<result column="SALE_PRICE" property="salePrice" />
@@ -18,6 +81,7 @@
 		<result column="SALE_NAME" property="saleName" />
 		<result column="USER_NO" property="userNo" />
 		<result column="PRO_NO" property="proNo" />
+		<result column="SALE_SUM" property="saleSum" />
 	</resultMap>
 	
 	<select id="selectSaleList" resultMap="saleMap">
@@ -29,6 +93,7 @@
 	<select id="selectSaleTotalContents" resultType="_int">
 		SELECT COUNT(*) FROM SALE
 	</select>
+
 	
 	<!-- 검색 기능 -->
 	<select id="searchInfo" parameterType="sale" resultMap="saleMap">
@@ -50,5 +115,6 @@
 		
 	</select>
 	
+
 
 </mapper>

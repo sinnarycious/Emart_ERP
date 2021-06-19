@@ -11,25 +11,38 @@ import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 public interface SaleDAO {
 
+
 	// 수익 그래프
-	HashMap<String, Date> FindMonday(String sqlDate);
 
-	Date FindMonth(String sqlDate);
 
-	List<Integer> selectWeekProfit(Date sqlWeekDate);
+	String findLastMonday(String sqlDate);
 
-	Map<String, Integer> selectLastMonthProfit(Date sqlMonthDate);
+	String findLastMonth(String sqlDate);
+	
+	String findMonday(String sqlDate);
 
-	Map<String, Integer> selectThisMonthProfit();
+	String findMonth(String sqlDate);
+
+	List<Sale> selectLineWeekProfit(String sqlWeekDate);
+
+	List<Sale> selectLineLastMonthProfit(String sqlMonthDate);
+
+	List<Sale> selectLineThisMonthProfit();
 
 	// 판매 페이지
 	List<Map<String, String>> selectSaleList(int pageNo, int numberPage);
 
 	int selectSaleTotalContents();
-	
+
 	// 조회 기능
 	List<Sale> searchInfo(Date saleDate1, Date saleDate2, String saleName, int proNo);
-	
+
+
+	List<Sale> selectDoughnutThisWeekProfit(String sqlWeek);
+
+	List<Sale> selectDoughnutLastMonthProfit(String sqlMonthDate);
+
+	List<Sale> selectDoughnutThisMonthProfit();
 
 
 

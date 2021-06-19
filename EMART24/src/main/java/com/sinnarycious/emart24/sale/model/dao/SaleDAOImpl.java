@@ -2,6 +2,7 @@ package com.sinnarycious.emart24.sale.model.dao;
 
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,34 +20,104 @@ public class SaleDAOImpl implements SaleDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
+
 	// 수익 그래프
+
+	/*
+
 	@Override
-	public HashMap<String, Date> FindMonday(String sqlDate) {
+	public HashMap<String, Date> findLastMonday(String sqlDate) {
+		HashMap<String, Date> hmap = new HashMap<>(); 
+		 
+		String result = sqlSession.selectOne("sale.findMonday", sqlDate);
 		
-		return sqlSession.selectOne("sale.findMonday", sqlDate);
+		hmap.put("lastMonday", Date.valueOf(result));
+		 
+		return hmap;
+	}
+	*/
+	/*
+	@Override
+	public HashMap<String, Date> findLastMonth(String sqlDate) {
+		HashMap<String, Date> hmap = new HashMap<>(); 
+		 
+		String result = sqlSession.selectOne("sale.findMonth", sqlDate);
+		System.out.println("result : " + result);
+		System.out.println("Date : " + Date.valueOf(result));
+		hmap.put("lastMonth", Date.valueOf(result));
+		System.out.println("hmap.get(\"lastMonth\") : " + hmap.get("lastMonth"));
+		return hmap;
+	}
+	 */
+	
+	@Override
+	public String findLastMonday(String sqlDate) {
+		HashMap<String, Date> hmap = new HashMap<>(); 
+		 
+		String result = sqlSession.selectOne("sale.findLastMonday", sqlDate);
+		 
+		return result;
+	}
+	
+	
+	@Override
+	public String findLastMonth(String sqlDate) {
+		 
+		String result = sqlSession.selectOne("sale.findLastMonth", sqlDate);
+
+		return result;
+	}
+	
+
+	@Override
+	public String findMonday(String sqlDate) {
+		
+		String result = sqlSession.selectOne("sale.findMonday", sqlDate);
+		
+		return result;
 	}
 
 	@Override
-	public Date FindMonth(String sqlDate) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("sale.findMonth", sqlDate);
+	public String findMonth(String sqlDate) {
+		
+		String result = sqlSession.selectOne("sale.findMonday", sqlDate);
+		
+		return result;
 	}
 
+	
 	@Override
-	public List<Integer> selectWeekProfit(Date sqlWeekDate) {
+	public List<Sale> selectLineWeekProfit(String sqlWeekDate) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("sale.selectWeekProfit", sqlWeekDate);
+		return sqlSession.selectList("sale.selectLineWeekProfit", sqlWeekDate);
 	}
 	
 	@Override
-	public Map<String, Integer> selectLastMonthProfit(Date sqlMonthDate) {
+	public List<Sale> selectLineLastMonthProfit(String sqlMonthDate) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("sale.selectLineLastMonthProfit", sqlMonthDate);
+	}
+	
+	@Override
+	public List<Sale> selectLineThisMonthProfit() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("sale.selectLineThisMonthProfit");
+	}
+	
+	@Override
+	public List<Sale> selectDoughnutThisWeekProfit(String sqlWeek) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
-	public Map<String, Integer> selectThisMonthProfit() {
+	public List<Sale> selectDoughnutLastMonthProfit(String sqlMonthDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sale> selectDoughnutThisMonthProfit() {
 		// TODO Auto-generated method stub
 		return null;
 	}
