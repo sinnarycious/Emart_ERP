@@ -1,10 +1,10 @@
 @charset "utf-8";
-.sellPage h2{
+.sale h2{
     padding-bottom: 57px;
     text-align: left;
 }
 
-.sellPage h2, .sellPage h3 {
+.sale h2, .salePage h3 {
     text-align: left;
 }
 

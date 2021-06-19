@@ -17,15 +17,37 @@
 		<result column="SALE_CAT_NO" property="saleCatNo" />
 		<result column="SALE_NAME" property="saleName" />
 		<result column="USER_NO" property="userNo" />
+		<result column="PRO_NO" property="proNo" />
 	</resultMap>
 	
 	<select id="selectSaleList" resultMap="saleMap">
-		SELECT * FROM SALE
+		SELECT S.*,P.PRO_NO FROM SALE S,PRODUCT P
+		WHERE SALE_NAME = PRO_NAME
 		ORDER BY SALE_NO DESC
 	</select>
 	
 	<select id="selectSaleTotalContents" resultType="_int">
 		SELECT COUNT(*) FROM SALE
+	</select>
+	
+	<!-- 검색 기능 -->
+	<select id="searchInfo" parameterType="sale" resultMap="saleMap">
+		SELECT S.*, PRO_NO
+		FROM PRODUCT P, SALE S
+		WHERE SALE_NAME = PRO_NAME
+			<if test="saleName !=null">
+				AND SALE_NAME LIKE '%' || #{ saleName } || '%'
+			</if>
+			<if test="proNo != 0">
+				AND PRO_NO = #{ proNo }
+			</if>
+			<if test="saleDate1 !=null and saleDate2 = null">
+				AND SALE_DATE = #{ saleDate1 }
+			</if>
+			<if test="saleDate1 !=null and saleDate2 !=null">
+				AND SALE_DATE BETWEEN #{ saleDate1 } AND #{ saleDate2 }
+			</if>
+		
 	</select>
 	
 

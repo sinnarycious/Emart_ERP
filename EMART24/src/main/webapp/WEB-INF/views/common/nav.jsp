@@ -30,7 +30,7 @@
                  </a>
              </li>
              <li>
-                 <a href="${pageContext.request.contextPath}/sale/sellPage.do">
+                 <a href="${pageContext.request.contextPath}/sale/sale.do">
                      <span class="icon"><img src="/emart24/resources/images/sale.png"></span>
                      <span class="title bold">판매 관리</span>
                  </a>

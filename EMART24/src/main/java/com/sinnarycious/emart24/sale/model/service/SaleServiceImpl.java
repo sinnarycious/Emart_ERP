@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sinnarycious.emart24.sale.model.dao.SaleDAO;
+import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 @Service
 public class SaleServiceImpl implements SaleService {
@@ -66,4 +67,14 @@ public class SaleServiceImpl implements SaleService {
 		return saleDAO.selectSaleTotalContents();
 
 	}
+	
+	// 조회 기능
+	@Override
+	public List<Sale> searchInfo(Date saleDate1, Date saleDate2, String saleName, int proNo) {
+
+		return saleDAO.searchInfo(saleDate1, saleDate2, saleName, proNo);
+	}
+	
+
+
 }

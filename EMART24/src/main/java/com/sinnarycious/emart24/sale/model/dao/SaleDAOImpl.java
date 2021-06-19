@@ -19,7 +19,8 @@ public class SaleDAOImpl implements SaleDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-
+	
+	// 수익 그래프
 	@Override
 	public HashMap<String, Date> FindMonday(String sqlDate) {
 		
@@ -50,6 +51,7 @@ public class SaleDAOImpl implements SaleDAO {
 		return null;
 	}
 	
+	// 판매 페이지
 	@Override
 	public List<Map<String, String>> selectSaleList(int pageNo, int numberPage) {
 
@@ -62,6 +64,19 @@ public class SaleDAOImpl implements SaleDAO {
 	public int selectSaleTotalContents() {
 		
 		return sqlSession.selectOne("sale.selectSaleTotalContents");
+	}
+	
+	// 조회 기능
+	@Override
+	public List<Sale> searchInfo(Date saleDate1, Date saleDate2, String saleName, int proNo) {
+		
+		System.out.println("saleDate1 : " + saleDate1);
+		System.out.println("saleDate2 : " + saleDate2);
+		System.out.println("saleNo : " + proNo);
+		System.out.println("saleName : " + saleName);
+		
+		Sale sale = new Sale(saleDate1, saleDate2, saleName, proNo);
+		return sqlSession.selectList("sale.searchInfo", sale);
 	}
 
 	
