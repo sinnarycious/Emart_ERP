@@ -1,6 +1,7 @@
 package com.sinnarycious.emart24.inv.model.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,4 +17,10 @@ public class Inv implements Serializable{
 	private int invSCount;
 	private int invPrice;
 	private int invCatNo;
+	
+	public Inv(int invCatNo, int invNo, String invName) {
+		this.invCatNo = invCatNo;
+		this.invNo = invNo;
+		this.invName = invName;
+	}
 }                      
