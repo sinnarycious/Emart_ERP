@@ -38,11 +38,13 @@
 			
 			<!-- 검색 ajax -->
  			<script>
+ 			// 키보드 엔터 = '#searchBtn' 클릭과 동일한 효과
  			$('#oeName').on('keyup', function(event){
  				if( event.keyCode == 13) {
  					$('#searchBtn').click();
  				}
  			});
+ 			
  			$('#searchBtn').on('click', function(){
  				
  				var orderDate1 = $('#orderDate1').val();
@@ -77,9 +79,18 @@
 	 							var $oeName = $('<td id="oeName">' + search[i].oeName + '</td>');
 								var $oeCount = $('<td><span class="num" id="oeCount">'+ search[i].oeCount +'</span></td>');
 								var $oePrice = $('<td><span class="num" id="oePrice">'+ search[i].oePrice +'</span></td>');
-								var $orderDate = $('<td id="orderDate">' + search[i].orderDate + '</td>');
-								var $oeStatus = $('<td>' + search[i].oeStatus + '</td></tr>');
-								 							
+								var $orderDate = $('<td id="orderDate">' + dateChange( search[i].orderDate ) + '</td>');
+								var $oeStatus = '';
+								if(search[i].oeStatus != 'Y') {
+									$oeStatus = $('<td>' 
+											+ '<button class="btn tag" type="submit" id="enrollBtn">등록하기</button>'
+											+ '</td></tr>');	
+								} else {
+									$oeStatus = $('<td>' 
+											+ '<button class="tag off">등록 완료</button>'
+											+ '</td></tr>');
+								}
+								
 	 							$tr.append($oeNo);
 	 							$tr.append($oeInvNo);
 	 							$tr.append($oeName);
@@ -88,13 +99,11 @@
 	 							$tr.append($orderDate);
 	 							$tr.append($oeStatus);
 	 							
-	 							$('tbody').append($tr);
-	 							
-	 							
+	 							$('tbody').append($tr);	 							
+
 	 						}
  							
-	 						$('#paging_area').empty();
-	 						
+	 						$('#paging_area').empty(); 		// ORDER_ENTER 테이블 전체 데이터 값에 따른 paging 삭제			
 	 						$('#paging_area').append(data.paging);
 	 						
 	 					}, error : function( error ) {
@@ -104,7 +113,11 @@
  				}
  			});
 
- 			
+ 			// 밀리초를 yyyy-mm-dd로 변환
+ 			function dateChange( time ) {
+ 				var myDate = new Date(time);
+ 				return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + myDate.getDate()).slice(-2); 
+ 			}
  			</script>
 
 
@@ -157,21 +170,37 @@
 	            </c:forEach>
 	            </tbody>
             </table>
-            <!-- 
+
             <script>
             	$('#enrollBtn').on('click', function(){
+            		
+            		var oeNo = parseInt($(this).parent().parent().find('#oeNo').text());
+            		var oeName = $(this).parent().parent().find('#oeName').text();
+            		
             		$.ajax({
-            			url : 'OE/enroll.do',
+            			url : '${pageContext.request.contextPath}/OE/updateStatus.do',
             			type : 'post',
             			data : {
-            				
+            				oeNo : oeNo,
+            				oeName : oeName
+            			},
+            			dataType : 'json',
+            			success : function(data){
+            				if(data == 1) {	// 업데이트가 이뤄졌으면
+            					$('#enrollBtn').removeClass('btn').addClass('off').empty().text('등록 완료');
+            				} else {
+            					alert("등록 실패했습니다!");            					
+            				}
+            			},
+            			error : function(error){
+            				alert("등록 실패!");
             			}
-            		})
+            		});
             	});
             		
             
             </script>
-             -->
+
             <div id="paging_area">
             	<c:out value="${ pageBar }" escapeXml="false"/>
 			</div>
