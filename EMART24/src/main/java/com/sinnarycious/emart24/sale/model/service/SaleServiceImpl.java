@@ -26,13 +26,13 @@ public class SaleServiceImpl implements SaleService {
 		System.out.println("javaDate : " + javaDate);
 		String sqlDate = new SimpleDateFormat("yy/MM/dd").format(javaDate);
 		
-		String sqlWeek = saleDAO.FindMonday(sqlDate);
+		String sqlWeek = saleDAO.findLastMonday(sqlDate);
 		
-		System.out.println("sqlWeekDate : " + sqlWeek);
+		System.out.println("sqlLastMonday : " + sqlWeek);
 		
-		String sqlMonthDate = saleDAO.FindMonth(sqlDate);
+		String sqlMonthDate = saleDAO.findLastMonth(sqlDate);
 		
-		System.out.println("sqlMonthDate : " + sqlMonthDate);
+		System.out.println("sqlLastMonth : " + sqlMonthDate);
 		
 		List<Sale> weekList = saleDAO.selectLineWeekProfit(sqlWeek);
 		
@@ -73,30 +73,32 @@ public class SaleServiceImpl implements SaleService {
 		System.out.println("javaDate : " + javaDate);
 		String sqlDate = new SimpleDateFormat("yy/MM/dd").format(javaDate);
 		
-		String sqlWeek = saleDAO.FindMonday(sqlDate);
+		String sqlWeek = saleDAO.findMonday(sqlDate);
 		
-		System.out.println("sqlWeekDate : " + sqlWeek);
+		System.out.println("sqlMonday : " + sqlWeek);
 		
-		String sqlMonthDate = saleDAO.FindMonth(sqlDate);
+		// String sqlMonthDate = saleDAO.findMonth(sqlDate);
 		
-		System.out.println("sqlMonthDate : " + sqlMonthDate);
+		// System.out.println("sqlMonth : " + sqlMonthDate);
 		
-		List<Sale> weekList = saleDAO.selectDoughnutWeekProfit(sqlWeek);
+		Sale doughnut = new Sale();
 		
-		List<Sale> lastMonthList = saleDAO.selectDoughnutLastMonthProfit(sqlMonthDate);
+		List<Sale> thisWeekList = saleDAO.selectDoughnutThisWeekProfit(sqlWeek);
+		
+		// List<Sale> lastMonthList = saleDAO.selectDoughnutLastMonthProfit(sqlMonthDate);
 		
 		List<Sale> thisMonthList = saleDAO.selectDoughnutThisMonthProfit();
 		
-		System.out.println("weekDoughnutList : " + weekList);
+		System.out.println("weekDoughnutList : " + thisWeekList);
 
-		System.out.println("lastDoughnutMonthList : " + lastMonthList);
+		// System.out.println("lastDoughnutMonthList : " + lastMonthList);
 		
 		System.out.println("thisDoughnutMonthList : " + thisMonthList);
 		
 		Map<String, Object> dataMap = new HashMap<>();
 		
-		dataMap.put("weekDoughnutList", weekList);
-		dataMap.put("lastDoughnutMonthList", lastMonthList);
+		dataMap.put("weekDoughnutList", thisWeekList);
+		// dataMap.put("lastDoughnutMonthList", lastMonthList);
 		dataMap.put("thisDoughnutMonthList", thisMonthList);
 
 		return dataMap;

@@ -125,6 +125,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
+    
+	    // 밀리초를 yyyy-mm-dd로 변환
+	    function dateChange( time ) {
+	       var myDate = new Date(time);
+	       return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + myDate.getDate()).slice(-2); 
+	    }
+
 	    var lineArea = document.getElementById('myChartLine').getContext('2d');
 		var date = new Date();
 		var line;  // undefined
@@ -154,7 +161,7 @@
 						weekData.push(weekList[i]);
 					}
 		
-					
+					console.log('weekData[0].sale : ' + weekData[0].saleSum);
 					// 월간 데이터 처리
 					
 					var lastMonthList = data.lastLineMonthList;
@@ -252,10 +259,12 @@
 								// console.log("첫 if 문 출력확인 : " + weekData[j]);
 								// console.log(weekDataset[i]);
 								weekDataset[i].data.push(weekData[j].saleSum);
+								// console.log('if ( i == 1) weekData[j].saleSum' + weekData[j].saleSum);
 							}
 						} else if (i == 0) {
-							for(var j = 7; j < 14; j++) {
+							for(var j = 7; j < weekData.length; j++) {
 								weekDataset[i].data.push(weekData[j].saleSum);
+								// console.log('if ( i == 0) weekData[j].saleSum' + weekData[j].saleSum);
 							}
 						}
 						//console.log(weekDataset[i].data);
@@ -373,7 +382,7 @@
     <script>
     
     /*
-        // lineGraph start
+        // lineGraph 원본 start
         var lineArea = document.getElementById('myChartLine').getContext('2d');
         var line;  // undefined
         
@@ -546,8 +555,11 @@
             data: monthLineData
         };
         
+     	// 월간 그래프 끝
               // === include 'setup' then 'config' above ===
-        
+     */
+     
+     /*
         function duringLine() {
             var val = document.getElementById('duringLine').value;
             console.log(val);
@@ -566,10 +578,11 @@
         // 월간 그래프 끝
 
 
-        // lineGraph end
+        // lineGraph 원본 end
     */
     </script>
     <script>
+    /*
     var doughnutArea = document.getElementById('myChartDoughnut').getContext('2d');
     var doughnut;
 	    $.ajax({ 
@@ -589,8 +602,11 @@
 				}
 			});
     
+	*/
+	</script>
+	<script>
     /*
-        // doughnutGraph start
+        // doughnutGraph 원본 start
         var doughnutArea = document.getElementById('myChartDoughnut').getContext('2d');
         var doughnut;
 
@@ -670,20 +686,14 @@
         }
         
 	*/
-        // doughnutGraph end
+        // doughnutGraph 원본 end
         
         // 시작 시 그래프 그리기
         $(function(){
-            duringLine();
-            duringDoughnut();
+            // duringLine();
+            // duringDoughnut();
         })
         
-        // 밀리초를 yyyy-mm-dd로 변환
-        function dateChange( time ) {
-           var myDate = new Date(time);
-           return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + myDate.getDate()).slice(-2); 
-        }
-
     </script>
 </body>
 </html>

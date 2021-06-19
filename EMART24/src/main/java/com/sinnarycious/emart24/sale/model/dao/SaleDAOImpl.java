@@ -22,7 +22,7 @@ public class SaleDAOImpl implements SaleDAO {
 	SqlSessionTemplate sqlSession;
 	/*
 	@Override
-	public HashMap<String, Date> FindMonday(String sqlDate) {
+	public HashMap<String, Date> findLastMonday(String sqlDate) {
 		HashMap<String, Date> hmap = new HashMap<>(); 
 		 
 		String result = sqlSession.selectOne("sale.findMonday", sqlDate);
@@ -32,19 +32,9 @@ public class SaleDAOImpl implements SaleDAO {
 		return hmap;
 	}
 	*/
-	
-	@Override
-	public String FindMonday(String sqlDate) {
-		HashMap<String, Date> hmap = new HashMap<>(); 
-		 
-		String result = sqlSession.selectOne("sale.findMonday", sqlDate);
-		 
-		return result;
-	}
-	
 	/*
 	@Override
-	public HashMap<String, Date> FindMonth(String sqlDate) {
+	public HashMap<String, Date> findLastMonth(String sqlDate) {
 		HashMap<String, Date> hmap = new HashMap<>(); 
 		 
 		String result = sqlSession.selectOne("sale.findMonth", sqlDate);
@@ -54,15 +44,43 @@ public class SaleDAOImpl implements SaleDAO {
 		System.out.println("hmap.get(\"lastMonth\") : " + hmap.get("lastMonth"));
 		return hmap;
 	}
-	*/
+	 */
 	
 	@Override
-	public String FindMonth(String sqlDate) {
+	public String findLastMonday(String sqlDate) {
+		HashMap<String, Date> hmap = new HashMap<>(); 
 		 
-		String result = sqlSession.selectOne("sale.findMonth", sqlDate);
+		String result = sqlSession.selectOne("sale.findLastMonday", sqlDate);
+		 
+		return result;
+	}
+	
+	
+	@Override
+	public String findLastMonth(String sqlDate) {
+		 
+		String result = sqlSession.selectOne("sale.findLastMonth", sqlDate);
 
 		return result;
 	}
+	
+
+	@Override
+	public String findMonday(String sqlDate) {
+		
+		String result = sqlSession.selectOne("sale.findMonday", sqlDate);
+		
+		return result;
+	}
+
+	@Override
+	public String findMonth(String sqlDate) {
+		
+		String result = sqlSession.selectOne("sale.findMonday", sqlDate);
+		
+		return result;
+	}
+
 	
 	@Override
 	public List<Sale> selectLineWeekProfit(String sqlWeekDate) {
@@ -83,21 +101,7 @@ public class SaleDAOImpl implements SaleDAO {
 	}
 	
 	@Override
-	public List<Map<String, String>> selectSaleList(int pageNo, int numberPage) {
-
-		RowBounds rows = new RowBounds((pageNo-1) * numberPage, numberPage);
-		
-		return sqlSession.selectList("sale.selectSaleList", null, rows);
-	}
-	
-	@Override
-	public int selectSaleTotalContents() {
-		
-		return sqlSession.selectOne("sale.selectSaleTotalContents");
-	}
-
-	@Override
-	public List<Sale> selectDoughnutWeekProfit(String sqlWeek) {
+	public List<Sale> selectDoughnutThisWeekProfit(String sqlWeek) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -112,6 +116,20 @@ public class SaleDAOImpl implements SaleDAO {
 	public List<Sale> selectDoughnutThisMonthProfit() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<Map<String, String>> selectSaleList(int pageNo, int numberPage) {
+
+		RowBounds rows = new RowBounds((pageNo-1) * numberPage, numberPage);
+		
+		return sqlSession.selectList("sale.selectSaleList", null, rows);
+	}
+	
+	@Override
+	public int selectSaleTotalContents() {
+		
+		return sqlSession.selectOne("sale.selectSaleTotalContents");
 	}
 
 	

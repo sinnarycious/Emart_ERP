@@ -12,9 +12,13 @@ import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 public interface SaleDAO {
 
-	String FindMonday(String sqlDate);
+	String findLastMonday(String sqlDate);
 
-	String FindMonth(String sqlDate);
+	String findLastMonth(String sqlDate);
+	
+	String findMonday(String sqlDate);
+
+	String findMonth(String sqlDate);
 
 	List<Sale> selectLineWeekProfit(String sqlWeekDate);
 
@@ -27,7 +31,7 @@ public interface SaleDAO {
 
 	int selectSaleTotalContents();
 
-	List<Sale> selectDoughnutWeekProfit(String sqlWeek);
+	List<Sale> selectDoughnutThisWeekProfit(String sqlWeek);
 
 	List<Sale> selectDoughnutLastMonthProfit(String sqlMonthDate);
 

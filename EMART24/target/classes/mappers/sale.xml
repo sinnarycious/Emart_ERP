@@ -3,13 +3,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sale">
 
-	<select id="findMonday" parameterType="string" resultType="string" >
+	<select id="findLastMonday" parameterType="string" resultType="string" >
 		SELECT TO_CHAR(NEXT_DAY(TO_DATE(#{sqlDate})-14, '월'), 'YYYY-MM-DD') LAST_WEEK
 		FROM DUAL
 	</select>
 
+	<select id="findLastMonth" parameterType="string" resultType="string" >
+		SELECT TO_CHAR(TRUNC(ADD_MONTHS(TO_DATE(#{sqlDate}),-1), 'MM')) "LAST_MONTH" FROM DUAL
+	</select>
+	
+	<select id="findMonday" parameterType="string" resultType="string" >
+		SELECT TO_CHAR(NEXT_DAY(TO_DATE(#{sqlDate})-7, '월'), 'YYYY-MM-DD') LAST_WEEK
+		FROM DUAL
+	</select>
+	
 	<select id="findMonth" parameterType="string" resultType="string" >
-		SELECT TO_CHAR(TRUNC(ADD_MONTHS(#{sqlDate},-1), 'MM')) "LAST_MONTH" FROM DUAL
+		SELECT TO_CHAR(TRUNC(TO_DATE(#{sqlDate}), 'MM')) "LAST_MONTH" FROM DUAL
 	</select>
 
 	<resultMap type="Sale" id="lineProfitMap">
@@ -24,7 +33,18 @@
 	</resultMap>
 		
 	<select id="selectDoughnutWeekProfit" parameterType="Sale" resultMap="doughnutProfitMap">
+		SELECT SUM(SALE_PRICE) "WEEK_PROFIT" FROM SALE
+		WHERE SALE_DATE BETWEEN TO_DATE(#{sqlDate})
+	  	  AND SYSDATE
+	      AND SALE_CAT_NO = #{saleCatNo}
+	</select>
 	
+	<select id="selectDoughnutMonthProfit" parameterType="Sale" resultMap="doughnutProfitMap">
+		SELECT SUM(SALE_PRICE) "THIS_MONTH_PROFIT" FROM SALE
+		WHERE SALE_DATE BETWEEN (SELECT TRUNC(SYSDATE, 'MM') "LAST_MONTH" FROM DUAL)
+		  AND SYSDATE
+		  AND SALE_CAT_NO = #{saleCatNo}
+		ORDER BY SALE_DATE
 	</select>
 
 	<select id="selectLineWeekProfit" parameterType="string" resultMap="lineProfitMap">

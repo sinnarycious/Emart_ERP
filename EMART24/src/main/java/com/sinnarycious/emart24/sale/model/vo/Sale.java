@@ -19,4 +19,10 @@ public class Sale implements Serializable{
 	private String saleName;
 	private int userNo;
 	private int saleSum;
+	private String findDate;
+	
+	public Sale(String findDate, int saleCatNo) {
+		this.findDate = findDate;
+		this.saleCatNo = saleCatNo;
+	}
 }
