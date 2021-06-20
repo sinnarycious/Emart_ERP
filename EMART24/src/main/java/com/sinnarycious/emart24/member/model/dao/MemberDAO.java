@@ -12,8 +12,8 @@ public interface MemberDAO {
 	
 	int updateMember(Member member);
 
-	List<Member> searchId(String userEmail);
+	List<Member> searchId(Member m);
 
-
+	List<Member> searchPwd(Member m);
 
 }

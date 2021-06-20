@@ -7,11 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon"
+href="/emart24/resources/images/emart.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>이마트24</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/oe.css">
 <script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 

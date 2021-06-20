@@ -45,21 +45,22 @@
 
 
 
-
+	
 		<div class="login_form">
 
 			<!-- 아이디 찾기 -->
 			<div id="searchId">
-				<div class="id_area">
-				<!-- 
+				<div class="id_area"> 
 					<input type="text" name="userName" id="userName"
 						placeholder="이름을 입력해주세요.">
-				 -->
 				</div>
 				<div class="pw_area">
 					<input type="text" name="userEmail" id="userEmail"
 						placeholder="이메일을 입력해주세요.">
 				</div>
+				<button class="btn loginBtn" id="findIdBtn">
+					<h3>확인</h3>
+				</button>
 			</div>
 
 			<!-- 아이디 찾기 끝 -->
@@ -74,20 +75,17 @@
 				<div class="pw_area">
 					<input type="text" name="userEmail2" id="userEmail2" placeholder="이메일을 입력해주세요.">
 				</div>
+				<button class="btn loginBtn" id="findPwdBtn">
+					<h3>확인</h3>
+				</button>
 			</div>
 			<!-- 비밀번호 찾기 끝 -->
-
-			<button class="btn loginBtn" id="findIdBtn">
-				<h3>확인</h3>
-			</button>
-
-			<button class="btn loginBtn" name="" type="reset">
-				<h3>취소</h3>
-			</button>
-			<button class="btn loginBtn" name="" type="reset">
+			
+			<button class="btn loginBtn" onclick="goLogin()">
 				<h3>로그인 하러가기</h3>
 			</button>
 		</div>
+	
 
 	</section>
 	<div class="copyrightText">
@@ -99,7 +97,7 @@
 
 
 	<script>
-		//체크 버튼에 따라 아이디/비밀번호 기능이 달라진다
+		// 체크 버튼에 따라 아이디/비밀번호 기능이 달라진다
 		function search_check(num) {
 			if (num == '1') {
 				document.getElementById("memberFind_title1").style.display = "";
@@ -114,8 +112,10 @@
 			}
 		};
 		
+		// 아이디 찾기 ajax
 		$('#findIdBtn').on('click', function(){
 
+			var userName = $('#userName').val();
 			var userEmail = $('#userEmail').val();
 			
 			$.ajax({
@@ -123,14 +123,15 @@
 				url : "${pageContext.request.contextPath}/member/searchId.do",
 				type : "get",
 				data : {
+					userName : userName,
 					userEmail : userEmail
 				},
 				dataType : 'json',
 				success : function(data){
 					
-					var userId = data.userId;
+					var userId = data.userId[0].userId;
 					
-					alert("검색 성공!" );
+					alert("점주님의 아이디는 " + userId + " 입니다.");
 				},
 				error : function(error){
 					alert("이름과 이메일을 확인해주세요!");
@@ -140,6 +141,38 @@
 			
 		});
 		
+		// 비밀번호 찾기 ajax
+		$('#findPwdBtn').on('click', function(){
+
+			var userId = $('#userId').val();
+			var userEmail = $('#userEmail').val();
+			
+			$.ajax({
+				
+				url : "${pageContext.request.contextPath}/member/searchPwd.do",
+				type : "get",
+				data : {
+					userId : userId,
+					userEmail : userEmail
+				},
+				dataType : 'json',
+				success : function(data){
+					
+					var userPwd = data.userPwd[0].userPwd;
+					
+					alert("점주님의 비밀번호는 " + userPwd + " 입니다.");
+				},
+				error : function(error){
+					alert("이름과 이메일을 확인해주세요!");
+				}
+				
+			});
+			
+		});
+		
+		function goLogin() {
+			location.href="${pageContext.request.contextPath}/"
+		}
 		
 	</script>
 </body>

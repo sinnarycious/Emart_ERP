@@ -33,11 +33,19 @@ public class MemberServiceImpl implements MemberService {
 
 	// 아이디 검색
 	@Override
-	public List<Member> searchId(String userEmail) {
+	public List<Member> searchId(Member m) {
 		
-		System.out.println("서비스 : " + userEmail);
+		System.out.println("서비스 : " + m);
 
-		return memberDAO.searchId(userEmail);
+		return memberDAO.searchId(m);
+	}
+	
+	// 비밀번호 검색
+	public List<Member> searchPwd(Member m) {
+		
+		System.out.println("서비스 : " + m);
+
+		return memberDAO.searchPwd(m);
 	}
 
 

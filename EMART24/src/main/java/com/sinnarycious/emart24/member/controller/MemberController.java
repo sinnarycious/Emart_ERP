@@ -76,12 +76,16 @@ public class MemberController {
 	// 아이디 찾기
 	@RequestMapping("/member/searchId.do")
 	@ResponseBody
-	public Map<String, Object> showmemberFind(
-			@RequestParam String userEmail) {
+	public Map<String, Object> showmemberFindId(
+			@RequestParam String userName,
+			@RequestParam String userEmail
+			) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<Member> result = memberService.searchId(userEmail);
+		Member m = new Member(userName, null, userEmail);
+		
+		List<Member> result = memberService.searchId(m);
 		
 		System.out.println("아이디 : " + result);
 		
@@ -91,48 +95,28 @@ public class MemberController {
 	}
 	// 아이디 찾기 기능 끝
 	
-	/*
-	// 비밀번호 찾기 기능
-		@RequestMapping("/member/memberFind.do")
-		public String memberPwdFind(
+	// 비밀번호 찾기
+	@RequestMapping("/member/searchPwd.do")
+	@ResponseBody
+	public Map<String, Object> showmemberFindPwd(
 			@RequestParam String userId,
-			@RequestParam String userEmail,
-			Model model				
-		) {
-		System.out.println("비밀번호 찾기");
+			@RequestParam String userEmail
+			) {
 		
-		Member m = new Member(userId, userEmail);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println(m);
+		Member m = new Member(null, userId, userEmail);
 		
-		Member result = memberService.searchMember(m);
-	
-		System.out.println("조회결과" + result);
+		List<Member> result = memberService.searchPwd(m);
 		
-		String loc = "/";
-		String msg = "";
+		System.out.println("비밀번호 : " + result);
 		
-		// result가 null 이 아니라면 (로그인할 시 )
-		if (result != null) {
-			// 우리가 입력한 비밀번호와 데이터베이스에서 가져온 비밀번호가 같다면
-				loc = "/main/memberLogin.do";
-				msg = "로그인 성공";
-				model.addAttribute("member", result);	// 마치 세션처럼 동작한다.
-				// @SessionAtributes 어노테이션에 의해 
-				// "member"라는 값은 세션에 저장됨
-				
-			
-		} else {
-			msg = "아이디와 비밀번호를 확인해주세요.";
-		}
+		map.put("userPwd", result);
 		
-		model.addAttribute("loc", loc);
-		model.addAttribute("msg", msg);
-		
-		return "common/msg";
-		}		
+		return map;
+	}
 	// 비밀번호 찾기 기능 끝
-	*/
+	
 	// 로그아웃 기능
 	@RequestMapping("/member/memberLogout.do")
 	public String memberLogout(SessionStatus status) {
