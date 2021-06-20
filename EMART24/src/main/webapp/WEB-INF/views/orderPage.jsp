@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/nav.css">
 <link rel="stylesheet" href="/emart24/resources/css/orderPage.css">
+<script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	
@@ -28,7 +29,7 @@
         <h3 class="order_h3">발주 신청</h3>
 
         <!-- 검색창 -->
-        <form action="${pageContext.request.contextPath }/product/searchBar.do" method="get" class="searchBar">
+      	<div class="searchBar">
             <!-- 상품카테고리 -->
             <h4>상품 카테고리 &nbsp;</h4> 
 
@@ -47,7 +48,7 @@
             <!-- 상품 번호 -->
             <h4 style="margin-left : 20px;">상품 번호 &nbsp;</h4>
             <div class="pdtNo">
-                <input type="number" id="pdtNo_num" name = "proNo">
+                <input type="number" id="proNo" name = "proNo">
             </div>
             <!-- 상품 번호끝 -->
 
@@ -61,8 +62,7 @@
             <!-- 버튼 -->
             <button class="btn click" id="search_btn">검색</button>
 
-		</form>
-        
+		</div>
 
         <!-- 검색창 끝-->
 
@@ -72,7 +72,7 @@
 	       <!--  <form action="resultList.do" method="post"> -->
 				<!-- 여기 CSS 수정하기 class명 다르게 주기 -->
 	            <table class="resultList" id="resultList">
-	            	
+	            	<!-- 
 	             	<c:if test="${product != null}">
 	             		<c:forEach var="product" items="${product}">
 			                <tr>
@@ -89,31 +89,11 @@
 			                </tr>
 			            </c:forEach>
 	                </c:if>
-
+					 -->
 	            </table>
 	
         </div>
         <!-- 검색결과 리스트 끝-->
-
-        <!-- 검색 리스트 -->
-        <form action="resultList.do" method="post">
-            <table class="resultList">
-             	<c:if test="${product != null}">
-             		<c:forEach var="product" items="${product}">
-		                <tr>
-		                    <td class="td1" style="width:120px;"><h4>상품명</h4></td>
-		                    <td class="order_Product" name="proName" id="proName">${product.proName}</td>
-		                    <td class="td1" style="width:70px;"><h4>금액</h4></td>
-		                    <td style="width:80px;" name="proPriceE" id="proPriceE">${product.proPriceE}</td>
-		                    <td class="td1" id="updown" style="width:180px;"><h4>수량</h4><input type="number" id="Pdt_Count" value="0">
-		                    </td>
-		                    <td style="width:110px;padding-right:30px;"><button class="btn click" id="addProduct">추가</button></td>
-		                </tr>
-		            </c:forEach>
-                </c:if>
-            </table>
-        </form> 
-        <!-- 검색 리스트 끝-->
 
         <!-- 발주 리스트 -->
         <form action="orderList.do" style="margin-top: 25px;">
@@ -188,95 +168,96 @@
     <!-- script 시작 -->
     <script>
 	    	
-		// '검색'버튼 클릭 시 검색 리스트에서 추가 
-		$('#proName').on('keyup', function(event){
-			if(event.keyCode == 13) {
-				$('#search_btn').click();
-			}
-		});
-		
-		$('.resultList .qty').on('change', function(){
-			var price = Number($(this).parent().parent().find('.originalPrice').val());
-			$(this).parent().parent().find('.calcPrice').text($(this).val() * price);
-			console.log(price);
-			console.log($(this).val() * price);
-		});
-		
-		$('#search_btn').on('click', function(){
-			var proName = $("#proName").val();
-			var proCatNo = $("#proCatNo").val();
-			var proNo = $("#proNo").val();
-			var proPriceE = $('#proPriceE').val();
-			var pdt_Count = $('#pdt_Count').val();
-		
-    	<!-- 카테고리랑 발주번호를 클릭 시 이름을 못불러옴 -->
+	// '검색'버튼 클릭 시 검색 리스트에서 추가 
+	$('#proName').on('keyup', function(event){
+		if(event.keyCode == 13) {
+			$('#search_btn').click();
+		}
+	});
+	
+	$('.resultList .qty').on('change', function(){
+		var price = Number($(this).parent().parent().find('.originalPrice').val());
+		$(this).parent().parent().find('.calcPrice').text($(this).val() * price);
+		console.log(price);
+		console.log($(this).val() * price);
+	});
+	
+	$('#search_btn').on('click', function(){
+		var proName = $("#proName").val();
+		var proCatNo = $("#proCatNo").val();
+		var proNo = $("#proNo").val();
+		var proPriceE = $('#proPriceE').val();
+		var pdt_Count = $('#pdt_Count').val();
+	
+	<!-- 카테고리랑 발주번호를 클릭 시 이름을 못불러옴 -->
+	
+	
+		 console.log(proName);
+		 console.log(proCatNo);
+		 console.log(proNo);
+		 
+		$.ajax({
+    		url : "${pageContext.request.contextPath }/product/searchBar.do",
+    		type : "get",
+    		data : {
+    			proName : proName,
+	    		proCatNo : proCatNo,
+	    		proNo : proNo
+    		},
+    		dataType : 'json',
+    		success : function(data) {
+    			alert("전송 성공");		// 나중에 삭제
+    			
+    			$('#resultList').empty();	
     	
-			// console.log(proName);
-			// console.log(proCatNo);
-			// console.log(proNo);
-    		$.ajax({
-	    		url : "${pageContext.request.contextPath }/product/searchBar.do",
-	    		type : "get",
-	    		data : {
-	    			proName : proName,
-		    		proCatNo : proCatNo,
-		    		proNo : proNo
-		    	
-	    		},
-	    		dataType : 'json',
-	    		success : function(data) {
-	    			alert("전송 성공");		// 나중에 삭제
-	    			
-	    			$('#resultList').empty();	
-	    	
-	    			var search = data.searchPdList;
-	    			console.log(search.proName);
-	    			console.log(search.proPriceE);
-	
-	    			// 검색리스트 반복문
-	    			for(var i in search) {
-	    				var $tr = $('<tr>');
-	    				
-	    				var $proNo = $('<input type="hidden" class="proNum" id="proNo"  value="' + search[i].proNo + '">');
-	    				var $h4 = $('<td class="td1" style="width:120px;"><h4>상품명</h4></td>');
-	    				var $proName =  $('<td class="proName" name="proName" id="proName">' + search[i].proName + '</td>');
-	    				var $price = $('<td class="td1" style="width:70px;"><h4>금액</h4></td>');
-	    				var $proPriceE = $('<td sytle="width:80px;" name="proPriceE" id="proPriceE">'
-	    				                   +'<input type="hidden" class="originalPrice" value="' + search[i].proPriceE + '">'
-				                	+'<span class="calcPrice">' + search[i].proPriceE + '</span></td>');
-	    				var $td1 = $('<td class="td1" id="updown" style="width:180px;"><h4>수량</h4><input type="number" class="qty" id="Pdt_Count" value="1" min="1"</td>');
-	    				var $btn = $('<td style="width:110px; pdding-right:30px;"><button class="btn click" id="addProduct" onclick="test(this)">추가</button></td></tr>');
-	    				
-	    			
-	    				$tr.append($proNo);
-	    				$tr.append($h4);
-	    				$tr.append($proName);
-	    				$tr.append($price);
-	    				$tr.append($proPriceE);
-	    				$tr.append($td1);
-	    				$tr.append($btn);
-	    				
-	    				console.log(proName);
-	    				console.log(proNo)
-	    				
-	    				$('#resultList').append($tr);
-	
-	    		    	$('.resultList .qty').on('change',function(){
-	    		    		var price = Number($(this).parent().parent().find('.originalPrice').val());
-	    		    		$(this).parent().parent().find('.calcPrice').text($(this).val() * price);
-	    		    		console.log(price);
-	    		    		console.log($(this).val() * price);
-	    		    	});
-	    		    	
-	    			}
-	    			
-	    			console.log(search);
-	    		}, error : function(error) {
-	    			alert("전송 실패");
-	    		}
-	    	});
+    			var search = data.searchPdList;
+    			console.log(search[0].proName);
+    			console.log(search[0].proPriceE);
 
-		});
+    			// 검색리스트 반복문
+    			for(var i in search) {
+    				var $tr = $('<tr>');
+    				
+    				var $proNo = $('<input type="hidden" class="proNum" id="proNo"  value="' + search[i].proNo + '">');
+    				var $h4 = $('<td class="td1" style="width:120px;"><h4>상품명</h4></td>');
+    				var $proName = $('<td class="proName" name="proName" id="proName">' + search[i].proName + '</td>');
+    				var $price = $('<td class="td1" style="width:70px;"><h4>금액</h4></td>');
+    				var $proPriceE = $('<td sytle="width:80px;" name="proPriceE" id="proPriceE">'
+    				                   +'<input type="hidden" class="originalPrice" value="' + search[i].proPriceE + '">'
+			                	+'<span class="calcPrice">' + search[i].proPriceE + '</span></td>');
+    				var $td1 = $('<td class="td1" id="updown" style="width:180px;"><h4>수량</h4><input type="number" class="qty" id="Pdt_Count" value="1" min="1"</td>');
+    				var $btn = $('<td style="width:110px; pdding-right:30px;"><button class="btn click" id="addProduct" onclick="test(this)">추가</button></td></tr>');
+    				
+    			
+    				$tr.append($proNo);
+    				$tr.append($h4);
+    				$tr.append($proName);
+    				$tr.append($price);
+    				$tr.append($proPriceE);
+    				$tr.append($td1);
+    				$tr.append($btn);
+    				
+    				console.log(proName);
+    				console.log(proNo)
+    				
+    				$('#resultList').append($tr);
+
+    		    	$('.resultList .qty').on('change',function(){
+    		    		var price = Number($(this).parent().parent().find('.originalPrice').val());
+    		    		$(this).parent().parent().find('.calcPrice').text($(this).val() * price);
+    		    		console.log(price);
+    		    		console.log($(this).val() * price);
+    		    	});
+    		    	
+    			}
+    			
+    			console.log(search);
+    		}, error : function(error) {
+    			alert("전송 실패");
+    		}
+    	});
+		
+	});
     	
 
 		function dateChange( time ) {
@@ -355,6 +336,7 @@
 			});
 		}
 		*/
+		
 		function OrderBtn() {
 			$(this).on('click', function(){
 				$('tbody').remove('.tbody .td');
@@ -376,14 +358,7 @@
     	}z
     	*/
     	// 삭제 버튼 클릭
-    	document.querySelectorAll('.table tbody').forEach(
-    		fucntion(item) {
-    			item.EventListener('click', function(){
-    				.delItem();
-    			});
-    		}	
-    	
-    	);
+    
     	
     	
     	// '발주하기' 버튼

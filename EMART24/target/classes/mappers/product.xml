@@ -24,25 +24,19 @@ WHERE PRO_NO LIKE ${proNo};
 	</resultMap>
 		
 	<select id="selectPdList" parameterType="Product" resultMap="productMap">
-			SELECT PRO_NO, PRO_NAME, PRO_PRICE_E
-			FROM PRODUCT
-			<where>
-				<if test="proCatNo != 0">
-					AND PRO_CAT_NO = #{proCatNo}
-				</if>
-				<if test="proNo != 0">
-					AND PRO_NO = #{proNo}
-				</if>
-				<if test="proName != null">
-					AND PRO_NAME = #{proName}
-				</if>	
-			</where>
-	</select>
-	
-	<select  id="selectResultList" parameterType="product">
-		SELECT O.OE_NO, PRO_NO, PRO_NAME, PRO_PRICE_E
-		FROM PRODUCT, ORDER_ENTER O
-		WHERE PRO_NAME LIKE #{proName}
+		SELECT PRO_NO, PRO_NAME, PRO_PRICE_E
+		FROM PRODUCT
+		<where>
+			<if test="proCatNo != 0">
+				AND PRO_CAT_NO = #{proCatNo}
+			</if>
+			<if test="proNo != 0">
+				AND PRO_NO = #{proNo}
+			</if>
+			<if test="proName != null">
+				AND PRO_NAME LIKE '%' || #{proName} || '%'
+			</if>	
+		</where>
 	</select>
 
 </mapper>

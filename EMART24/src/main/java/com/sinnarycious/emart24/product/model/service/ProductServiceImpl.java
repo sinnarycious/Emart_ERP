@@ -16,9 +16,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	// 검색
 	@Override
-	public List<Product> selectPdList(Product product) {
+	public List<Product> selectPdList(int proNo, String proName, int proCatNo) {
 		
-		return productDAO.selectPdList(product);
+		return productDAO.selectPdList(proNo, proName, proCatNo);
 	}
 
 	// 검색 리스트

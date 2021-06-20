@@ -7,8 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon"
-	href="/emart24/resources/images/emart.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/emart24/resources/images/emart.ico">
 <title>Emart24_ERP</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/login.css">
