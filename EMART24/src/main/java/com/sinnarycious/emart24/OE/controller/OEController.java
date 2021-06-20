@@ -65,7 +65,6 @@ public class OEController {
 			@RequestParam (required=false) String oeName,
 			@RequestParam (required=false, defaultValue="0") int oeNo 
 			){
-		System.out.println(orderDate1);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		oeName.replace('_', ' ');

@@ -37,7 +37,7 @@
 			<if test="orderDate1 !=null and orderDate2 =null">
 				AND ORDER_DATE = #{ orderDate1 }
 			</if>
-			<if test="orderDate1 !=null and orderDate2 !=null">
+			<if test="orderDate1 !=null and orderDate2 != null">
 				AND ORDER_DATE BETWEEN #{ orderDate1 } AND #{ orderDate2 }
 			</if>
 		</where>
@@ -48,7 +48,7 @@
 	<!-- 등록하기 -> 등록 완료 -->
 	<update id="updateStatus" parameterType="oe">
 		UPDATE ORDER_ENTER
-		SET OE_STATUS = 'Y'
+		SET OE_STATUS = 'Y', ENTER_DATE = SYSDATE
 		WHERE OE_NO = #{ oeNo } AND OE_NAME = #{ oeName }
 	</update>
 	

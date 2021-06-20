@@ -22,7 +22,6 @@ public class OE implements Serializable{
 	private int oeInvNo;
 	private String oeName;
 	private int oeCatNo;
-	
 
 	private Date orderDate1;
 	private Date orderDate2;
