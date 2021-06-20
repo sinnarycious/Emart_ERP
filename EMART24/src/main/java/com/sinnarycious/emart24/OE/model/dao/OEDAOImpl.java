@@ -75,21 +75,30 @@ public class OEDAOImpl implements OEDAO {
 	
 	
 
-	// 다시 쓰기 - 가율
 
-	@Override
-	public int resetList() {
-		
-		return sqlSession.delete("oe.resetList");
-	}
-
-	// 발주결과 리스트 - 가율
+	// 발주결과 리스트 보내기 - 가율
 	@Override
 	public List<OE> orderInsertList(OE oe) {
 		
 		return sqlSession.selectList("oe.orderInsertList", oe);
 	}
+	
+	// 발주리스트 : 가율
+	@Override
+	public OE orderList(int oeNo) {
+	
+		return sqlSession.selectOne("oe.orderList",  oeNo);
+	}
 
+	@Override
+	public int resetList() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	
+	
 
 
 

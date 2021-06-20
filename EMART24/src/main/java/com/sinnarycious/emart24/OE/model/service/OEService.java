@@ -25,8 +25,9 @@ public interface OEService {
 	// 발주리스트 - 가율
 	List<OE> orderInsertList(OE oe);
 
+	OE orderList(int oeNo);
 
-
+	
 
 
 

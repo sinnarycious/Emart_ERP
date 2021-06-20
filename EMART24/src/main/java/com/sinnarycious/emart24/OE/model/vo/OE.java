@@ -45,6 +45,10 @@ public class OE implements Serializable{
 		this.oeNo = oeNo;
 		this.oeName = oeName;
 	}
+	
+	public OE(int oeNo) {
+		 this.oeNo = oeNo;
+	}
 }
 
 

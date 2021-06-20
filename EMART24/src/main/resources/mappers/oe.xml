@@ -75,12 +75,15 @@
 		WEHRE 
 	</delete>
 	
-	<select id="orderInsertList" resultMap="oeMap">
-		SELECT OE_INV_NO, OE_NAME, OE_PRICE_E, ORDER_DATE
-		FROM ORDER_ENTER
-		WHERE OE_INV_NO = #{oeInvNo}
+	<select  id="orderList" resultMap="oeMap">
+		SELECT * FROM ORDER_ENTER
+		WHERE OE_NO = #{oeNo}
 	</select>
-
-
+	
+	<insert id="">
+		INSERT INTO ORDER_ENTER VALUES(#{oeNo}, #{oeCount}, #{oePrice}, 
+			#{orderDate}, #{enterDate}, #{oeStatus}, #{oeInvNo}, 
+			#{oeName}, #{oeCatNo}, #{})
+	</insert>
 
 </mapper>
