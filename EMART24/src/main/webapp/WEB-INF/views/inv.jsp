@@ -28,10 +28,9 @@
             <h3>재고 현황</h3>
 
             <div class="searchBar">
-                    <h4>상품 카테고리</h4><input type="number" name="invCatNo" id="invCatNo" />
-                    <h4>상품 번호</h4> <input type="number" name="invNo" id="invNo" />
-                    <h4>상품명</h4> <input type="text" name="invName" id="invName" placeholder="상품명을 검색하세요. " />
-
+                    <h4>상품 카테고리</h4><input type="number" name="invCatNo" id="invCatNo" min="0"/>
+                    <h4>상품 번호</h4> <input type="number" name="invNo" id="invNo" min="0"/>
+                    <h4>상품명</h4> <input type="text" name="invName" id="invName" min="0" placeholder="상품명을 검색하세요. " />
                     <button id="searchBtn" type="button" class="btn search">조회</button>
 
             </div>
@@ -39,9 +38,6 @@
             <table class="invTable">
             <thead>
                 <tr>
-                	<th>
-                        <h4>상품 카테고리</h4>
-                    </th>
                     <th>
                         <h4>상품 번호</h4>
                     </th>
@@ -71,24 +67,31 @@
                 <tbody>
                 <c:forEach items="${list}" var="inv"> 
                 <tr class="item">
-                    <td><span class="num" id ="invCatNo">${inv.invCatNo}</span></td>
                     <td><span class="num" id ="invNo">${inv.invNo}</span></td>
                     <td id ="invName">${inv.invName}</td>
                     <td><span class="num" id ="invWCount">${inv.invWCount}</span></td>
-                    <td><input type="number" style="width:70px;"></td>
+                    <td><input type="number" style="width:70px;" min="0"></td>
                     <td><span class="num" id ="invSCount">${inv.invSCount}</span></td>
-                    <td><input type="number" style="width:70px;"></td>
+                    <td><input type="number" style="width:70px;" min="0"></td>
                     <td><span class="num" id ="invPrice">${inv.invPrice}</span></td>
-                    <td><button class="btn tag" type="submit" onclick="goOE()">재고 부족</button></td>
+                    	<td>
+				<c:if test="${inv.invWCount < 30 }">
+					<button class="tag">재고 부족</button>
+				</c:if>	
+				<c:if test="${inv.invWCount >=30 }">
+					<button class="tag off">재고 충분</button>
+				</c:if>
+					</td>
                    
                 </tr>
                 </c:forEach>
                 </tbody>
             </table>
             <div class="goOE">
+                <button class="btn search" onclick="">수량변경</button>
                 <button class="btn search" onclick="goOE()">발주하기</button>
             </div>
-           <div id="pageNo">
+            <div id="pageNo">
             <c:out value="${pageBar}" escapeXml="false"/>
         </div>
         </div>
@@ -128,17 +131,24 @@
 						for(var i in search){
 	 						var $tr = $('<tr>');
 							
-	 						var $invCatNo = $('<td><span class="num" id="invCatNo">' + search[i].invCatNo + '</span></td>');
+	 					
 							var $invNo = $('<td><span class="num" id="invNo">' + search[i].invNo + '</span></td>');
 							var $invName = $('<td id="invName">' + search[i].invName + '</td>');
 							var $invWCount = $('<td><span class="num" id="invWCount">' + search[i].invWCount + '</td>');
-							var $invWNum =$('<td><input type="number" style="width:70px;"></td>');
+							var $invWNum =$('<td><input type="number" style="width:70px;" min="0"></td>');
 							var $invSCount = $('<td><span class="num" id="invSCount">' + search[i].invSCount + '</td>');
-							var $invSNum = $('<td><input type="number" style="width:70px;"></td>');
+							var $invSNum = $('<td><input type="number" style="width:70px;" min="0"></td>');
 							var $invPrice = $('<td><span class="num" id="invPrice">' + search[i].invPrice + '</td>');
-							var $invBtn = $('<td><button class="btn tag" type="submit" onclick="goOE()">부족</button></td>'); 
+							var $invStatus = '';
+							if( search[i].invWCount < 30 ) {
+								$invStatus = $('<td>' + '<button class="btn tag">재고 부족</button>' + '</td></tr>');
+								
+								} else {
+								$invStatus = $('<td>' + '<button class="tag off">재고 충분</button>' + '</td></tr>');
+								}																	
+								
 							
-							$tr.append($invCatNo);
+						
 							$tr.append($invNo);
 							$tr.append($invName);						
 							$tr.append($invWCount);
@@ -146,7 +156,7 @@
 							$tr.append($invSCount);
 							$tr.append($invSNum);
 							$tr.append($invPrice);
-							$tr.append($invBtn);
+							$tr.append($invStatus);		
 
 							$('tbody').append($tr);
 							
@@ -166,4 +176,7 @@
 	</script> 
 </body>
 </html>
+
+
+
 

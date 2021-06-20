@@ -43,4 +43,6 @@ public class InvDAOImpl implements InvDAO {
 		return sqlSession.selectList("inv.searchInfo", inv);
 	}
 	
+
+	
 }

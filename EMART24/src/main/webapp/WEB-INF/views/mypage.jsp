@@ -62,7 +62,7 @@
 							<td><input type="text" class="email" name = "userEmail"
 								placeholder="새 이메일을 입력하세요"></td>
 						</tr>
-						<tr>
+						<tr class = "mypage_border_bottom">
 							<td class="td1">전화번호</td>
 							<td><input type="text" class="phone" name = "userPhone"
 								placeholder="새 전화번호를 입력하세요"></td>
@@ -94,7 +94,7 @@
 							<td class="td1">점포 전화번호</td>
 							<td>02-408-7906</td>
 						</tr>
-						<tr>
+						<tr class = "mypage_border_bottom">
 							<td class="td1">점포 개업일</td>
 							<td>${member.userOpenDate}</td>
 						</tr>
