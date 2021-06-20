@@ -60,12 +60,22 @@ public class OEServiceImpl implements OEService {
 		return oeDAO.resetList();
 	}
 	
-	// 발주리스트 결과
+	// 발주리스트 보내기 : 가율
 	@Override
 	public List<OE> orderInsertList(OE oe) {
 		
 		return oeDAO.orderInsertList(oe);
 	}
+
+	// 발주리스트 : 가율
+	@Override
+	public OE orderList(int oeNo) {
+		
+		return oeDAO.orderList(oeNo);
+	}
+
+
+	
 
 
 }

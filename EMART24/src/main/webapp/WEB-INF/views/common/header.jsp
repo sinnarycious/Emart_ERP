@@ -10,7 +10,7 @@
           <ul class="gnb">
               <li><a href="#" onclick="goEmail()"><img src="/emart24/resources/images/email.png"></a></li>
               <li><a href="#" onclick="goAlarm()"><img src="/emart24/resources/images/alram.png"></a></li>
-              <li><a href="#">${member.userBranch}점&nbsp;</a></li>
+              <li><a href="#">${member.userBranch}&nbsp;</a></li>
               <li class="headerBorder">&nbsp;</li>
               <li><a href="#">${member.userName} 님</a></li>
               <div class="action">
@@ -19,7 +19,6 @@
                   </div>
                   <div class="menu">
                       <ul>
-                         <li><a href="${pageContext.request.contextPath}" onclick="goLogin()">로그인</a></li>
                          <li><a href="/emart24/views/mypage.jsp" onclick="goMyprofile()">마이페이지</a></li>
                          <li><a href="#" onclick="goLogout()">로그아웃</a></li>
                       </ul>

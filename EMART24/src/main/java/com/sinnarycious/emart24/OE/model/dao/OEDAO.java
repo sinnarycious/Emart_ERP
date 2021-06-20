@@ -29,7 +29,13 @@ public interface OEDAO {
 	int resetList();
 	
 	// 검색 결과 리스트 : 가율
+	OE orderList(int oeNo);
+
 	List<OE> orderInsertList(OE oe);
+
+	
+
+
 
 
 
