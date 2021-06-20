@@ -24,16 +24,17 @@
 	<!-- 로그인 끝 -->
 
 	<!-- 아이디 찾기시 이름과 전화번호 확인 -->
-	<select id="searchMember" parameterType="Member" resultMap="resultMember">
+	<select id="searchMemberId" parameterType="Member" resultMap="resultMember">
 		SELECT USER_ID
 		FROM MEMBER
-		WHERE USER_EMAIL = #{ userEmail }
+		WHERE USER_NAME = #{ userName } AND USER_EMAIL = #{ userEmail }
 	</select>
 	<!-- 아이디 찾기 끝 -->
 
 	<!-- 비밀번호 찾기시 아이디, 이름 -->
-	<select id="findPassword" resultMap="resultMember">
-		SELECT * FROM MEMBER
+	<select id="searchMemberPwd" parameterType="Member" resultMap="resultMember">
+		SELECT USER_PWD
+		FROM MEMBER
 		WHERE USER_ID =#{ userId } AND USER_EMAIL =#{ userEmail }
 	</select>
 	<!-- 비밀번호 찾기 끝 -->

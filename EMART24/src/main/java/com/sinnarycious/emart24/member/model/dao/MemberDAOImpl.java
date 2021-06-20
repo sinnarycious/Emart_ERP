@@ -33,15 +33,22 @@ public class MemberDAOImpl implements MemberDAO {
 
 	// 아이디 검색
 	@Override
-	public List<Member> searchId(String userEmail) {
-		
-		System.out.println("DAO : " + userEmail);
+	public List<Member> searchId(Member m) {
+	
+		System.out.println("DAO : " + m);
 
-		return sqlSession.selectList("member.searchMember", userEmail);
+		return sqlSession.selectList("member.searchMemberId", m);
 	}
 
+	// 비밀번호 검색
+	@Override
+	public List<Member> searchPwd(Member m) {
 	
+		System.out.println("DAO : " + m);
 
-	
+		return sqlSession.selectList("member.searchMemberPwd", m);
+	}
+
+
 }
 
