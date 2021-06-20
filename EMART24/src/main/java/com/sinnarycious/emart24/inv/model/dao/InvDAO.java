@@ -14,4 +14,6 @@ public interface InvDAO {
 	
 	List<Inv> searchInfo(int invCatNo, int invNo, String invName);
 
+	
+
 }

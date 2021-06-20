@@ -53,12 +53,12 @@
         
         .email {
         	padding-right: 50px;
-        	 width: 230px;
+        	width: 230px;
         }
         
         .phone {
         	padding-right: 50px;
-        	width: 200px;
+        	width: 230px;
         }
 
         .update_profile {
@@ -98,4 +98,8 @@
 
         tr:last-child{
             border: 0;
+        }
+        
+        .mypage_border_bottom{
+        	border: 0;
         }

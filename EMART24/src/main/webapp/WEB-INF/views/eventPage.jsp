@@ -34,7 +34,7 @@
         <div class="searchBar">
          
             <h4>행사 일자</h4><input type="date" name="evntDateS1" id="evntDateS1"/> ~ <input type="date" name="evntDateS2" id="evntDateS2"/>
-            <h4>행사 번호</h4><input type="number" name="evntNo" id="evntNo" style="width:100px;" />
+            <h4>행사 번호</h4><input type="number" name="evntNo" id="evntNo" style="width:100px;" min="0"/>
 			<h4>행사명</h4><input type="text" name="evntTitle" id = "evntTitle" style="width:510px;" placeholder="행사명을 검색하세요. "/>
 			
             <button id="searchBtn" class="btn search">조회</button>
