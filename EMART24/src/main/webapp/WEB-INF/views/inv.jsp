@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/emart24/resources/css/common/nav.css">
     <link rel="stylesheet" href="/emart24/resources/css/common/header.css">
     <link rel="stylesheet" href="/emart24/resources/css/inv.css">
-   <script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<c:import url="common/nav.jsp" />
@@ -28,20 +28,24 @@
             <h3>재고 현황</h3>
 
             <div class="searchBar">
-                    <h4>상품 카테고리</h4><input type="number" name="invCatNo" id="invCatNo" />
-                    <h4>상품 번호</h4> <input type="number" name="invNo" id="invNo" />
-                    <h4>상품명</h4> <input type="text" name="invName" id="invName" placeholder="상품명을 검색하세요. " />
+                <form action="${pageContext.request.contextPath}/OE/search.do" method="post" id="searchFrm">
+                    <h4>상품 카테고리</h4>
+                    <select name="categori">
+                        <option value="snack">과자</option>
+                        <option value="drink">음료</option>
+                        <option value="ice">냉동식품</option>
+                        <option value="편의용품">편의용품</option>
+                        <option value="간편식">간편식</option>
+                    </select>
+                    <h4>상품 번호</h4> <input type="number" name="invNo" />
+                    <h4>상품명</h4> <input type="text" name="invName" placeholder="상품명을 검색하세요. " />
 
-                    <button id="searchBtn" type="button" class="btn search">조회</button>
-
+                    <button type="submit" class="btn search" onclick="search()">조회</button>
+                </form>
             </div>
 
             <table class="invTable">
-            <thead>
                 <tr>
-                	<th>
-                        <h4>상품 카테고리</h4>
-                    </th>
                     <th>
                         <h4>상품 번호</h4>
                     </th>
@@ -67,103 +71,37 @@
                         <h4>재고 부족</h4>
                     </th>
                 </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${list}" var="inv"> 
-                <tr class="item">
-                    <td><span class="num" id ="invCatNo">${inv.invCatNo}</span></td>
-                    <td><span class="num" id ="invNo">${inv.invNo}</span></td>
-                    <td id ="invName">${inv.invName}</td>
-                    <td><span class="num" id ="invWCount">${inv.invWCount}</span></td>
+                <tr>
+                    <td><span class="num">${inv.invNo}</span></td>
+                    <td><span class="num">${inv.invName}</span></td>
+                    <td><span class="num">${inv.invWCount}</span></td>
                     <td><input type="number" style="width:70px;"></td>
-                    <td><span class="num" id ="invSCount">${inv.invSCount}</span></td>
+                    <td><span class="num">${inv.invSCount}</span></td>
                     <td><input type="number" style="width:70px;"></td>
-                    <td><span class="num" id ="invPrice">${inv.invPrice}</span></td>
-                    <td><button class="btn tag" type="submit" onclick="goOE()">재고 부족</button></td>
-                   
+                    <td><span class="num">${inv.invPrice}</span></td>
+                    <td><button class="btn tag" type="submit" onclick="goOE()">부족</button></td>
                 </tr>
-                </c:forEach>
-                </tbody>
             </table>
             <div class="goOE">
                 <button class="btn search" onclick="goOE()">발주하기</button>
             </div>
-           <div id="pageNo">
-            <c:out value="${pageBar}" escapeXml="false"/>
-        </div>
+            <div class="pageNo">
+                <ul>
+                    <li><span class="arrLeft"></span></li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li><span class="arrRight"></span></li>
+                </ul>
+            </div>
         </div>
 	</section>
-		<script>
-
-		  $('#invName').on('keyup', function(event){
-				if( event.keyCode == 13) {
-					$('#searchBtn').click();
-				}
-			});
-		
-		 $('#searchBtn').on('click', function(){
-			
-			
-			var invCatNo = $('#invCatNo').val();
-			var invNo = $('#invNo').val();
-			var invName = $('#invName').val();
-		
-			if(invName != null){
-				$.ajax({ 
-					url : "${pageContext.request.contextPath}/inv/searchInfo.do",
-					type : "get",
-					data : {
-						invCatNo : invCatNo,
-						invNo : invNo,
-						invName : invName
-					}, 
-				
-					success : function( data ) {
-
-						$('tbody').empty();	
-						
-						console.log(data);
-						
-						var search = data.search;
-						for(var i in search){
-	 						var $tr = $('<tr>');
-							
-	 						var $invCatNo = $('<td><span class="num" id="invCatNo">' + search[i].invCatNo + '</span></td>');
-							var $invNo = $('<td><span class="num" id="invNo">' + search[i].invNo + '</span></td>');
-							var $invName = $('<td id="invName">' + search[i].invName + '</td>');
-							var $invWCount = $('<td><span class="num" id="invWCount">' + search[i].invWCount + '</td>');
-							var $invWNum =$('<td><input type="number" style="width:70px;"></td>');
-							var $invSCount = $('<td><span class="num" id="invSCount">' + search[i].invSCount + '</td>');
-							var $invSNum = $('<td><input type="number" style="width:70px;"></td>');
-							var $invPrice = $('<td><span class="num" id="invPrice">' + search[i].invPrice + '</td>');
-							var $invBtn = $('<td><button class="btn tag" type="submit" onclick="goOE()">부족</button></td>'); 
-							
-							$tr.append($invCatNo);
-							$tr.append($invNo);
-							$tr.append($invName);						
-							$tr.append($invWCount);
-							$tr.append($invWNum);
-							$tr.append($invSCount);
-							$tr.append($invSNum);
-							$tr.append($invPrice);
-							$tr.append($invBtn);
-
-							$('tbody').append($tr);
-							
-							
-						}
-						
-						$('#pageNo').empty();
-						
-						$('#pageNo').append(data.paging);
-					}, error : function( error ) {
-						alert("전송 실패!");
-					}
-				});
-			}
-		}); 
-                 
-	</script> 
 </body>
 </html>
-

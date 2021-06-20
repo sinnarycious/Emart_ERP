@@ -12,7 +12,6 @@
 <title>Emart24_ERP</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/login.css">
-<script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -34,7 +33,7 @@
 				</div>
 				<div class="idSave_checkbox">
 					<input type="checkbox" id="idSaveCheck"> <label
-						for="login_chk">아이디저장</label> <a href="${pageContext.request.contextPath}/member/memberFind.do">아이디 찾기 / 비밀번호 찾기</a>
+						for="login_chk">아이디저장</label> <a href="/views/userSearch.jsp">아이디 찾기 / 비밀번호 찾기</a>
 				</div>
 				<button class="btn loginBtn" name="" type="submit">
 					<h3>로그인</h3>

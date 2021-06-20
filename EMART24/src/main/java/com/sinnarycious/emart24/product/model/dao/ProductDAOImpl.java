@@ -15,12 +15,11 @@ public class ProductDAOImpl implements ProductDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Product> selectPdList(int proNo, String proName, int proCatNo) {
-		
-		Product product = new Product(proNo, proName, proCatNo);
+	public List<Product> selectPdList(Product product) {
 		
 		System.out.println(sqlSession.selectList("product.selectPdList", product));
 		
+		System.out.println(product.getProName());
 		
 		return sqlSession.selectList("product.selectPdList", product);
 	}

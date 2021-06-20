@@ -6,14 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 
 public interface SaleDAO {
-
-
-	// 수익 그래프
-
 
 	String findLastMonday(String sqlDate);
 
@@ -29,20 +26,17 @@ public interface SaleDAO {
 
 	List<Sale> selectLineThisMonthProfit();
 
-	// 판매 페이지
 	List<Map<String, String>> selectSaleList(int pageNo, int numberPage);
 
 	int selectSaleTotalContents();
 
-	// 조회 기능
-	List<Sale> searchInfo(Date saleDate1, Date saleDate2, String saleName, int proNo);
+	Sale selectDoughnutThisWeekProfit(Sale sql);
+	
+	Sale selectDoughnutLastWeekProfit(Sale sql);
 
+	Sale selectDoughnutLastMonthProfit(Sale sale);
 
-	List<Sale> selectDoughnutThisWeekProfit(String sqlWeek);
-
-	List<Sale> selectDoughnutLastMonthProfit(String sqlMonthDate);
-
-	List<Sale> selectDoughnutThisMonthProfit();
+	Sale selectDoughnutThisMonthProfit(int saleCatNo);
 
 
 

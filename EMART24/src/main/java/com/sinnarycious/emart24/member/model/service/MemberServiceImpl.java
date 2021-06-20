@@ -1,7 +1,5 @@
 package com.sinnarycious.emart24.member.model.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -30,15 +28,4 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.updateMember(member);
 	}
-
-	// 아이디 검색
-	@Override
-	public List<Member> searchId(String userEmail) {
-		
-		System.out.println("서비스 : " + userEmail);
-
-		return memberDAO.searchId(userEmail);
-	}
-
-
 }

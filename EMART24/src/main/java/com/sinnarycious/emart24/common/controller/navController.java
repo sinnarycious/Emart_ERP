@@ -1,11 +1,21 @@
 package com.sinnarycious.emart24.common.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sinnarycious.emart24.sale.model.service.SaleService;
+import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 @Controller
 public class navController {
 
+	@Autowired
+	SaleService saleService;
+	
 	/* 마이페이지 이동 */
 	@RequestMapping("/common/mypage.do")
 	public String myPage() {
@@ -47,8 +57,9 @@ public class navController {
 	
 	/* 수익 페이지 이동 */
 	@RequestMapping("/common/profit.do")
-	public String profit() {
+	public String profit(Model model) {
 		System.out.println("/common/profit.do가 호출되었습니다.");
+		
 		return "profit";
 	}	
 	

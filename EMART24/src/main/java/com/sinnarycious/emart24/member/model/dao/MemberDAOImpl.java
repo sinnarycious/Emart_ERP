@@ -1,7 +1,5 @@
 package com.sinnarycious.emart24.member.model.dao;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,17 +28,6 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.update("member.updateMember", member);
 	}
-
-	// 아이디 검색
-	@Override
-	public List<Member> searchId(String userEmail) {
-		
-		System.out.println("DAO : " + userEmail);
-
-		return sqlSession.selectList("member.searchMember", userEmail);
-	}
-
-	
 
 	
 }

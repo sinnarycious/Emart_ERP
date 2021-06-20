@@ -41,33 +41,12 @@
 				AND ORDER_DATE BETWEEN #{ orderDate1 } AND #{ orderDate2 }
 			</if>
 		</where>
-		ORDER BY OE_NO DESC
 	</select>
 
-	<!-- 입고 등록하기 버튼 활성화 -->
-	<!-- 등록하기 -> 등록 완료 -->
 	<update id="updateStatus" parameterType="oe">
 		UPDATE ORDER_ENTER
 		SET OE_STATUS = 'Y'
 		WHERE OE_NO = #{ oeNo } AND OE_NAME = #{ oeName }
-	</update>
-	
-	<!-- oeNo와 oeName으로 oeInvNo 찾기 -->
-	<select id="findOEInvNo" parameterType="oe" resultType = "_int">
-		SELECT OE_INV_NO
-		FROM ORDER_ENTER
-		WHERE OE_NO = #{ oeNo } AND OE_NAME = #{ oeName }		
-	</select>
-	
-	<!-- 발주 수량 INV 테이블에 추가 -->
-	<update id="addCount" parameterType="oe">
-		UPDATE INV
-		SET INV_W_COUNT = (
-		        (SELECT INV_W_COUNT FROM INV WHERE INV_NO = #{ oeInvNo })
-		        +
-		        (SELECT OE_COUNT FROM ORDER_ENTER WHERE OE_INV_NO = #{ oeInvNo })
-		        )
-		WHERE INV_NO= #{ oeInvNo }
 	</update>
 
 	<delete id="resetList" parameterType="string">

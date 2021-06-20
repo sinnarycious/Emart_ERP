@@ -2,40 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="inv">
-
-<resultMap type="inv" id="invMap">
-		<result column="INV_NO" property="invNo" />
-		<result column="INV_NAME" property="invName" />
-		<result column="INV_W_COUNT" property="invWCount" />
-		<result column="INV_S_COUNT" property="invSCount" />
-		<result column="INV_PRICE" property="invPrice" />
-		<result column="INV_CAT_NO" property="invCatNo" />
-	</resultMap>
-	
-		<select id="selectInvList" resultMap="invMap">
-		SELECT * FROM INV
-		ORDER BY INV_NO DESC
-	</select>
-	
-	<select id="selectInvTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM INV
-	</select>
-	
-	<select id="searchInfo" parameterType="inv" resultMap="invMap">
-		SELECT * FROM INV
-		<where>
-			<if test="invCatNo != 0">
-				AND INV_CAT_NO = #{ invCatNo }
-			</if>
-			<if test="invNo != 0">
-				AND INV_NO = #{ invNo }
-			</if>
-				<if test="invName !=null">
-				AND INV_NAME LIKE '%' || #{ invName } || '%'
-			</if>
-		</where>
-	</select>
-	
 <!-- 
 	INV_NO, INV_NAME, INV_W_COUNT
 	INV_S_COUNT, INV_PRICE, INV_CAT_NO
