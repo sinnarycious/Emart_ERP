@@ -61,18 +61,8 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		
 		return "common/msg";
-		}
-	// 아이디 기능 끝
-	
-	// 아이디 비밀번호 찾기 페이지
-	@RequestMapping("/member/memberFind.do")
-	public String memberFind() {		
-		
-		return "memberFind";
-	}
-	// 아이디 비밀번호 찾기 페이지 끝
-	
 
+	}
 	// 아이디 찾기
 	@RequestMapping("/member/searchId.do")
 	@ResponseBody
@@ -80,7 +70,8 @@ public class MemberController {
 			@RequestParam String userName,
 			@RequestParam String userEmail
 			) {
-		
+
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Member m = new Member(userName, null, userEmail);
@@ -92,9 +83,10 @@ public class MemberController {
 		map.put("userId", result);
 		
 		return map;
+
 	}
-	// 아이디 찾기 기능 끝
 	
+
 	// 비밀번호 찾기
 	@RequestMapping("/member/searchPwd.do")
 	@ResponseBody
@@ -117,6 +109,7 @@ public class MemberController {
 	}
 	// 비밀번호 찾기 기능 끝
 	
+
 	// 로그아웃 기능
 	@RequestMapping("/member/memberLogout.do")
 	public String memberLogout(SessionStatus status) {
@@ -152,6 +145,5 @@ public class MemberController {
 		return "common/msg";
 		
 	}
-	// 로그아웃 기능 끝
 }
 

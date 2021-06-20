@@ -1,7 +1,5 @@
 package com.sinnarycious.emart24.member.model.dao;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,6 +29,7 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("member.updateMember", member);
 	}
 
+<<<<<<< HEAD
 	// 아이디 검색
 	@Override
 	public List<Member> searchId(Member m) {
@@ -50,5 +49,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+=======
+	
+>>>>>>> refs/remotes/origin/dev_Moon
 }
 

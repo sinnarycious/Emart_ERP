@@ -20,11 +20,7 @@ public class SaleDAOImpl implements SaleDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-
-	// 수익 그래프
-
 	/*
-
 	@Override
 	public HashMap<String, Date> findLastMonday(String sqlDate) {
 		HashMap<String, Date> hmap = new HashMap<>(); 
@@ -52,8 +48,7 @@ public class SaleDAOImpl implements SaleDAO {
 	
 	@Override
 	public String findLastMonday(String sqlDate) {
-		HashMap<String, Date> hmap = new HashMap<>(); 
-		 
+
 		String result = sqlSession.selectOne("sale.findLastMonday", sqlDate);
 		 
 		return result;
@@ -80,7 +75,7 @@ public class SaleDAOImpl implements SaleDAO {
 	@Override
 	public String findMonth(String sqlDate) {
 		
-		String result = sqlSession.selectOne("sale.findMonday", sqlDate);
+		String result = sqlSession.selectOne("sale.findMonth", sqlDate);
 		
 		return result;
 	}
@@ -105,24 +100,29 @@ public class SaleDAOImpl implements SaleDAO {
 	}
 	
 	@Override
-	public List<Sale> selectDoughnutThisWeekProfit(String sqlWeek) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Sale> selectDoughnutLastMonthProfit(String sqlMonthDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Sale> selectDoughnutThisMonthProfit() {
-		// TODO Auto-generated method stub
-		return null;
+	public Sale selectDoughnutThisWeekProfit(Sale sql) {
+		
+		return sqlSession.selectOne("sale.selectDoughnutThisWeekProfit", sql);
 	}
 	
-	// 판매 페이지
+	@Override
+	public Sale selectDoughnutLastWeekProfit(Sale sql) {
+		
+		return sqlSession.selectOne("sale.selectDoughnutLastWeekProfit", sql);
+	}
+	
+	@Override
+	public Sale selectDoughnutLastMonthProfit(Sale sale) {
+		
+		return sqlSession.selectOne("sale.selectDoughnutLastMonthProfit", sale);
+	}
+	
+	@Override
+	public Sale selectDoughnutThisMonthProfit(int saleCatNo) {
+
+		return sqlSession.selectOne("sale.selectDoughnutThisMonthProfit", saleCatNo);
+	}
+	
 	@Override
 	public List<Map<String, String>> selectSaleList(int pageNo, int numberPage) {
 
@@ -135,19 +135,6 @@ public class SaleDAOImpl implements SaleDAO {
 	public int selectSaleTotalContents() {
 		
 		return sqlSession.selectOne("sale.selectSaleTotalContents");
-	}
-	
-	// 조회 기능
-	@Override
-	public List<Sale> searchInfo(Date saleDate1, Date saleDate2, String saleName, int proNo) {
-		
-		System.out.println("saleDate1 : " + saleDate1);
-		System.out.println("saleDate2 : " + saleDate2);
-		System.out.println("saleNo : " + proNo);
-		System.out.println("saleName : " + saleName);
-		
-		Sale sale = new Sale(saleDate1, saleDate2, saleName, proNo);
-		return sqlSession.selectList("sale.searchInfo", sale);
 	}
 
 	

@@ -52,8 +52,10 @@
                     <div class="doughnutAnno">
                         <h3 class="ration">판매량 비율</h3>
                         <select name="during" id="duringDoughnut" onchange="duringDoughnut()">
-                            <option name="during" value="week">주간</option>
-                            <option name="during" value="month">월간</option>
+                            <option name="during" value="lastWeek">지난 주</option>
+                            <option name="during" value="thisWeek">이번 주</option>
+                            <option name="during" value="lastMonth">지난 달</option>
+                            <option name="during" value="thisMonth">이번 달</option>
                         </select>
                     </div>
                     <canvas id="myChartDoughnut"></canvas>
@@ -154,22 +156,22 @@
 					//console.log("data(thisMonthList) : " + data.thisMonthList);
 					
 					// 주간 데이터 처리
-					var weekList = data.weekLineList
-					var weekData = [];
+					var weekLineList = data.weekLineList
+					var weekLineData = [];
 		
 		
-					for (var i in weekList) {
+					for (var i in weekLineList) {
 						// console.log(weekList[i]);
-						weekData.push(weekList[i]);
+						weekLineData.push(weekLineList[i]);
 					}
 		
-					console.log('weekData[0].sale : ' + weekData[0].saleSum);
+					// console.log('weekLineData[0].sale : ' + weekLineData[0].saleSum);
 					// 월간 데이터 처리
 					
-					var lastMonthList = data.lastLineMonthList;
-					var lastMonthData = [];
-					var thisMonthList = data.thisLineMonthList;
-					var thisMonthData = [];
+					var lastMonthLineList = data.lastLineMonthList;
+					var lastMonthLineData = [];
+					var thisMonthLineList = data.thisLineMonthList;
+					var thisMonthLineData = [];
 					
 					// 지난 달 데이터 처리
 					/*
@@ -188,10 +190,10 @@
 					
 					// console.log("lastData 순서 확인 : " + lastMonthData);
 					
-					for (var i in lastMonthList) {
+					for (var i in lastMonthLineList) {
 						// console.log("lastMonthList.saleDate 입력 확인 : " + dateChange(lastMonthList[i].saleDate));
 						// console.log("lastMonthList.saleSum 입력 확인 : " + lastMonthList[i].saleSum);
-						lastMonthData.push(lastMonthList[i]);
+						lastMonthLineData.push(lastMonthLineList[i]);
 						// console.log("lastMonthData[i].salenum : " + lastMonthData[i].saleSum);
 					}
 					
@@ -204,10 +206,10 @@
 					});
 					*/
 					
-					for (var i in thisMonthList) {
+					for (var i in thisMonthLineList) {
 						// console.log("thisMonthList.saleDate 입력 확인 : " + dateChange(thisMonthList[i].saleDate));
 						// console.log("thisMonthList.saleSum 입력 확인 : " + thisMonthList[i].saleSum);
-						thisMonthData.push(thisMonthList[i]);
+						thisMonthLineData.push(thisMonthLineList[i]);
 					}
 
 
@@ -224,49 +226,49 @@
 			          '토',
 			          '일'
 			        ];
-			        var weekLineData = {
+			        var weekLine = {
 			          labels: weekLabels,
 			          datasets: [{
 			            label: '이번 주',
 			            backgroundColor: '#fdb718',
 			            borderColor: '#fdb718',
 			            data:
-			                [],
+			                []
 			                },{
 			            label: '지난 주',
 			            backgroundColor: '#777777',
 			            borderColor: '#777777',
 			            data:
-			                [],
+			                []
 			                }]
 			        };
 			    
 			        wLine = {
 			          type: 'line',
-			          data: weekLineData
+			          data: weekLine
 			        };
 			    
 			        // === include 'setup' then 'config' above ===
 			        
-			        var weekDataset = weekLineData.datasets;	
+			        var weekLineDataset = weekLine.datasets;	
 			        
 			        // console.log("dataset 길이 : " + dataset.length);
 			        // console.log("weekData 확인 : " + weekData);
 			        // console.log(dataset);
 					
-					for(var i = weekDataset.length -1; i >= 0; i--){
+					for(var i = weekLineDataset.length -1; i >= 0; i--){
 						
 						if (i == 1) {
 							for(var j = 0; j < 7; j++) {
 								// console.log("첫 if 문 출력확인 : " + weekData[j]);
 								// console.log(weekDataset[i]);
-								weekDataset[i].data.push(weekData[j].saleSum);
-								// console.log('if ( i == 1) weekData[j].saleSum' + weekData[j].saleSum);
+								weekLineDataset[i].data.push(weekLineData[j].saleSum);
+								// console.log('if ( i == 1) weekData[j].saleSum' + weekLineData[j].saleSum);
 							}
 						} else if (i == 0) {
-							for(var j = 7; j < weekData.length; j++) {
-								weekDataset[i].data.push(weekData[j].saleSum);
-								// console.log('if ( i == 0) weekData[j].saleSum' + weekData[j].saleSum);
+							for(var j = 7; j < weekLineData.length; j++) {
+								weekLineDataset[i].data.push(weekLineData[j].saleSum);
+								// console.log('if ( i == 0) weekData[j].saleSum' + weekLineData[j].saleSum);
 							}
 						}
 						//console.log(weekDataset[i].data);
@@ -309,7 +311,7 @@
 			          '30',
 			          '31'
 			        ];
-			        var monthLineData = {
+			        var monthLine = {
 			            labels: monthLabels,
 			            datasets: [{
 			            label: '이번 달',
@@ -323,29 +325,29 @@
 			            backgroundColor: '#777777',
 			            borderColor: '#777777',
 			            data:
-			                [],
+			                []
 			                }]
 			        };
 			            
 			        mLine = {
 			            type: 'line',
-			            data: monthLineData
+			            data: monthLine
 			        };
 			        
-			        var monthDataset = monthLineData.datasets;
+			        var monthLineDataset = monthLine.datasets;
 			        
-					for(var i = monthDataset.length -1; i >= 0; i--){
+					for(var i = monthLineDataset.length -1; i >= 0; i--){
 						
 						if (i == 1) {
-							for(var j = 0; j < lastMonthData.length; j++) {
-								// console.log("첫 if 문 출력확인 : " + weekData[j]);
-								monthDataset[i].data.push(lastMonthData[j].saleSum);
-								console.log("lastMonthDataset : " + monthDataset[i].data[j]);
+							for(var j = 0; j < lastMonthLineData.length; j++) {
+								// console.log("첫 if 문 출력확인 : " + weekMonthData[j]);
+								monthLineDataset[i].data.push(lastMonthLineData[j].saleSum);
+								// console.log("lastMonthLineDataset : " + monthLineDataset[i].data[j]);
 							}
 						} else if (i == 0) {
-							for(var j = 0; j < thisMonthData.length; j++) {
-								monthDataset[i].data.push(thisMonthData[j].saleSum);
-								console.log("thisMonthDataset : " + monthDataset[i].data[j]);
+							for(var j = 0; j < thisMonthLineData.length; j++) {
+								monthLineDataset[i].data.push(thisMonthLineData[j].saleSum);
+								// console.log("thisMonthLineDataset : " + monthLineDataset[i].data[j]);
 							}
 						}
 						// console.log(monthDataset[i].data);
@@ -383,210 +385,13 @@
 	</script>
     <script>
     
-    /*
-        // lineGraph 원본 start
-        var lineArea = document.getElementById('myChartLine').getContext('2d');
-        var line;  // undefined
-        
-        // 주간 그래프 시작
-
-        var weekLabels = [
-          '월',
-          '화',
-          '수',
-          '목',
-          '금',
-          '토',
-          '일'
-        ];
-        var weekLineData = {
-          labels: weekLabels,
-          datasets: [{
-            label: '이번 주',
-            backgroundColor: '#fdb718',
-            borderColor: '#fdb718',
-            data:
-                [22,
-                 50,
-                 10,
-                 8,
-                 30,
-                 30,
-                 45],
-                },{
-            label: '지난 주',
-            backgroundColor: '#777777',
-            borderColor: '#777777',
-            data:
-                [10,
-                 50,
-                 22,
-                 50,
-                 60,
-                 80,
-                 100],
-                }]
-        };
-    
-        var wLine = {
-          type: 'line',
-          data: weekLineData
-        };
-    
-          // === include 'setup' then 'config' above ===
-        
-        // 주간 그래프 끝
-        
-        // 월간 그래프 시작
-
-       
-        var monthLabels = [
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9',
-          '10',
-          '11',
-          '12',
-          '13',
-          '14',
-          '15',
-          '16',
-          '17',
-          '18',
-          '19',
-          '20',
-          '21',
-          '22',
-          '23',
-          '24',
-          '25',
-          '26',
-          '27',
-          '28',
-          '29',
-          '30',
-          '31'
-        ];
-        var monthLineData = {
-            labels: monthLabels,
-            datasets: [{
-            label: '이번 달',
-            backgroundColor: '#fdb718',
-            borderColor: '#fdb718',
-            data:
-                [22,
-                 50,
-                 10,
-                 8,
-                 30,
-                 30,
-                 45,
-                 22,
-                 50,
-                 10,
-                 8,
-                 30,
-                 30,
-                 45,
-                 22,
-                 50,
-                 10,
-                 8,
-                 30,
-                 30,
-                 45,
-                 22,
-                 50,
-                 10,
-                 8,
-                 30,
-                 30,
-                 45,
-                 55,
-                 100,
-                 5
-                ],
-                },{
-            label: '지난 달',
-            backgroundColor: '#777777',
-            borderColor: '#777777',
-            data:
-                [10,
-                 50,
-                 22,
-                 50,
-                 60,
-                 80,
-                 100,
-                 10,
-                 50,
-                 22,
-                 50,
-                 60,
-                 80,
-                 100,
-                 10,
-                 50,
-                 22,
-                 50,
-                 60,
-                 80,
-                 100,
-                 10,
-                 50,
-                 22,
-                 50,
-                 60,
-                 80,
-                 100,
-                 150,
-                 15,
-                 10
-                ],
-                }]
-        };
-            
-        var mLine = {
-            type: 'line',
-            data: monthLineData
-        };
-        
-     	// 월간 그래프 끝
-              // === include 'setup' then 'config' above ===
-     */
-     
-     /*
-        function duringLine() {
-            var val = document.getElementById('duringLine').value;
-            console.log(val);
-
-            if(line != undefined){ // undefined = null;
-                line.destroy();
-            }
-           
-            if (val == 'week') {
-                line = new Chart(lineArea, wLine);
-            } else if (val == 'month'){
-                line = new Chart(lineArea, mLine);
-            }
-        }
-
-        // 월간 그래프 끝
-
-
-        // lineGraph 원본 end
-    */
-    </script>
-    <script>
-    /*
     var doughnutArea = document.getElementById('myChartDoughnut').getContext('2d');
     var doughnut;
+    var lastWDoughnut;
+    var thisWDoughnut;
+    var lastMDoughnut;
+    var thisMDoughnut;
+    
 	    $.ajax({ 
 			url : "/emart24/sale/doughnut.do",
 			type : "get",
@@ -595,6 +400,193 @@
 				date : date.getTime()
 				}, success : function( data ) {
 					
+					var lastWeekDoughnutList = data.lastWeekDoughnutList;
+					var lastWeekDoughnutData = [];
+					
+					var thisWeekDoughnutList = data.thisWeekDoughnutList;
+					var thisWeekDoughnutData = [];
+					
+					var lastMonthDoughnutList = data.lastMonthDoughnutList;
+					var lastMonthDoughnutData = [];
+					
+					var thisMonthDoughnutList = data.thisMonthDoughnutList;
+					var thisMonthDoughnutData = [];
+					
+					for (var i in lastWeekDoughnutList) {
+						// console.log(lastWeekDoughnutList[i]);
+						lastWeekDoughnutData.push(lastWeekDoughnutList[i]);
+						// console.log(lastWeekDoughnutData[i]);
+					}
+					
+					for (var i in thisWeekDoughnutList) {
+						//c onsole.log(thisWeekDoughnutList[i]);
+						thisWeekDoughnutData.push(thisWeekDoughnutList[i]);
+						// console.log(thisWeekDoughnutData[i]);
+					}
+					
+					
+					for (var i in lastMonthDoughnutList) {
+						console.log(lastMonthDoughnutList[i]);
+						lastMonthDoughnutData.push(lastMonthDoughnutList[i]);
+						console.log(lastMonthDoughnutData[i].saleSum);
+					}
+					for (var i in thisMonthDoughnutList) {
+						//console.log(thisDoughnutMonthList[i]);
+						thisMonthDoughnutData.push(thisMonthDoughnutList[i]);
+						//console.log(thisDoughnutMonthData[i]);
+					}
+					
+					// console.log('weekDoughnutData.length : ' + weekDoughnutData.length);
+					// console.log('weekDoughnutData.saleSum : ' + weekDoughnutData[0].saleSum);
+					
+					var lastWeekDoughnut = {
+			                labels: [
+			                  '음료',
+			                  '냉동 식품',
+			                  '편의 식품',
+			                  '과자',
+			                  '간편식'
+			                ],
+			                datasets: [{
+			                    label: '품목별 판매액(만)',
+			                    data: [lastWeekDoughnutData[0].saleSum,
+			                    	   lastWeekDoughnutData[1].saleSum,
+			                    	   lastWeekDoughnutData[2].saleSum,
+			                    	   lastWeekDoughnutData[3].saleSum,
+			                    	   lastWeekDoughnutData[4].saleSum],
+			                    backgroundColor: [
+			                        'red',
+			                        'blue',
+			                        'green',
+			                        'pink',
+			                        'violet'
+			                    ],
+			                    hoverOffset: 4
+			                }]
+			            };
+					
+			    	var thisWeekDoughnut = {
+			                labels: [
+			                  '음료',
+			                  '냉동 식품',
+			                  '편의 식품',
+			                  '과자',
+			                  '간편식'
+			                ],
+			                datasets: [{
+			                    label: '품목별 판매액(만)',
+			                    data: [thisWeekDoughnutData[0].saleSum,
+			                    	   thisWeekDoughnutData[1].saleSum,
+			                    	   thisWeekDoughnutData[2].saleSum,
+			                    	   thisWeekDoughnutData[3].saleSum,
+			                    	   thisWeekDoughnutData[4].saleSum],
+			                    backgroundColor: [
+			                        'red',
+			                        'blue',
+			                        'green',
+			                        'pink',
+			                        'violet'
+			                    ],
+			                    hoverOffset: 4
+			                }]
+			            };
+
+			     	// console.log(weekDoughnutDataset.data);
+			     	/*
+					for(var i = 1; i <= weekDoughnutData.length -1; i++){
+						weekDoughnutDataset.data.push(weekDoughnutData[i].saleSum);
+						console.log(weekDoughnutDataset.data[i]);
+					}
+			     	*/
+
+			    	var lastMonthDoughnut = {
+			                labels: [
+			                	'음료',
+				            	'냉동 식품',
+				            	'편의 식품',
+				            	'과자',
+				                '간편식'
+			                ],
+			                datasets: [{
+			                    label: '품목별 판매액(만)',
+			                    data: [lastMonthDoughnutData[0].saleSum,
+			                    	   lastMonthDoughnutData[1].saleSum,
+			                    	   lastMonthDoughnutData[2].saleSum,
+			                    	   lastMonthDoughnutData[3].saleSum,
+			                    	   lastMonthDoughnutData[4].saleSum],
+			                    backgroundColor: [
+			                        'red',
+			                        'blue',
+			                        'green',
+			                        'pink',
+			                        'violet'
+			                    ],
+			                    hoverOffset: 4
+			                }]
+			            };
+
+			    	var thisMonthDoughnut = {
+			                labels: [
+			                	'음료',
+				            	'냉동 식품',
+				            	'편의 식품',
+				            	'과자',
+				                '간편식'
+			                ],
+			                datasets: [{
+			                    label: '품목별 판매액(만)',
+			                    data: [thisMonthDoughnutData[0].saleSum,
+			                    	   thisMonthDoughnutData[1].saleSum,
+			                    	   thisMonthDoughnutData[2].saleSum,
+			                    	   thisMonthDoughnutData[3].saleSum,
+			                    	   thisMonthDoughnutData[4].saleSum],
+			                    backgroundColor: [
+			                        'red',
+			                        'blue',
+			                        'green',
+			                        'pink',
+			                        'violet'
+			                    ],
+			                    hoverOffset: 4
+			                }]
+			            };
+						/*
+						for(var i = monthDoughnutDataset.length -1; i >= 0; i--){
+						
+						}
+			    		*/
+			    		lastWDoughnut = {
+					    	type: 'doughnut',
+					    	data: lastWeekDoughnut,
+					    	options: {
+					                
+					        }
+					    };
+			    		
+			            thisWDoughnut = {
+			              type: 'doughnut',
+			              data: thisWeekDoughnut,
+			              options: {
+			                
+			              }
+			            };
+
+			            lastMDoughnut = {
+					    	type: 'doughnut',
+					    	data: lastMonthDoughnut,
+					    	options: {
+					                
+					        }
+					    };
+
+			            thisMDoughnut = {
+			              type: 'doughnut',
+			              data: thisMonthDoughnut,
+			              options: {
+			                
+			              }
+			            };
+
 					
 					alert("전송 성공!");
 				}, error : function( error ) { 
@@ -603,75 +595,7 @@
 					alert("전송 실패!");
 				}
 			});
-    
-	*/
-	</script>
-	<script>
-    /*
-        // doughnutGraph 원본 start
-        var doughnutArea = document.getElementById('myChartDoughnut').getContext('2d');
-        var doughnut;
-
-        var weekDoughnutData = {
-            labels: [
-              '음료',
-              '냉동 식품',
-              '간편 식품',
-              '편의 용품',
-              '과자'
-            ],
-            datasets: [{
-                label: '품목별 판매액(만)',
-                data: [30, 5, 10, 30, 50],
-                backgroundColor: [
-                    'red',
-                    'blue',
-                    'green',
-                    'pink',
-                    'violet'
-                ],
-                hoverOffset: 4
-            }]
-        };
-
-        var monthDoughnutData = {
-            labels: [
-              '음료',
-              '냉동 식품',
-              '간편 식품',
-              '편의 용품',
-              '과자'
-            ],
-            datasets: [{
-                label: '품목별 판매액(만)',
-                data: [50, 25, 10, 10, 50],
-                backgroundColor: [
-                    'red',
-                    'blue',
-                    'green',
-                    'pink',
-                    'violet'
-                ],
-                hoverOffset: 4
-            }]
-        };
-
-        var wDoughnut = {
-          type: 'doughnut',
-          data: weekDoughnutData,
-          options: {
-            
-          }
-        };
-
-        var mDoughnut = {
-          type: 'doughnut',
-          data: monthDoughnutData,
-          options: {
-            
-          }
-        };
-
+	    
         function duringDoughnut() {
             var val = document.getElementById('duringDoughnut').value;
             console.log(val);
@@ -679,23 +603,19 @@
             if(doughnut != undefined){ // undefined = null;
                 doughnut.destroy();
             }
-           
-            if (val == 'week') {
-                doughnut = new Chart(doughnutArea, wDoughnut);
-            } else if (val == 'month'){
-                doughnut = new Chart(doughnutArea, mDoughnut);
+            
+            if (val == 'lastWeek') {
+                doughnut = new Chart(doughnutArea, lastWDoughnut);
+            } else if (val == 'thisWeek') {
+                doughnut = new Chart(doughnutArea, thisWDoughnut);
+            } else if (val == 'lastMonth'){
+                doughnut = new Chart(doughnutArea, lastMDoughnut);
+            } else if (val == 'thisMonth'){
+                doughnut = new Chart(doughnutArea, thisMDoughnut);
             }
         }
-        
-	*/
-        // doughnutGraph 원본 end
-        
-        // 시작 시 그래프 그리기
-        $(function(){
-            // duringLine();
-            // duringDoughnut();
-        })
-        
-    </script>
+	
+	</script>
+
 </body>
 </html>

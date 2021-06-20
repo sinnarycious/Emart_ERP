@@ -33,7 +33,8 @@
 					<table class="update_pw">
 						<tr>
 							<td class="td1">아이디</td>
-							<td>${member.userId}</td>
+							<td><input type="text" class="idInput" name ="userId"
+								value="${member.userId}" readonly required></td>
 						</tr>
 						<tr>
 							<td class="td1">비밀번호</td>
@@ -53,11 +54,13 @@
 					<table class="update_profile">
 						<tr>
 							<td class="td1">이름</td>
-							<td>${member.userName}</td>
+							<td><input type="text" class="name" name ="userName"
+								value="${member.userName}" readonly required></td>
 						</tr>
 						<tr>
 							<td class="td1">주민번호</td>
-							<td>${member.userRNo}</td>
+							<td><input type="text" class="rno" value="${member.userRNo}" name= "userRNo"
+								readonly required></td>
 						</tr>
 						<tr>
 							<td class="td1">이메일</td>

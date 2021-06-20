@@ -13,24 +13,25 @@
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/nav.css">
 <link rel="stylesheet" href="/emart24/resources/css/orderPage.css">
-<script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	
 	<c:import url="common/nav.jsp" />
 		
 	<c:import url="common/header.jsp" />
-	
+
 	<!-- 전체 시작 -->
     <div class="area orderPage" style="margin-left: 17%">
+
         <h2>발주 관리</h2>
 
         <h3 class="order_h3">발주 신청</h3>
 
         <!-- 검색창 -->
-        <div class="searchBar">
+        <form action="${pageContext.request.contextPath }/product/searchBar.do" method="get" class="searchBar">
             <!-- 상품카테고리 -->
             <h4>상품 카테고리 &nbsp;</h4> 
+
             <div class="selectBar">
                 <select name="proCatNo" id="proCatNo">
                 	<option value="0" >-- 전체 --</option>
@@ -46,7 +47,7 @@
             <!-- 상품 번호 -->
             <h4 style="margin-left : 20px;">상품 번호 &nbsp;</h4>
             <div class="pdtNo">
-                <input type="number" id="proNo" name = "proNo">
+                <input type="number" id="pdtNo_num" name = "proNo">
             </div>
             <!-- 상품 번호끝 -->
 
@@ -59,9 +60,12 @@
 
             <!-- 버튼 -->
             <button class="btn click" id="search_btn">검색</button>
-            
-       	</div>
+
+		</form>
+        
+
         <!-- 검색창 끝-->
+
 
         <!-- 검색결과 리스트 -->
         <div class="resultArea">
@@ -90,7 +94,27 @@
 	
         </div>
         <!-- 검색결과 리스트 끝-->
-	
+
+        <!-- 검색 리스트 -->
+        <form action="resultList.do" method="post">
+            <table class="resultList">
+             	<c:if test="${product != null}">
+             		<c:forEach var="product" items="${product}">
+		                <tr>
+		                    <td class="td1" style="width:120px;"><h4>상품명</h4></td>
+		                    <td class="order_Product" name="proName" id="proName">${product.proName}</td>
+		                    <td class="td1" style="width:70px;"><h4>금액</h4></td>
+		                    <td style="width:80px;" name="proPriceE" id="proPriceE">${product.proPriceE}</td>
+		                    <td class="td1" id="updown" style="width:180px;"><h4>수량</h4><input type="number" id="Pdt_Count" value="0">
+		                    </td>
+		                    <td style="width:110px;padding-right:30px;"><button class="btn click" id="addProduct">추가</button></td>
+		                </tr>
+		            </c:forEach>
+                </c:if>
+            </table>
+        </form> 
+        <!-- 검색 리스트 끝-->
+
         <!-- 발주 리스트 -->
         <form action="orderList.do" style="margin-top: 25px;">
             <table class="orderList" id="orderList">
@@ -128,10 +152,12 @@
                         <td style="width:60px;" id="oeCount" name="oeCount">${oe.oeCount}</td>
                         <td class="mul" id="mul" name="mul" style="width:90px;padding-left:10px"></td>
                         <td style="padding-left:37px;" id="orderDate" name="orderDate">${oe.orderDate}</td>
+
                         <td><button class="btn click" id="orderDel" onclick="goOrderDel(this)">삭제</button></td>
+
                     	<!-- onclick 없애보기-
                     </tr> 
-                    -->
+                    --> 
                 </tbody>
                 <tfoot class="tfoot">
                     <tr>
@@ -184,7 +210,6 @@
 			var pdt_Count = $('#pdt_Count').val();
 		
     	<!-- 카테고리랑 발주번호를 클릭 시 이름을 못불러옴 -->
-    	
     	
 			// console.log(proName);
 			// console.log(proCatNo);
@@ -250,13 +275,15 @@
 	    			alert("전송 실패");
 	    		}
 	    	});
-    		
+
 		});
     	
+
 		function dateChange( time ) {
  			var myDate = new Date(time);
  			return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + myDate.getDate()).slice(-2); 
  		}
+
     	
     	// '추가'버튼 클릭 시 검색 결과 리스트 전달하기
     	
@@ -302,7 +329,7 @@
 		}
     	
     	// 총합계
-    	
+
     	/*
 		// 하나만 삭제
 		function ('#btn_delete()') {
@@ -317,7 +344,9 @@
 		}
 		*/	
 
+
     	// 발주리스트에서 행 삭제
+
     	/*
     	const btns = document.querySelectorAll('table td button');
 		for(let i=0; i < btns.length; i++) {
@@ -340,12 +369,30 @@
 		}	
 		
 
+    	/* function goOrderDel() {
+    		var ths = $(ths);
+    		
+    		ths.parents("tr").remove();
+    	}z
+    	*/
+    	// 삭제 버튼 클릭
+    	document.querySelectorAll('.table tbody').forEach(
+    		fucntion(item) {
+    			item.EventListener('click', function(){
+    				.delItem();
+    			});
+    		}	
+    	
+    	);
+    	
     	
     	// '발주하기' 버튼
     	// OE/oe.do
     	$('#orderBtn').on('click', function(){
     		
     	});
+
+
     </script>
     <!-- script 끝 -->
     

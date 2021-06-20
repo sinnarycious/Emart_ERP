@@ -3,18 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-    <resultMap type="Member" id="resultMember"> 
-    	<result column="USER_NO" property="userNo" />
-    	<result column="USER_ID" property="userId" />
-    	<result column="USER_PWD" property="userPwd" />
-    	<result column="USER_RNO" property="userRNo" />
-    	<result column="USER_NAME" property="userName" />
-    	<result column="USER_EMAIL" property="userEmail" />
-    	<result column="USER_PHONE" property="userPhone" />
-    	<result column="USER_BRANCH" property="userBranch" />
-    	<result column="USER_OPENDATE" property="userOpenDate" />
-    	<result column="USER_ATT_NO" property="userAttNO" />
-    </resultMap>
+    <resultMap type="Member" id="resultMember"> </resultMap>
     
     <!-- 로그인시 아이디와 비밀번호 확인 -->
     <select id="selectOneMember" parameterType="Member" resultMap="resultMember">
@@ -24,12 +13,15 @@
 	<!-- 로그인 끝 -->
 
 	<!-- 아이디 찾기시 이름과 전화번호 확인 -->
+
 	<select id="searchMemberId" parameterType="Member" resultMap="resultMember">
 		SELECT USER_ID
 		FROM MEMBER
 		WHERE USER_NAME = #{ userName } AND USER_EMAIL = #{ userEmail }
+
 	</select>
 	<!-- 아이디 찾기 끝 -->
+
 
 	<!-- 비밀번호 찾기시 아이디, 이름 -->
 	<select id="searchMemberPwd" parameterType="Member" resultMap="resultMember">

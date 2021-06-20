@@ -13,7 +13,6 @@ public interface EventDAO {
 
 	int selectEventTotalContents();
 	
-	List<Event> searchInfo(Date evntDateS1, Date evntDateS2, String evntTitle, int evntNo);
 	
 	
 }

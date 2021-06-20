@@ -33,17 +33,7 @@ public class EventDAOImpl implements EventDAO{
 		return sqlSession.selectOne("event.selectEventTotalContents");
 	}
 	
-	@Override
-	public List<Event> searchInfo(Date evntDateS1, Date evntDateS2, String evntTitle, int evntNo) {
-		
-		System.out.println("evntDateS1 : " + evntDateS1);
-		System.out.println("evntDateS2 : " + evntDateS2);
-		System.out.println("evntNo : " + evntNo);
-		System.out.println("evntTitle : " + evntTitle);
-				
-		Event event = new Event(evntDateS1, evntDateS2, evntTitle, evntNo);
-		return sqlSession.selectList("event.searchInfo", event);
-	}
+	
 
 
 }

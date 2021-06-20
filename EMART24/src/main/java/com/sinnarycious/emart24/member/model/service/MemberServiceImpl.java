@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.sinnarycious.emart24.member.model.dao.MemberDAO;
 import com.sinnarycious.emart24.member.model.vo.Member;
@@ -30,6 +29,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.updateMember(member);
 	}
+
 
 	// 아이디 검색
 	@Override

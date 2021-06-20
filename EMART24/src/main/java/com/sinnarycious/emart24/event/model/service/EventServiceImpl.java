@@ -29,10 +29,5 @@ public class EventServiceImpl implements EventService{
 		return eventDAO.selectEventTotalContents();
 	}
 	
-	@Override
-	public List<Event> searchInfo(Date evntDateS1, Date evntDateS2, String evntTitle, int evntNo) {
-
-		return eventDAO.searchInfo(evntDateS1, evntDateS2, evntTitle, evntNo);
-	}
 
 }

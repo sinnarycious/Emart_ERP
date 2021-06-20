@@ -14,17 +14,8 @@ public interface OEDAO {
 	
 	int selectOETotalContents();
 
-	// 검색 기능
 	List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo);
 
-	// 입고 내역 등록 버튼
-	int updateStatus(int oeNo, String oeName);
-	// oeNo와 oeName으로 oeInvNo 찾기 
-	int findOEInvNo(int oeNo, String oeName);
-	// 발주 수량 재고 테이블에 추가
-	int addCount(int oeInvNo);
-
-		
 	// 다시쓰기 : 가율
 	int resetList();
 	
@@ -32,9 +23,6 @@ public interface OEDAO {
 	OE orderList(int oeNo);
 
 	List<OE> orderInsertList(OE oe);
-
-	
-
 
 
 

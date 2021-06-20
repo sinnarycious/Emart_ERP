@@ -14,7 +14,6 @@ href="/emart24/resources/images/emart.ico">
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/oe.css">
 <script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
-
 </head>
 <body>
 
@@ -43,8 +42,9 @@ href="/emart24/resources/images/emart.ico">
 
 				<button id="searchBtn" class="btn search">조회</button>
 			</div>
-
+		
 			<!-- 검색 ajax -->
+
 			<script>
 				// 키보드 엔터 = '#searchBtn' 클릭과 동일한 효과
 				$('#oeNo, #oeName').on('keyup', function(event) {
@@ -277,6 +277,7 @@ href="/emart24/resources/images/emart.ico">
 
 			<div id="paging_area">
 				<c:out value="${ pageBar }" escapeXml="false" />
+
 			</div>
 		</div>
 

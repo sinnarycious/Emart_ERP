@@ -1,7 +1,6 @@
 package com.sinnarycious.emart24.inv.model.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Inv implements Serializable{
+	
 	private int invNo;
 	private String invName;
 	private int invWCount;
