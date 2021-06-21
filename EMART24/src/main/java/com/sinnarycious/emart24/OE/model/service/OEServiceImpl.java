@@ -31,9 +31,9 @@ public class OEServiceImpl implements OEService {
 
 	// 검색 기능
 	@Override
-	public List<OE> searchInfo(String orderDate1, String orderDate2, String oeName, int oeNo) {
+	public List<OE> searchInfo(int pageNo, int numberPage, String orderDate1, String orderDate2, String oeName, int oeNo) {
 
-		return oeDAO.searchInfo(orderDate1, orderDate2, oeName, oeNo);
+		return oeDAO.searchInfo(pageNo, numberPage, orderDate1, orderDate2, oeName, oeNo);
 	}
 	
 	// 입고 내역 등록 버튼
@@ -64,6 +64,11 @@ public class OEServiceImpl implements OEService {
 	public List<OE> orderInsertList(OE oe) {
 		
 		return oeDAO.orderInsertList(oe);
+	}
+
+	@Override
+	public int searchTotalContent(String orderDate1, String orderDate2, String oeName, int oeNo) {
+		return oeDAO.searchTotalContent(orderDate1, orderDate2, oeName, oeNo);
 	}
 
 

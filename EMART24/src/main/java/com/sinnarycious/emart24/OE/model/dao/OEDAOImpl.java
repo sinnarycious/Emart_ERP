@@ -31,7 +31,7 @@ public class OEDAOImpl implements OEDAO {
 	
 	// 검색 기능
 	@Override
-	public List<OE> searchInfo(String orderDate1, String orderDate2, String oeName, int oeNo) {
+	public List<OE> searchInfo(int pageNo, int numberPage, String orderDate1, String orderDate2, String oeName, int oeNo) {
 		
 		System.out.println("orderDate1 : " + orderDate1);
 		System.out.println("orderDate2 : " + orderDate2);
@@ -40,7 +40,8 @@ public class OEDAOImpl implements OEDAO {
 		
 		OE oe = new OE(orderDate1, orderDate2, oeName, oeNo);
 		
-		return sqlSession.selectList("oe.searchInfo", oe);
+		RowBounds rows = new RowBounds((pageNo-1) * numberPage, numberPage);
+		return sqlSession.selectList("oe.searchInfo", oe, rows);
 	}
 
 	// 입고 내역 등록 버튼
@@ -88,6 +89,14 @@ public class OEDAOImpl implements OEDAO {
 	public List<OE> orderInsertList(OE oe) {
 		
 		return sqlSession.selectList("oe.orderInsertList", oe);
+	}
+
+	@Override
+	public int searchTotalContent(String orderDate1, String orderDate2, String oeName, int oeNo) {
+		
+		OE oe = new OE(orderDate1, orderDate2, oeName, oeNo);
+		
+		return sqlSession.selectOne("oe.searchTotalContent", oe);
 	}
 
 

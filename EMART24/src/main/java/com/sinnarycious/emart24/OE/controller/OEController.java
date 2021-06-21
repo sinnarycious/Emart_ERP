@@ -60,17 +60,19 @@ public class OEController {
 	@RequestMapping("/OE/searchInfo.do")
 	@ResponseBody
 	public Map<String, Object> searchInfo(
+			@RequestParam( required=false, defaultValue="1") int cPage,
 			@RequestParam (required=false)String orderDate1,
 			@RequestParam (required=false)String orderDate2,
 			@RequestParam (required=false, defaultValue="") String oeName,
 			@RequestParam (required=false, defaultValue="0") int oeNo 
 			){
-		
+		int numPerPage = 10;
 		Map<String, Object> map = new HashMap<String, Object>();
 		oeName.replace('_', ' ');
-
-		List<OE> searchList = oeService.searchInfo(orderDate1, orderDate2, oeName, oeNo);
-		String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "oe.do", oeName);
+		int searchTotalContent = oeService.searchTotalContent(orderDate1, orderDate2, oeName, oeNo);
+		List<OE> searchList = oeService.searchInfo(cPage, numPerPage, orderDate1, orderDate2, oeName, oeNo);
+		
+		String pageBar = SearchUtils.getPageBar(searchTotalContent, cPage, 10, "oe.do", oeName);
 		
 		System.out.println("search : " + searchList);
 		

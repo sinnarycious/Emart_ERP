@@ -13,7 +13,7 @@ public interface OEService {
 	int selectOETotalContents();
 	
 	// 검색 기능
-	List<OE> searchInfo(String orderDate1, String orderDate2, String oeName, int oeNo);
+	List<OE> searchInfo(int pageNo, int numberPage, String orderDate1, String orderDate2, String oeName, int oeNo);
 	
 	// 입고 내역 등록 버튼 활성화
 	int updateStastus(int oeNo, String oeName);
@@ -23,6 +23,8 @@ public interface OEService {
 	
 	// 발주리스트 - 가율
 	List<OE> orderInsertList(OE oe);
+
+	int searchTotalContent(String orderDate1, String orderDate2, String oeName, int oeNo);
 
 
 
