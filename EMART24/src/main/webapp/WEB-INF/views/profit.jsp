@@ -64,74 +64,64 @@
             <div class="categoriArea">
                 <h3>판매량 TOP 5</h3>
                 <div claas="categori snack">
-                    <!--
                     <div>
                         <h4>과자</h4>
                         <div>
-                            <h6>1. 아침에 주스 100% 오렌지</h6>
-                            <h6>2. 아침에 주스 100% 오렌지</h6>
-                            <h6>3. 아침에 주스 100% 오렌지</h6>
-                            <h6>4. 아침에 주스 100% 오렌지</h6>
-                            <h6>5. 아침에 주스 100% 오렌지</h6>
+                            <h6 class="snackTop"></h6>
+                            <h6 class="snackTop"></h6>
+                            <h6 class="snackTop"></h6>
+                            <h6 class="snackTop"></h6>
+                            <h6 class="snackTop"></h6>
                         </div>
                     </div>
-                    -->
                 </div>
             <div claas="categori drink">
-                <!--
                 <div>
                     <h4>음료</h4>
                     <div>
-                        <h6>1. 아침에 주스 100% 오렌지</h6>
-                        <h6>2. 아침에 주스 100% 오렌지</h6>
-                        <h6>3. 아침에 주스 100% 오렌지</h6>
-                        <h6>4. 아침에 주스 100% 오렌지</h6>
-                        <h6>5. 아침에 주스 100% 오렌지</h6>
+                        <h6 class="drinkTop"></h6>
+                        <h6 class="drinkTop"></h6>
+                        <h6 class="drinkTop"></h6>
+                        <h6 class="drinkTop"></h6>
+                        <h6 class="drinkTop"></h6>
                     </div>
                 </div>
-                -->
             </div>
             <div claas="categori ice">
-                <!--
                 <div>
                     <h4>냉동식품</h4>
                     <div>
-                        <h6>1. 아침에 주스 100% 오렌지</h6>
-                        <h6>2. 아침에 주스 100% 오렌지</h6>
-                        <h6>3. 아침에 주스 100% 오렌지</h6>
-                        <h6>4. 아침에 주스 100% 오렌지</h6>
-                        <h6>5. 아침에 주스 100% 오렌지</h6>
+                        <h6 class="iceTop"></h6>
+                        <h6 class="iceTop"></h6>
+                        <h6 class="iceTop"></h6>
+                        <h6 class="iceTop"></h6>
+                        <h6 class="iceTop"></h6>
                     </div>
                 </div>
-                -->
             </div>
             <div claas="categori simple">
-                <!--
                 <div>
                     <h4>간편식</h4>
                     <div>
-                        <h6>1. 아침에 주스 100% 오렌지</h6>
-                        <h6>2. 아침에 주스 100% 오렌지</h6>
-                        <h6>3. 아침에 주스 100% 오렌지</h6>
-                        <h6>4. 아침에 주스 100% 오렌지</h6>
-                        <h6>5. 아침에 주스 100% 오렌지</h6>
+                        <h6 class="simpleTop"></h6>
+                        <h6 class="simpleTop"></h6>
+                        <h6 class="simpleTop"></h6>
+                        <h6 class="simpleTop"></h6>
+                        <h6 class="simpleTop"></h6>
                     </div>
                 </div>
-                -->
             </div>
             <div claas="categori convinience">
-                <!--
                 <div>
                     <h4>편의용품</h4>
                     <div>
-                        <h6>1. 아침에 주스 100% 오렌지</h6>
-                        <h6>2. 아침에 주스 100% 오렌지</h6>
-                        <h6>3. 아침에 주스 100% 오렌지</h6>
-                        <h6>4. 아침에 주스 100% 오렌지</h6>
-                        <h6>5. 아침에 주스 100% 오렌지</h6>
+                        <h6 class="conTop"></h6>
+                        <h6 class="conTop"></h6>
+                        <h6 class="conTop"></h6>
+                        <h6 class="conTop"></h6>
+                        <h6 class="conTop"></h6>
                     </div>
                 </div>
-                -->
             </div>
         </div>
     </section>
@@ -666,6 +656,36 @@
 				console.log(ice);
 				console.log(simple);
 				console.log(con);
+				
+				$('.snackTop:eq(0)').text("1. " + snack[0].saleName)
+				$('.snackTop:eq(1)').text("2. " + snack[1].saleName)
+				$('.snackTop:eq(2)').text("3. " + snack[2].saleName)
+				$('.snackTop:eq(3)').text("4. " + snack[3].saleName)
+				$('.snackTop:eq(4)').text("5. " + snack[4].saleName)
+				
+				$('.drinkTop:eq(0)').text("1. " + drink[0].saleName)
+				$('.drinkTop:eq(1)').text("2. " + drink[1].saleName)
+				$('.drinkTop:eq(2)').text("3. " + drink[2].saleName)
+				$('.drinkTop:eq(3)').text("4. " + drink[3].saleName)
+				$('.drinkTop:eq(4)').text("5. " + drink[4].saleName)
+				
+				$('.iceTop:eq(0)').text("1. " + ice[0].saleName)
+				$('.iceTop:eq(1)').text("2. " + ice[1].saleName)
+				$('.iceTop:eq(2)').text("3. " + ice[2].saleName)
+				$('.iceTop:eq(3)').text("4. " + ice[3].saleName)
+				$('.icekTop:eq(4)').text("5. " + ice[4].saleName)
+				
+				$('.simpleTop:eq(0)').text("1. " + simple[0].saleName)
+				$('.simpleTop:eq(1)').text("2. " + simple[1].saleName)
+				$('.simpleTop:eq(2)').text("3. " + simple[2].saleName)
+				$('.simpleTop:eq(3)').text("4. " + simple[3].saleName)
+				$('.simpleTop:eq(4)').text("5. " + simple[4].saleName)
+				
+				$('.conTop:eq(0)').text("1. " + con[0].saleName)
+				$('.conTop:eq(1)').text("2. " + con[1].saleName)
+				$('.conTop:eq(2)').text("3. " + con[2].saleName)
+				$('.conTop:eq(3)').text("4. " + con[3].saleName)
+				$('.conTop:eq(4)').text("5. " + con[4].saleName)
 				
 				
 				
