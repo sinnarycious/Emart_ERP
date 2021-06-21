@@ -38,6 +38,7 @@ public interface SaleDAO {
 
 	Sale selectDoughnutThisMonthProfit(int saleCatNo);
 
+	List<Sale> selectTop5(int saleCatNo);
 
-
+	
 }

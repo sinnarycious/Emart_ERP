@@ -4,6 +4,8 @@ package com.sinnarycious.emart24.sale.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.sinnarycious.emart24.sale.model.vo.Sale;
+
 
 public interface SaleService {
 
@@ -15,6 +17,8 @@ public interface SaleService {
 	int selectSaleTotalContents();
 
 	Map<String, Object> selectDoughnutProfit(String sqlDate);
+
+	Map<String, List<Sale>> selectTop5();
 
 
 }

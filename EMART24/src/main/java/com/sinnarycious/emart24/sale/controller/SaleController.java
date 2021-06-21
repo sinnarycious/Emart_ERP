@@ -72,6 +72,15 @@ public class SaleController {
 				
 		return map;
 	}
+	
+	@RequestMapping("/sale/top5.do")
+	@ResponseBody
+	public Map<String, List<Sale>> top5() {
+		
+		Map<String, List<Sale>> map = saleService.selectTop5();
+		
+		return map;
+	}
 
 	@RequestMapping("/sale/sellPage.do")
 	public String selectSaleList(

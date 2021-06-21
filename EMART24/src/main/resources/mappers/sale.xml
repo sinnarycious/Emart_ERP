@@ -33,7 +33,6 @@
 	
 	<resultMap type="Sale" id="top5Map">
 		<result column="SALE_Name" property="saleName" />
-		<result column="SALE_CAT_NO" property="saleCatNo" />
 		<result column="SALE_SUM" property="saleSum" />
 	</resultMap>
 	
@@ -69,7 +68,7 @@
 	</select>
 		
 	<select id="selectDoughnutThisWeekProfit" parameterType="Sale" resultMap="doughnutProfitMap">
-		SELECT SUM(SALE_PRICE) "SALE_SUM" FROM SALE
+		SELECT NVL(SUM(SALE_PRICE),1) "SALE_SUM" FROM SALE
 		WHERE SALE_DATE BETWEEN TO_DATE(#{findDate})
 	  	  AND SYSDATE
 	      AND SALE_CAT_NO = #{saleCatNo}
@@ -83,18 +82,19 @@
 	</select>
 	
 	<select id="selectDoughnutThisMonthProfit" parameterType="_int" resultMap="doughnutProfitMap">
-		SELECT SUM(SALE_PRICE) "SALE_SUM" FROM SALE
+		SELECT NVL(SUM(SALE_PRICE),1) "SALE_SUM" FROM SALE
 		WHERE SALE_DATE BETWEEN (SELECT TRUNC(SYSDATE, 'MM') "LAST_MONTH" FROM DUAL)
 		  AND SYSDATE
 		  AND SALE_CAT_NO = #{saleCatNo}
 	</select>
 
 	<select id="selectTop5" parameterType="_int" resultMap="top5Map">
-		SELECT SALE_NAME, SALE_CAT_NO, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
+		SELECT * FROM
+		(SELECT SALE_NAME, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
 		WHERE SALE_CAT_NO = #{saleCatNo}
-	  	  AND ROWNUM <![CDATA[<]]> 6
 		GROUP BY SALE_NAME
-		ORDER BY "SALE_SUM" DESC;
+		ORDER BY "SALE_SUM" DESC)
+		WHERE ROWNUM <![CDATA[<]]> 6
 	</select>
 
 	<resultMap type="Sale" id="saleMap">
