@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sinnarycious.emart24.OE.model.service.OEService;
 import com.sinnarycious.emart24.OE.model.vo.OE;
 import com.sinnarycious.emart24.common.SearchUtils;
 import com.sinnarycious.emart24.common.Utils;
+import com.sinnarycious.emart24.product.model.vo.Product;
 
 @Controller
 public class OEController {
@@ -60,17 +60,19 @@ public class OEController {
 	@RequestMapping("/OE/searchInfo.do")
 	@ResponseBody
 	public Map<String, Object> searchInfo(
-			@RequestParam (required=false)Date orderDate1,
-			@RequestParam (required=false)Date orderDate2,
-			@RequestParam (required=false) String oeName,
+			@RequestParam( required=false, defaultValue="1") int cPage,
+			@RequestParam (required=false)String orderDate1,
+			@RequestParam (required=false)String orderDate2,
+			@RequestParam (required=false, defaultValue="") String oeName,
 			@RequestParam (required=false, defaultValue="0") int oeNo 
 			){
-		
+		int numPerPage = 10;
 		Map<String, Object> map = new HashMap<String, Object>();
 		oeName.replace('_', ' ');
+		int searchTotalContent = oeService.searchTotalContent(orderDate1, orderDate2, oeName, oeNo);
+		List<OE> searchList = oeService.searchInfo(cPage, numPerPage, orderDate1, orderDate2, oeName, oeNo);
 		
-		List<OE> searchList = oeService.searchInfo(orderDate1, orderDate2, oeName, oeNo);
-		String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "oe.do", oeName);
+		String pageBar = SearchUtils.getPageBar(searchTotalContent, cPage, 10, "oe.do", oeName);
 		
 		System.out.println("search : " + searchList);
 		
@@ -98,39 +100,54 @@ public class OEController {
 
 
 	/* 입고 등록하기 */
-	@RequestMapping("OE/updateStatus.do")
-	public String updateStatus() {
+	@RequestMapping("/OE/updateStatus.do")
+	@ResponseBody
+	public int updateStatus(
+			@RequestParam int oeNo,
+			@RequestParam String oeName) {
 		
-		return "";
+		int result = oeService.updateStastus(oeNo, oeName);
+		return result;
 	}
 
 	
-	// 발주 리스트 보내기 : 가율
-	@RequestMapping("/product/orderInsertList.do")
-	public ModelAndView orderInsertList(
-						 	HttpServletRequest req) {
-							// user_no 나중에 추가
-		Map map = new HashMap();
-		map.put("oeNo", req.getParameter("oeNo"));
-		map.put("oeCount", req.getParameter("oeCount"));
+	// 발주 다시 작성 : 가율
+	@RequestMapping("/OE/resetList.do")
+	public String resetList(@RequestParam int oeNo,
+							HttpServletRequest req, Model model) {
 		
-		ModelAndView mv = new ModelAndView("redirect:/orderPage");
+		int result = oeService.resetList(oeNo);
 		
-		return mv;
-	
-	}
-	
-	// 발주리스트 : 가율
-	@RequestMapping("/OE/orderList.do")
-	public String orderList(@RequestParam (required=false, defaultValue="0") int oeNo) {
-	
-		OE oe = oeService.orderList(oeNo);
+		String loc = "";
+		String msg = "";
 		
-		System.out.println("oeNo :" + oeNo );
-		
-		for (int i = 0; i > 0; i++) {
+		if (result > 0) {
 			
 		}
+		
+		
+		
+		return "common/msg";
+	}
+	
+	// 발주 리스트 : 가율
+	@RequestMapping("/product/orderInsertList.do")
+	public String orderInsertList(
+						 	@RequestParam int oeInvNo,
+							 @RequestParam String oeName,
+							 @RequestParam int oePrice,
+							 @RequestParam Date orderDate,
+							 @RequestParam int oeCatNo,
+							 Model model) {
+							// user_no 나중에 추가
+		
+		OE oe = new OE(oeInvNo, oeName, orderDate, oePrice, oeCatNo);
+		
+		List<OE> list = oeService.orderInsertList(oe);
+		
+		System.out.println("리스트" + list);
+		
+		model.addAttribute("list", list);
 		
 		return "orderPage";
 	}
