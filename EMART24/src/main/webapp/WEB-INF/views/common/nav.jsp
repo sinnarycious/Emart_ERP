@@ -24,7 +24,7 @@
                  <a href="${pageContext.request.contextPath}/OE/oe.do"><h5 class="OEsub">- 입고 관리</h5></a>
              </li>
              <li>
-                 <a href="${pageContext.request.contextPath}/common/inv.do">
+                 <a href="${pageContext.request.contextPath}/inv/inv.do">
                      <span class="icon"><img src="/emart24/resources/images/enter.png"></span>
                      <span class="title bold">재고 관리</span>
                  </a>

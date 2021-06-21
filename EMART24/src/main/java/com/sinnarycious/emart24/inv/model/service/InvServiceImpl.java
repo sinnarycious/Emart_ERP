@@ -1,5 +1,6 @@
 package com.sinnarycious.emart24.inv.model.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,6 @@ public class InvServiceImpl implements InvService {
 	@Autowired
 	InvDAO invDAO;
 	
-
 	@Override
 	public List<Map<String, String>> selectInvList(int pageNo, int numPerPage) {
 		
@@ -33,5 +33,8 @@ public class InvServiceImpl implements InvService {
 
 		return invDAO.searchInfo(invCatNo, invNo, invName);
 	}
+	
+	
 
+	
 }
