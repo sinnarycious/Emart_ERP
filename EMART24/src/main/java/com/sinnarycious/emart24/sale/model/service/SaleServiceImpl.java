@@ -141,6 +141,15 @@ public class SaleServiceImpl implements SaleService {
 
 		return dataMap;
 		
+		
+		
 	}
+	
+	// 조회 기능
+		@Override
+		public List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo) {
+
+			return saleDAO.searchInfo(saleDate1, saleDate2, saleName, proNo);
+		}
 
 }

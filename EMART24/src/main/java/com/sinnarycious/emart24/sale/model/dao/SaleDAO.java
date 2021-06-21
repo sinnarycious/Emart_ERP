@@ -37,6 +37,10 @@ public interface SaleDAO {
 	Sale selectDoughnutLastMonthProfit(Sale sale);
 
 	Sale selectDoughnutThisMonthProfit(int saleCatNo);
+	
+	// 조회 기능
+
+	List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo);
 
 
 
