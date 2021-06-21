@@ -51,7 +51,9 @@
 						$('#searchBtn').click();
 					}
 				});
-
+				$('#orderDate1, #orderDate2').on('click',function(){
+					$(this).val('');
+				});
 				$('#searchBtn')
 						.on(
 								'click',
@@ -64,7 +66,7 @@
 									if (orderDate1 == "" && orderDate2 == ""
 											&& oeName == "" && oeNo == "") {
 										alert("검색 값을 입력하세요!");
-									} else if (oeName != null) {
+									}else {
 										$.ajax({ // jQuery 전용 함수
 													url : "${pageContext.request.contextPath}/OE/searchInfo.do",
 													type : "get",
@@ -97,13 +99,13 @@
 																	+ '</td>');
 															var $oeCount = $('<td class="oeCount"><span class="num">'
 																	+ search[i].oeCount
-																	+ '</span></td>');
+																	+ '</span>개</td>');
 															var $oePrice = $('<td class="oePrice"><span class="num">'
 																	+ search[i].oePrice
-																	+ '</span></td>');
-															var $orderDate = $('<td class="orderDate">'
+																	+ '</span>원</td>');
+															var $orderDate = $('<td class="orderDate"><span class="num">'
 																	+ dateChange(search[i].orderDate)
-																	+ '</td>');
+																	+ '</span></td>');
 															var $oeStatus = '';
 															if (search[i].oeStatus != 'Y') {
 																$oeStatus = $('<td>'

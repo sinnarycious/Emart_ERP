@@ -1,6 +1,5 @@
 package com.sinnarycious.emart24.OE.model.dao;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class OEDAOImpl implements OEDAO {
 	
 	// 검색 기능
 	@Override
-	public List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo) {
+	public List<OE> searchInfo(String orderDate1, String orderDate2, String oeName, int oeNo) {
 		
 		System.out.println("orderDate1 : " + orderDate1);
 		System.out.println("orderDate2 : " + orderDate2);
@@ -40,6 +39,7 @@ public class OEDAOImpl implements OEDAO {
 		System.out.println("oeName : " + oeName);
 		
 		OE oe = new OE(orderDate1, orderDate2, oeName, oeNo);
+		
 		return sqlSession.selectList("oe.searchInfo", oe);
 	}
 

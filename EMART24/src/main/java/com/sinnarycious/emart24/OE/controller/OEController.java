@@ -60,9 +60,9 @@ public class OEController {
 	@RequestMapping("/OE/searchInfo.do")
 	@ResponseBody
 	public Map<String, Object> searchInfo(
-			@RequestParam (required=false)Date orderDate1,
-			@RequestParam (required=false)Date orderDate2,
-			@RequestParam (required=false) String oeName,
+			@RequestParam (required=false)String orderDate1,
+			@RequestParam (required=false)String orderDate2,
+			@RequestParam (required=false, defaultValue="") String oeName,
 			@RequestParam (required=false, defaultValue="0") int oeNo 
 			){
 		

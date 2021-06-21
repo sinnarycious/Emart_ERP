@@ -15,7 +15,7 @@ public interface OEDAO {
 	int selectOETotalContents();
 
 	// 검색 기능
-	List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo);
+	List<OE> searchInfo(String orderDate1, String orderDate2, String oeName, int oeNo);
 
 	// 입고 내역 등록 버튼
 	int updateStatus(int oeNo, String oeName);

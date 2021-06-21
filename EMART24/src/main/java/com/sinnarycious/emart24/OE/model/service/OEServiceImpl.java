@@ -1,6 +1,5 @@
 package com.sinnarycious.emart24.OE.model.service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class OEServiceImpl implements OEService {
 
 	// 검색 기능
 	@Override
-	public List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo) {
+	public List<OE> searchInfo(String orderDate1, String orderDate2, String oeName, int oeNo) {
 
 		return oeDAO.searchInfo(orderDate1, orderDate2, oeName, oeNo);
 	}
