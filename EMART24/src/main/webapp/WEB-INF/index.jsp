@@ -12,6 +12,7 @@
 <title>Emart24_ERP</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/login.css">
+<link rel="stylesheet" href="/emart24/resources/css/common/projectMember.css">
 <script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -44,7 +45,16 @@
 	</section>
 	<div class="copyrightText">
 		<hr>
-		<h5>프로젝트 참여원</h5>
+		<button class="btn loginBtn" id="open">프로젝트 참여원</button>
+		<div class="modal hidden">
+			<div class="modal_overlay"></div>
+			<div class="modal_content">
+			<div>
+				<img src="/emart24/resources/images/projectMember.png" class="projectMemberImg">
+				<button>X</button>
+			</div>
+		</div>
+		</div>
 		<p style="text-align: center;">copyright © 2021 Sinnarycious All
 			Rights Reserved</p>
 	</div>
@@ -108,8 +118,24 @@
 		}
 		return unescape(cookieValue);
 	}
-</script>
 
+</script>
+<script>
+
+	const openButton = document.getElementById("open");
+	const modal = document.querySelector(".modal");
+	const overlay = modal.querySelector(".modal_overlay");
+	const closeBtn = modal.querySelector("button");
+	const openModal = () => {
+		modal.classList.remove("hidden");
+	}
+	const closeModal = () => {
+		modal.classList.add("hidden");
+	}
+	overlay.addEventListener("click", closeModal);
+	closeBtn.addEventListener("click", closeModal);
+	openButton.addEventListener("click", openModal);
+</script>
 
 
 </body>
