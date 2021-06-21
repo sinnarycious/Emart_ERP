@@ -19,7 +19,7 @@ form {
     margin-right: 0;
 }
 
-.search_text {
+.proName {
 	width: 720px;
 }
 
@@ -49,19 +49,20 @@ form {
     padding : 10px;
     
 }
-.resultList tr:first-child{
-    border-top : var(--yellow) 2px solid;
-    border-bottom : 0;
-	border-left : var(--yellow) 2px solid;
-	border-right : var(--yellow) 2px solid;
-}
+
 tr:nth-child(n+2){
     border-bottom : 0;
-	border-left : var(--yellow) 2px solid;
-	border-right : var(--yellow) 2px solid;
+	/* border-left : var(--yellow) 2px solid;
+	border-right : var(--yellow) 2px solid; */
 }
+/*
 tr:last-child{
-    border-bottom : var(--yellow) 2px solid;
+   border-bottom : var(--yellow) 2px solid;
+}
+*/
+
+tfoot {
+	 border-bottom : var(--yellow) 2px solid;
 }
 
 .td1 {
@@ -111,7 +112,7 @@ td {
 }
 
 .category, .pdtNo, .search {
-	padding-right: 25px;
+	padding-right: 25px; 
 }
 
 #pdtNo_num {

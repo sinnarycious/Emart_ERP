@@ -20,17 +20,6 @@ public class Sale implements Serializable{
 	private int userNo;
 	private int saleSum;
 	private String findDate;
-	private int proNo;
-
-	private String saleDate1;
-	private String saleDate2;
-
-	public Sale(String saleDate1, String saleDate2, String saleName, int proNo) {
-		this.saleDate1 = saleDate1;
-		this.saleDate2 = saleDate2;
-		this.saleName = saleName;
-		this.proNo = proNo;
-	}
 	
 	public Sale(String findDate, int saleCatNo) {
 		this.findDate = findDate;

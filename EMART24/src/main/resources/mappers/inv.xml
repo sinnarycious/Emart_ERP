@@ -10,7 +10,7 @@
 		<result column="INV_S_COUNT" property="invSCount" />
 		<result column="INV_PRICE" property="invPrice" />
 		<result column="INV_CAT_NO" property="invCatNo" />
-
+		<result column="userId" property="userId" />
 	</resultMap>
 	
 		<select id="selectInvList" resultMap="invMap">
@@ -38,7 +38,6 @@
 	</select>
 	
 
-	
 <!-- 
 	INV_NO, INV_NAME, INV_W_COUNT
 	INV_S_COUNT, INV_PRICE, INV_CAT_NO

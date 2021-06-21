@@ -33,6 +33,7 @@
 	
 	<resultMap type="Sale" id="top5Map">
 		<result column="SALE_Name" property="saleName" />
+		<result column="SALE_CAT_NO" property="saleCatNo" />
 		<result column="SALE_SUM" property="saleSum" />
 	</resultMap>
 	
@@ -68,7 +69,7 @@
 	</select>
 		
 	<select id="selectDoughnutThisWeekProfit" parameterType="Sale" resultMap="doughnutProfitMap">
-		SELECT NVL(SUM(SALE_PRICE),1) "SALE_SUM" FROM SALE
+		SELECT SUM(SALE_PRICE) "SALE_SUM" FROM SALE
 		WHERE SALE_DATE BETWEEN TO_DATE(#{findDate})
 	  	  AND SYSDATE
 	      AND SALE_CAT_NO = #{saleCatNo}
@@ -82,19 +83,18 @@
 	</select>
 	
 	<select id="selectDoughnutThisMonthProfit" parameterType="_int" resultMap="doughnutProfitMap">
-		SELECT NVL(SUM(SALE_PRICE),1) "SALE_SUM" FROM SALE
+		SELECT SUM(SALE_PRICE) "SALE_SUM" FROM SALE
 		WHERE SALE_DATE BETWEEN (SELECT TRUNC(SYSDATE, 'MM') "LAST_MONTH" FROM DUAL)
 		  AND SYSDATE
 		  AND SALE_CAT_NO = #{saleCatNo}
 	</select>
 
 	<select id="selectTop5" parameterType="_int" resultMap="top5Map">
-		SELECT * FROM
-		(SELECT SALE_NAME, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
+		SELECT SALE_NAME, SALE_CAT_NO, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
 		WHERE SALE_CAT_NO = #{saleCatNo}
+	  	  AND ROWNUM <![CDATA[<]]> 6
 		GROUP BY SALE_NAME
-		ORDER BY "SALE_SUM" DESC)
-		WHERE ROWNUM <![CDATA[<]]> 6
+		ORDER BY "SALE_SUM" DESC;
 	</select>
 
 	<resultMap type="Sale" id="saleMap">
@@ -109,33 +109,12 @@
 	</resultMap>
 	
 	<select id="selectSaleList" resultMap="saleMap">
-		SELECT S.*,P.PRO_NO FROM SALE S,PRODUCT P
-		WHERE SALE_NAME = PRO_NAME
+		SELECT * FROM SALE
 		ORDER BY SALE_NO DESC
 	</select>
 	
 	<select id="selectSaleTotalContents" resultType="_int">
 		SELECT COUNT(*) FROM SALE
-	</select>
-	
-	<!-- 검색 기능 -->
-	<select id="searchInfo" parameterType="sale" resultMap="saleMap">
-		SELECT S.*, PRO_NO
-		FROM PRODUCT P, SALE S
-		WHERE SALE_NAME = PRO_NAME
-			<if test="saleName !=null">
-				AND SALE_NAME LIKE '%' || #{ saleName } || '%'
-			</if>
-			<if test="proNo != 0">
-				AND PRO_NO = #{ proNo }
-			</if>
-			<if test="saleDate1 != '' and saleDate2 = ''">
-				AND SALE_DATE = #{ saleDate1 }
-			</if>
-			<if test="saleDate1 != '' and saleDate2 != ''">
-				AND SALE_DATE BETWEEN #{ saleDate1 } AND #{ saleDate2 }
-			</if>
-
 	</select>
 
 

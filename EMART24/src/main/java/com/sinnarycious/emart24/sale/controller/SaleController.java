@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinnarycious.emart24.OE.model.vo.OE;
-import com.sinnarycious.emart24.common.SearchUtils;
 import com.sinnarycious.emart24.common.Utils;
 import com.sinnarycious.emart24.sale.model.service.SaleService;
 import com.sinnarycious.emart24.sale.model.vo.Sale;
@@ -73,17 +72,8 @@ public class SaleController {
 				
 		return map;
 	}
-	
-	@RequestMapping("/sale/top5.do")
-	@ResponseBody
-	public Map<String, List<Sale>> top5() {
-		
-		Map<String, List<Sale>> map = saleService.selectTop5();
-		
-		return map;
-	}
 
-	@RequestMapping("/sale/sale.do")
+	@RequestMapping("/sale/sellPage.do")
 	public String selectSaleList(
 			@RequestParam( required=false, defaultValue="1") int cPage,
 			Model model
@@ -96,7 +86,7 @@ public class SaleController {
 		
 		int totalContents = saleService.selectSaleTotalContents();
 		
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "sale.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "sellPage.do");
 		
 		System.out.println("list : " + list);
 		
@@ -105,48 +95,7 @@ public class SaleController {
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);
 		
-		return "sale";
-	}
-	
-	/* 조회 기능 */
-	@RequestMapping("/sale/searchInfo.do")
-	@ResponseBody
-	public Map<String, Object> searchInfo(
-			@RequestParam (required=false)String saleDate1,
-			@RequestParam (required=false)String saleDate2,
-			@RequestParam (required=false) String saleName,
-			@RequestParam (required=false, defaultValue="0") int proNo 
-			){
-		System.out.println(saleDate1);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		saleName.replace('_', ' ');
-
-		List<Sale> searchList = saleService.searchInfo(saleDate1, saleDate2, saleName, proNo);
-		String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "sale.do", saleName);
-
-		System.out.println("search : " + searchList);
-
-		map.put("search", searchList);
-		map.put("paging", pageBar);
-
-		return map;
-	}
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) throws Exception {
-	    final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-	    final CustomDateEditor dateEditor = new CustomDateEditor(df, true) {
-	        @Override
-	        public void setAsText(String text) throws IllegalArgumentException {
-	            if ("today".equals(text)) {
-	                setValue(new java.util.Date());
-	            } else {
-	                super.setAsText(text);
-	            }
-	        }
-	    };
-	    binder.registerCustomEditor(Date.class, dateEditor);
+		return "sellPage";
 	}
 
 	

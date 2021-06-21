@@ -7,8 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon"
-	href="/emart24/resources/images/emart.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/emart24/resources/images/emart.ico">
 <title>이마트24</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/nav.css">
@@ -55,7 +54,7 @@
             <!-- 상품명 검색 -->
             <h4>상품명 &nbsp;</h4>
             <div class="search">
-                <input type="text" name="proName" class="search_text" id="proName" >
+                <input type="text" name="proName" class="proName" id="proName" >
             </div>
             <!-- 상품명 검색 끝-->
 
@@ -181,12 +180,12 @@
 		console.log(price);
 		console.log($(this).val() * price);
 	});
-	
-	$('#search_btn').on('click', function(){
-		var proName = $("#proName").val();
-		var proCatNo = $("#proCatNo").val();
-		var proNo = $("#proNo").val();
-		var proPriceE = $('#proPriceE').val();
+
+	$('#search_btn').on('click', function() {
+		var proName = $('#proName').val();
+		var proCatNo = $('#proCatNo').val();
+		var proNo = $('#proNo').val();
+		var proPriceE  = $('#proPriceE').val();
 		var pdt_Count = $('#pdt_Count').val();
 	
 	<!-- 카테고리랑 발주번호를 클릭 시 이름을 못불러옴 -->
@@ -197,7 +196,7 @@
 		 console.log(proNo);
 		 
 		$.ajax({
-    		url : "${pageContext.request.contextPath }/product/searchBar.do",
+    		url : "${pageContext.request.contextPath}/product/searchBar.do",
     		type : "get",
     		data : {
     			proName : proName,
@@ -210,10 +209,8 @@
     			
     			$('#resultList').empty();	
     	
-    			var search = data.searchPdList;
-    			console.log(search[0].proName);
-    			console.log(search[0].proPriceE);
-
+    			var search = data.selectPdList;
+    			
     			// 검색리스트 반복문
     			for(var i in search) {
     				var $tr = $('<tr>');
@@ -224,7 +221,7 @@
     				var $price = $('<td class="td1" style="width:70px;"><h4>금액</h4></td>');
     				var $proPriceE = $('<td sytle="width:80px;" name="proPriceE" id="proPriceE">'
     				                   +'<input type="hidden" class="originalPrice" value="' + search[i].proPriceE + '">'
-			                	+'<span class="calcPrice">' + search[i].proPriceE + '</span></td>');
+			                	+'<span class="calcPrice">' + search[i].proPriceE + '</span> 원</td>');
     				var $td1 = $('<td class="td1" id="updown" style="width:180px;"><h4>수량</h4><input type="number" class="qty" id="Pdt_Count" value="1" min="1"</td>');
     				var $btn = $('<td style="width:110px; pdding-right:30px;"><button class="btn click" id="addProduct" onclick="test(this)">추가</button></td></tr>');
     				
@@ -260,54 +257,61 @@
 	});
     	
 
-		function dateChange( time ) {
- 			var myDate = new Date(time);
- 			return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + myDate.getDate()).slice(-2); 
- 		}
+	function dateChange( time ) {
+ 		var myDate = new Date(time);
+ 		return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + myDate.getDate()).slice(-2); 
+ 	}
 
     	
     	// '추가'버튼 클릭 시 검색 결과 리스트 전달하기
     	
-		function test(){
-			
-			var oeNo = $('#addProduct').parent().parent().find('.oeNo').val();
-			var proNo = $('#addProduct').parent().parent().find('.proNum').val();
-			var proName = $('#addProduct').parent().parent().find('.proName').val();
-			var oeCount = $('#addProduct').parent().parent().find('.qty').val();
-			var orderDate = dateChange(new Date());
-			var oePriceE = Number($('#addProduct').parent().parent().find('.originalPrice').val());
-			var mul = Number($('#addProduct').parent().parent().find('.qty').val());
-			
-			console.log(proName);
-			console.log(oeNo);
-			console.log(proNo);
-			console.log(oeCount);
-			console.log(orderDate);
-			console.log(oePriceE);
-			console.log(mul);
+	function test(obj){
 		
-			var $tr = $('<tr>');
-			var $oeNo =$('<td style="width:115px;padding-left:45px;" class="oeNo">' + oeNo + '</td>');
-			var $proNo = $('<td style="width:110px;padding-left:8px;">'+ proNo + '</td>');
-			var $proName =$('<td class="proName" name="proName" id="proName">' + proName + '</td>');
-			var $oeCount =$('<td style="width:60px;">' + oeCount + '</td>');
-			var $mul =  $('<td class="mul" style="width:90px;padding-left:10px">' + oePriceE * mul + '</td>');
-			var $orderDate = $('<td style="padding-left:37px;">' + orderDate + '</td>');
-			var $btn2 = $('<td><button class="btn click" id="orderDel" onclick="OrderDel(this)">삭제</button></td></tr>');
+    	$.ajax({
+    		url :  "${pageContext.request.contextPath}/OE/orderList.do",
+    		type : 'get',
+    		data : {
+    			oeNo : oeNo
+    		}, 
+    		dataType : 'json',
+    		success : function(data2) {
+    			alert('전송 성공');
+    		
+	    		
+				var oeNo = $(oeNo).val();
+				var proNo = $(obj).parent().parent().find('.proNum').val();
+				var proName = $(obj).parent().parent().find('#proName').text();
+				var oeCount = $(obj).parent().parent().find('.qty').val();
+				var orderDate = dateChange(new Date());
+				var oePriceE = Number($(obj).parent().parent().find('.originalPrice').val());
+				var mul = Number($(obj).parent().parent().find('.qty').val());
 			
-			
-			$tr.append($oeNo);
-			$tr.append($proNo);
-			$tr.append($proName);
-			$tr.append($oeCount);
-			$tr.append($mul);
-			$tr.append($orderDate);
-			$tr.append($btn2);
-			   
-			 $('tbody').append($tr);
-			
-		
-		}
+					
+				var $tr = $('<tr>');
+				var $oeNo =$('<td style="width:115px;padding-left:45px;" class="oeNo">' + oeNo + '</td>');
+				var $proNo = $('<td style="width:110px;padding-left:8px;" class="proNo" name="proNo">'+ proNo + '</td>');
+				var $proName =$('<td class="proName" name="proName" id="proName">' + proName + '</td>');
+				var $oeCount =$('<td style="width:60px;">' + oeCount + ' 개</td>');
+				var $mul =  $('<td class="mul" style="width:90px;padding-left:10px">' + oePriceE * mul + ' 원</td>');
+				var $orderDate = $('<td style="padding-left:37px;">' + orderDate + '</td>');
+				var $btn2 = $('<td><button class="btn click" id="orderDel" onclick="OrderDel(this)">삭제</button></td></tr>');
+				
+				
+				$tr.append($oeNo);
+				$tr.append($proNo);
+				$tr.append($proName);
+				$tr.append($oeCount);
+				$tr.append($mul);
+				$tr.append($orderDate);
+				$tr.append($btn2);
+				   
+				 $('tbody').append($tr);
+				 
+    		}, error : function(error) {
+    			alert('실패');
+    		}	
+    	})
+	}
     	
     	// 총합계
 

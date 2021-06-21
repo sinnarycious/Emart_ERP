@@ -1,5 +1,6 @@
 package com.sinnarycious.emart24.OE.model.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.sinnarycious.emart24.OE.model.dao.OEDAO;
 import com.sinnarycious.emart24.OE.model.vo.OE;
-import com.sinnarycious.emart24.product.model.vo.Product;
 
 @Service
 public class OEServiceImpl implements OEService {
@@ -29,29 +29,20 @@ public class OEServiceImpl implements OEService {
 		return oeDAO.selectOETotalContents();
 	}
 
-	// 검색 기능
+	/* 입고 관리 이동 기존
 	@Override
-	public List<OE> searchInfo(int pageNo, int numberPage, String orderDate1, String orderDate2, String oeName, int oeNo) {
+	public List<OE> selectOEList() {
 
-		return oeDAO.searchInfo(pageNo, numberPage, orderDate1, orderDate2, oeName, oeNo);
+		return oeDAO.selectOEList();
 	}
-	
-	// 입고 내역 등록 버튼
+	*/
+
 	@Override
-	public int updateStastus(int oeNo, String oeName) {
-		int result = 0;
-		// oeStatus 'N'에서 'Y'로 변경
-		int result1 = oeDAO.updateStatus(oeNo, oeName);
-		
-		if( result1 != 0 ) {
-			// oeNo와 oeName으로 oeInvNo 찾기
-			int oeInvNo = oeDAO.findOEInvNo(oeNo, oeName);
-			
-			// 발주 수량 재고 테이블에 추가
-			result = oeDAO.addCount(oeInvNo);
-		}
-		return result;
+	public List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo) {
+
+		return oeDAO.searchInfo(orderDate1, orderDate2, oeName, oeNo);
 	}
+
 
 	@Override
 	public int resetList(int oeNo) {
@@ -59,17 +50,30 @@ public class OEServiceImpl implements OEService {
 		return oeDAO.resetList();
 	}
 	
-	// 발주리스트 결과
+	// 발주리스트 보내기 : 가율
 	@Override
 	public List<OE> orderInsertList(OE oe) {
 		
 		return oeDAO.orderInsertList(oe);
 	}
 
-	@Override
-	public int searchTotalContent(String orderDate1, String orderDate2, String oeName, int oeNo) {
-		return oeDAO.searchTotalContent(orderDate1, orderDate2, oeName, oeNo);
-	}
 
+	// 발주리스트 : 가율
+	@Override
+	public OE orderList() {
+		
+		OE oe = new OE();
+		
+		int count = 0;
+		
+		if(count == 0) {
+			oe = oeDAO.orderList();		// 증가값
+			count++;
+		} else {
+			oe = oeDAO.orderList2();	// 현재값
+		}
+		
+		return oeDAO.orderList();
+	}
 
 }

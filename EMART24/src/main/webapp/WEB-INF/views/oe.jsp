@@ -7,10 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon"
+href="/emart24/resources/images/emart.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>이마트24</title>
-<link rel="shortcut icon" type="image/x-icon"
-   href="/emart24/resources/images/emart.ico">
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/oe.css">
 <script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
@@ -42,8 +42,9 @@
 
 				<button id="searchBtn" class="btn search">조회</button>
 			</div>
-
+		
 			<!-- 검색 ajax -->
+
 			<script>
 				// 키보드 엔터 = '#searchBtn' 클릭과 동일한 효과
 				$('#oeNo, #oeName').on('keyup', function(event) {
@@ -51,9 +52,7 @@
 						$('#searchBtn').click();
 					}
 				});
-				$('#orderDate1, #orderDate2').on('click',function(){
-					$(this).val('');
-				});
+
 				$('#searchBtn')
 						.on(
 								'click',
@@ -66,7 +65,7 @@
 									if (orderDate1 == "" && orderDate2 == ""
 											&& oeName == "" && oeNo == "") {
 										alert("검색 값을 입력하세요!");
-									}else {
+									} else if (oeName != null) {
 										$.ajax({ // jQuery 전용 함수
 													url : "${pageContext.request.contextPath}/OE/searchInfo.do",
 													type : "get",
@@ -99,13 +98,13 @@
 																	+ '</td>');
 															var $oeCount = $('<td class="oeCount"><span class="num">'
 																	+ search[i].oeCount
-																	+ '</span>개</td>');
+																	+ '</span></td>');
 															var $oePrice = $('<td class="oePrice"><span class="num">'
 																	+ search[i].oePrice
-																	+ '</span>원</td>');
-															var $orderDate = $('<td class="orderDate"><span class="num">'
-																	+ dateChange(search[i].orderDate)
 																	+ '</span></td>');
+															var $orderDate = $('<td class="orderDate">'
+																	+ dateChange(search[i].orderDate)
+																	+ '</td>');
 															var $oeStatus = '';
 															if (search[i].oeStatus != 'Y') {
 																$oeStatus = $('<td>'
@@ -278,6 +277,7 @@
 
 			<div id="paging_area">
 				<c:out value="${ pageBar }" escapeXml="false" />
+
 			</div>
 		</div>
 
