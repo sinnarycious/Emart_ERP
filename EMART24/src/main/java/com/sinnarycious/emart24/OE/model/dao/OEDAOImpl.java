@@ -29,15 +29,8 @@ public class OEDAOImpl implements OEDAO {
 
 		return sqlSession.selectOne("oe.selectOETotalContents");
 	}
-
-	/*
-	@Override
-	public List<OE> selectOEList() {
-
-		return sqlSession.selectList("oe.selectOEList");
-	}
-	*/
 	
+	// 검색 기능
 	@Override
 	public List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo) {
 		
@@ -50,7 +43,31 @@ public class OEDAOImpl implements OEDAO {
 		return sqlSession.selectList("oe.searchInfo", oe);
 	}
 
+	// 입고 내역 등록 버튼
+	@Override
+	public int updateStatus(int oeNo, String oeName) {
+		
+		OE oe = new OE(oeNo, oeName);		
+		return sqlSession.update("oe.updateStatus", oe);
+	}
+	// oeNo와 oeName으로 oeInvNo 찾기
+	@Override
+	public int findOEInvNo(int oeNo, String oeName) {
+		
+		System.out.println("oeNo : " + oeNo);
+		System.out.println("oeName : " + oeName);
 
+		OE oe = new OE(oeNo, oeName);
+		return sqlSession.selectOne("oe.findOEInvNo", oe);
+	}	
+	// 발주 수량 재고 테이블에 추가
+	@Override
+	public int addCount(int oeInvNo) {
+		
+		System.out.println("oeInvNo : " + oeInvNo);
+
+		return sqlSession.update("oe.addCount", oeInvNo);
+	}
 
 
 
@@ -58,31 +75,24 @@ public class OEDAOImpl implements OEDAO {
 	
 	
 
+	// 다시 쓰기 - 가율
 
-	// 발주결과 리스트 보내기 - 가율
+	@Override
+	public int resetList() {
+		
+		return sqlSession.delete("oe.resetList");
+	}
+
+	// 발주결과 리스트 - 가율
 	@Override
 	public List<OE> orderInsertList(OE oe) {
 		
 		return sqlSession.selectList("oe.orderInsertList", oe);
 	}
 
-	
-	// 발주리스트 : 가율
-	@Override
-	public OE orderList(int oeNo) {
-	
-		return sqlSession.selectOne("oe.orderList",  oeNo);
-	}
 
-	@Override
-	public int resetList() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	
-	
-	
+
 
 	
 }

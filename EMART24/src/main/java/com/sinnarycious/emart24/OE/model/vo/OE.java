@@ -39,11 +39,11 @@ public class OE implements Serializable{
 		this.orderDate = orderDate;
 		this.oePrice = oePrice;
 		this.oeCatNo = oeCatNo;
-
 	}
 	
-	public OE(int oeNo) {
-		 this.oeNo = oeNo;
+	public OE(int oeNo, String oeName) {
+		this.oeNo = oeNo;
+		this.oeName = oeName;
 	}
 }
 

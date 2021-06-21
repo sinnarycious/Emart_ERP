@@ -7,8 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon"
-href="/emart24/resources/images/emart.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>이마트24</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
@@ -42,9 +40,8 @@ href="/emart24/resources/images/emart.ico">
 
 				<button id="searchBtn" class="btn search">조회</button>
 			</div>
-		
-			<!-- 검색 ajax -->
 
+			<!-- 검색 ajax -->
 			<script>
 				// 키보드 엔터 = '#searchBtn' 클릭과 동일한 효과
 				$('#oeNo, #oeName').on('keyup', function(event) {
@@ -277,7 +274,6 @@ href="/emart24/resources/images/emart.ico">
 
 			<div id="paging_area">
 				<c:out value="${ pageBar }" escapeXml="false" />
-
 			</div>
 		</div>
 
