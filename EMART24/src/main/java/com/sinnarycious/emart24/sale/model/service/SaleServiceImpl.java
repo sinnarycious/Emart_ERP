@@ -114,7 +114,7 @@ public class SaleServiceImpl implements SaleService {
 
 			lastMonthDoughnutList.add(month);
 					
-			System.out.println("lastDoughnutMonthList : " + lastMonthDoughnutList.get(i-1));
+			// System.out.println("lastDoughnutMonthList : " + lastMonthDoughnutList.get(i-1));
 					
 		}
 		
@@ -125,7 +125,7 @@ public class SaleServiceImpl implements SaleService {
 
 			thisMonthDoughnutList.add(month);
 			
-			System.out.println("thisDoughnutMonthList : " + thisMonthDoughnutList.get(i-1));
+			// System.out.println("thisDoughnutMonthList : " + thisMonthDoughnutList.get(i-1));
 			
 		}
 
@@ -151,5 +151,32 @@ public class SaleServiceImpl implements SaleService {
 
 			return saleDAO.searchInfo(saleDate1, saleDate2, saleName, proNo);
 		}
+
+	@Override
+	public Map<String, List<Sale>> selectTop5() {
+		
+		
+		Map<String, List<Sale>> map = new HashMap<>();
+
+		for (int i = 1; i < 6; i++) {
+			List<Sale> top5 = saleDAO.selectTop5(i);
+			
+			if (i == 1) {
+				map.put("drink", top5);
+			} else if(i == 2) {
+				map.put("ice", top5);
+			} else if(i == 3) {
+				map.put("con", top5);
+			} else if(i == 4) {
+				map.put("snack", top5);
+			} else if(i == 5) {
+				map.put("simple", top5);
+			}
+			
+		}
+		
+		return map;
+	}
+
 
 }

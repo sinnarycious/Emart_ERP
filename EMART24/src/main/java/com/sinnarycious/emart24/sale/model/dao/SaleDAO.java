@@ -42,6 +42,7 @@ public interface SaleDAO {
 
 	List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo);
 
+	List<Sale> selectTop5(int saleCatNo);
 
-
+	
 }

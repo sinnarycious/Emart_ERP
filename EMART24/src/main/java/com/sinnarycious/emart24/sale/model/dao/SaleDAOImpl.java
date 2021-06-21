@@ -122,6 +122,12 @@ public class SaleDAOImpl implements SaleDAO {
 
 		return sqlSession.selectOne("sale.selectDoughnutThisMonthProfit", saleCatNo);
 	}
+
+	@Override
+	public List<Sale> selectTop5(int saleCatNo) {
+		
+		return sqlSession.selectList("sale.selectTop5", saleCatNo);
+	}
 	
 	@Override
 	public List<Map<String, String>> selectSaleList(int pageNo, int numberPage) {

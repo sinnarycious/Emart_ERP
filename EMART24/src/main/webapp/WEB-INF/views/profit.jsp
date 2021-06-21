@@ -32,7 +32,7 @@
                     <h3 class="graphTop5">수익 그래프</h3>
                     <span>
                         <select name="during" id="duringLine" onchange="duringLine()">
-                            <option name="during" value="week">주간</option>
+                            <option selected name="during" value="week">주간</option>
                             <option name="during" value="month">월간</option>
                         </select>
                     </span>
@@ -41,18 +41,18 @@
             </div>
             <div class="area doughnut graphArea">
                 <div class="day profit tag">
-                    <h2>220만</h2>
+                    <h2 class="today"></h2>
                     <h6>오늘 매출</h6>
                 </div>
                 <div class="month profit tag off">
-                    <h2>2200만</h2>
+                    <h2 class="thisMonth"></h2>
                     <h6>이번 달 매출</h6>
                 </div>
                 <div id="ration" style="border : 1px solid var(--light-gray);">
                     <div class="doughnutAnno">
                         <h3 class="ration">판매량 비율</h3>
                         <select name="during" id="duringDoughnut" onchange="duringDoughnut()">
-                            <option name="during" value="lastWeek">지난 주</option>
+                            <option selected name="during" value="lastWeek">지난 주</option>
                             <option name="during" value="thisWeek">이번 주</option>
                             <option name="during" value="lastMonth">지난 달</option>
                             <option name="during" value="thisMonth">이번 달</option>
@@ -67,11 +67,11 @@
                     <div>
                         <h4>과자</h4>
                         <div>
-                            <h6>1. 아침에 주스 100% 오렌지</h6>
-                            <h6>2. 아침에 주스 100% 오렌지</h6>
-                            <h6>3. 아침에 주스 100% 오렌지</h6>
-                            <h6>4. 아침에 주스 100% 오렌지</h6>
-                            <h6>5. 아침에 주스 100% 오렌지</h6>
+                            <h6 class="snackTop"></h6>
+                            <h6 class="snackTop"></h6>
+                            <h6 class="snackTop"></h6>
+                            <h6 class="snackTop"></h6>
+                            <h6 class="snackTop"></h6>
                         </div>
                     </div>
                 </div>
@@ -79,11 +79,11 @@
                 <div>
                     <h4>음료</h4>
                     <div>
-                        <h6>1. 아침에 주스 100% 오렌지</h6>
-                        <h6>2. 아침에 주스 100% 오렌지</h6>
-                        <h6>3. 아침에 주스 100% 오렌지</h6>
-                        <h6>4. 아침에 주스 100% 오렌지</h6>
-                        <h6>5. 아침에 주스 100% 오렌지</h6>
+                        <h6 class="drinkTop"></h6>
+                        <h6 class="drinkTop"></h6>
+                        <h6 class="drinkTop"></h6>
+                        <h6 class="drinkTop"></h6>
+                        <h6 class="drinkTop"></h6>
                     </div>
                 </div>
             </div>
@@ -91,11 +91,11 @@
                 <div>
                     <h4>냉동식품</h4>
                     <div>
-                        <h6>1. 아침에 주스 100% 오렌지</h6>
-                        <h6>2. 아침에 주스 100% 오렌지</h6>
-                        <h6>3. 아침에 주스 100% 오렌지</h6>
-                        <h6>4. 아침에 주스 100% 오렌지</h6>
-                        <h6>5. 아침에 주스 100% 오렌지</h6>
+                        <h6 class="iceTop"></h6>
+                        <h6 class="iceTop"></h6>
+                        <h6 class="iceTop"></h6>
+                        <h6 class="iceTop"></h6>
+                        <h6 class="iceTop"></h6>
                     </div>
                 </div>
             </div>
@@ -103,11 +103,11 @@
                 <div>
                     <h4>간편식</h4>
                     <div>
-                        <h6>1. 아침에 주스 100% 오렌지</h6>
-                        <h6>2. 아침에 주스 100% 오렌지</h6>
-                        <h6>3. 아침에 주스 100% 오렌지</h6>
-                        <h6>4. 아침에 주스 100% 오렌지</h6>
-                        <h6>5. 아침에 주스 100% 오렌지</h6>
+                        <h6 class="simpleTop"></h6>
+                        <h6 class="simpleTop"></h6>
+                        <h6 class="simpleTop"></h6>
+                        <h6 class="simpleTop"></h6>
+                        <h6 class="simpleTop"></h6>
                     </div>
                 </div>
             </div>
@@ -115,11 +115,11 @@
                 <div>
                     <h4>편의용품</h4>
                     <div>
-                        <h6>1. 아침에 주스 100% 오렌지</h6>
-                        <h6>2. 아침에 주스 100% 오렌지</h6>
-                        <h6>3. 아침에 주스 100% 오렌지</h6>
-                        <h6>4. 아침에 주스 100% 오렌지</h6>
-                        <h6>5. 아침에 주스 100% 오렌지</h6>
+                        <h6 class="conTop"></h6>
+                        <h6 class="conTop"></h6>
+                        <h6 class="conTop"></h6>
+                        <h6 class="conTop"></h6>
+                        <h6 class="conTop"></h6>
                     </div>
                 </div>
             </div>
@@ -141,6 +141,8 @@
 		var line;  // undefined
 		var wLine;
 		var mLine;
+		var todaySum = 0;
+		var thisMonthSum = 0;
 	
 		
 			$.ajax({ 
@@ -353,9 +355,9 @@
 						// console.log(monthDataset[i].data);
 					}
 			        
+					duringLine();
 			        // === include 'setup' then 'config' above ===
 			        
-					alert("전송 성공!");
 				}, error : function( error ) {
 					alert("전송 실패!");
 				}
@@ -426,9 +428,9 @@
 					
 					
 					for (var i in lastMonthDoughnutList) {
-						console.log(lastMonthDoughnutList[i]);
+						// console.log(lastMonthDoughnutList[i]);
 						lastMonthDoughnutData.push(lastMonthDoughnutList[i]);
-						console.log(lastMonthDoughnutData[i].saleSum);
+						// console.log(lastMonthDoughnutData[i].saleSum);
 					}
 					for (var i in thisMonthDoughnutList) {
 						//console.log(thisDoughnutMonthList[i]);
@@ -438,7 +440,7 @@
 					
 					// console.log('weekDoughnutData.length : ' + weekDoughnutData.length);
 					// console.log('weekDoughnutData.saleSum : ' + weekDoughnutData[0].saleSum);
-					
+
 					var lastWeekDoughnut = {
 			                labels: [
 			                  '음료',
@@ -587,8 +589,27 @@
 			              }
 			            };
 
+			            for (var i in thisWeekDoughnutData){
+			            	todaySum += Number(thisWeekDoughnutData[i].saleSum);
+			            }
 					
-					alert("전송 성공!");
+			            for (var i in thisMonthDoughnutData){
+			            	thisMonthSum += Number(thisMonthDoughnutData[i].saleSum);
+			            }
+			            
+			           if (todaySum == 5) {
+			        	   $(".doughnut").find('.today').text(0 + "원");
+			           } else {
+			        	   $(".doughnut").find('.today').text(todaySum + "원");
+			           }
+			           
+			           if (thisMonthSum == 5) {
+			        	   $(".doughnut").find('.thisMonth').text(0 + "원");
+			           } else {
+			        	   $(".doughnut").find('.thisMonth').text(thisMonthSum + "원");
+			           }
+			            
+					duringDoughnut();
 				}, error : function( error ) { 
 					
 					
@@ -596,7 +617,7 @@
 				}
 			});
 	    
-        function duringDoughnut() {
+        function duringDoughnut(val) {
             var val = document.getElementById('duringDoughnut').value;
             console.log(val);
 
@@ -615,6 +636,63 @@
             }
         }
 	
+
+	</script>
+	<script>
+		$.ajax({
+			url : "/emart24/sale/top5.do",
+			type : "get",
+			async : true,
+			success : function( data ) {
+				alert('전송 성공')
+				var snack = data.snack;
+				var drink = data.drink;
+				var ice = data.ice;
+				var simple = data.simple;
+				var con = data.con;
+				
+				console.log(snack);
+				console.log(drink);
+				console.log(ice);
+				console.log(simple);
+				console.log(con);
+				
+				$('.snackTop:eq(0)').text("1. " + snack[0].saleName)
+				$('.snackTop:eq(1)').text("2. " + snack[1].saleName)
+				$('.snackTop:eq(2)').text("3. " + snack[2].saleName)
+				$('.snackTop:eq(3)').text("4. " + snack[3].saleName)
+				$('.snackTop:eq(4)').text("5. " + snack[4].saleName)
+				
+				$('.drinkTop:eq(0)').text("1. " + drink[0].saleName)
+				$('.drinkTop:eq(1)').text("2. " + drink[1].saleName)
+				$('.drinkTop:eq(2)').text("3. " + drink[2].saleName)
+				$('.drinkTop:eq(3)').text("4. " + drink[3].saleName)
+				$('.drinkTop:eq(4)').text("5. " + drink[4].saleName)
+				
+				$('.iceTop:eq(0)').text("1. " + ice[0].saleName)
+				$('.iceTop:eq(1)').text("2. " + ice[1].saleName)
+				$('.iceTop:eq(2)').text("3. " + ice[2].saleName)
+				$('.iceTop:eq(3)').text("4. " + ice[3].saleName)
+				$('.icekTop:eq(4)').text("5. " + ice[4].saleName)
+				
+				$('.simpleTop:eq(0)').text("1. " + simple[0].saleName)
+				$('.simpleTop:eq(1)').text("2. " + simple[1].saleName)
+				$('.simpleTop:eq(2)').text("3. " + simple[2].saleName)
+				$('.simpleTop:eq(3)').text("4. " + simple[3].saleName)
+				$('.simpleTop:eq(4)').text("5. " + simple[4].saleName)
+				
+				$('.conTop:eq(0)').text("1. " + con[0].saleName)
+				$('.conTop:eq(1)').text("2. " + con[1].saleName)
+				$('.conTop:eq(2)').text("3. " + con[2].saleName)
+				$('.conTop:eq(3)').text("4. " + con[3].saleName)
+				$('.conTop:eq(4)').text("5. " + con[4].saleName)
+				
+				
+				
+			}, error : function( error ) {
+				alert('전송 실패');
+			}
+		});
 	</script>
 
 </body>

@@ -18,9 +18,14 @@ public interface SaleService {
 	int selectSaleTotalContents();
 
 	Map<String, Object> selectDoughnutProfit(String sqlDate);
+
 	
 	// 조회 기능
 	List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo);
+
+
+	Map<String, List<Sale>> selectTop5();
+
 
 
 }
