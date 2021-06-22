@@ -29,7 +29,7 @@
 				method="post">
 				<div class="myPageArea1">
 					<h2>마이페이지</h2>
-					<img src="/emart24/resources/images/yoona.png" class="profile_Img">
+					<img src="/emart24/resources/images/memberimage/${member.userAttNO}.png" class="profile_Img">
 					<table class="update_pw">
 						<tr>
 							<td class="td1">아이디</td>
@@ -42,16 +42,17 @@
 								></td>
 						</tr>
 						<tr>
-							<td class="td1">비밀번호 확인</td>
+							<td class="td1" style="border-bottom : none;">비밀번호 확인</td>
 							<td><input type="password" class="pwInput" name ="userPwd2" id = "userPwd2" placeholder="새 비밀번호 확인입니다"
 								></td>
 						</tr>
-						<tr>
+						<tr style="border-bottom : none;">
 						<td id="alert-success" style="display: none; color: #0000ff; font-weight: bold;">똑같지롱~~</td>
    						<td id="alert-fail" style="display: none; color: #ff0000; font-weight: bold;">다르지롱~~</td>						
 						</tr>
 					</table>
 					<table class="update_profile">
+						<tbody>
 						<tr>
 							<td class="td1">이름</td>
 							<td><input type="text" class="name" name ="userName"
@@ -67,11 +68,12 @@
 							<td><input type="text" class="email" name = "userEmail"
 								placeholder="새 이메일을 입력하세요"></td>
 						</tr>
-						<tr class = "mypage_border_bottom">
+						<tr class = "mypage_border_bottom" style="border-bottom : none;">
 							<td class="td1">전화번호</td>
 							<td><input type="text" class="phone" name = "userPhone"
 								placeholder="새 전화번호를 입력하세요"></td>
 						</tr>
+						</tbody>
 					</table>
 	
 				    <button class="btn submit myPage_updateBtn">수정하기</button> 
@@ -99,7 +101,7 @@
 							<td class="td1">점포 전화번호</td>
 							<td>02-408-7906</td>
 						</tr>
-						<tr class = "mypage_border_bottom">
+						<tr class = "mypage_border_bottom" style="border-bottom : none;">
 							<td class="td1">점포 개업일</td>
 							<td>${member.userOpenDate}</td>
 						</tr>
@@ -113,8 +115,8 @@
 		}
 		
 		$("#update").submit(function(event){
-			if($('#userPwd').val() != $('#userPwd2').val()) alert("비밀번호 확인 값과 다릅니다.");
-			else return;
+			if($('#userPwd').val() != $('#userPwd2').val()) { alert("비밀번호 확인 값과 다릅니다.");
+			} else return;
 			event.preventDefault();
 		});
 		

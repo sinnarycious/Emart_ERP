@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sinnarycious.emart24.OE.model.vo.OE;
 import com.sinnarycious.emart24.event.model.vo.Attachment;
 import com.sinnarycious.emart24.event.model.vo.Event;
 
@@ -34,7 +35,7 @@ public class EventDAOImpl implements EventDAO{
 	}
 	
 	@Override
-	public List<Event> searchInfo(Date evntDateS1, Date evntDateS2, String evntTitle, int evntNo) {
+	public List<Event> searchInfo(int pageNo, int numberPage, Date evntDateS1, Date evntDateS2, String evntTitle, int evntNo) {
 		
 		System.out.println("evntDateS1 : " + evntDateS1);
 		System.out.println("evntDateS2 : " + evntDateS2);
@@ -42,8 +43,19 @@ public class EventDAOImpl implements EventDAO{
 		System.out.println("evntTitle : " + evntTitle);
 				
 		Event event = new Event(evntDateS1, evntDateS2, evntTitle, evntNo);
-		return sqlSession.selectList("event.searchInfo", event);
+		
+		RowBounds rows = new RowBounds((pageNo-1) * numberPage, numberPage);
+		return sqlSession.selectList("event.searchInfo", event, rows);
 	}
+	
+	@Override
+	public int searchTotalContent(Date evntDateS1, Date evntDateS2, String evntTitle, int evntNo) {
+		
+		Event event = new Event(evntDateS1, evntDateS2, evntTitle, evntNo);
+		
+		return sqlSession.selectOne("event.searchTotalContent", event);
+	}
+
 
 
 }

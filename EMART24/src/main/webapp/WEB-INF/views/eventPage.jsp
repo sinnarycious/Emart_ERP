@@ -97,10 +97,13 @@
 			$(this).next('.evnt-content').show(1000);
 		}); 
 	
-		  $('#evntTitle').on('keyup', function(event){
+		  $('#evntTitle', '#evntName').on('keyup', function(event){
 				if( event.keyCode == 13) {
 					$('#searchBtn').click();
 				}
+			});
+		  $('#evntDateS1, #evntDateS2').on('click',function(){
+				$(this).val('');
 			});
 		
 		 $('#searchBtn').on('click', function(){
@@ -113,7 +116,7 @@
 			if (evntDateS1 == "" &&  evntDateS2== ""
 				&& evntTitle == "" && evntNo == "") {
 			alert("적어도 하나 이상 입력해야 합니다.");
-			} else if(evntTitle != null){
+			} else {
 				$.ajax({ 
 					url : "${pageContext.request.contextPath}/event/searchInfo.do",
 					type : "get",
