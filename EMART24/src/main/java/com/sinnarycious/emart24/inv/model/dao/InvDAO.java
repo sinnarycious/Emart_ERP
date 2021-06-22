@@ -12,8 +12,12 @@ public interface InvDAO {
 
 	int selectInvTotalContents();
 	
-	List<Inv> searchInfo(int invCatNo, int invNo, String invName);
+	List<Inv> searchInfo(int pageNo, int numberPage, int invCatNo, int invNo, String invName);
 
-	
+	int searchTotalContent(int invCatNo, int invNo, String invName);
+
+	int updateWarehouse(Inv inv);
+
+	int updateStock(Inv inv);
 
 }

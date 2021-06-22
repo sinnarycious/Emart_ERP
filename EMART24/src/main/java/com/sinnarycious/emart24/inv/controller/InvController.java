@@ -56,16 +56,17 @@ public class InvController {
 	 @RequestMapping("/inv/searchInfo.do")
 		@ResponseBody
 		public Map<String, Object> searchInfo(
+				@RequestParam( required=false, defaultValue="1") int cPage,
 				@RequestParam (required=false, defaultValue="0") int invCatNo,
 				@RequestParam (required=false, defaultValue="0") int invNo,
-				@RequestParam (required=false) String invName
+				@RequestParam (required=false, defaultValue="") String invName
 				){
-			
+		 	int numPerPage = 10;
 			Map<String, Object> map = new HashMap<String, Object>();
 			invName.replace('_', ' ');
-			
-			List<Inv> searchList = invService.searchInfo(invCatNo, invNo, invName);
-			String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "inv.do", invName);
+			int searchTotalContent = invService.searchTotalContent(invCatNo, invNo, invName);
+			List<Inv> searchList = invService.searchInfo(cPage, numPerPage, invCatNo, invNo, invName);
+			String pageBar = SearchUtils.getPageBar(searchTotalContent, cPage, 10, "inv.do", invName);
 			
 			System.out.println("search : " + searchList);
 			
@@ -91,5 +92,33 @@ public class InvController {
 		    binder.registerCustomEditor(Date.class, dateEditor);
 		}
 		
-
+		@RequestMapping("/inv/updateWarehouse.do")
+		@ResponseBody
+		public int updateWarehouse(
+				@RequestParam int invNo,
+				@RequestParam int count
+				){
+		 	int result = 0;
+		 	Inv inv = new Inv();
+		 	inv.setInvNo(invNo);
+		 	inv.setInvWCount(count);
+		 	result = invService.updateWarehouse(inv);
+		 	
+			return result;
+		}
+		
+		@RequestMapping("/inv/updateStock.do")
+		@ResponseBody
+		public int updateStock(
+				@RequestParam int invNo,
+				@RequestParam int count
+				){
+			int result = 0;
+		 	Inv inv = new Inv();
+		 	inv.setInvNo(invNo);
+		 	inv.setInvSCount(count);
+		 	result = invService.updateStock(inv);
+		 	
+			return result;
+		}
 }

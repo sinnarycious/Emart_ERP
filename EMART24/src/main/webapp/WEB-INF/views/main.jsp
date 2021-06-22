@@ -331,8 +331,16 @@
     var thisWDoughnut;
     var lastMDoughnut;
     var thisMDoughnut;
-    var today = new Date();
-    $('.profitTitle').text(today);
+    
+    
+    // 밀리초를 yyyy-mm-dd로 변환
+    function dateChange() {
+       var myDate = new Date();
+       return myDate.getFullYear() + '년 ' +('0' + (myDate.getMonth()+1)).slice(-2)+ '월 ' +  ('0' + myDate.getDate()).slice(-2) + '일'; 
+    }
+    
+    
+    $('.profitTitle').text(dateChange());
     
 	    $.ajax({ 
 			url : "/emart24/sale/doughnut.do",
