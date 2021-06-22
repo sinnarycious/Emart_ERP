@@ -35,7 +35,7 @@ public interface OEDAO {
 
 	List<OE> orderInsertList(OE oe);
 
-	OE orderList2();
+	// OE orderList2();
 
 
 

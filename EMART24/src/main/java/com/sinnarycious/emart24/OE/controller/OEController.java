@@ -24,6 +24,7 @@ import com.sinnarycious.emart24.OE.model.service.OEService;
 import com.sinnarycious.emart24.OE.model.vo.OE;
 import com.sinnarycious.emart24.common.SearchUtils;
 import com.sinnarycious.emart24.common.Utils;
+import com.sinnarycious.emart24.product.model.vo.Product;
 
 @Controller
 public class OEController {
@@ -110,32 +111,46 @@ public class OEController {
 		return result;
 	}
 
-	
+	/*
 	// 발주 리스트 보내기 : 가율
-	@RequestMapping("/product/orderInsertList.do")
-	public ModelAndView orderInsertList(
+	@RequestMapping("/OE/OEInsert.do")
+	public String orderInsertList(
 						 	HttpServletRequest req) {
 							// user_no 나중에 추가
+		
+		System.out.println("oeNo3 : " + req.getParameterValues("oeNo3"));
 		Map map = new HashMap();
 		map.put("oeNo", req.getParameter("oeNo"));
 		map.put("oeCount", req.getParameter("oeCount"));
 		
-		ModelAndView mv = new ModelAndView("redirect:/orderPage");
+		//ModelAndView mv = new ModelAndView("redirect:/OEInsert.do");
 		
-		return mv;
+		return "orderPage";
 	
 	}
-	
+	*/
 	// 발주리스트 : 가율이
 	@RequestMapping("/OE/orderList.do")
-	public String orderList() {
+	@ResponseBody
+	public Map<String, OE> orderList() {
+		
+		Map<String, OE> map = oeService.orderList();
+		
+		System.out.println("map : " + map.get("OE"));
+		
+		return map;
+	}
 	
-		OE oe = oeService.orderList();
+	/*
+	// 발주리스트 보내기 : 가율
+	@RequestMapping("/OE/OEInsert.do")
+	public String orderListInsert(@RequestParam OE oe) {
+	
 		
 		System.out.println("oe : " + oe);
 		
 		return "orderPage";
 	}
+	*/
 	
-
 }

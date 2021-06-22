@@ -17,6 +17,7 @@ public class Product implements Serializable{
 	private int proPriceS;
 	private int proPriceE;
 	private int proCatNo;
+	private int count;
 	
 	public Product(int proNo, String proName, int proCatNo) {
 		this.proNo = proNo;
