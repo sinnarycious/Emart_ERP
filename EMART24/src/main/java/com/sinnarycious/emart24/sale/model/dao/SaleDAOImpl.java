@@ -122,6 +122,17 @@ public class SaleDAOImpl implements SaleDAO {
 
 		return sqlSession.selectOne("sale.selectDoughnutThisMonthProfit", saleCatNo);
 	}
+
+	@Override
+	public List<Sale> selectTop5(int saleCatNo) {
+		
+		return sqlSession.selectList("sale.selectTop5", saleCatNo);
+	}
+	
+	public List<Sale> todaySum() {
+		
+		return sqlSession.selectList("sale.todaySum");
+	}
 	
 	@Override
 	public List<Map<String, String>> selectSaleList(int pageNo, int numberPage) {
@@ -137,5 +148,16 @@ public class SaleDAOImpl implements SaleDAO {
 		return sqlSession.selectOne("sale.selectSaleTotalContents");
 	}
 
-	
+	// 조회 기능
+	@Override
+	public List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo) {
+
+		System.out.println("saleDate1 : " + saleDate1);
+		System.out.println("saleDate2 : " + saleDate2);
+		System.out.println("saleNo : " + proNo);
+		System.out.println("saleName : " + saleName);
+
+		Sale sale = new Sale(saleDate1, saleDate2, saleName, proNo);
+		return sqlSession.selectList("sale.searchInfo", sale);
+	}
 }

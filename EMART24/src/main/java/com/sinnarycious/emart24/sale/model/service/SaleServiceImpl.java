@@ -77,6 +77,8 @@ public class SaleServiceImpl implements SaleService {
 		
 		List<Sale> thisMonthDoughnutList = new ArrayList<>();
 		
+		List<Sale> todaySum = saleDAO.todaySum();
+		
 		// System.out.println("sqlMonday : " + sqlWeekDate);
 		
 		// System.out.println("sqlMonth : " + sqlMonthDate);
@@ -114,7 +116,7 @@ public class SaleServiceImpl implements SaleService {
 
 			lastMonthDoughnutList.add(month);
 					
-			System.out.println("lastDoughnutMonthList : " + lastMonthDoughnutList.get(i-1));
+			// System.out.println("lastDoughnutMonthList : " + lastMonthDoughnutList.get(i-1));
 					
 		}
 		
@@ -125,9 +127,11 @@ public class SaleServiceImpl implements SaleService {
 
 			thisMonthDoughnutList.add(month);
 			
-			System.out.println("thisDoughnutMonthList : " + thisMonthDoughnutList.get(i-1));
+			// System.out.println("thisDoughnutMonthList : " + thisMonthDoughnutList.get(i-1));
 			
 		}
+		
+		
 
 		// System.out.println("lastDoughnutMonthList : " + lastMonthList);
 		
@@ -138,9 +142,44 @@ public class SaleServiceImpl implements SaleService {
 		dataMap.put("thisWeekDoughnutList", thisWeekDoughnutList);
 		dataMap.put("lastMonthDoughnutList", lastMonthDoughnutList);
 		dataMap.put("thisMonthDoughnutList", thisMonthDoughnutList);
-
+		dataMap.put("todaySum", todaySum);
+		
+		
 		return dataMap;
 		
+	}
+	
+	@Override
+	public Map<String, List<Sale>> selectTop5() {
+		
+		
+		Map<String, List<Sale>> map = new HashMap<>();
+
+		for (int i = 1; i < 6; i++) {
+			List<Sale> top5 = saleDAO.selectTop5(i);
+			
+			if (i == 1) {
+				map.put("drink", top5);
+			} else if(i == 2) {
+				map.put("ice", top5);
+			} else if(i == 3) {
+				map.put("con", top5);
+			} else if(i == 4) {
+				map.put("snack", top5);
+			} else if(i == 5) {
+				map.put("simple", top5);
+			}
+			
+		}
+		
+		return map;
+	}
+	
+	// 조회 기능
+	@Override
+	public List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo) {
+	
+		return saleDAO.searchInfo(saleDate1, saleDate2, saleName, proNo);
 	}
 
 }

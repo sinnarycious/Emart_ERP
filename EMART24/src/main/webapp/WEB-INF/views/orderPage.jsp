@@ -278,7 +278,7 @@
     			alert('전송 성공');
     		
 	    		
-				var oeNo = $(oeNo).val();
+				var oeNo = $oeNo.val();
 				var proNo = $(obj).parent().parent().find('.proNum').val();
 				var proName = $(obj).parent().parent().find('#proName').text();
 				var oeCount = $(obj).parent().parent().find('.qty').val();

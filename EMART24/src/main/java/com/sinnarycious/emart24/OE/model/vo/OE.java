@@ -23,10 +23,10 @@ public class OE implements Serializable{
 	private String oeName;
 	private int oeCatNo;
 
-	private Date orderDate1;
-	private Date orderDate2;
+	private String orderDate1;
+	private String orderDate2;
 
-	public OE(Date orderDate1, Date orderDate2, String oeName, int oeNo) {
+	public OE(String orderDate1, String orderDate2, String oeName, int oeNo) {
 		this.orderDate1 = orderDate1;
 		this.orderDate2 = orderDate2;
 		this.oeName = oeName;
@@ -39,7 +39,11 @@ public class OE implements Serializable{
 		this.orderDate = orderDate;
 		this.oePrice = oePrice;
 		this.oeCatNo = oeCatNo;
-
+	}
+	
+	public OE(int oeNo, String oeName) {
+		this.oeNo = oeNo;
+		this.oeName = oeName;
 	}
 	
 	public OE(int oeNo) {

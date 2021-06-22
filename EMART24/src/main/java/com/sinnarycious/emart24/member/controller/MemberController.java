@@ -63,6 +63,16 @@ public class MemberController {
 		return "common/msg";
 
 	}
+	// 로그인 기능 끝
+	
+	// 아이디 비밀번호 찾기 페이지
+		@RequestMapping("/member/memberFind.do")
+		public String memberFind() {		
+			
+			return "memberFind";
+		}
+	// 아이디 비밀번호 찾기 페이지 끝
+	
 	// 아이디 찾기
 	@RequestMapping("/member/searchId.do")
 	@ResponseBody
@@ -85,6 +95,7 @@ public class MemberController {
 		return map;
 
 	}
+	// 아이디 찾기 기능 끝
 	
 
 	// 비밀번호 찾기
@@ -122,7 +133,9 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
-
+	// 로그아웃 기능 끝
+	
+	
 	@RequestMapping("/member/memberUpdate.do")
 	public String memberUpdate(Member member, Model model) {
 		
@@ -145,5 +158,6 @@ public class MemberController {
 		return "common/msg";
 		
 	}
+	
 }
 

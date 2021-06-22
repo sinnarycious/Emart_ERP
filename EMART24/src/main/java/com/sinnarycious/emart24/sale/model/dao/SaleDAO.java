@@ -11,6 +11,15 @@ import com.sinnarycious.emart24.sale.model.vo.Sale;
 
 
 public interface SaleDAO {
+	
+	List<Map<String, String>> selectSaleList(int pageNo, int numberPage);
+
+	int selectSaleTotalContents();
+	
+	// 조회 기능
+
+	List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo);
+
 
 	String findLastMonday(String sqlDate);
 
@@ -26,10 +35,6 @@ public interface SaleDAO {
 
 	List<Sale> selectLineThisMonthProfit();
 
-	List<Map<String, String>> selectSaleList(int pageNo, int numberPage);
-
-	int selectSaleTotalContents();
-
 	Sale selectDoughnutThisWeekProfit(Sale sql);
 	
 	Sale selectDoughnutLastWeekProfit(Sale sql);
@@ -38,6 +43,8 @@ public interface SaleDAO {
 
 	Sale selectDoughnutThisMonthProfit(int saleCatNo);
 
+	List<Sale> selectTop5(int saleCatNo);
 
+	List<Sale> todaySum();
 
 }

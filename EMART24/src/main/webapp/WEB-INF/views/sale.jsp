@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="shortcut icon" type="image/x-icon"
+   href="/emart24/resources/images/emart.ico">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -33,7 +35,7 @@
 
 				<h4>판매 날짜</h4>
 				<input type="date" name="saleDate1" id="saleDate1"/> ~ <input type="date"
-					name="saleDate2" id="saleDate1" />
+					name="saleDate2" id="saleDate2" />
 				<h4>상품번호</h4>
 				<input type="number" name="proNo" id="proNo" style="width: 100px;" min="0" />
 				<h4>상품명</h4>

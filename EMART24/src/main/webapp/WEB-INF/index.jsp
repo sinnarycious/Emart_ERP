@@ -7,10 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon" href="/emart24/resources/images/emart.ico">
+<link rel="shortcut icon" type="image/x-icon"
+	href="/emart24/resources/images/emart.ico">
 <title>Emart24_ERP</title>
 <link rel="stylesheet" href="/emart24/resources/css/common/reset.css">
 <link rel="stylesheet" href="/emart24/resources/css/common/login.css">
+<link rel="stylesheet" href="/emart24/resources/css/common/projectMember.css">
+<script src="/emart24/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -32,7 +35,7 @@
 				</div>
 				<div class="idSave_checkbox">
 					<input type="checkbox" id="idSaveCheck"> <label
-						for="login_chk">아이디저장</label> <a href="/views/userSearch.jsp">아이디 찾기 / 비밀번호 찾기</a>
+						for="login_chk">아이디저장</label> <a href="${pageContext.request.contextPath}/member/memberFind.do">아이디 찾기 / 비밀번호 찾기</a>
 				</div>
 				<button class="btn loginBtn" name="" type="submit">
 					<h3>로그인</h3>
@@ -42,7 +45,16 @@
 	</section>
 	<div class="copyrightText">
 		<hr>
-		<h5>프로젝트 참여원</h5>
+		<button class="btn loginBtn" id="open">프로젝트 참여원</button>
+		<div class="modal hidden">
+			<div class="modal_overlay"></div>
+			<div class="modal_content">
+			<div>
+				<img src="/emart24/resources/images/projectMember.png" class="projectMemberImg">
+				<button>X</button>
+			</div>
+		</div>
+		</div>
 		<p style="text-align: center;">copyright © 2021 Sinnarycious All
 			Rights Reserved</p>
 	</div>
@@ -106,8 +118,24 @@
 		}
 		return unescape(cookieValue);
 	}
-</script>
 
+</script>
+<script>
+
+	const openButton = document.getElementById("open");
+	const modal = document.querySelector(".modal");
+	const overlay = modal.querySelector(".modal_overlay");
+	const closeBtn = modal.querySelector("button");
+	const openModal = () => {
+		modal.classList.remove("hidden");
+	}
+	const closeModal = () => {
+		modal.classList.add("hidden");
+	}
+	overlay.addEventListener("click", closeModal);
+	closeBtn.addEventListener("click", closeModal);
+	openButton.addEventListener("click", openModal);
+</script>
 
 
 </body>

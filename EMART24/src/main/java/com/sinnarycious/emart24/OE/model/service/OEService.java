@@ -8,14 +8,19 @@ import com.sinnarycious.emart24.OE.model.vo.OE;
 import com.sinnarycious.emart24.product.model.vo.Product;
 
 public interface OEService {
-
-	List<Map<String, String>> selectOEList(int pageNo, int numberPage);
 	
-	//List<OE> selectOEList();
-
-	List<OE> searchInfo(Date orderDate1, Date orderDate2, String oeName, int oeNo);
+	List<Map<String, String>> selectOEList(int pageNo, int numberPage);
 
 	int selectOETotalContents();
+	
+	int searchTotalContent(String orderDate1, String orderDate2, String oeName, int oeNo);
+	
+	// 검색 기능
+	List<OE> searchInfo(int pageNo, int numberPage, String orderDate1, String orderDate2, String oeName, int oeNo);
+	
+	// 입고 내역 등록 버튼 활성화
+	int updateStastus(int oeNo, String oeName);
+
 
 	// 다시 쓰기 - 가율
 	int resetList(int oeNo);
