@@ -150,14 +150,26 @@ public class SaleDAOImpl implements SaleDAO {
 
 	// 조회 기능
 	@Override
-	public List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo) {
+	public List<Sale> searchInfo(int pageNo, int numberPage, String saleDate1, String saleDate2, String saleName, int proNo) {
 
 		System.out.println("saleDate1 : " + saleDate1);
 		System.out.println("saleDate2 : " + saleDate2);
-		System.out.println("saleNo : " + proNo);
+		System.out.println("proNo : " + proNo);
 		System.out.println("saleName : " + saleName);
 
 		Sale sale = new Sale(saleDate1, saleDate2, saleName, proNo);
-		return sqlSession.selectList("sale.searchInfo", sale);
+		
+		RowBounds rows = new RowBounds((pageNo-1) * numberPage, numberPage);
+		return sqlSession.selectList("sale.searchInfo", sale, rows);
 	}
+
+
+	@Override
+	public int searchTotalContent(String saleDate1, String saleDate2, String saleName, int proNo) {
+		
+		Sale sale = new Sale(saleDate1, saleDate2, saleName, proNo);
+		System.out.println("sqlSession.selectOne(\"sale.searchTotalContent\", sale) : " + sqlSession.selectOne("sale.searchTotalContent", sale));
+		return sqlSession.selectOne("sale.searchTotalContent", sale);
+	}
+	
 }

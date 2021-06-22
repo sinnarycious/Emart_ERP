@@ -18,7 +18,8 @@ public interface SaleDAO {
 	
 	// 조회 기능
 
-	List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo);
+	List<Sale> searchInfo(int pageNo, int numberPage, String saleDate1, String saleDate2, String saleName, int proNo);
+	int searchTotalContent(String saleDate1, String saleDate2, String saleName, int proNo);
 
 
 	String findLastMonday(String sqlDate);

@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinnarycious.emart24.OE.model.vo.OE;
+import com.sinnarycious.emart24.common.SearchUtils;
 import com.sinnarycious.emart24.common.Utils;
 import com.sinnarycious.emart24.sale.model.service.SaleService;
 import com.sinnarycious.emart24.sale.model.vo.Sale;
@@ -111,18 +112,21 @@ public class SaleController {
 	@RequestMapping("/sale/searchInfo.do")
 	@ResponseBody
 	public Map<String, Object> searchInfo(
+			@RequestParam( required=false, defaultValue="1") int cPage,
 			@RequestParam (required=false)String saleDate1,
 			@RequestParam (required=false)String saleDate2,
-			@RequestParam (required=false)String saleName,
+			@RequestParam (required=false, defaultValue="")String saleName,
 			@RequestParam (required=false, defaultValue="0") int proNo 
 			){
-		System.out.println(saleDate1);
+		
+		int numPerPage = 10;
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		saleName.replace('_', ' ');
-
-		List<Sale> searchList = saleService.searchInfo(saleDate1, saleDate2, saleName, proNo);
-		String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "sale.do", saleName);
+		int searchTotalContent = saleService.searchTotalContent(saleDate1, saleDate2, saleName, proNo);
+		List<Sale> searchList = saleService.searchInfo(cPage, numPerPage, saleDate1, saleDate2, saleName, proNo);
+		
+		String pageBar = SearchUtils.getPageBar(searchTotalContent, cPage, 10, "searchInfo.do", saleName);
 
 		System.out.println("search : " + searchList);
 

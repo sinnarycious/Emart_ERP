@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="shortcut icon" type="image/x-icon"
-   href="/emart24/resources/images/emart.ico">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -9,6 +7,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon"
+   href="/emart24/resources/images/emart.ico">
 <link rel="shortcut icon" type="image/x-icon"
 	href="/emart24/resources/images/emart.ico">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -120,8 +120,7 @@
 															$tr.append($salePrice);
 															$tr.append($saleDate);
 
-															$('tbody').append(
-																	$tr);
+															$('tbody').append( $tr);
 
 														}
 
@@ -186,7 +185,7 @@
 				</tbody>
 			</table>
 
-			<div class="pageNo">
+			<div class="paging_area">
 				<c:out value="${pageBar}" escapeXml="false" />
 			</div>
 
