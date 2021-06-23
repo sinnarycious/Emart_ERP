@@ -28,7 +28,15 @@
             <h3>재고 현황</h3>
 
             <div class="searchBar">
-                    <h4>상품 카테고리</h4><input type="number" name="invCatNo" id="invCatNo" min="0"/>
+                    <h4>상품 카테고리</h4>
+                    <select class="invCatNo" >
+                    		<option  selected name="invCatNo" value="0">전체</option>
+                            <option  name="invCatNo" value="1">음료</option>
+                            <option  name="invCatNo" value="2">냉동식품</option>
+                            <option  name="invCatNo" value="3">편의물품</option>
+                            <option  name="invCatNo" value="4">과자</option>
+                            <option  name="invCatNo" value="5">간편식</option>
+                        </select>
                     <h4>상품 번호</h4> <input type="number" name="invNo" id="invNo" min="0"/>
                     <h4>상품명</h4> <input type="text" name="invName" id="invName" min="0" placeholder="상품명을 검색하세요. " />
                     <button id="searchBtn" type="button" class="btn search">조회</button>
@@ -76,11 +84,11 @@
                     <td><span class="num" id ="invNo">${inv.invNo}</span></td>
                     <td id ="invName">${inv.invName}</td>
                     <td><span class="num" id ="invWCount">${inv.invWCount}</span></td>
-                    <td><input type="number" style="width:70px;" min="0"></td>
-                    <td><button class ="btn search" onclick="">변경하기</button></td>
+                    <td><input type="number" class="w-num" style="width:70px;" ></td>
+                    <td><button class ="btn search" onclick="changeWarehouse('${inv.invNo}', this);">변경하기</button></td>
                     <td><span class="num" id ="invSCount">${inv.invSCount}</span></td>
-                    <td><input type="number" style="width:70px;" min="0"></td>
-                    <td><button class ="btn search" onclick="">변경하기</button></td>
+                    <td><input type="number" class="s-num" style="width:70px;" ></td>
+                    <td><button class ="btn search" onclick="changeStock('${inv.invNo}', this);">변경하기</button></td>
                     <td><span class="num" id ="invPrice">${inv.invPrice}</span></td>
                     	<td>
 				<c:if test="${inv.invWCount < 30 }">
@@ -104,17 +112,57 @@
         </div>
 	</section>
 		<script>
-
-		  $('#invName').on('keyup', function(event){
+		function changeWarehouse(invNo, obj){
+			var w_count = $(obj).parent().parent().find('.w-num').val();
+			console.log(w_count);
+			$.ajax({
+				url : 'updateWarehouse.do',
+				data : {
+					invNo : invNo,
+					count : w_count
+				}, success: function(data){
+					var invWCount = $(obj).parent().parent().find('#invWCount');
+					invWCount.text(Number(invWCount.text()) + Number(w_count));
+				}
+			});
+		
+		}
+		
+		function changeStock(invNo, obj){
+			var s_count = $(obj).parent().parent().find('.s-num').val();
+			var invSCount = $(obj).parent().parent().find('#invSCount');
+			var invWCount = $(obj).parent().parent().find('#invWCount');
+			console.log(s_count);
+			
+			console.log(Number(s_count) < Number(invWCount.text()));
+			if (Number(s_count) <= Number(invWCount.text())){
+				$.ajax({
+					url : 'updateStock.do',
+					data : {
+						invNo : invNo,
+						count : s_count
+					}, success: function(data){
+						invWCount.text(Number(invWCount.text()) - Number(s_count));
+						invSCount.text(Number(invSCount.text()) + Number(s_count));
+					}
+				});				
+			} else {
+				alert('창고에 재고가 부족합니다.');
+			}
+			
+		}
+		  $('#invCatNo','#invNo','#invName',).on('keyup', function(event){
 				if( event.keyCode == 13) {
 					$('#searchBtn').click();
 				}
 			});
 		
+		
 		 $('#searchBtn').on('click', function(){
 			
 			
-			var invCatNo = $('#invCatNo').val();
+			var invCatNo = $('.invCatNo').val();
+			console.log(invCatNo);
 			var invNo = $('#invNo').val();
 			var invName = $('#invName').val();
 			
@@ -122,7 +170,7 @@
 				&& invName == "") {
 			alert("적어도 하나 이상 입력해야 합니다.");
 		
-		    } else if(invName != null){
+		    } else {
 				$.ajax({ 
 					url : "${pageContext.request.contextPath}/inv/searchInfo.do",
 					type : "get",
@@ -146,10 +194,10 @@
 							var $invNo = $('<td><span class="num" id="invNo">' + search[i].invNo + '</span></td>');
 							var $invName = $('<td id="invName">' + search[i].invName + '</td>');
 							var $invWCount = $('<td><span class="num" id="invWCount">' + search[i].invWCount + '</td>');
-							var $invWNum =$('<td><input type="number" style="width:70px;" min="0"></td>');
+							var $invWNum =$('<td><input type="number" style="width:70px;" ></td>');
 							var $invWmodify =$('<td>' + '<button class ="btn search" onclick="">변경하기</button>' + '</td>');
 							var $invSCount = $('<td><span class="num" id="invSCount">' + search[i].invSCount + '</td>');
-							var $invSNum = $('<td><input type="number" style="width:70px;" min="0"></td>');
+							var $invSNum = $('<td><input type="number" style="width:70px;"></td>');
 							var $invSmodify =$('<td>' + '<button class ="btn search" onclick="">변경하기</button>' + '</td>');
 							var $invPrice = $('<td><span class="num" id="invPrice">' + search[i].invPrice + '</td>');
 							var $invStatus = '';
