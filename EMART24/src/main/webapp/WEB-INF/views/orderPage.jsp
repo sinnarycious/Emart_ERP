@@ -95,7 +95,7 @@
         <!-- 검색결과 리스트 끝-->
 
         <!-- 발주 리스트 -->
-        <form action="${pageContext.request.contextPath}/OE/OEInsert.do" method="get" style="margin-top: 25px;">
+        <div style="margin-top: 25px;">
             <table class="orderList" id="orderList">
                 <thead class="thead">
                     <tr>
@@ -155,7 +155,7 @@
 		        <button class="btn submit orderBtn" id="orderBtn" type="submit">발주하기</button>
        		</div>
         <!--  발주 버튼 끝 -->
-        </form>
+        </div>
         <!-- 발주 리스트 끝 -->
         
     
@@ -206,7 +206,7 @@
     		},
     		dataType : 'json',
     		success : function(data) {
-    			alert("전송 성공");		// 나중에 삭제
+    			// 나중에 삭제
     			
     			$('#resultList').empty();	
     	
@@ -217,6 +217,7 @@
     				var $tr = $('<tr>');
     				
     				var $proNo = $('<input type="hidden" class="proNum" id="proNo"  value="' + search[i].proNo + '">');
+    				var $proCatNo = $('<input type="hidden" class="proCatNo" id="proCatNo"  value="' + search[i].proCatNo + '">');
     				var $h4 = $('<td class="td1" style="width:120px;"><h4>상품명</h4></td>');
     				var $proName = $('<td class="proName" name="proName" id="proName">' + search[i].proName + '</td>');
     				var $price = $('<td class="td1" style="width:70px;"><h4>금액</h4></td>');
@@ -228,6 +229,7 @@
     				
     			
     				$tr.append($proNo);
+    				$tr.append($proCatNo);
     				$tr.append($h4);
     				$tr.append($proName);
     				$tr.append($price);
@@ -277,7 +279,7 @@
     		type : 'get', 
     		dataType : 'json',
     		success : function(data2) {
-    			alert('전송 성공');
+    			// alert('전송 성공');
     			// console.log(data2.OE.oeNo);
 	    		
 				var oeNo = data2.OE.oeNo;
@@ -287,35 +289,43 @@
 				var orderDate = dateChange(new Date());
 				var oePriceE = Number($(obj).parent().parent().find('.originalPrice').val());
 				var mul = Number($(obj).parent().parent().find('.qty').val());
-					
+				var proCatNo = $(obj).parent().parent().find('.proCatNo').val();
+				
 				var $tr = $('<tr>');
-				var $oeNo =$('<td style="width:115px;padding-left:45px;" class="oeNo"><input type="hidden" name="oeNo3" value="'+ oeNo + ' />' + oeNo + '</td>');
-				var $proNo = $('<td style="width:110px;padding-left:8px;" class="proNo" name="oeInvNo3">'+ proNum + '</td>');
-				var $proName =$('<td class="proName" name="oeName3" id="proName">' + proName + '</td>');
-				var $oeCount =$('<td style="width:60px;" name="oeCount3">' + count + ' 개</td>');
-				var $mul =  $('<td class="mul" style="width:90px;padding-left:10px" name="oePrice3">' + oePriceE * mul + ' 원</td>');
-				var $orderDate = $('<td style="padding-left:37px;">' + orderDate + '</td>');
-				var $btn2 = $('<td><button class="btn click delete" id="orderDel" onclick="orderDel()">삭제</button></td></tr>');
+				var $proCatNo =$('<input type="hidden" class="orderList proCatNo" value="' + proCatNo + '" />');
+				var $oeNo =$('<td style="width:115px;padding-left:45px;" class="orderList oeNo">' + oeNo + '</td>');
+				var $proNo = $('<td style="width:110px;padding-left:8px;" class="orderList proNo" name="oeInvNo3">'+ proNum + '</td>');
+				var $proName =$('<td class="orderList proName" name="oeName3" id="proName">' + proName + '</td>');
+				var $oeCount =$('<td style="width:60px;" class="orderList oeCount" name="oeCount3">' + count + ' 개</td>');
+				var $mul =  $('<td class="orderList mul" style="width:90px;padding-left:10px" name="oePrice3">' + Number(oePriceE * mul) + ' 원</td>');
+				var $orderDate = $('<td style="padding-left:37px;" class="orderList orderDate"  >' + orderDate + '</td>');
+				var $btn2 = $('<td><button class="btn click delete" id="orderDel" >삭제</button></td></tr>');
 				
-				
-				$tr.append($oeNo);
-				$tr.append($proNo);
-				$tr.append($proName);
-				$tr.append($oeCount);
-				$tr.append($mul);
-				$tr.append($orderDate);
-				$tr.append($btn2);
+				$tr.append($proCatNo).append($oeNo).append($proNo).append($proName)
+				   .append($oeCount).append($mul).append($orderDate).append($btn2);
 				   
 				$('tbody').append($tr);
 				
-				$('.delete').on('click', function(){
-					$(this).parent().parent().remove();
-					$('.sumPriceResult').empty();
-				});
-				
 				console.log('Number(oePriceE * mul) : ' + Number(oePriceE * mul));
 				
-				sumPrice += Number(oePriceE * mul);
+				sumPrice += parseInt(oePriceE * mul);
+				
+				$('.delete').on('click', function(){
+					var min =  parseInt($(this).parent().parent().find('.mul').text());
+					var mul = Number($(obj).parent().parent().find('.qty').text());
+					var oePriceE = Number($(obj).parent().parent().find('.originalPrice').text());
+					
+					console.log('min : ' + min);
+					
+					var result =  sumPrice - min ;
+					
+					$(this).parent().parent().remove();
+					
+					$('.sumPriceResult').text(result);
+					
+					
+				});
+				
 				
 				console.log('sumPrice : ' + sumPrice);
 				
@@ -334,12 +344,41 @@
 		$('.reWrite').on('click', function(){
 			$('tbody').empty();
 			$('.sumPriceResult').empty();
+			
+			sumPrice = 0;
 		});
 			
     	// '발주하기' 버튼
     	// OE/oe.do
     	$('#orderBtn').on('click', function(){
+    		var orderList = [];
+    		$('.orderList.proNo').each(function(){
+    			var $parentTr = $(this).parent();
+    			var oe = {};
+    			oe['oeInvNo'] = Number($parentTr.find('.proNo').text());
+    			oe['oeName'] = $parentTr.find('.proName').text();
+    			oe['oeCount'] = parseInt($parentTr.find('.oeCount').text());
+    			oe['oePrice'] = parseInt($parentTr.find('.mul').text());
+    			oe['oeCatNo'] = parseInt($parentTr.find('.proCatNo').val());
+    			oe['userNo'] = Number('${ member.userNo }');
+    			orderList.push(oe);
+    		});
     		
+    		$.ajax({
+    			url : "${pageContext.request.contextPath}/OE/OEInsert.do",
+    			type : "get",
+    			data :{
+    				 orderList : JSON.stringify(orderList)
+    			}, success : function(data) {
+    				if(data != 0){
+    					 
+    					 $('tbody').empty(); 
+    				}
+    				
+    				$('.sumPriceResult').empty();
+    				
+    			}, error : function(error) {alert('전송 실패')}
+    		});
     	});
 
 

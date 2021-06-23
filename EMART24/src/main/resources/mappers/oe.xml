@@ -101,12 +101,16 @@
 		
 	</select>
 	 -->
-	
-	
-	<insert id="orderListInsert" >
-		INSERT INTO ORDER_ENTER VALUES(#{oeNo}, #{oeCount}, #{oePrice}, 
+	<insert id="orderInsertListFirst" parameterType="oe">
+		INSERT INTO ORDER_ENTER VALUES( SEQ_OE_NO.NEXTVAL , #{oeCount}, #{oePrice}, 
 			SYSDATE, NULL, 'N', #{oeInvNo}, 
-			#{oeName}, #{oeCatNo}, #{#userNo})
+			#{oeName}, #{oeCatNo}, #{userNo})
+	</insert>
+	
+	<insert id="orderInsertList" parameterType="oe">
+		INSERT INTO ORDER_ENTER VALUES(SEQ_OE_NO.CURRVAL , #{oeCount}, #{oePrice}, 
+			SYSDATE, NULL, 'N', #{oeInvNo}, 
+			#{oeName}, #{oeCatNo}, #{userNo})
 	</insert>
 
 </mapper>

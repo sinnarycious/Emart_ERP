@@ -81,14 +81,18 @@ public class OEDAOImpl implements OEDAO {
 	}
 
 	
-	
+
+	@Override
+	public int orderInsertListFirst(OE oe) {
+		return sqlSession.insert("oe.orderInsertListFirst", oe);
+	}
 
 
 	// 발주결과 리스트 보내기 - 가율
 	@Override
-	public List<OE> orderInsertList(OE oe) {
+	public int orderInsertList(OE oe) {
 		
-		return sqlSession.selectList("oe.orderInsertList", oe);
+		return sqlSession.insert("oe.orderInsertList", oe);
 	}
 
 	
@@ -107,6 +111,7 @@ public class OEDAOImpl implements OEDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	
 	

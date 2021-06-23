@@ -33,7 +33,9 @@ public interface OEDAO {
 	// 검색 결과 리스트 : 가율
 	OE orderList();
 
-	List<OE> orderInsertList(OE oe);
+	int orderInsertList(OE oe);
+
+	int orderInsertListFirst(OE oe);
 
 	// OE orderList2();
 

@@ -3,11 +3,10 @@ package com.sinnarycious.emart24.OE.controller;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -18,13 +17,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.sinnarycious.emart24.OE.model.service.OEService;
 import com.sinnarycious.emart24.OE.model.vo.OE;
 import com.sinnarycious.emart24.common.SearchUtils;
 import com.sinnarycious.emart24.common.Utils;
-import com.sinnarycious.emart24.product.model.vo.Product;
 
 @Controller
 public class OEController {
@@ -141,16 +139,18 @@ public class OEController {
 		return map;
 	}
 	
-	/*
+
 	// 발주리스트 보내기 : 가율
 	@RequestMapping("/OE/OEInsert.do")
-	public String orderListInsert(@RequestParam OE oe) {
+	@ResponseBody
+	public int orderListInsert(@RequestParam String orderList) {
 	
+		List<OE> list = Arrays.asList(new Gson().fromJson(orderList, OE[].class));
+		System.out.println(list);
+		int result = oeService.orderInsertList(list);
 		
-		System.out.println("oe : " + oe);
-		
-		return "orderPage";
+		return result;
 	}
-	*/
+	
 	
 }

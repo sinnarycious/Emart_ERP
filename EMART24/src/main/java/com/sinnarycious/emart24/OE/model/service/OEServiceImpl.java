@@ -69,10 +69,20 @@ public class OEServiceImpl implements OEService {
 	
 	// 발주리스트 보내기 : 가율
 	@Override
-	public List<OE> orderInsertList(OE oe) {
+	public int orderInsertList(List<OE> list) {
+		int result = 0;
 		
-		return oeDAO.orderInsertList(oe);
+		for(int i = 0 ; i < list.size() ; i ++) {
+			if( i == 0) {
+				result = oeDAO.orderInsertListFirst(list.get(i));				
+			} else {
+				result = oeDAO.orderInsertList(list.get(i));
+			}
+		}
+		
+		return result;
 	}
+
 
 
 	// 발주리스트 : 가율
