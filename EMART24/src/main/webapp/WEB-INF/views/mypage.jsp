@@ -28,7 +28,7 @@
 				action="${pageContext.request.contextPath}/member/memberUpdate.do" id="update"
 				method="post">
 				<div class="myPageArea1">
-					<h2>마이페이지</h2>
+					<h2>마이페이지</h2><button class="btn submit myPage_updateBtn">수정하기</button> 
 					<img src="/emart24/resources/images/memberimage/${member.userAttNO}.png" class="profile_Img">
 					<table class="update_pw">
 						<tr>
@@ -76,11 +76,11 @@
 						</tbody>
 					</table>
 	
-				    <button class="btn submit myPage_updateBtn">수정하기</button> 
+				    
 					<!-- <input type="submit" class="btn submit myPage_updateBtn" value="수정하기" /> -->
 					<img src="/emart24/resources/images/emart24store.png"
 						class="emart24_storeImg">
-					<table class="update_profile">
+					<table class="update_profile" style="vertical-align:middle;">
 						<tr>
 							<td class="td1">지점명</td>
 							<td>${member.userBranch}</td>
