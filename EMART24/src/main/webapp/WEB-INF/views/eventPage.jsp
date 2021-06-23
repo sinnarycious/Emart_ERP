@@ -37,7 +37,7 @@
             <h4>행사 번호</h4><input type="number" name="evntNo" id="evntNo" style="width:100px;" min="0"/>
 			<h4>행사명</h4><input type="text" name="evntTitle" id = "evntTitle" style="width:510px;" placeholder="행사명을 검색하세요. "/>
 			
-            <button id="searchBtn" class="btn search">조회</button>
+            <button type ="button" id="searchBtn" class="btn search">조회</button>
 
         </div>
         <c:set var="today" value="<%= new Date(new java.util.Date().getTime()) %>"/>
@@ -97,10 +97,13 @@
 			$(this).next('.evnt-content').show(1000);
 		}); 
 	
-		  $('#evntTitle').on('keyup', function(event){
+		  $('#evntTitle', '#evntName').on('keyup', function(event){
 				if( event.keyCode == 13) {
 					$('#searchBtn').click();
 				}
+			});
+		  $('#evntDateS1, #evntDateS2').on('click',function(){
+				$(this).val('');
 			});
 		
 		 $('#searchBtn').on('click', function(){
@@ -113,7 +116,7 @@
 			if (evntDateS1 == "" &&  evntDateS2== ""
 				&& evntTitle == "" && evntNo == "") {
 			alert("적어도 하나 이상 입력해야 합니다.");
-			} else if(evntTitle != null){
+			} else {
 				$.ajax({ 
 					url : "${pageContext.request.contextPath}/event/searchInfo.do",
 					type : "get",
@@ -123,7 +126,6 @@
 						evntTitle : evntTitle,
 						evntNo : evntNo
 					}, 
-					dataType : 'json',
 					success : function( data ) {
 
 						$('tbody').empty();	// ORDER_ENTER 테이블 전체 데이터 값을 <tbody>에서 지움

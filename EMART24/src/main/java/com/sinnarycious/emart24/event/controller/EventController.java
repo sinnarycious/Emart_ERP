@@ -29,24 +29,28 @@ public class EventController {
 	
 	@Autowired
     EventService eventService;
- 
+	
     @RequestMapping("/event/eventPage.do")
 	public String event(
 			@RequestParam( required=false, defaultValue="1") int cPage,
+			@RequestParam (required=false)Date evntDateS1,
+			@RequestParam (required=false)Date evntDateS2,
+			@RequestParam (value="keyword", required=false, defaultValue="")String evntTitle,
+			@RequestParam (required=false, defaultValue="0") int evntNo ,
 			Model model
 			) {
 		
 		int numPerPage = 10;		
-		List<Map<String, String>> list = eventService.selectEventList(cPage, numPerPage);
+		List<Event> list = eventService.searchInfo(cPage, numPerPage, evntDateS1, evntDateS2, evntTitle, evntNo);
 		
-		int totalContents = eventService.selectEventTotalContents();
+		int searchTotalContent = eventService.searchTotalContent(evntDateS1, evntDateS2, evntTitle, evntNo);
 		
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "eventPage.do");
+		String pageBar = SearchUtils.getPageBar(searchTotalContent, cPage, 10,  "eventPage.do", evntTitle);
 		
 		System.out.println("list : " + list);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("totalContents", searchTotalContent);
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);
 		
@@ -57,18 +61,21 @@ public class EventController {
 	@RequestMapping("/event/searchInfo.do")
 	@ResponseBody
 	public Map<String, Object> searchInfo(
+			@RequestParam( required=false, defaultValue="1") int cPage,
 			@RequestParam (required=false)Date evntDateS1,
 			@RequestParam (required=false)Date evntDateS2,
-			@RequestParam (required=false)String evntTitle,
+			@RequestParam (required=false, defaultValue="")String evntTitle,
 			@RequestParam (required=false, defaultValue="0") int evntNo 
 			){
-		System.out.println(evntDateS1);
 		
+		int numPerPage = 10;
 		Map<String, Object> map = new HashMap<String, Object>();
 		evntTitle.replace('_', ' ');
 		
-		List<Event> searchList = eventService.searchInfo(evntDateS1, evntDateS2, evntTitle, evntNo);
-		String pageBar = SearchUtils.getPageBar(searchList.size(), 1, 10, "eventPage.do", evntTitle);
+		int searchTotalContent = eventService.searchTotalContent(evntDateS1, evntDateS2, evntTitle, evntNo);
+		List<Event> searchList = eventService.searchInfo(cPage, numPerPage, evntDateS1, evntDateS2, evntTitle, evntNo);
+		
+		String pageBar = SearchUtils.getPageBar(searchTotalContent, cPage, 10,  "eventPage.do", evntTitle);
 		
 		System.out.println("search : " + searchList);
 		

@@ -35,6 +35,22 @@
 				AND INV_NAME LIKE '%' || #{ invName } || '%'
 			</if>
 		</where>
+		ORDER BY INV_NO DESC
+	</select>
+		<select id="searchTotalContent" parameterType="inv" resultType="_int">
+		SELECT COUNT(*) FROM INV
+			<where>
+				<if test="invCatNo != 0">
+				AND INV_CAT_NO = #{ invCatNo }
+			</if>
+			<if test="invNo != 0">
+				AND INV_NO = #{ invNo }
+			</if>
+				<if test="invName !=null">
+				AND INV_NAME LIKE '%' || #{ invName } || '%'
+			</if>
+			</where>
+			ORDER BY INV_NO DESC
 	</select>
 		<select id="searchTotalContent" parameterType="inv" resultType="_int">
 		SELECT COUNT(*) FROM INV

@@ -29,7 +29,7 @@
 				method="post">
 				<div class="myPageArea1">
 					<h2>마이페이지</h2>
-					<img src="/emart24/resources/images/yoona.png" class="profile_Img">
+					<img src="/emart24/resources/images/memberimage/${member.userAttNO}.png" class="profile_Img">
 					<table class="update_pw">
 						<tr>
 							<td class="td1">아이디</td>
@@ -109,14 +109,24 @@
 				</div>
 	
 			</form>
+			
+		</div>
+
+	</section>
 <script>
 		function updateMember() {
 			$("#update").submit();
 		}
 		
 		$("#update").submit(function(event){
-			if($('#userPwd').val() != $('#userPwd2').val()) alert("비밀번호 확인 값과 다릅니다.");
-			else return;
+			
+			var userPwd = $('#userPwd').val();
+			var userPwd2 = $('#userPwd2').val();
+			var userEmail = $('#userEmail').val();
+			var userPhone = $('#userPhone').val();
+			
+			if(userPwd != userPwd2) { alert("비밀번호 확인 값과 다릅니다.");
+			} else return;
 			event.preventDefault();
 		});
 		
@@ -138,8 +148,6 @@
 		    
 		    });
 </script>
-		</div>
 
-	</section>
 </body>
 </html>

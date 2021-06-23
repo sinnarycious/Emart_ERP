@@ -20,7 +20,7 @@ public class Member implements Serializable{
 	private String userPhone;
 	private String userBranch;
 	private Date userOpenDate;
-	private String userAttNO;
+	private int userAttNO;
 	
 	public Member(String userId, String userPwd) {
 		this.userId = userId;

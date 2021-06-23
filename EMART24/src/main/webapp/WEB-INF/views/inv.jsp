@@ -23,19 +23,21 @@
    	
     <section class="wrap">
         <div class="area invArea">
-
+			<form id = "inv">
             <h2>재고 관리</h2>
             <h3>재고 현황</h3>
 
             <div class="searchBar">
                     <h4>상품 카테고리</h4>
                     <select class="invCatNo" >
+
                     		<option  selected name="invCatNo" value="0">전체</option>
                             <option  name="invCatNo" value="1">음료</option>
                             <option  name="invCatNo" value="2">냉동식품</option>
                             <option  name="invCatNo" value="3">편의물품</option>
                             <option  name="invCatNo" value="4">과자</option>
                             <option  name="invCatNo" value="5">간편식</option>
+
                         </select>
                     <h4>상품 번호</h4> <input type="number" name="invNo" id="invNo" min="0"/>
                     <h4>상품명</h4> <input type="text" name="invName" id="invName" min="0" placeholder="상품명을 검색하세요. " />
@@ -104,14 +106,22 @@
                 </tbody>
             </table>
             <div class="goOE">
-                <button class="btn search" onclick="${pageContext.request.contextPath}/common/orderPage.do">발주하기</button>
+                <button type="button" class="btn search" onclick="orderpage();">발주하기</button>
             </div>
             <div id="pageNo">
             <c:out value="${pageBar}" escapeXml="false"/>
         </div>
+        </form>
         </div>
 	</section>
 		<script>
+
+		function orderpage(){
+			$("inv").attr("action","${pageContext.request.contextPath}/common/orderPage.do");
+			$("inv").submit();
+		}
+		
+
 		function changeWarehouse(invNo, obj){
 			var w_count = $(obj).parent().parent().find('.w-num').val();
 			console.log(w_count);

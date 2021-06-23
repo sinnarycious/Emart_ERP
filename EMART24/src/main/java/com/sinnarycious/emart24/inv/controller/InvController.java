@@ -120,5 +120,7 @@ public class InvController {
 		 	result = invService.updateStock(inv);
 		 	
 			return result;
+
 		}
+
 }
