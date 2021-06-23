@@ -93,20 +93,24 @@
 	
 	<!-- 가율 -->
 	<select  id="orderList" resultMap="oeMap">
-		SELECT SEQ_OE_NO.NEXTVAL FROM DUAL
+		SELECT (MAX(oe_No)+1) "OE_NO" FROM ORDER_ENTER
 	</select>
-	
+	<!-- 
 	<select id="orderList2" resultMap="oeMap ">
-		SELECT SEQ_OE_NO.CURRVAL FROM DUAL
+		SELECT TO_NUMBER(SEQ_OE_NO.CURRVAL) "OE_NO" FROM DUAL
 		
 	</select>
-	
-	
-	<!-- 
-	<insert id="">
-		INSERT INTO ORDER_ENTER VALUES(#{oeNo}, #{oeCount}, #{oePrice}, 
-			#{orderDate}, #{enterDate}, #{oeStatus}, #{oeInvNo}, 
-			#{oeName}, #{oeCatNo}, #{})
+	 -->
+	<insert id="orderInsertListFirst" parameterType="oe">
+		INSERT INTO ORDER_ENTER VALUES( SEQ_OE_NO.NEXTVAL , #{oeCount}, #{oePrice}, 
+			SYSDATE, NULL, 'N', #{oeInvNo}, 
+			#{oeName}, #{oeCatNo}, #{userNo})
 	</insert>
- -->
+	
+	<insert id="orderInsertList" parameterType="oe">
+		INSERT INTO ORDER_ENTER VALUES(SEQ_OE_NO.CURRVAL , #{oeCount}, #{oePrice}, 
+			SYSDATE, NULL, 'N', #{oeInvNo}, 
+			#{oeName}, #{oeCatNo}, #{userNo})
+	</insert>
+
 </mapper>

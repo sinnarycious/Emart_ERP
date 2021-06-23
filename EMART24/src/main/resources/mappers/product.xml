@@ -24,7 +24,7 @@ WHERE PRO_NO LIKE ${proNo};
 	</resultMap>
 		
 	<select id="selectPdList" parameterType="Product" resultMap="productMap">
-		SELECT PRO_NO, PRO_NAME, PRO_PRICE_E
+		SELECT PRO_NO, PRO_NAME, PRO_PRICE_E, PRO_CAT_NO
 		FROM PRODUCT
 		<where>
 			<if test="proCatNo != 0">

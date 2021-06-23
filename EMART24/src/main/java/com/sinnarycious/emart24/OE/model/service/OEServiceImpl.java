@@ -1,6 +1,7 @@
 package com.sinnarycious.emart24.OE.model.service;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,28 +69,33 @@ public class OEServiceImpl implements OEService {
 	
 	// 발주리스트 보내기 : 가율
 	@Override
-	public List<OE> orderInsertList(OE oe) {
+	public int orderInsertList(List<OE> list) {
+		int result = 0;
 		
-		return oeDAO.orderInsertList(oe);
+		for(int i = 0 ; i < list.size() ; i ++) {
+			if( i == 0) {
+				result = oeDAO.orderInsertListFirst(list.get(i));				
+			} else {
+				result = oeDAO.orderInsertList(list.get(i));
+			}
+		}
+		
+		return result;
 	}
+
 
 
 	// 발주리스트 : 가율
 	@Override
-	public OE orderList() {
-		
+	public Map<String, OE> orderList() {
+		Map<String, OE> map = new HashMap<>();
 		OE oe = new OE();
 		
-		int count = 0;
+		oe = oeDAO.orderList();
 		
-		if(count == 0) {
-			oe = oeDAO.orderList();		// 증가값
-			count++;
-		} else {
-			oe = oeDAO.orderList2();	// 현재값
-		}
+		map.put("OE", oe);
 		
-		return oeDAO.orderList();
+		return map;
 	}
 
 }

@@ -95,7 +95,7 @@
         <!-- 검색결과 리스트 끝-->
 
         <!-- 발주 리스트 -->
-        <form action="orderList.do" style="margin-top: 25px;">
+        <div style="margin-top: 25px;">
             <table class="orderList" id="orderList">
                 <thead class="thead">
                     <tr>
@@ -123,7 +123,8 @@
                     </tr>
                 </thead>
                 <tbody class="tbody" id="listTable">
-                   <!-- 
+                <input type="hidden" name="userNo" value="${ member.userNo }" />
+                 <!--   
                     <tr>
                         <td style="width:115px;padding-left:45px;" class="oeNo" id="oeNo" name="oeNo">${oe.oeNo}</td>
                         <td style="width:110px;padding-left:8px;" id="proNo" name="proNo">${product.proNo}</td>
@@ -131,12 +132,9 @@
                         <td style="width:60px;" id="oeCount" name="oeCount">${oe.oeCount}</td>
                         <td class="mul" id="mul" name="mul" style="width:90px;padding-left:10px"></td>
                         <td style="padding-left:37px;" id="orderDate" name="orderDate">${oe.orderDate}</td>
-
                         <td><button class="btn click" id="orderDel" onclick="goOrderDel(this)">삭제</button></td>
-
-                    	<!-- onclick 없애보기-
                     </tr> 
-                    --> 
+                    -->
                 </tbody>
                 <tfoot class="tfoot">
                     <tr>
@@ -144,7 +142,7 @@
                         <td></td>
                         <td></td>
                         <td class="sumPrice" id="sum_p_price" style="width:60px;">총 금액</td>
-                        <td style="width:90px;padding-left:10px"></td>
+                        <td class="sumPriceResult"style="width:90px;padding-left:10px"></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -153,11 +151,11 @@
             
             <!-- 발주 버튼 시작 -->
         	<div class="order_btn">
-		        <button class="btn submit reWrite" type="reset" id="reWrite">다시 작성</button>
+		        <button class="btn submit reWrite" type="reset" class="reWrite" id="reWrite">다시 작성</button>
 		        <button class="btn submit orderBtn" id="orderBtn" type="submit">발주하기</button>
        		</div>
         <!--  발주 버튼 끝 -->
-        </form>
+        </div>
         <!-- 발주 리스트 끝 -->
         
     
@@ -166,13 +164,16 @@
     
     <!-- script 시작 -->
     <script>
-	    	
+	var sumPrice = 0;
+    
+    
 	// '검색'버튼 클릭 시 검색 리스트에서 추가 
 	$('#proName').on('keyup', function(event){
 		if(event.keyCode == 13) {
 			$('#search_btn').click();
 		}
 	});
+	
 	
 	$('.resultList .qty').on('change', function(){
 		var price = Number($(this).parent().parent().find('.originalPrice').val());
@@ -205,7 +206,7 @@
     		},
     		dataType : 'json',
     		success : function(data) {
-    			alert("전송 성공");		// 나중에 삭제
+    			// 나중에 삭제
     			
     			$('#resultList').empty();	
     	
@@ -216,6 +217,7 @@
     				var $tr = $('<tr>');
     				
     				var $proNo = $('<input type="hidden" class="proNum" id="proNo"  value="' + search[i].proNo + '">');
+    				var $proCatNo = $('<input type="hidden" class="proCatNo" id="proCatNo"  value="' + search[i].proCatNo + '">');
     				var $h4 = $('<td class="td1" style="width:120px;"><h4>상품명</h4></td>');
     				var $proName = $('<td class="proName" name="proName" id="proName">' + search[i].proName + '</td>');
     				var $price = $('<td class="td1" style="width:70px;"><h4>금액</h4></td>');
@@ -227,6 +229,7 @@
     				
     			
     				$tr.append($proNo);
+    				$tr.append($proCatNo);
     				$tr.append($h4);
     				$tr.append($proName);
     				$tr.append($price);
@@ -234,8 +237,8 @@
     				$tr.append($td1);
     				$tr.append($btn);
     				
-    				console.log(proName);
-    				console.log(proNo)
+    				// console.log(proName);
+    				// console.log(proNo)
     				
     				$('#resultList').append($tr);
 
@@ -266,109 +269,116 @@
     	// '추가'버튼 클릭 시 검색 결과 리스트 전달하기
     	
 	function test(obj){
-		
+
+    		
+		var count = $(obj).parent().parent().find('.qty').val();	
+    	var proNum = $(obj).parent().parent().find('.proNum').val();
+
     	$.ajax({
     		url :  "${pageContext.request.contextPath}/OE/orderList.do",
-    		type : 'get',
-    		data : {
-    			oeNo : oeNo
-    		}, 
+    		type : 'get', 
     		dataType : 'json',
     		success : function(data2) {
-    			alert('전송 성공');
-    		
+    			// alert('전송 성공');
+    			// console.log(data2.OE.oeNo);
 	    		
-				var oeNo = $oeNo.val();
+				var oeNo = data2.OE.oeNo;
 				var proNo = $(obj).parent().parent().find('.proNum').val();
 				var proName = $(obj).parent().parent().find('#proName').text();
 				var oeCount = $(obj).parent().parent().find('.qty').val();
 				var orderDate = dateChange(new Date());
 				var oePriceE = Number($(obj).parent().parent().find('.originalPrice').val());
 				var mul = Number($(obj).parent().parent().find('.qty').val());
-			
-					
+				var proCatNo = $(obj).parent().parent().find('.proCatNo').val();
+				
 				var $tr = $('<tr>');
-				var $oeNo =$('<td style="width:115px;padding-left:45px;" class="oeNo">' + oeNo + '</td>');
-				var $proNo = $('<td style="width:110px;padding-left:8px;" class="proNo" name="proNo">'+ proNo + '</td>');
-				var $proName =$('<td class="proName" name="proName" id="proName">' + proName + '</td>');
-				var $oeCount =$('<td style="width:60px;">' + oeCount + ' 개</td>');
-				var $mul =  $('<td class="mul" style="width:90px;padding-left:10px">' + oePriceE * mul + ' 원</td>');
-				var $orderDate = $('<td style="padding-left:37px;">' + orderDate + '</td>');
-				var $btn2 = $('<td><button class="btn click" id="orderDel" onclick="OrderDel(this)">삭제</button></td></tr>');
+				var $proCatNo =$('<input type="hidden" class="orderList proCatNo" value="' + proCatNo + '" />');
+				var $oeNo =$('<td style="width:115px;padding-left:45px;" class="orderList oeNo">' + oeNo + '</td>');
+				var $proNo = $('<td style="width:110px;padding-left:8px;" class="orderList proNo" name="oeInvNo3">'+ proNum + '</td>');
+				var $proName =$('<td class="orderList proName" name="oeName3" id="proName">' + proName + '</td>');
+				var $oeCount =$('<td style="width:60px;" class="orderList oeCount" name="oeCount3">' + count + ' 개</td>');
+				var $mul =  $('<td class="orderList mul" style="width:90px;padding-left:10px" name="oePrice3">' + Number(oePriceE * mul) + ' 원</td>');
+				var $orderDate = $('<td style="padding-left:37px;" class="orderList orderDate"  >' + orderDate + '</td>');
+				var $btn2 = $('<td><button class="btn click delete" id="orderDel" >삭제</button></td></tr>');
 				
-				
-				$tr.append($oeNo);
-				$tr.append($proNo);
-				$tr.append($proName);
-				$tr.append($oeCount);
-				$tr.append($mul);
-				$tr.append($orderDate);
-				$tr.append($btn2);
+				$tr.append($proCatNo).append($oeNo).append($proNo).append($proName)
+				   .append($oeCount).append($mul).append($orderDate).append($btn2);
 				   
-				 $('tbody').append($tr);
-				 
+				$('tbody').append($tr);
+				
+				console.log('Number(oePriceE * mul) : ' + Number(oePriceE * mul));
+				
+				sumPrice += parseInt(oePriceE * mul);
+				
+				$('.delete').on('click', function(){
+					var min =  parseInt($(this).parent().parent().find('.mul').text());
+					var mul = Number($(obj).parent().parent().find('.qty').text());
+					var oePriceE = Number($(obj).parent().parent().find('.originalPrice').text());
+					
+					console.log('min : ' + min);
+					
+					var result =  sumPrice - min ;
+					
+					$(this).parent().parent().remove();
+					
+					$('.sumPriceResult').text(result);
+					
+					
+				});
+				
+				
+				console.log('sumPrice : ' + sumPrice);
+				
+				$('.sumPriceResult').empty();
+				
+				$('.sumPriceResult').text(sumPrice + '원');
+				
     		}, error : function(error) {
     			alert('실패');
     		}	
     	})
 	}
     	
-    	// 총합계
-
-    	/*
-		// 하나만 삭제
-		function ('#btn_delete()') {
-			$(this).on('click', function(){
-				
-				var $btn_dlt = $('<button class="btn submit orderBtn">발주하기</button>');
-				
-				var $orderBtn = $('.orderBtn').
-				
-				
-			});
-		}
-		*/	
-
-
-    	// 발주리스트에서 행 삭제
-
-    	/*
-    	const btns = document.querySelectorAll('table td button');
-		for(let i=0; i < btns.length; i++) {
-			btns[i].addEventListenter('click', function(){
-				this.closest('tr').remove();
-			});
-		}
-		*/
-		
-		function OrderBtn() {
-			$(this).on('click', function(){
-				$('tbody').remove('.tbody .td');
-			});
-		}
-		
-		// 다시쓰기
-		function reWrite() {
-	    	$('.reWrite').on('click', function(){
-	    		$('tbody').remove('.tbody');
-	    	});
-		}	
-		
-
-    	/* function goOrderDel() {
-    		var ths = $(ths);
-    		
-    		ths.parents("tr").remove();
-    	}z
-    	*/
-    	// 삭제 버튼 클릭
-    
     	
-    	
+		// 다시쓰기 버튼
+		$('.reWrite').on('click', function(){
+			$('tbody').empty();
+			$('.sumPriceResult').empty();
+			
+			sumPrice = 0;
+		});
+			
     	// '발주하기' 버튼
     	// OE/oe.do
     	$('#orderBtn').on('click', function(){
+    		var orderList = [];
+    		$('.orderList.proNo').each(function(){
+    			var $parentTr = $(this).parent();
+    			var oe = {};
+    			oe['oeInvNo'] = Number($parentTr.find('.proNo').text());
+    			oe['oeName'] = $parentTr.find('.proName').text();
+    			oe['oeCount'] = parseInt($parentTr.find('.oeCount').text());
+    			oe['oePrice'] = parseInt($parentTr.find('.mul').text());
+    			oe['oeCatNo'] = parseInt($parentTr.find('.proCatNo').val());
+    			oe['userNo'] = Number('${ member.userNo }');
+    			orderList.push(oe);
+    		});
     		
+    		$.ajax({
+    			url : "${pageContext.request.contextPath}/OE/OEInsert.do",
+    			type : "get",
+    			data :{
+    				 orderList : JSON.stringify(orderList)
+    			}, success : function(data) {
+    				if(data != 0){
+    					 
+    					 $('tbody').empty(); 
+    				}
+    				
+    				$('.sumPriceResult').empty();
+    				
+    			}, error : function(error) {alert('전송 실패')}
+    		});
     	});
 
 

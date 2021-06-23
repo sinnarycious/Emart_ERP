@@ -3,11 +3,10 @@ package com.sinnarycious.emart24.OE.controller;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.sinnarycious.emart24.OE.model.service.OEService;
 import com.sinnarycious.emart24.OE.model.vo.OE;
 import com.sinnarycious.emart24.common.SearchUtils;
@@ -110,32 +109,48 @@ public class OEController {
 		return result;
 	}
 
-	
+	/*
 	// 발주 리스트 보내기 : 가율
-	@RequestMapping("/product/orderInsertList.do")
-	public ModelAndView orderInsertList(
+	@RequestMapping("/OE/OEInsert.do")
+	public String orderInsertList(
 						 	HttpServletRequest req) {
 							// user_no 나중에 추가
+		
+		System.out.println("oeNo3 : " + req.getParameterValues("oeNo3"));
 		Map map = new HashMap();
 		map.put("oeNo", req.getParameter("oeNo"));
 		map.put("oeCount", req.getParameter("oeCount"));
 		
-		ModelAndView mv = new ModelAndView("redirect:/orderPage");
-		
-		return mv;
-	
-	}
-	
-	// 발주리스트 : 가율이
-	@RequestMapping("/OE/orderList.do")
-	public String orderList() {
-	
-		OE oe = oeService.orderList();
-		
-		System.out.println("oe : " + oe);
+		//ModelAndView mv = new ModelAndView("redirect:/OEInsert.do");
 		
 		return "orderPage";
+	
+	}
+	*/
+	// 발주리스트 : 가율이
+	@RequestMapping("/OE/orderList.do")
+	@ResponseBody
+	public Map<String, OE> orderList() {
+		
+		Map<String, OE> map = oeService.orderList();
+		
+		System.out.println("map : " + map.get("OE"));
+		
+		return map;
 	}
 	
 
+	// 발주리스트 보내기 : 가율
+	@RequestMapping("/OE/OEInsert.do")
+	@ResponseBody
+	public int orderListInsert(@RequestParam String orderList) {
+	
+		List<OE> list = Arrays.asList(new Gson().fromJson(orderList, OE[].class));
+		System.out.println(list);
+		int result = oeService.orderInsertList(list);
+		
+		return result;
+	}
+	
+	
 }

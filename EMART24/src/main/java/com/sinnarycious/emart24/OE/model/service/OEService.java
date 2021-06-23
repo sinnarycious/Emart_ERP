@@ -26,9 +26,9 @@ public interface OEService {
 	int resetList(int oeNo);
 	
 	// 발주리스트 - 가율
-	List<OE> orderInsertList(OE oe);
+	int orderInsertList(List<OE> list);
 
-	OE orderList();
+	Map<String, OE> orderList();
 
 	
 
