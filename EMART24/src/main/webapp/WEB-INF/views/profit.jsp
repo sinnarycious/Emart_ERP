@@ -471,11 +471,11 @@
 			                    	   lastWeekDoughnutData[3].saleSum,
 			                    	   lastWeekDoughnutData[4].saleSum],
 			                    backgroundColor: [
-			                        'red',
-			                        'blue',
-			                        'green',
-			                        'pink',
-			                        'violet'
+			                    	'#6cf',
+			                        '#99c',
+			                        '#6c3',
+			                        '#fc3',
+			                        '#f66'
 			                    ],
 			                    hoverOffset: 4
 			                }]
@@ -497,11 +497,11 @@
 			                    	   thisWeekDoughnutData[3].saleSum,
 			                    	   thisWeekDoughnutData[4].saleSum],
 			                    backgroundColor: [
-			                        'red',
-			                        'blue',
-			                        'green',
-			                        'pink',
-			                        'violet'
+			                    	'#6cf',
+			                        '#99c',
+			                        '#6c3',
+			                        '#fc3',
+			                        '#f66'
 			                    ],
 			                    hoverOffset: 4
 			                }]
@@ -531,11 +531,11 @@
 			                    	   lastMonthDoughnutData[3].saleSum,
 			                    	   lastMonthDoughnutData[4].saleSum],
 			                    backgroundColor: [
-			                        'red',
-			                        'blue',
-			                        'green',
-			                        'pink',
-			                        'violet'
+			                    	'#6cf',
+			                        '#99c',
+			                        '#6c3',
+			                        '#fc3',
+			                        '#f66'
 			                    ],
 			                    hoverOffset: 4
 			                }]
@@ -557,11 +557,11 @@
 			                    	   thisMonthDoughnutData[3].saleSum,
 			                    	   thisMonthDoughnutData[4].saleSum],
 			                    backgroundColor: [
-			                        'red',
-			                        'blue',
-			                        'green',
-			                        'pink',
-			                        'violet'
+			                    	'#6cf',
+			                        '#99c',
+			                        '#6c3',
+			                        '#fc3',
+			                        '#f66'
 			                    ],
 			                    hoverOffset: 4
 			                }]
