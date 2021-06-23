@@ -35,6 +35,7 @@
 				AND INV_NAME LIKE '%' || #{ invName } || '%'
 			</if>
 		</where>
+		ORDER BY INV_NO DESC
 	</select>
 		<select id="searchTotalContent" parameterType="inv" resultType="_int">
 		SELECT COUNT(*) FROM INV
@@ -49,7 +50,7 @@
 				AND INV_NAME LIKE '%' || #{ invName } || '%'
 			</if>
 			</where>
-			
+			ORDER BY INV_NO DESC
 	</select>
 	
 	<update id="updateWarehouse" parameterType="Inv">

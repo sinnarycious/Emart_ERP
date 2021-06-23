@@ -109,13 +109,23 @@
 				</div>
 	
 			</form>
+			
+		</div>
+
+	</section>
 <script>
 		function updateMember() {
 			$("#update").submit();
 		}
 		
 		$("#update").submit(function(event){
-			if($('#userPwd').val() != $('#userPwd2').val()) { alert("비밀번호 확인 값과 다릅니다.");
+			
+			var userPwd = $('#userPwd').val();
+			var userPwd2 = $('#userPwd2').val();
+			var userEmail = $('#userEmail').val();
+			var userPhone = $('#userPhone').val();
+			
+			if(userPwd != userPwd2) { alert("비밀번호 확인 값과 다릅니다.");
 			} else return;
 			event.preventDefault();
 		});
@@ -138,8 +148,6 @@
 		    
 		    });
 </script>
-		</div>
 
-	</section>
 </body>
 </html>

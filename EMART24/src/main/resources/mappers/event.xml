@@ -24,7 +24,7 @@
 	<select id="searchTotalContent" parameterType="event" resultType="_int">
 		SELECT COUNT(*) FROM EVENT
 			<where>
-				<if test="evntTitle !=null">
+				<if test="evntTitle !=''">
 				AND EVNT_TITLE LIKE '%' || #{ evntTitle } || '%'
 			</if>
 			<if test="evntNo != 0">
@@ -37,13 +37,13 @@
 				AND EVNT_DATE_S BETWEEN #{ evntDateS1 } AND #{ evntDateS2 }
 			</if>
 			</where>
-			
+			ORDER BY EVNT_NO DESC
 	</select>
 
 		<select id="searchInfo" parameterType="event" resultMap="eventMap">
 		SELECT * FROM EVENT
 		<where>
-			<if test="evntTitle !=null">
+			<if test="evntTitle !=''">
 				AND EVNT_TITLE LIKE '%' || #{ evntTitle } || '%'
 			</if>
 			<if test="evntNo != 0">
@@ -56,7 +56,7 @@
 				AND EVNT_DATE_S BETWEEN #{ evntDateS1 } AND #{ evntDateS2 }
 			</if>
 		</where>
-		
+		ORDER BY EVNT_NO DESC
 	</select>
 	
 </mapper>
