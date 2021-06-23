@@ -177,9 +177,16 @@ public class SaleServiceImpl implements SaleService {
 	
 	// 조회 기능
 	@Override
-	public List<Sale> searchInfo(String saleDate1, String saleDate2, String saleName, int proNo) {
+	public List<Sale> searchInfo(int pageNo, int numberPage, String saleDate1, String saleDate2, String saleName, int proNo) {
 	
-		return saleDAO.searchInfo(saleDate1, saleDate2, saleName, proNo);
+		return saleDAO.searchInfo(pageNo, numberPage, saleDate1, saleDate2, saleName, proNo);
 	}
+	
+	@Override
+	public int searchTotalContent(String saleDate1, String saleDate2, String saleName, int proNo) {
+		return saleDAO.searchTotalContent(saleDate1, saleDate2, saleName, proNo);
+	}
+	
+	
 
 }

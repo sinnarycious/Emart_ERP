@@ -122,23 +122,46 @@
 		SELECT COUNT(*) FROM SALE
 	</select>
 	
+	
+	<select id="searchTotalContent" parameterType="sale" resultType="_int">
+		SELECT COUNT(*)
+		FROM  PRODUCT P, SALE S
+			<where>
+			SALE_NAME = PRO_NAME
+				<if test='saleName != "" '>
+					AND SALE_NAME LIKE '%' || #{ saleName } || '%'
+				</if>
+				<if test="proNo != 0">
+					AND PRO_NO = #{ proNo }
+				</if>
+				<if test='saleDate1 != "" and saleDate2 == ""'>
+					AND SALE_DATE = #{ saleDate1 }
+				</if>
+				<if test='saleDate1 != "" and saleDate2 != ""'>
+					AND SALE_DATE BETWEEN #{ saleDate1 } AND #{ saleDate2 }
+				</if>
+			</where>
+	</select>
+	
 	<!-- 검색 기능 -->
 	<select id="searchInfo" parameterType="sale" resultMap="saleMap">
 		SELECT S.*, P.PRO_NO
 		FROM PRODUCT P, SALE S
-		WHERE SALE_NAME = PRO_NAME
-			<if test="saleName !=null">
+		<where> 
+		SALE_NAME = PRO_NAME
+			<if test='saleName != "" '>
 				AND SALE_NAME LIKE '%' || #{ saleName } || '%'
 			</if>
 			<if test="proNo != 0">
 				AND PRO_NO = #{ proNo }
 			</if>
-			<if test="saleDate1 != null and saleDate2 = null">
+			<if test='saleDate1 != "" and saleDate2 == ""'>
 				AND SALE_DATE = #{ saleDate1 }
 			</if>
-			<if test="saleDate1 != null and saleDate2 != null">
+			<if test='saleDate1 != "" and saleDate2 != ""'>
 				AND SALE_DATE BETWEEN #{ saleDate1 } AND #{ saleDate2 }
 			</if>
+		</where>
 
 	</select>
 

@@ -36,4 +36,13 @@ public class Sale implements Serializable{
 		this.findDate = findDate;
 		this.saleCatNo = saleCatNo;
 	}
+	
+	public Sale(int proNo, String saleName) {
+		this.proNo = proNo;
+		this.saleName = saleName;
+	}
+
+	public Sale(int proNo) {
+		 this.proNo = proNo;
+	}
 }
