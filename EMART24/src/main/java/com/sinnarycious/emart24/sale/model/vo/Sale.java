@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sale implements Serializable{
+	private static final long serialVersionUID = 102000L;
+	
 	private int saleNo;
 	private int saleCount;
 	private int salePrice;
