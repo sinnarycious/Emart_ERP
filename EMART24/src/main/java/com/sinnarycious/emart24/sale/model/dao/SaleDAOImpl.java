@@ -84,6 +84,10 @@ public class SaleDAOImpl implements SaleDAO {
 	@Override
 	public List<Sale> selectLineWeekProfit(String sqlWeekDate) {
 		// TODO Auto-generated method stub
+		// List<Object> result = sqlSession.selectList("sale.selectLineWeekProfit", sqlWeekDate);
+		
+		// System.out.println(result);
+		
 		return sqlSession.selectList("sale.selectLineWeekProfit", sqlWeekDate);
 	}
 	

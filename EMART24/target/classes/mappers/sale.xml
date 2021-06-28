@@ -36,7 +36,7 @@
 	</resultMap>
 	
 	<select id="selectLineWeekProfit" parameterType="string" resultMap="lineProfitMap">
-		SELECT SALE_DATE, SUM(SALE_PRICE) "SALE_SUM" FROM SALE
+		SELECT SALE_DATE, NVL(SUM(SALE_PRICE), 1) "SALE_SUM" FROM SALE
 		WHERE SALE_DATE BETWEEN TO_DATE(#{sqlWeekDate})
   		  AND SYSDATE
 		GROUP BY SALE_DATE

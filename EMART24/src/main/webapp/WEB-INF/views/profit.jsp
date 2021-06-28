@@ -132,10 +132,13 @@
     <script>
     
 	    // 밀리초를 yyyy-mm-dd로 변환
+	    // Contoroller 에서 변환하므로 이 페이지에서 사용 X
+	    /*
 	    function dateChange( time ) {
 	       var myDate = new Date(time);
 	       return myDate.getFullYear() + '-' +('0' + (myDate.getMonth()+1)).slice(-2)+ '-' +  ('0' + myDate.getDate()).slice(-2); 
 	    }
+	    */
 
 	    var lineArea = document.getElementById('myChartLine').getContext('2d');
 		var date = new Date();
@@ -148,7 +151,7 @@
 		
 			$.ajax({ 
 			url : "/emart24/sale/line.do",
-			type : "get",
+			type : "post",
 			async : true,
 			data : {
 				date : date.getTime()
@@ -164,8 +167,9 @@
 		
 		
 					for (var i in weekLineList) {
-						// console.log(weekList[i]);
+						// console.log(weekLineList[i]);
 						weekLineData.push(weekLineList[i]);
+						// console.log(weekLineData[i].saleSum);
 					}
 		
 					// console.log('weekLineData[0].sale : ' + weekLineData[0].saleSum);
@@ -232,13 +236,13 @@
 			        var weekLine = {
 			          labels: weekLabels,
 			          datasets: [{
-			            label: '이번 주',
+			            label: '이번 주(원)',
 			            backgroundColor: '#fdb718',
 			            borderColor: '#fdb718',
 			            data:
 			                []
 			                },{
-			            label: '지난 주',
+			            label: '지난 주(원)',
 			            backgroundColor: '#777777',
 			            borderColor: '#777777',
 			            data:
@@ -262,16 +266,29 @@
 					for(var i = weekLineDataset.length -1; i >= 0; i--){
 						
 						if (i == 1) {
-							for(var j = 0; j < 7; j++) {
-								// console.log("첫 if 문 출력확인 : " + weekData[j]);
-								// console.log(weekDataset[i]);
-								weekLineDataset[i].data.push(weekLineData[j].saleSum);
-								// console.log('if ( i == 1) weekData[j].saleSum' + weekLineData[j].saleSum);
+							if (weekLineData.length > 7) {
+								for(var j = 0; j < 7; j++) {
+									// console.log("첫 if 문 출력확인 : " + weekLineData[j]);
+									// console.log(weekDataset[i]);
+									
+									weekLineDataset[i].data.push(weekLineData[j].saleSum);
+									
+									// console.log('if ( i == 1) weekLineData[j].saleSum' + weekLineData[j].saleSum);
+								}
+							} else {
+								for(var j = 0; j < weekLineData.length; j++) {
+									// console.log("첫 if 문 출력확인 : " + weekLineData[j]);
+									// console.log(weekDataset[i]);
+									
+									weekLineDataset[i].data.push(weekLineData[j].saleSum);
+									
+									// console.log('if ( i == 1) weekLineData[j].saleSum' + weekLineData[j].saleSum);
+								}
 							}
 						} else if (i == 0) {
 							for(var j = 7; j < weekLineData.length; j++) {
 								weekLineDataset[i].data.push(weekLineData[j].saleSum);
-								// console.log('if ( i == 0) weekData[j].saleSum' + weekLineData[j].saleSum);
+								console.log('if ( i == 0) weekLineData[j].saleSum' + weekLineData[j].saleSum);
 							}
 						}
 						//console.log(weekDataset[i].data);
@@ -281,50 +298,38 @@
 				
 					// 월간 그래프 시작
 		
-			        var monthLabels = [
-			          '1',
-			          '2',
-			          '3',
-			          '4',
-			          '5',
-			          '6',
-			          '7',
-			          '8',
-			          '9',
-			          '10',
-			          '11',
-			          '12',
-			          '13',
-			          '14',
-			          '15',
-			          '16',
-			          '17',
-			          '18',
-			          '19',
-			          '20',
-			          '21',
-			          '22',
-			          '23',
-			          '24',
-			          '25',
-			          '26',
-			          '27',
-			          '28',
-			          '29',
-			          '30',
-			          '31'
-			        ];
+					// Label 처리
+			        var monthLabels = [];
+					
+					
+					// 데이터 값이 대비가 되지 않는다.
+					// (1 = i, 2 = j ... 가 아닌 1 = i, 1.5 = j 이런 식으로 입력된다.)
+					if (lastMonthLineData.length != 0 && thisMonthLineData.length != 0) {
+						if (lastMonthLineData.length >= thisMonthLineData.length) {
+							for (var i = 1; i <= lastMonthLineData.length; i++){
+								monthLabels.push(i);
+								console.log('monthLabels.push(i) : ' + monthLabels.push(i));
+							}
+						} else if (lastMonthLineData.length < thisMonthLineData.length) {
+							for (var i = 1; i <= thisMonthLineData.length; i++){
+								monthLabels.push(i);
+								// console.log('monthLabels.push(i ) : ' + monthLabels.push(i));
+							}
+						}
+					} else {
+						alert('판매가 진행되지 않았습니다!\n판매 상품이 등록되면 데이터를 확인할 수 있습니다!')
+					}
 			        var monthLine = {
 			            labels: monthLabels,
 			            datasets: [{
-			            label: '이번 달',
+			            label: '이번 달(원)',
 			            backgroundColor: '#fdb718',
 			            borderColor: '#fdb718',
 			            data:
 			                []
 			            },
 			                {
-			            label: '지난 달',
+			            label: '지난 달(원)',
 			            backgroundColor: '#777777',
 			            borderColor: '#777777',
 			            data:
@@ -345,12 +350,12 @@
 							for(var j = 0; j < lastMonthLineData.length; j++) {
 								// console.log("첫 if 문 출력확인 : " + weekMonthData[j]);
 								monthLineDataset[i].data.push(lastMonthLineData[j].saleSum);
-								// console.log("lastMonthLineDataset : " + monthLineDataset[i].data[j]);
+								console.log("lastMonthLineDataset : " + monthLineDataset[i].data[j]);
 							}
 						} else if (i == 0) {
 							for(var j = 0; j < thisMonthLineData.length; j++) {
 								monthLineDataset[i].data.push(thisMonthLineData[j].saleSum);
-								// console.log("thisMonthLineDataset : " + monthLineDataset[i].data[j]);
+								console.log("thisMonthLineDataset : " + monthLineDataset[i].data[j]);
 							}
 						}
 						// console.log(monthDataset[i].data);
@@ -443,9 +448,9 @@
 					}
 					
 					for (var i in todaySumList) {
-						console.log(todaySumList[i].saleSum);
+						// console.log(todaySumList[i].saleSum);
 						todaySum += todaySumList[i].saleSum;
-						console.log(todaySum)
+						// console.log(todaySum)
 					}
 					
 					if (todaySum <= 5) {
@@ -663,11 +668,11 @@
 				var simple = data.simple;
 				var con = data.con;
 				
-				console.log(snack);
-				console.log(drink);
-				console.log(ice);
-				console.log(simple);
-				console.log(con);
+				// console.log(snack);
+				// console.log(drink);
+				// console.log(ice);
+				// console.log(simple);
+				// console.log(con);
 				
 				$('.snackTop:eq(0)').text("1. " + snack[0].saleName)
 				$('.snackTop:eq(1)').text("2. " + snack[1].saleName)
