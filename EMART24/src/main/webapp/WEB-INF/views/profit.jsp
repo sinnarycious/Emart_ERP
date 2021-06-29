@@ -163,24 +163,14 @@
 					
 					// 주간 데이터 처리
 					var weekLineList = data.weekLineList
-					var weekLineData = [];
-		
-		
-					for (var i in weekLineList) {
-						// console.log(weekLineList[i]);
-						weekLineData.push(weekLineList[i]);
-						// console.log(weekLineData[i].saleSum);
-					}
-		
-					// console.log('weekLineData[0].sale : ' + weekLineData[0].saleSum);
+
 					// 월간 데이터 처리
 					
 					var lastMonthLineList = data.lastLineMonthList;
-					var lastMonthLineData = [];
-					var thisMonthLineList = data.thisLineMonthList;
-					var thisMonthLineData = [];
 					
-					// 지난 달 데이터 처리
+					var thisMonthLineList = data.thisLineMonthList;
+					
+					// 지난 달 데이터 처리(Map 형식)
 					/*
 					$.each(data.lastMonthList,function(key, value){
 		
@@ -196,15 +186,8 @@
 					*/
 					
 					// console.log("lastData 순서 확인 : " + lastMonthData);
-					
-					for (var i in lastMonthLineList) {
-						// console.log("lastMonthList.saleDate 입력 확인 : " + dateChange(lastMonthList[i].saleDate));
-						// console.log("lastMonthList.saleSum 입력 확인 : " + lastMonthList[i].saleSum);
-						lastMonthLineData.push(lastMonthLineList[i]);
-						// console.log("lastMonthData[i].salenum : " + lastMonthData[i].saleSum);
-					}
-					
-					// 이번 달 데이터 처리
+
+					// 이번 달 데이터 처리(Map 형식)
 					/*
 					$.each(data.thisMonthList,function(key, value){
 		
@@ -212,12 +195,6 @@
 		
 					});
 					*/
-					
-					for (var i in thisMonthLineList) {
-						// console.log("thisMonthList.saleDate 입력 확인 : " + dateChange(thisMonthList[i].saleDate));
-						// console.log("thisMonthList.saleSum 입력 확인 : " + thisMonthList[i].saleSum);
-						thisMonthLineData.push(thisMonthLineList[i]);
-					}
 
 
 			        // lineGraph start
@@ -255,8 +232,6 @@
 			          data: weekLine
 			        };
 			    
-			        // === include 'setup' then 'config' above ===
-			        
 			        var weekLineDataset = weekLine.datasets;	
 			        
 			        // console.log("dataset 길이 : " + dataset.length);
@@ -266,29 +241,25 @@
 					for(var i = weekLineDataset.length -1; i >= 0; i--){
 						
 						if (i == 1) {
-							if (weekLineData.length > 7) {
+							if (weekLineList.length > 7) {
 								for(var j = 0; j < 7; j++) {
-									// console.log("첫 if 문 출력확인 : " + weekLineData[j]);
-									// console.log(weekDataset[i]);
+									weekLineDataset[i].data.push(weekLineList[j].saleSum);
 									
-									weekLineDataset[i].data.push(weekLineData[j].saleSum);
-									
-									// console.log('if ( i == 1) weekLineData[j].saleSum' + weekLineData[j].saleSum);
+									// console.log('if ( i == 1) weekLineList[j].saleSum' + weekLineList[j].saleSum);
 								}
 							} else {
-								for(var j = 0; j < weekLineData.length; j++) {
-									// console.log("첫 if 문 출력확인 : " + weekLineData[j]);
+								for(var j = 0; j < weekLineList.length; j++) {
+									// console.log("첫 if 문 출력확인 : " + weekLineList[j]);
 									// console.log(weekDataset[i]);
 									
-									weekLineDataset[i].data.push(weekLineData[j].saleSum);
-									
-									// console.log('if ( i == 1) weekLineData[j].saleSum' + weekLineData[j].saleSum);
+									weekLineDataset[i].data.push(weekLineList[j].saleSum);
+									// console.log('if ( i == 1) weekLineList[j].saleSum' + weekLineList[j].saleSum);
 								}
 							}
 						} else if (i == 0) {
-							for(var j = 7; j < weekLineData.length; j++) {
-								weekLineDataset[i].data.push(weekLineData[j].saleSum);
-								console.log('if ( i == 0) weekLineData[j].saleSum' + weekLineData[j].saleSum);
+							for(var j = 7; j < weekLineList.length; j++) {
+								weekLineDataset[i].data.push(weekLineList[j].saleSum);
+								console.log('if ( i == 0) weekLineList[j].saleSum' + weekLineList[j].saleSum);
 							}
 						}
 						//console.log(weekDataset[i].data);
@@ -301,19 +272,17 @@
 					// Label 처리
 			        var monthLabels = [];
 					
-					
-					// 데이터 값이 대비가 되지 않는다.
-					// (1 = i, 2 = j ... 가 아닌 1 = i, 1.5 = j 이런 식으로 입력된다.)
-					if (lastMonthLineData.length != 0 && thisMonthLineData.length != 0) {
-						if (lastMonthLineData.length >= thisMonthLineData.length) {
-							for (var i = 1; i <= lastMonthLineData.length; i++){
+					if (lastMonthLineList.length != 0 && thisMonthLineList.length != 0) {
+						if (lastMonthLineList.length >= thisMonthLineList.length) {
+							for (var i = 1; i <= lastMonthLineList.length; i++){
+								// console.log('monthLabels.push(' + i + ') : ' + monthLabels.push(i));
 								monthLabels.push(i);
-								console.log('monthLabels.push(i) : ' + monthLabels.push(i));
+								
 							}
-						} else if (lastMonthLineData.length < thisMonthLineData.length) {
-							for (var i = 1; i <= thisMonthLineData.length; i++){
+						} else if (lastMonthLineList.length < thisMonthLineList.length) {
+							for (var i = 1; i <= thisMonthLineList.length; i++){
 								monthLabels.push(i);
-								// console.log('monthLabels.push(i ) : ' + monthLabels.push(i));
+								// console.log('monthLabels.push(' + i + ') : ' + monthLabels.push(i));
 							}
 						}
 					} else {
@@ -347,23 +316,22 @@
 					for(var i = monthLineDataset.length -1; i >= 0; i--){
 						
 						if (i == 1) {
-							for(var j = 0; j < lastMonthLineData.length; j++) {
+							for(var j = 0; j < lastMonthLineList.length; j++) {
 								// console.log("첫 if 문 출력확인 : " + weekMonthData[j]);
-								monthLineDataset[i].data.push(lastMonthLineData[j].saleSum);
-								console.log("lastMonthLineDataset : " + monthLineDataset[i].data[j]);
+								monthLineDataset[i].data.push(lastMonthLineList[j].saleSum);
+								// console.log("lastMonthLineDataset : " + monthLineDataset[i].data[j]);
 							}
 						} else if (i == 0) {
-							for(var j = 0; j < thisMonthLineData.length; j++) {
-								monthLineDataset[i].data.push(thisMonthLineData[j].saleSum);
-								console.log("thisMonthLineDataset : " + monthLineDataset[i].data[j]);
+							for(var j = 0; j < thisMonthLineList.length; j++) {
+								monthLineDataset[i].data.push(thisMonthLineList[j].saleSum);
+								// console.log("thisMonthLineDataset : " + monthLineDataset[i].data[j]);
 							}
 						}
 						// console.log(monthDataset[i].data);
 					}
 			        
 					duringLine();
-			        // === include 'setup' then 'config' above ===
-			        
+					
 				}, error : function( error ) {
 					alert("전송 실패!");
 				}
@@ -372,7 +340,7 @@
 		
 	    function duringLine() {
 	    	var val = document.getElementById('duringLine').value;
-	        console.log(val);
+	        // console.log(val);
 	
 	        if(line != undefined){ // undefined = null;
 	            line.destroy();
@@ -384,14 +352,12 @@
 	            line = new Chart(lineArea, mLine);
 	        }
 	    }
-		/*
-	    window.onload = function() {
-	    	line = new Chart(lineArea, wLine);
-	    }
-		*/
+
 	    // lineGraph end
 	</script>
     <script>
+    
+    // doughnutGraph start
     
     var doughnutArea = document.getElementById('myChartDoughnut').getContext('2d');
     var doughnut;
@@ -409,43 +375,15 @@
 				}, success : function( data ) {
 					
 					var lastWeekDoughnutList = data.lastWeekDoughnutList;
-					var lastWeekDoughnutData = [];
 					
 					var thisWeekDoughnutList = data.thisWeekDoughnutList;
-					var thisWeekDoughnutData = [];
 					
 					var lastMonthDoughnutList = data.lastMonthDoughnutList;
-					var lastMonthDoughnutData = [];
 					
 					var thisMonthDoughnutList = data.thisMonthDoughnutList;
-					var thisMonthDoughnutData = [];
 					
 					var todaySumList = data.todaySum;
 					var todaySum = [];
-					
-					for (var i in lastWeekDoughnutList) {
-						// console.log(lastWeekDoughnutList[i]);
-						lastWeekDoughnutData.push(lastWeekDoughnutList[i]);
-						// console.log(lastWeekDoughnutData[i]);
-					}
-					
-					for (var i in thisWeekDoughnutList) {
-						//c onsole.log(thisWeekDoughnutList[i]);
-						thisWeekDoughnutData.push(thisWeekDoughnutList[i]);
-						// console.log(thisWeekDoughnutData[i]);
-					}
-					
-					
-					for (var i in lastMonthDoughnutList) {
-						// console.log(lastMonthDoughnutList[i]);
-						lastMonthDoughnutData.push(lastMonthDoughnutList[i]);
-						// console.log(lastMonthDoughnutData[i].saleSum);
-					}
-					for (var i in thisMonthDoughnutList) {
-						//console.log(thisDoughnutMonthList[i]);
-						thisMonthDoughnutData.push(thisMonthDoughnutList[i]);
-						//console.log(thisDoughnutMonthData[i]);
-					}
 					
 					for (var i in todaySumList) {
 						// console.log(todaySumList[i].saleSum);
@@ -459,7 +397,7 @@
 					
 					// console.log('weekDoughnutData.length : ' + weekDoughnutData.length);
 					// console.log('weekDoughnutData.saleSum : ' + weekDoughnutData[0].saleSum);
-
+					
 					var lastWeekDoughnut = {
 			                labels: [
 			                  '음료',
@@ -470,11 +408,7 @@
 			                ],
 			                datasets: [{
 			                    label: '품목별 판매액(만)',
-			                    data: [lastWeekDoughnutData[0].saleSum,
-			                    	   lastWeekDoughnutData[1].saleSum,
-			                    	   lastWeekDoughnutData[2].saleSum,
-			                    	   lastWeekDoughnutData[3].saleSum,
-			                    	   lastWeekDoughnutData[4].saleSum],
+			                    data: [],
 			                    backgroundColor: [
 			                    	'#6cf',
 			                        '#99c',
@@ -485,7 +419,16 @@
 			                    hoverOffset: 4
 			                }]
 			            };
+					// data 에 push 안된다.
+					/*
+					var datasets = lastWeekDoughnut.datasets
+					console.log(datasets);
 					
+					for (i in lastWeekDoughnutList){
+						console.log(datasets.data.push);
+						datasets.data.push(i);
+					}
+					*/
 			    	var thisWeekDoughnut = {
 			                labels: [
 			                  '음료',
@@ -496,11 +439,11 @@
 			                ],
 			                datasets: [{
 			                    label: '품목별 판매액(만)',
-			                    data: [thisWeekDoughnutData[0].saleSum,
-			                    	   thisWeekDoughnutData[1].saleSum,
-			                    	   thisWeekDoughnutData[2].saleSum,
-			                    	   thisWeekDoughnutData[3].saleSum,
-			                    	   thisWeekDoughnutData[4].saleSum],
+			                    data: [thisWeekDoughnutList[0].saleSum,
+			                    	   thisWeekDoughnutList[1].saleSum,
+			                    	   thisWeekDoughnutList[2].saleSum,
+			                    	   thisWeekDoughnutList[3].saleSum,
+			                    	   thisWeekDoughnutList[4].saleSum],
 			                    backgroundColor: [
 			                    	'#6cf',
 			                        '#99c',
@@ -530,11 +473,11 @@
 			                ],
 			                datasets: [{
 			                    label: '품목별 판매액(만)',
-			                    data: [lastMonthDoughnutData[0].saleSum,
-			                    	   lastMonthDoughnutData[1].saleSum,
-			                    	   lastMonthDoughnutData[2].saleSum,
-			                    	   lastMonthDoughnutData[3].saleSum,
-			                    	   lastMonthDoughnutData[4].saleSum],
+			                    data: [lastMonthDoughnutList[0].saleSum,
+			                    	   lastMonthDoughnutList[1].saleSum,
+			                    	   lastMonthDoughnutList[2].saleSum,
+			                    	   lastMonthDoughnutList[3].saleSum,
+			                    	   lastMonthDoughnutList[4].saleSum],
 			                    backgroundColor: [
 			                    	'#6cf',
 			                        '#99c',
@@ -556,11 +499,11 @@
 			                ],
 			                datasets: [{
 			                    label: '품목별 판매액(만)',
-			                    data: [thisMonthDoughnutData[0].saleSum,
-			                    	   thisMonthDoughnutData[1].saleSum,
-			                    	   thisMonthDoughnutData[2].saleSum,
-			                    	   thisMonthDoughnutData[3].saleSum,
-			                    	   thisMonthDoughnutData[4].saleSum],
+			                    data: [thisMonthDoughnutList[0].saleSum,
+			                    	   thisMonthDoughnutList[1].saleSum,
+			                    	   thisMonthDoughnutList[2].saleSum,
+			                    	   thisMonthDoughnutList[3].saleSum,
+			                    	   thisMonthDoughnutList[4].saleSum],
 			                    backgroundColor: [
 			                    	'#6cf',
 			                        '#99c',
@@ -610,8 +553,8 @@
 
 
 					
-			            for (var i in thisMonthDoughnutData){
-			            	thisMonthSum += Number(thisMonthDoughnutData[i].saleSum);
+			            for (var i in thisMonthDoughnutList){
+			            	thisMonthSum += Number(thisMonthDoughnutList[i].saleSum);
 			            }
 			            
 			           if (todaySum == 5) {
@@ -636,7 +579,7 @@
 	    
         function duringDoughnut(val) {
             var val = document.getElementById('duringDoughnut').value;
-            console.log(val);
+            // console.log(val);
 
             if(doughnut != undefined){ // undefined = null;
                 doughnut.destroy();
@@ -653,7 +596,7 @@
             }
         }
 	
-
+     // doughnutGraph end
 	</script>
 	<script>
 		$.ajax({
